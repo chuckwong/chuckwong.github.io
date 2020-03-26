@@ -4,7 +4,7 @@
 
 
 <html class="theme-next pisces" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -139,7 +139,7 @@
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/gfdd3.jpg">
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/wek92.jpg">
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/y0inx.jpg">
-<meta property="og:updated_time" content="2019-11-19T08:20:54.988Z">
+<meta property="og:updated_time" content="2019-11-19T08:20:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="78. Subsets I &amp; II">
 <meta name="twitter:description" content="Reference: Subsets I &amp;amp; Subsets II EPI 15.5Difficulty: MediumI think it should be hard for Subsets II My Post: Subsets I &amp;amp; II, Java Solution with Detailed Explanation and Comments (Recursion &amp;">
@@ -441,7 +441,7 @@
 <p><strong>Example:</strong> </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Input: nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">Output: [</span><br><span class="line">  [<span class="number">3</span>],</span><br><span class="line">  [<span class="number">1</span>],</span><br><span class="line">  [<span class="number">2</span>],</span><br><span class="line">  [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],</span><br><span class="line">  [<span class="number">1</span>,<span class="number">3</span>],</span><br><span class="line">  [<span class="number">2</span>,<span class="number">3</span>],</span><br><span class="line">  [<span class="number">1</span>,<span class="number">2</span>],</span><br><span class="line">  []</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <p><strong>Follow up:</strong> Check out the <a href="#subsets_ii">Subsets II</a> section below.</p>
-<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>The power set of a set $S$ is the set of all subsets of $S$, including both the empty set $\emptyset$ and $S$ itself. The power set of $\{1, 2, 3\}$ is graphically illustrated as follows.</p>
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>The power set of a set $S$ is the set of all subsets of $S$, including both the empty set $\emptyset$ and $S$ itself. The power set of ${1, 2, 3}$ is graphically illustrated as follows.</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/mgtg8.jpg" alt=""></p>
 <h3 id="Backtracking"><a href="#Backtracking" class="headerlink" title="Backtracking"></a>Backtracking</h3><p>The idea is that we loop over the number list. For each number, we have two choices: pick it, or not. For example, in <code>[1, 2, 3]</code>, we pick $1$ and then do the same thing for the subproblem <code>[2, 3]</code>; and we don’t pick $1$ and then do the same thing for the subproblem <code>[2, 3]</code>.</p>
 <p>The size of subproblems is decreasing. When picking $2$, the subproblem becomes <code>[3]</code> instead of <code>[1, 3]</code>.</p>

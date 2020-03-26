@@ -4,7 +4,7 @@
 
 
 <html class="theme-next pisces" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -845,13 +845,13 @@
 </li>
 <li>Eulerian Path:<ul>
 <li>Same as the first condition of Eulerian Cycle.</li>
-<li>There should be a single vertex in graph which has $D_{in} + 1 = D_{out}$ and another vertex which has $D_{in} = D_{out} + 1$.</li>
-<li>Rest of vertices should have $D_{in} = D_{out}$.</li>
+<li>There should be a single vertex in graph which has $D<em>{in} + 1 = D</em>{out}$ and another vertex which has $D<em>{in} = D</em>{out} + 1$.</li>
+<li>Rest of vertices should have $D<em>{in} = D</em>{out}$.</li>
 </ul>
 </li>
 </ul>
 <p>We can detect singly connected component using <code>Kosaraju&#39;s DFS based simple algorithm</code>.</p>
-<p>To compare $D_{in}$ and $D_{out}$ degree, we need to store $D_{in}$ and $D_{out}$ of every vertex. $D_{out}$ can be obtained by size of adjacency list. $D_{in}$ can be stored by creating an array of size equal to number of vertices.</p>
+<p>To compare $D<em>{in}$ and $D</em>{out}$ degree, we need to store $D<em>{in}$ and $D</em>{out}$ of every vertex. $D<em>{out}$ can be obtained by size of adjacency list. $D</em>{in}$ can be stored by creating an array of size equal to number of vertices.</p>
 <h2 id="Ex-Examprep-9"><a href="#Ex-Examprep-9" class="headerlink" title="Ex (Examprep 9)"></a>Ex (Examprep 9)</h2><h3 id="Ex-1-K-th-Ancestor"><a href="#Ex-1-K-th-Ancestor" class="headerlink" title="Ex 1 (K-th Ancestor)"></a>Ex 1 (K-th Ancestor)</h3><p>(a) Consider the Tree class below. Suppose we would like to write a method for this Tree class, <code>getAncestor(int k, Node target)</code>. This method takes in an integer $k$ and a Node <code>target</code>, and returns the k-th ancestor of <code>target</code> in our tree (you may assume such an ancestor exists). You may also assume that $k &gt;= 0$, that <code>target != null</code>, and that there are no cycles in our tree before we call this method.</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/6diw2.png" alt=""></p>
 <p>(b) Give a bound on the runtime of <code>getAncestor(int k, Node target)</code> in the best and worst case in $\Theta(\cdot)$ notation in terms of $N$ and $k$, for a tree with $N$ nodes. How does our choice of list implementation on line 10 affect our runtime?</p>

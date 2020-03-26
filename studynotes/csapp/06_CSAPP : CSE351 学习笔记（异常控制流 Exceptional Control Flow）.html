@@ -4,7 +4,7 @@
 
 
 <html class="theme-next pisces" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -149,7 +149,7 @@
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/xefq4.jpg">
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/voqxv.jpg">
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ixn28.jpg">
-<meta property="og:updated_time" content="2019-06-03T17:32:28.720Z">
+<meta property="og:updated_time" content="2019-06-03T17:32:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSAPP &#x2F; CSE 351 学习笔记（异常控制流 Exceptional Control Flow)">
 <meta name="twitter:description" content="从给处理器加电开始，直到断电为止，程序计数器假设一个值的序列： a_0, a_1, \cdots, a_{n-1}其中，每个 $a_k$ 是某个相应的指令 $I_k$ 的地址。每次从 $a_k$ 到 $a_k+1$ 的过渡称为控制转移（control transfer）。这样的控制转移序列叫做处理器的控制流（flow of control or control flow）。 最简单的一种控制流是">
@@ -444,7 +444,7 @@
           <p><br></p>
 <p>从给处理器加电开始，直到断电为止，程序计数器假设一个值的序列：</p>
 <script type="math/tex; mode=display">a_0, a_1, \cdots, a_{n-1}</script><p>其中，每个 $a_k$ 是某个相应的指令 $I_k$ 的地址。每次从 $a_k$ 到 $a_k+1$ 的过渡称为<code>控制转移</code>（control transfer）。这样的控制转移序列叫做处理器的<code>控制流</code>（flow of control or control flow）。</p>
-<p>最简单的一种控制流是一个<code>平滑的</code>序列，其中每个 $I_k$ 和 $I_{k+1}$ 在内存中都是相邻的。这种平滑流的突变通常是由<code>跳转</code>、<code>调用</code>和<code>返回</code>这样一些熟悉的程序指令造成的。</p>
+<p>最简单的一种控制流是一个<code>平滑的</code>序列，其中每个 $I<em>k$ 和 $I</em>{k+1}$ 在内存中都是相邻的。这种平滑流的突变通常是由<code>跳转</code>、<code>调用</code>和<code>返回</code>这样一些熟悉的程序指令造成的。</p>
 <p>现代系统通过使控制流发生突变来做出反应。一般而言，我们把这些突变称为<code>异常控制流</code>（Exceptional Control Flow，ECF）。异常控制流发生在计算机系统的各个层次。比如：</p>
 <ul>
 <li><code>硬件层</code>：硬件检测到的事件会触发控制突然转移到异常处理程序。</li>

@@ -4,7 +4,7 @@
 
 
 <html class="theme-next pisces" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -148,7 +148,7 @@
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/abmox.jpg">
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/5c5ct.jpg">
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/bwwhg.jpg">
-<meta property="og:updated_time" content="2019-05-10T18:30:26.657Z">
+<meta property="og:updated_time" content="2019-05-10T18:30:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSAPP &#x2F; CSE 351 学习笔记（概要 &amp; 信息的表示和处理）">
 <meta name="twitter:description" content="概要 C 语言是「古怪的、有缺陷的，但同时也是一个巨大的成功」。Why？  与 Unix 操作系统关系密切。 C 语言小而简单。 C 语言是为实践目的设计的。   编译系统的流程 系统的硬件组成 总线贯穿整个系统的是一组电子管道，称作总线，它携带信息字节并负责在各个部件间传递。通常总线被设计成传送定长的字节块，也就是字（word）。字中的字长数是一个基本的系统参数，各个系统不同。现在的大多数机器">
@@ -550,7 +550,7 @@
 <p>以往，在大多数机器上，整数乘法指令相当慢，需要 10 个或者更多的时钟周期，然而其他整数运算（例如加法、减法、位级运算和移位）只需要 1 个时钟周期。即使在 Intel Core i7 Haswell 上，其整数乘法也需要 3 个时钟周期。因此，编译器使用了一项重要的优化，试着用移位和加法运算的组合来代替乘以常熟因子的乘法。</p>
 <p>由于整数乘法比移位和加法的代价要大得多，许多 C 语言编译器试图以移位、加法和减法的组合来消除很多整数乘以常数的情况。例如，<code>x * 14</code>会变成<code>(x&lt;&lt;3) + (x&lt;&lt;2) + (x&lt;&lt;1)</code>。</p>
 <p>在大多数机器上，整数除法比整数乘法更慢——需要 30 个或者更多的时钟周期。除以 2 的幂也可以用移位运算来实现，只不过我们用的是右移，而不是左移。无符号和补码数分别使用<code>逻辑移位</code>和<code>算术移位</code>来达到目的。</p>
-<h3 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h3><h4 id="二进制小数"><a href="#二进制小数" class="headerlink" title="二进制小数"></a>二进制小数</h4><p>一个图说明二进制小数表示法（$b_m b_{m-1}\cdots b_1 b_0\ .\ b_{-1} b_{-2} \cdots b_{-n-1} b_{-n}$）：</p>
+<h3 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h3><h4 id="二进制小数"><a href="#二进制小数" class="headerlink" title="二进制小数"></a>二进制小数</h4><p>一个图说明二进制小数表示法（$b<em>m b</em>{m-1}\cdots b<em>1 b_0\ .\ b</em>{-1} b<em>{-2} \cdots b</em>{-n-1} b_{-n}$）：</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ge6ok.jpg" alt="" title="小数的二进制表示（CSAPP 2-31）"></p>
 <p>注意，形如 $0.11\cdots 1_2$ 的数表示的是刚好小于 1 的数。例如，$0.111111_2$ 表示 $\frac{63}{64}$。小数的二进制表示只能表示够被写成 $x \times 2^y$ 的数，如数 $\frac{1}{5}$ 不可以被精确表示。</p>
 <h4 id="IEEE-浮点数表示"><a href="#IEEE-浮点数表示" class="headerlink" title="IEEE 浮点数表示"></a>IEEE 浮点数表示</h4><p>IEEE 浮点标准用 $V = (-1)^s \times M \times 2^E$ 的形式来表示一个数：</p>
@@ -570,7 +570,7 @@
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/abmox.jpg" alt="" title="单精度浮点数数值的分类（CSAPP 2-33）"></p>
 <p><strong>情况 1：规格化的值（Normalized）</strong></p>
 <p>在这种情况下，阶码字段被解释为以<code>偏置（biased）</code>形式表示的有符号整数。也就是说，阶码的值是 $E=e-Bias$，其中 e 是无符号整数，对应具体的位表示，而 Bias 是一个等于 $2^{k-1} - 1$（单精度是 127，双精度是 1023）的<code>偏置值</code>，由此分别产生范围是<code>-126 ~ +127</code>和<code>-1022 ~ +1023</code>的整数。</p>
-<p>小数字段 frac 被解释为描述小数值 $f$，其中 $0 \leq f &lt; 1$，而实际的尾数定义为 $M = 1+f$。有时，这种方式也叫做<code>隐含的以 1 开头的表示</code>（implied leading 1），以表示 $1.f_{n-1}f_{n-2}\cdots f_0$ 的数字，其范围在原来的基础上加 1。</p>
+<p>小数字段 frac 被解释为描述小数值 $f$，其中 $0 \leq f &lt; 1$，而实际的尾数定义为 $M = 1+f$。有时，这种方式也叫做<code>隐含的以 1 开头的表示</code>（implied leading 1），以表示 $1.f<em>{n-1}f</em>{n-2}\cdots f_0$ 的数字，其范围在原来的基础上加 1。</p>
 <p><strong>情况 2：非规格化的值（Denormalized）</strong></p>
 <p>阶码位全为 0。在这种情况下，阶码值是 $E=1-Bias$（使用 1 是因为可以提供一种从非规格化值平滑转换到规格化值的方法，可以补偿非规格化数的尾数没有隐含的开头的 1），而尾数的值是 $M=f$，也就是小数字段的值，不好隐含的 1。</p>
 <p>非规格化有两个用途：</p>

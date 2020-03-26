@@ -4,7 +4,7 @@
 
 
 <html class="theme-next pisces" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -162,7 +162,7 @@
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/bk95t.png">
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9g8zt.png">
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/teahw.png">
-<meta property="og:updated_time" content="2019-10-15T07:21:25.219Z">
+<meta property="og:updated_time" content="2019-10-15T07:21:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS 61B | Part 11 | Topological Sort, DAG-LPT, DAG-SPT, DP, LIS &#x2F; LLIS">
 <meta name="twitter:description" content="Topological SortDefinitionSuppose we have a collection of different tasks or activities, some of which must happen before another. How do we find the way to sort the tasks such that for each task $v$">
@@ -623,7 +623,7 @@
 <p>$Q(2) = \text{max}(Q(0) + 1, Q(1) + 1) = 2$<br>$Q(3) = Q(1) + 1 = 2$</p>
 <p>Recall that $Q(K)$ is the solution to <code>LLSEA(K)</code> (they are equivalent).</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/4pvtt.png" alt="" title="Example Q(5)"></p>
-<p>$Q(5) = \text{max}\{ Q(1) + 1, Q(3) + 1, Q(4) + 1 \} = Q(5) + 1 = 4$</p>
+<p>$Q(5) = \text{max}{ Q(1) + 1, Q(3) + 1, Q(4) + 1 } = Q(5) + 1 = 4$</p>
 <h4 id="Fact-1-Memo"><a href="#Fact-1-Memo" class="headerlink" title="Fact #1: Memo"></a>Fact #1: Memo</h4><p><strong>Fact #1:</strong> We can use results for small $Q$ to compute results for larger $Q$.</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/sjd83.png" alt="" title="Consider larger Q"></p>
 <p>The answer is $62$. Because of all the increasing subsequences that have an edge pointing to <code>vertex 104</code>, the longest one was of length $61$ (ending at <code>vertex 100</code>).</p>

@@ -4,7 +4,7 @@
 
 
 <html class="theme-next pisces" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -1014,7 +1014,7 @@ T(N) &= \Theta(\frac{N}{10^0} \mod 10 + \frac{N}{10^1} \mod 10 + \ldots + \frac{
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// cost model: println</span><br><span class="line">          a(N)   =&gt; N   \</span><br><span class="line">          /              \</span><br><span class="line">      a(N/2)     =&gt; N/2   \</span><br><span class="line">      /                    \ height = log N</span><br><span class="line">  a(N/4)         =&gt; N/4    /</span><br><span class="line">    /                     /</span><br><span class="line">  ...                    /</span><br><span class="line">  /                     /</span><br><span class="line">a(1)             =&gt; 1  /</span><br></pre></td></tr></table></figure>
 <p>Sum: $\sim 2N - 1$</p>
 <p>Worst case: $\Theta(N)$<br>Best case: $\Theta(N)$</p>
-<p>In both cases the runtime is $\sum^{\log(N)}_{i=0} \frac{N}{2^i} \leq N \sum^{\log(\infty)}_{i=0} \frac{1}{2^i} = 2N$. </p>
+<p>In both cases the runtime is $\sum^{\log(N)}<em>{i=0} \frac{N}{2^i} \leq N \sum^{\log(\infty)}</em>{i=0} \frac{1}{2^i} = 2N$. </p>
 <script type="math/tex; mode=display">1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \ldots + \frac{1}{N} \rightarrow 2</script><p>One potentially tricky portion is that $\sum^{\log(n)}_{i=0}\frac{1}{2^i}$ is at most $2$ because the geometric sum as it goes to infinity is bounded by $2$.</p>
 <p><strong>61B Style:</strong></p>
 <p>The TA demonstrates a general model to solve this kind of problems.</p>

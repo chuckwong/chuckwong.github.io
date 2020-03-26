@@ -4,7 +4,7 @@
 
 
 <html class="theme-next pisces" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -166,7 +166,7 @@
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/zckmv.jpg">
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/jtho0.jpg">
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tb1o1.jpg">
-<meta property="og:updated_time" content="2019-04-26T09:59:01.141Z">
+<meta property="og:updated_time" content="2019-04-26T09:59:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="陷入多元微积「危机」分时写的笔记">
 <meta name="twitter:description" content="多元函数多元函数：输入由多个变量构成的函数，是一个空间的点到另一个空间的点的映射。虽然输出由多个变量构成的函数也可被称为多元函数，但是它们通常被称为向量值函数。  导数（Derivatives）: the rate of change of a function as you slightly tweak its input.积分（Integrals）: how to add together i">
@@ -564,7 +564,7 @@
 <p>研究多元函数可以告诉我们<code>在不同方向上</code>函数值的变化情况，以及这些<code>变化间的关系</code>。</p>
 <a id="more"></a>
 <h3 id="向量值函数（Vector-valued-Functions-or-Vector-Functions）"><a href="#向量值函数（Vector-valued-Functions-or-Vector-Functions）" class="headerlink" title="向量值函数（Vector-valued Functions or Vector Functions）"></a>向量值函数（Vector-valued Functions or Vector Functions）</h3><p>定义域：标量 or 矢量<br>值域：矢量</p>
-<p>可用向量场（Vector Field）表示该函数：$f(x,y)=\left[\begin{aligned}F(x,y)\\G(x,y)\end{aligned}\right]$</p>
+<p>可用向量场（Vector Field）表示该函数：$f(x,y)=\left[\begin{aligned}F(x,y)\G(x,y)\end{aligned}\right]$</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/29rpr.jpg" alt="" title="颜色表示向量的长度"></p>
 <h3 id="可视化（Visualization）"><a href="#可视化（Visualization）" class="headerlink" title="可视化（Visualization）"></a>可视化（Visualization）</h3><p>在多元函数中，我们并不总是对函数进行可视化，而且并不总是将导数看作是<code>斜率（Slope）</code>。但是，我们仍然可以通过以下几种方式进行可视化：</p>
 <ol>
@@ -575,17 +575,17 @@
 <li><p><strong>等高线图</strong>：该图只显示输入空间，适用于<code>二对一</code>的函数。</p>
 <p> <img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/1fntb.jpg" alt="" title="平面的等高线图"></p>
 </li>
-<li><p><strong>参数曲线/平面</strong>：适用于输出空间维度<code>大于</code>输入空间的情况，如 $f(t)=\left[\begin{aligned}2t\\3t \end{aligned}\right]$、$f(t)=\left[\begin{aligned}\sin&amp;(t)\\\cos&amp;(3t)\\3&amp;t \end{aligned}\right]$。</p>
+<li><p><strong>参数曲线/平面</strong>：适用于输出空间维度<code>大于</code>输入空间的情况，如 $f(t)=\left[\begin{aligned}2t\3t \end{aligned}\right]$、$f(t)=\left[\begin{aligned}\sin&amp;(t)\\cos&amp;(3t)\3&amp;t \end{aligned}\right]$。</p>
 <ul>
-<li><p>一个输入：$f(t)=\left[\begin{aligned}t\cos(2\pi t)\\t\sin(2\pi t)\end{aligned}\right]$</p>
+<li><p>一个输入：$f(t)=\left[\begin{aligned}t\cos(2\pi t)\t\sin(2\pi t)\end{aligned}\right]$</p>
 <p>  <img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/q7msq.jpg" alt=""></p>
 </li>
-<li><p>两个输入：$f(s,t)=\left[\begin{aligned}t^3&amp;-st\\s&amp;-t\\s&amp;+t\end{aligned}\right]$</p>
+<li><p>两个输入：$f(s,t)=\left[\begin{aligned}t^3&amp;-st\s&amp;-t\s&amp;+t\end{aligned}\right]$</p>
 <p>  <img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/qu6f7.jpg" alt="" title="二维空间到三维空间的映射（和 3x2 矩阵一个道理）"></p>
 </li>
 </ul>
 </li>
-<li><p><strong>向量场</strong>：适用于输入空间维度与输出空间维度<code>相等</code>的函数，如 $f(x,y)=\left[\begin{aligned}&amp;1\\y^2&amp;-y\end{aligned}\right]$。</p>
+<li><p><strong>向量场</strong>：适用于输入空间维度与输出空间维度<code>相等</code>的函数，如 $f(x,y)=\left[\begin{aligned}&amp;1\y^2&amp;-y\end{aligned}\right]$。</p>
 <p> <img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/s5uyo.jpg" alt=""></p>
 </li>
 <li><p><strong>变换</strong>：可以用于任何函数，通过这种方法可以对函数有更直观的理解（非线性变换）。</p>
@@ -601,7 +601,7 @@
 <h3 id="梯度和方向导数（Gradient-amp-Directional-Derivatives）"><a href="#梯度和方向导数（Gradient-amp-Directional-Derivatives）" class="headerlink" title="梯度和方向导数（Gradient &amp; Directional Derivatives）"></a>梯度和方向导数（Gradient &amp; Directional Derivatives）</h3><p><strong>方向导数：</strong>是某个方向（任意方向）上的<code>导数</code>，是一个数！$\nabla_{\vec{v}\ }f(x_0,y_0)= \nabla f(x_0,y_0)\cdot \vec{v}$（点积）表示为在 $(x_0,y_0)$ 上沿 $\vec{v}$（不一定是单位向量）方向的变化率。</p>
 <p>可以仔细观察一下<code>偏导</code>和<code>方向导数</code>的定义式：</p>
 <script type="math/tex; mode=display">\frac{\partial f}{\partial x}(\vec{a})=\lim\limits_{h\rightarrow0}\frac{f(\vec{a}+h\hat{i})-f(\vec{a})}{h}</script><script type="math/tex; mode=display">\nabla_{\vec{v}\ }f(\vec{a})=\lim\limits_{h\rightarrow0}\frac{f(\vec{a}+h\vec{v})-f(\vec{a})}{h}</script><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/zagcq.jpg" alt="" title="方向导数的几何意义"></p>
-<p><strong>梯度：</strong>是一个矢量（向量），它所在方向（最陡峭的方向）的<code>方向导数</code>最大，表示为 $\nabla f = \left[\begin{aligned}\frac{\partial}{\partial x}\\\frac{\partial}{\partial y}\end{aligned}\right]$（可以读：nabla, del, grad）。</p>
+<p><strong>梯度：</strong>是一个矢量（向量），它所在方向（最陡峭的方向）的<code>方向导数</code>最大，表示为 $\nabla f = \left[\begin{aligned}\frac{\partial}{\partial x}\\frac{\partial}{\partial y}\end{aligned}\right]$（可以读：nabla, del, grad）。</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/jtf5z.jpg" alt="" title="注意梯度的方向在底部平面上，即用 xy 平面上的一个向量表示方向"></p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ufetu.jpg" alt="" title="每个方向都有方向导数"></p>
 <p>$\nabla$ 可以看作是一个操作算子（Operator），其输入和输出均是函数 $f$，与 $\frac{d}{dx}$、$\frac{\partial}{\partial x}$ 类似。</p>
@@ -610,7 +610,7 @@
 <li>计算方向导数时要不要将向量归一化？</li>
 </ul>
 <blockquote>
-<p>If the directional derivative is used to compute slope, either $\vec{v}$ must be a unit vector or you must remember to divide by $||\vec{v}||$ at the end. Then you will get $\nabla_{\vec{v}\ }f(\vec{x})=\lim\limits_{h\rightarrow0}\frac{f(\vec{x}+h\vec{v})-f(\vec{x})}{h||\vec{v}||}$.<br>However, this definition puts too much emphasis on the particular use case of finding slope, so I (not me…) prefer to use the original definition and normalize $\vec{v}$ when necessary.</p>
+<p>If the directional derivative is used to compute slope, either $\vec{v}$ must be a unit vector or you must remember to divide by $||\vec{v}||$ at the end. Then you will get $\nabla<em>{\vec{v}\ }f(\vec{x})=\lim\limits</em>{h\rightarrow0}\frac{f(\vec{x}+h\vec{v})-f(\vec{x})}{h||\vec{v}||}$.<br>However, this definition puts too much emphasis on the particular use case of finding slope, so I (not me…) prefer to use the original definition and normalize $\vec{v}$ when necessary.</p>
 </blockquote>
 <ul>
 <li>为什么只有一个最大值（方向导数）？</li>
@@ -636,13 +636,13 @@
 <p><strong>一般式：</strong>$\kappa = \frac{|x’(t)y’’(t)-y’(t)x’’(t)|}{[x’(t)^2+y’(t^2)]^{\frac{3}{2}}}$。对于圆有：$\kappa = \frac{1}{R}$。</p>
 <p><strong>螺旋线（Helix）：</strong></p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/lpw1h.jpg" alt=""></p>
-<p>对应的函数为：$\vec{s}(t)=\left[\begin{aligned}\cos&amp;(t)\\\sin&amp;(t)\\\frac{t}{5}\end{aligned}\right]$；求导得：$\frac{d\vec{s}(t)}{dt}=\left[\begin{aligned}-\sin&amp;(t)\\\cos&amp;(t)\\\frac{t}{5}\end{aligned}\right]$</p>
-<p>单位切线向量（Unit tangent vector）：$T(t)=\frac{\vec{s}’(t)}{||\vec{s}’(t)||} = \left[\begin{aligned}\frac{-\sin(t)}{\sqrt{26}/5}\\\frac{\cos(t)}{\sqrt{26}/5}\\\frac{t/5}{\sqrt{26}/5}\end{aligned}\right]$；求导得：$\frac{dT(t)}{dt}$</p>
+<p>对应的函数为：$\vec{s}(t)=\left[\begin{aligned}\cos&amp;(t)\\sin&amp;(t)\\frac{t}{5}\end{aligned}\right]$；求导得：$\frac{d\vec{s}(t)}{dt}=\left[\begin{aligned}-\sin&amp;(t)\\cos&amp;(t)\\frac{t}{5}\end{aligned}\right]$</p>
+<p>单位切线向量（Unit tangent vector）：$T(t)=\frac{\vec{s}’(t)}{||\vec{s}’(t)||} = \left[\begin{aligned}\frac{-\sin(t)}{\sqrt{26}/5}\\frac{\cos(t)}{\sqrt{26}/5}\\frac{t/5}{\sqrt{26}/5}\end{aligned}\right]$；求导得：$\frac{dT(t)}{dt}$</p>
 <p>最后求得：$\kappa=||\frac{dT}{d\vec{s}}||=||\frac{dT/dt}{d\vec{s}/dt}||$，代入即可。</p>
 <h3 id="散度（Divergence）"><a href="#散度（Divergence）" class="headerlink" title="散度（Divergence）"></a>散度（Divergence）</h3><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/5sbf0.jpg" alt="" title="粒子在流动"></p>
 <p>适用函数：2D → 2D、3D → 3D。</p>
-<p><strong>定义</strong>：是向量分析中的一个<code>向量算子</code>，将向量空间上的一个<code>向量场</code>对应到一个<code>标量场</code>上。对于函数 $\vec{v}(x,y)=\left[\begin{aligned}P(x,y)\\Q(x,y)\end{aligned}\right]$，其<code>散度</code>为 $\rm{div}\ \vec{v}=\frac{\partial{P}}{\partial{x}}+\frac{\partial{Q}}{\partial{y}}$。</p>
-<p><strong>写法上的<code>Trick</code>：</strong> $\nabla\cdot\vec{v}=\left[\begin{aligned}\frac{\partial}{\partial{x}}\\\frac{\partial}{\partial{y}}\\\frac{\partial}{\partial{z}}\end{aligned}\right]\cdot\left[\begin{aligned}P\\Q\\R\end{aligned}\right]$</p>
+<p><strong>定义</strong>：是向量分析中的一个<code>向量算子</code>，将向量空间上的一个<code>向量场</code>对应到一个<code>标量场</code>上。对于函数 $\vec{v}(x,y)=\left[\begin{aligned}P(x,y)\Q(x,y)\end{aligned}\right]$，其<code>散度</code>为 $\rm{div}\ \vec{v}=\frac{\partial{P}}{\partial{x}}+\frac{\partial{Q}}{\partial{y}}$。</p>
+<p><strong>写法上的<code>Trick</code>：</strong> $\nabla\cdot\vec{v}=\left[\begin{aligned}\frac{\partial}{\partial{x}}\\frac{\partial}{\partial{y}}\\frac{\partial}{\partial{z}}\end{aligned}\right]\cdot\left[\begin{aligned}P\Q\R\end{aligned}\right]$</p>
 <p><strong>几何上的意义：</strong>如<code>First Component</code>「即 $P(x,y)$」小于 $0$，则从左到右来看向量所指的方向往左边去一点：）</p>
 <h3 id="旋度（Curl）"><a href="#旋度（Curl）" class="headerlink" title="旋度（Curl）"></a>旋度（Curl）</h3><blockquote>
 <p>Curl measures the rotation in a fluid flowing along a vector field. Formally, curl only applies to 3D, but here we cover the concept in 2D to warmup.</p>
@@ -670,7 +670,7 @@ P & Q & R
 <h3 id="雅克比矩阵（Jacobian-Matrix）"><a href="#雅克比矩阵（Jacobian-Matrix）" class="headerlink" title="雅克比矩阵（Jacobian Matrix）"></a>雅克比矩阵（Jacobian Matrix）</h3><blockquote>
 <p>雅可比矩阵的重要性在于它体系那了一个可微方程与给出点的最优线性逼近，因此，雅可比矩阵类似于多元函数的导数。</p>
 </blockquote>
-<p>给出 $f(\left[\begin{aligned}x\\y\end{aligned}\right])=\left[\begin{aligned}f_1(x,y)\\f_2(x,y)\end{aligned}\right]=\left[\begin{aligned}x + \sin(y)\\y+\sin(x)\end{aligned}\right]$，其对应的<code>非线性变化</code>如下图所示。</p>
+<p>给出 $f(\left[\begin{aligned}x\y\end{aligned}\right])=\left[\begin{aligned}f_1(x,y)\f_2(x,y)\end{aligned}\right]=\left[\begin{aligned}x + \sin(y)\y+\sin(x)\end{aligned}\right]$，其对应的<code>非线性变化</code>如下图所示。</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/xzclb.jpg" alt=""></p>
 <p>在以红点为原点的切空间中，该区域可以看成是<code>局部线性的</code>（Locally Linear）。该空间内的变换可以看成是<code>线性变换</code>，其<code>变换矩阵</code>如下：</p>
 <script type="math/tex; mode=display">\left[
@@ -684,7 +684,7 @@ P & Q & R
 </blockquote>
 <p><strong>2D 下的几何意义：</strong>如何控制这个切平面，如图所示。</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9p3dj.jpg" alt=""></p>
-<p>令 $\vec{v} = \left[\begin{aligned}x\\y\end{aligned}\right]$、$\vec{v}_0 = \left[\begin{aligned}x_0\\y_0\end{aligned}\right]$，该切平面可以表示为（可以扩展至更高维）：</p>
+<p>令 $\vec{v} = \left[\begin{aligned}x\y\end{aligned}\right]$、$\vec{v}_0 = \left[\begin{aligned}x_0\y_0\end{aligned}\right]$，该切平面可以表示为（可以扩展至更高维）：</p>
 <script type="math/tex; mode=display">\begin{aligned}L_f(x,y)&=f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0)+f(x_0,y_0)\\
 &= \nabla{f(\vec{v}_0)}\cdot(\vec{v}-\vec{v}_0) + f(\vec{v}_0)
 \end{aligned}</script><h3 id="局部二次非线性逼近（Quadratic-Approximations）"><a href="#局部二次非线性逼近（Quadratic-Approximations）" class="headerlink" title="局部二次非线性逼近（Quadratic Approximations）"></a>局部二次非线性逼近（Quadratic Approximations）</h3><blockquote>
@@ -697,7 +697,7 @@ P & Q & R
 </li>
 <li><p>一阶偏导都相等，$f_x=Q_x$、$f_y=Q_y$</p>
 </li>
-<li><p>二阶偏导都相等，$f_{xx}=Q_{xx}$、$f_{yy}=Q_{yy}$、$f_{xy}=Q_{yx}$</p>
+<li><p>二阶偏导都相等，$f<em>{xx}=Q</em>{xx}$、$f<em>{yy}=Q</em>{yy}$、$f<em>{xy}=Q</em>{yx}$</p>
 </li>
 </ul>
 <p>我就直接丢公式了（相当于线性逼近的扩展）：</p>
