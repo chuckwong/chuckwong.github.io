@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic|Bitter:300,300italic,400,400italic,700,700italic|Bitter:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="junhaow, maodai">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Project 1A - Deque (Linked List &amp;amp; Array)Code: linkGuide: linkTips (not too much!): link  Take things a little at a time. Writing tons of code all at once is going to lead to misery and only miser">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CS 61B | Project 1 | Data Structures (Deque API)">
+<meta property="og:url" content="http://www.junhaow.com/studynotes/cs61b/cs61b proj1.html">
+<meta property="og:site_name" content="B_L_OO_GGG">
+<meta property="og:description" content="Project 1A - Deque (Linked List &amp;amp; Array)Code: linkGuide: linkTips (not too much!): link  Take things a little at a time. Writing tons of code all at once is going to lead to misery and only miser">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-05-17T18:53:32.360Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CS 61B | Project 1 | Data Structures (Deque API)">
+<meta name="twitter:description" content="Project 1A - Deque (Linked List &amp;amp; Array)Code: linkGuide: linkTips (not too much!): link  Take things a little at a time. Writing tons of code all at once is going to lead to misery and only miser">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.junhaow.com/studynotes/cs61b/cs61b proj1.html">
+
+
+
+
+
+  <title>CS 61B | Project 1 | Data Structures (Deque API) | B_L_OO_GGG</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-146643833-1', 'auto');
+  ga('send', 'pageview');
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">B_L_OO_GGG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Sumomo mo momo mo no uchi</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+
+
+            
+
+            
+
+            
+
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-inbox"></i> <br>
+            
+            Archives
+
+
+            
+
+            
+              <span class="badge">50</span>
+            
+
+            
+
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-studynotes">
+          <a href="/studynotes/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br>
+            
+            Study Notes
+
+
+            
+
+            
+
+            
+              <span class="badge">6</span>
+            
+
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-lc">
+          <a href="/lc/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            LeetCode Book
+
+
+            
+
+            
+
+            
+
+            
+              <span class="badge badge-lc">251 / ∞</span>
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-address-card"></i> <br>
+            
+            About Me
+
+
+            
+
+            
+
+            
+
+            
+
+            
+              <span class="badge-about">👋</span>
+            
+
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+	<h1 class="post-title" itemprop="name headline">CS 61B | Project 1 | Data Structures (Deque API)</h1>
+
+
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <p><br></p>
+<h2 id="Project-1A-Deque-Linked-List-amp-Array"><a href="#Project-1A-Deque-Linked-List-amp-Array" class="headerlink" title="Project 1A - Deque (Linked List &amp; Array)"></a>Project 1A - Deque (Linked List &amp; Array)</h2><p>Code: <a href="https://github.com/junhaowww/cs61b-sp18/tree/master/proj1a" target="_blank" rel="noopener">link</a><br>Guide: <a href="https://sp18.datastructur.es/materials/proj/proj1a/proj1a" target="_blank" rel="noopener">link</a><br>Tips (not too much!): <a href="https://docs.google.com/presentation/d/1XBJOht0xWz1tEvLuvOL4lOIaY0NSfArXAvqgkrx0zpc/edit#" target="_blank" rel="noopener">link</a></p>
+<blockquote>
+<p>Take things a little at a time. Writing tons of code all at once is going to lead to misery and only misery. If you wrote too much stuff and feel overwhelmed, comment out whatever is unnecessary.</p>
+<p>Work out what your data structures will look like on paper before you try implementing them in code! If you can find a willing friend, have them give commands, while you attempt to draw everything out. Try to come up with operations that might reveal problems with your implementation.</p>
+<p>Sentinel nodes make life much easier, once you understand them.</p>
+<p>Circular data structures make life easier for both implementations (but especially the ArrayDeque, e.g., MOD operation).</p>
+</blockquote>
+<h3 id="The-Deque-API"><a href="#The-Deque-API" class="headerlink" title="The Deque API"></a>The Deque API</h3><p>The double ended queue is very similar to the <code>SLList</code> and <code>AList</code> classes that we’ve discussed in class.</p>
+<p><code>Deque</code> (usually pronounced like “deck”) is an irregular acronym of double-ended queue. <code>Double-ended queues</code> are sequence containers with <code>dynamic sizes</code> that can be <code>expanded or contracted on both ends</code> (either its front or its back).</p>
+<p>Generally implemented as a dynamic array, it allows direct access to any element in the sequence and provides relatively fast addition/removal of elements at the beginning or the end of the sequence.</p>
+<ul>
+<li>addFirst(T x)</li>
+<li>addLast(T x)</li>
+<li>isEmpty()</li>
+<li>size()</li>
+<li>printDeque()</li>
+<li>T removeFirst()</li>
+<li>T removeLast(T)</li>
+<li>T get(int index)</li>
+</ul>
+<h3 id="LinkedListDeque"><a href="#LinkedListDeque" class="headerlink" title="LinkedListDeque"></a>LinkedListDeque</h3><p>Code (see above link)</p>
+<p>Compared to array deque, this one is not difficult. Just pay attention to special cases and the way to loop.</p>
+<p><strong>Note:</strong> there is a circular sentinel.</p>
+<h4 id="get"><a href="#get" class="headerlink" title="get"></a>get</h4><ul>
+<li><p>get (iterative version)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 0 1 2 3 4 5</span></span><br><span class="line"><span class="comment">// 3 5 9 5 3 8</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// if (isEmpty()) &#123; return null; &#125;</span></span><br><span class="line">  <span class="comment">/* could be removed, since we set sentinel.item == null */</span></span><br><span class="line">  Node p = sentinel.next; <span class="comment">/* the 1st real node */</span></span><br><span class="line">  <span class="keyword">while</span> (index &gt; <span class="number">0</span> &amp;&amp; p != sentinel) &#123; <span class="comment">/* p != sentinel stops outofbound cases */</span></span><br><span class="line">    p = p.next;</span><br><span class="line">    index--;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> p.item; <span class="comment">/* when index is out of bound, returns null (sentinel) */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>get (recursive version)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** getRecursive - LinkedListDeque class */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">getRecursive</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">  <span class="comment">/** sentinel.next won't be null */</span></span><br><span class="line">  Node firstNode = sentinel.next;</span><br><span class="line">  <span class="keyword">return</span> firstNode.get(index); <span class="comment">/* Node.get */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** Helper Method (Recursive) - Node class */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (index &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> item;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span> == sentinel) &#123; <span class="comment">/* what if index is very large */</span></span><br><span class="line">    <span class="comment">/** Returns null if index is out of bound */</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> next.get(index - <span class="number">1</span>);   <span class="comment">/* better */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="addFirst"><a href="#addFirst" class="headerlink" title="addFirst"></a>addFirst</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addFirst</span><span class="params">(T item)</span> </span>&#123;</span><br><span class="line">  Node newNode = <span class="keyword">new</span> Node(item, sentinel, sentinel.next);</span><br><span class="line">  sentinel.next = newNode;</span><br><span class="line">  newNode.next.prev = newNode;</span><br><span class="line">  size += <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="addLast"><a href="#addLast" class="headerlink" title="addLast"></a>addLast</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addLast</span><span class="params">(T item)</span> </span>&#123;</span><br><span class="line">  Node newNode = <span class="keyword">new</span> Node(item, sentinel.prev, sentinel);</span><br><span class="line">  sentinel.prev = newNode;</span><br><span class="line">  newNode.prev.next = newNode;</span><br><span class="line">  size += <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="removeFirst"><a href="#removeFirst" class="headerlink" title="removeFirst"></a>removeFirst</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">removeFirst</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (isEmpty()) &#123; <span class="comment">/* because of circular sentinel, removedNode won't be null */</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>; <span class="comment">/* just in case size -= 1, return is okay since sentinel.item is null */</span></span><br><span class="line">  &#125;</span><br><span class="line">  Node removedNode = sentinel.next; <span class="comment">/* even without if, these two lines won't crash */</span></span><br><span class="line">  sentinel.next = removedNode.next;</span><br><span class="line">  removedNode.next.prev = sentinel; <span class="comment">/* ok for all size &gt;= 1 */</span></span><br><span class="line">  size -= <span class="number">1</span>; <span class="comment">/** But "if" decides if this line should be run */</span></span><br><span class="line">  <span class="keyword">return</span> removedNode.item;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="removeLast"><a href="#removeLast" class="headerlink" title="removeLast"></a>removeLast</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">removeLast</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (isEmpty()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/** Usually, when using a circular sentinel and the list is empty, both sides of the equation are pointing at the sentinel! Just do useless work */</span></span><br><span class="line">  Node removedNode = sentinel.prev; <span class="comment">/** Use some local variables */</span></span><br><span class="line">  removedNode.prev.next = sentinel;</span><br><span class="line">  sentinel.prev = removedNode.prev;</span><br><span class="line">  size -= <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">return</span> removedNode.item;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Array-Deque"><a href="#Array-Deque" class="headerlink" title="Array Deque"></a>Array Deque</h3><h4 id="Constructor-How-where-to-start"><a href="#Constructor-How-where-to-start" class="headerlink" title="Constructor (How/where to start?)"></a>Constructor (How/where to start?)</h4><p>One requirement of the project is that the <code>initSize</code> of the array should be 8. We can initially make it 4. Make things easier! Later, we have to deal with many boundary cases and design a way to resize the array.</p>
+<p>What fields do we need?</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">publci <span class="class"><span class="keyword">class</span> <span class="title">ArrayDeque</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> nextFirst;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> nextLast;</span><br><span class="line">  <span class="keyword">private</span> T[] items;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> initSize = <span class="number">4</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>First, where do we start? Well, I can pick a position, what about the middle position <code>mid = length / 2</code>.</p>
+<p>[ ][ ][ ][ ]</p>
+<p><code>nextFirst</code> and <code>nextLast</code> point to the same box or two boxes?</p>
+<p>If they point to the same box, for <code>addFirst</code> and <code>addLast</code>, we have to deal with special cases.</p>
+<p>What if <code>nextFirst</code> points to the leftmost element (i.e. <code>nextFirst - 1</code> is the position we about to put a new element in), while <code>nextLast</code> points to the position we about to put a new element in? Think about it.</p>
+<p>Finally, I decide to make them point to the future spots because it makes code cleaner without special <code>if</code>. It’s more intuitive too.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayDeque</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  items = (T[]) <span class="keyword">new</span> Object[initSize];</span><br><span class="line">  <span class="keyword">int</span> mid = items.length / <span class="number">2</span>;</span><br><span class="line">  nextFirst = mid - <span class="number">1</span>;</span><br><span class="line">  nextLast = mid;</span><br><span class="line">  size = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Hit-the-Boundary"><a href="#Hit-the-Boundary" class="headerlink" title="Hit the Boundary"></a>Hit the Boundary</h4><p>When there is no enough space in one side, I’ll put elements into the other side. The guide suggests we using the circular approach. There are few things we need to think over while designing the algorithm.</p>
+<ul>
+<li><p>When to resize?</p>
+<p><code>F</code> stands for <code>nextFirst</code>; <code>L</code> stands for <code>nextLast</code>.</p>
+<p>Init state: [ ][ ][ ][ ]</p>
+<p><code>F</code> points to the 2nd box. <code>L</code> points to the 3rd box.</p>
+<p>Consider 3 cases here:</p>
+<ul>
+<li><p>Invoke <code>addFirst</code> only:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 0  1  2  3</span><br><span class="line">[x][x][ ][x]</span><br><span class="line">-------F---- F starts from 1 to 2 (move 3 times)</span><br><span class="line">-------L---- L doesn&apos;t change</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Invoke <code>addLast</code> only:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 0  1  2  3</span><br><span class="line">[x][ ][x][x]</span><br><span class="line">----F------- F doesn&apos;t change</span><br><span class="line">----L------- L starts from 2 to 1 (move 3 times)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Move <code>F</code> 1 time &amp; Move <code>L</code> 2 times:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 0  1  2  3</span><br><span class="line">[ ][x][x][x]</span><br><span class="line">-F---------- F starts from 1 to 0</span><br><span class="line">-L---------- L starts from 2 to 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Move <code>F</code> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 0  1  2  3  4  5</span><br><span class="line">[x][x][x][x][ ][x]</span><br><span class="line">-------------F---- F starts from 2 to 4</span><br><span class="line">-------------L---- L starts from 3 to 4</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>My <code>question</code> is do we need to add one more element into the array, in other words, make it fully filled?</p>
+<p>You’ll see it is not a good idea. The 1st reason is that once we do that we don’t know how to detect whether the array is full, although we can use <code>size</code>. That <code>L</code> is before <code>F</code> doesn’t ensure that the array is full.</p>
+<p>However, the most important reason is that if we keep <code>F</code> always equal or less than <code>L</code> we can make things easier or possible for later implementation of <code>get</code> and <code>resize</code>.</p>
+<p>In these functions, we need to know which part of the array belongs to the left or right side.</p>
+<p><strong>Note:</strong> You know what. Later, I think it’s okay to fully fill that out. What we need to do in later iteration, the order is either <code>F</code> -&gt; <code>L</code> (not full), <code>F</code> -&gt; <code>END</code> -&gt; <code>START</code> -&gt; <code>L</code>. So the relative order of <code>F</code> and <code>L</code> does not really matters here. <code>F</code> may encounter <code>L</code>, but <code>size</code> could tell that it does not reach the <code>END</code>.</p>
+<p>Also, we need <code>resize</code> when the array is full… not at any other time :)</p>
+</li>
+<li><p>Since we need to implement <code>get(int index)</code> of a constant time later, how can we calculate the real index? (horrible) And how to resize?</p>
+</li>
+</ul>
+<h4 id="My-solution"><a href="#My-solution" class="headerlink" title="My solution"></a>My solution</h4><p>My solution for <code>addFirst</code>, <code>addLast</code>, and <code>resize</code> (all passed the test):</p>
+<p>Test: <a href="https://github.com/junhaowww/cs61b-sp18/blob/master/proj1a/ArrayDequeTest.java" target="_blank" rel="noopener">ArrayDequeTest.java</a></p>
+<h5 id="resize-amp-resizeDown"><a href="#resize-amp-resizeDown" class="headerlink" title="resize &amp; resizeDown"></a>resize &amp; resizeDown</h5><ul>
+<li><p>resize</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">resize</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  T[] newItems = (T[]) <span class="keyword">new</span> Object[capacity];</span><br><span class="line">  <span class="comment">//  0  1  2  3  4  5  6  7</span></span><br><span class="line">  <span class="comment">//       [x][x][x][x]       items (copy array)</span></span><br><span class="line">  <span class="comment">// [ ][ ][ ][ ][ ][ ][ ][ ] newItems</span></span><br><span class="line">  <span class="comment">//    [x][x][x]   if initSize is an odd number</span></span><br><span class="line">  <span class="comment">// [ ][ ][ ][ ][ ][ ]</span></span><br><span class="line">  <span class="keyword">int</span> startPos = newItems.length / <span class="number">2</span> - size / <span class="number">2</span>; <span class="comment">/* draw a picture */</span></span><br><span class="line">  <span class="comment">/** Copy */</span></span><br><span class="line">  <span class="comment">/* // stupid way</span></span><br><span class="line"><span class="comment">  int oldIndex = (nextFirst + 1 &gt; size - 1) ? (0) : (nextFirst + 1);</span></span><br><span class="line"><span class="comment">  // if nextF points at the last position, it means we need to start from 0</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="keyword">int</span> oldIndex = nextFirst + <span class="number">1</span>; <span class="comment">/* Use MOD operation instead */</span></span><br><span class="line">  <span class="keyword">int</span> newIndex = startPos; <span class="comment">/* newIndex for newItems */</span></span><br><span class="line">  <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (count &lt; size) &#123; <span class="comment">/* yes! the original size! */</span></span><br><span class="line">    newItems[newIndex] = items[oldIndex % items.length]; <span class="comment">/* 3 + 1 = 4, 4 % 4 = 0 */</span></span><br><span class="line">    oldIndex++; newIndex++;</span><br><span class="line">    count++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/** Set new fields */</span></span><br><span class="line">  items = newItems;</span><br><span class="line">  <span class="comment">// size = capacity; bug! we don't need to change size!</span></span><br><span class="line">  nextFirst = startPos - <span class="number">1</span>;</span><br><span class="line">  nextLast = newIndex; <span class="comment">/* or nextFirst + size */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>resizeDown</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">resizeDown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  resize(size * <span class="number">2</span> &lt; initSize ? initSize : size * <span class="number">2</span>); <span class="comment">/* if it is too small, make it 8 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="addFirst-addLast"><a href="#addFirst-addLast" class="headerlink" title="addFirst/addLast"></a>addFirst/addLast</h5><ul>
+<li><p>addFirst</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addFirst</span><span class="params">(T item)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (size == items.length) &#123; <span class="comment">/** FULL! */</span></span><br><span class="line">    resize(items.length * <span class="number">2</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  items[nextFirst] = item;</span><br><span class="line">  nextFirst = ((nextFirst - <span class="number">1</span>) + items.length) % items.length;</span><br><span class="line">  <span class="comment">/* since in java, -5 % 6 == -5, we need to add items.length */</span></span><br><span class="line">  size++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>addLast</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addLast</span><span class="params">(T item)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (size == items.length) &#123;</span><br><span class="line">    resize(items.length * <span class="number">2</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  items[nextLast] = item;</span><br><span class="line">  nextLast = (nextLast + <span class="number">1</span>) % items.length; <span class="comment">/* nextLast += 1 */</span></span><br><span class="line">  size++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="removeFirst-removeLast"><a href="#removeFirst-removeLast" class="headerlink" title="removeFirst/removeLast"></a>removeFirst/removeLast</h5><p>Now, let’s finish up with <code>removeFirst</code>, <code>removeLast</code>, and <code>get</code>. Based on the code of <code>addFirst</code> and <code>addLast</code>, it is not difficult. But there are few things to be mentioned.</p>
+<ul>
+<li>Set the deleted item reference to <code>null</code>. It helps the Garbage Collector to clean the unused objects. If you don’t do it, it still stays there.</li>
+<li>Be careful about the boundary. I just copy the code from <code>addFirst</code> and <code>addLast</code>, then write cases to test them out.</li>
+<li>Invariants:<ul>
+<li><code>nextFirst</code> always points to the previous position of the first element.</li>
+<li><code>nextLast</code> always points to the next position of the last element.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>removeFirst</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">removeFirst</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (isEmpty()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/** Resize down */</span></span><br><span class="line">  <span class="keyword">if</span> ((<span class="keyword">double</span>) size / items.length &lt; <span class="number">0.25</span> &amp;&amp; items.length &gt; initSize) &#123;</span><br><span class="line">    resizeDown();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  nextFirst = (nextFirst + <span class="number">1</span>) % items.length;</span><br><span class="line">  T removedItem = items[nextFirst];</span><br><span class="line">  items[nextFirst] = <span class="keyword">null</span>; <span class="comment">/* since it is a reference */</span></span><br><span class="line">  size--;</span><br><span class="line">  <span class="keyword">return</span> removedItem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>removeLast</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">removeLast</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">//  0  1  2  3</span></span><br><span class="line">  <span class="comment">// [ ][x][x][x]</span></span><br><span class="line">  <span class="comment">// [ ][ ][ ][ ]</span></span><br><span class="line">  <span class="keyword">if</span> (isEmpty()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/** Resize down */</span></span><br><span class="line">  <span class="keyword">if</span> ((<span class="keyword">double</span>) size / items.length &lt; <span class="number">0.25</span> &amp;&amp; items.length &gt; initSize) &#123;</span><br><span class="line">    resizeDown();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  nextLast = ((nextLast - <span class="number">1</span>) + items.length) % items.length;</span><br><span class="line">  T removedItem = items[nextLast];</span><br><span class="line">  items[nextLast] = <span class="keyword">null</span>;</span><br><span class="line">  size--;</span><br><span class="line">  <span class="keyword">return</span> removedItem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="get-1"><a href="#get-1" class="headerlink" title="get"></a>get</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">  <span class="comment">/* Test at the first place. It makes the condition later more succinct */</span></span><br><span class="line">  <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> oldIndex = nextFirst + <span class="number">1</span>; <span class="comment">/* will be MODed */</span></span><br><span class="line">  <span class="keyword">while</span> (index &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    oldIndex++;</span><br><span class="line">    index--;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> items[oldIndex % items.length];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Project-1B"><a href="#Project-1B" class="headerlink" title="Project 1B"></a>Project 1B</h2><p>Code: <a href="https://github.com/junhaowww/cs61b-sp18/tree/master/proj1b" target="_blank" rel="noopener">link</a><br>Guide: <a href="https://sp18.datastructur.es/materials/proj/proj1b/proj1b" target="_blank" rel="noopener">link</a></p>
+<p>Done~</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/handsomecat.jpg" alt="Junhao Wang">
+            
+              <p class="site-author-name" itemprop="name">Junhao Wang</p>
+              <p class="site-description motion-element" itemprop="description">Debug the old world, bug the new world!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/chuckwangg" target="_blank" title="Facebook">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>Facebook</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/junhaowww" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.linkedin.com/in/junhaowww/" target="_blank" title="LinkedIn">
+                      
+                        <i class="fa fa-fw fa-linkedin"></i>LinkedIn</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.douban.com/people/maodai/" target="_blank" title="豆瓣 (Book)">
+                      
+                        <i class="fa fa-fw fa-book"></i>豆瓣 (Book)</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jianshu.com/u/41865efdad5d/" title="Xiaofud" target="_blank">Xiaofud</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.davex.pw/" title="DaveX" target="_blank">DaveX</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://alexfan.xyz/" title="alexfan.xyz" target="_blank">alexfan.xyz</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Project-1A-Deque-Linked-List-amp-Array"><span class="nav-number">1.</span> <span class="nav-text">Project 1A - Deque (Linked List &amp; Array)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Deque-API"><span class="nav-number">1.1.</span> <span class="nav-text">The Deque API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedListDeque"><span class="nav-number">1.2.</span> <span class="nav-text">LinkedListDeque</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#get"><span class="nav-number">1.2.1.</span> <span class="nav-text">get</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#addFirst"><span class="nav-number">1.2.2.</span> <span class="nav-text">addFirst</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#addLast"><span class="nav-number">1.2.3.</span> <span class="nav-text">addLast</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#removeFirst"><span class="nav-number">1.2.4.</span> <span class="nav-text">removeFirst</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#removeLast"><span class="nav-number">1.2.5.</span> <span class="nav-text">removeLast</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Array-Deque"><span class="nav-number">1.3.</span> <span class="nav-text">Array Deque</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Constructor-How-where-to-start"><span class="nav-number">1.3.1.</span> <span class="nav-text">Constructor (How/where to start?)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hit-the-Boundary"><span class="nav-number">1.3.2.</span> <span class="nav-text">Hit the Boundary</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#My-solution"><span class="nav-number">1.3.3.</span> <span class="nav-text">My solution</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#resize-amp-resizeDown"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">resize &amp; resizeDown</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#addFirst-addLast"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">addFirst/addLast</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#removeFirst-removeLast"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">removeFirst/removeLast</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#get-1"><span class="nav-number">1.3.3.4.</span> <span class="nav-text">get</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Project-1B"><span class="nav-number">2.</span> <span class="nav-text">Project 1B</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Junhao Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://junhaow.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.junhaow.com/studynotes/cs61b/cs61b proj1.html';
+          this.page.identifier = 'studynotes/cs61b/cs61b proj1.html';
+          this.page.title = 'CS 61B | Project 1 | Data Structures (Deque API)';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://junhaow.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  
+
+  
+  
+
+
+  
+
+  
+
+
+</body>
+</html>

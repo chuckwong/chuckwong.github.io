@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic|Bitter:300,300italic,400,400italic,700,700italic|Bitter:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="多元微积分,Multivarible Calculus,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="多元函数多元函数：输入由多个变量构成的函数，是一个空间的点到另一个空间的点的映射。虽然输出由多个变量构成的函数也可被称为多元函数，但是它们通常被称为向量值函数。  导数（Derivatives）: the rate of change of a function as you slightly tweak its input.积分（Integrals）: how to add together i">
+<meta name="keywords" content="多元微积分,Multivarible Calculus">
+<meta property="og:type" content="article">
+<meta property="og:title" content="陷入多元微积「危机」分时写的笔记">
+<meta property="og:url" content="http://www.junhaow.com/2018/01/27/022 | 陷入多元微积分笔记/index.html">
+<meta property="og:site_name" content="B_L_OO_GGG">
+<meta property="og:description" content="多元函数多元函数：输入由多个变量构成的函数，是一个空间的点到另一个空间的点的映射。虽然输出由多个变量构成的函数也可被称为多元函数，但是它们通常被称为向量值函数。  导数（Derivatives）: the rate of change of a function as you slightly tweak its input.积分（Integrals）: how to add together i">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/29rpr.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/oz5zc.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/1fntb.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/q7msq.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/qu6f7.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/s5uyo.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/vacjx.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tzwyf.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/7qhsu.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/zagcq.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/jtf5z.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ufetu.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/vhni5.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9e1a4.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/8t1uz.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/rui1m.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/lpw1h.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/5sbf0.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ervs7.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/gdzqk.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9erxj.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/bo023.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/v5xph.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/xzclb.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9p3dj.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/u47h3.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/nopv0.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/zckmv.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/jtho0.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tb1o1.jpg">
+<meta property="og:updated_time" content="2019-04-26T09:59:01.141Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="陷入多元微积「危机」分时写的笔记">
+<meta name="twitter:description" content="多元函数多元函数：输入由多个变量构成的函数，是一个空间的点到另一个空间的点的映射。虽然输出由多个变量构成的函数也可被称为多元函数，但是它们通常被称为向量值函数。  导数（Derivatives）: the rate of change of a function as you slightly tweak its input.积分（Integrals）: how to add together i">
+<meta name="twitter:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/29rpr.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.junhaow.com/2018/01/27/022 | 陷入多元微积分笔记/">
+
+
+
+
+
+  <title>陷入多元微积「危机」分时写的笔记 | B_L_OO_GGG</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-146643833-1', 'auto');
+  ga('send', 'pageview');
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">B_L_OO_GGG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Sumomo mo momo mo no uchi</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+
+
+            
+
+            
+
+            
+
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-inbox"></i> <br>
+            
+            Archives
+
+
+            
+
+            
+              <span class="badge">50</span>
+            
+
+            
+
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-studynotes">
+          <a href="/studynotes/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br>
+            
+            Study Notes
+
+
+            
+
+            
+
+            
+              <span class="badge">6</span>
+            
+
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-lc">
+          <a href="/lc/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            LeetCode Book
+
+
+            
+
+            
+
+            
+
+            
+              <span class="badge badge-lc">251 / ∞</span>
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-address-card"></i> <br>
+            
+            About Me
+
+
+            
+
+            
+
+            
+
+            
+
+            
+              <span class="badge-about">👋</span>
+            
+
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.junhaow.com/2018/01/27/022 | 陷入多元微积分笔记/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Junhao Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/handsomecat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="B_L_OO_GGG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">陷入多元微积「危机」分时写的笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-27T21:12:50-08:00">
+                01/27/2018
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/27/022 | 陷入多元微积分笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/27/022 | 陷入多元微积分笔记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="多元函数"><a href="#多元函数" class="headerlink" title="多元函数"></a>多元函数</h2><p>多元函数：输入由<code>多个变量</code>构成的函数，是一个空间的点到另一个空间的点的<code>映射</code>。虽然输出由多个变量构成的函数也可被称为<code>多元函数</code>，但是它们通常被称为<code>向量值函数</code>。</p>
+<blockquote>
+<p><strong>导数（Derivatives）:</strong> the rate of change of a function as you <code>slightly tweak its input</code>.<br><strong>积分（Integrals）:</strong> how to <code>add together infinitely infinitesimal</code> quantities that make up a function’s output.</p>
+</blockquote>
+<p>研究多元函数可以告诉我们<code>在不同方向上</code>函数值的变化情况，以及这些<code>变化间的关系</code>。</p>
+<a id="more"></a>
+<h3 id="向量值函数（Vector-valued-Functions-or-Vector-Functions）"><a href="#向量值函数（Vector-valued-Functions-or-Vector-Functions）" class="headerlink" title="向量值函数（Vector-valued Functions or Vector Functions）"></a>向量值函数（Vector-valued Functions or Vector Functions）</h3><p>定义域：标量 or 矢量<br>值域：矢量</p>
+<p>可用向量场（Vector Field）表示该函数：$f(x,y)=\left[\begin{aligned}F(x,y)\\G(x,y)\end{aligned}\right]$</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/29rpr.jpg" alt="" title="颜色表示向量的长度"></p>
+<h3 id="可视化（Visualization）"><a href="#可视化（Visualization）" class="headerlink" title="可视化（Visualization）"></a>可视化（Visualization）</h3><p>在多元函数中，我们并不总是对函数进行可视化，而且并不总是将导数看作是<code>斜率（Slope）</code>。但是，我们仍然可以通过以下几种方式进行可视化：</p>
+<ol>
+<li><p><strong>图形</strong>：通常只适用于<code>二对一</code>的函数，如 $f(x,y)=e^{-(x^2+y^2)}$、$f(x,y)=\cos(x)\sin(y)$。</p>
+<p> 在实际中，对于维度较高的函数如 $f(x,y,z)=x^2+y^2+z^2$，人们通常先研究 $f(x,y)=x^2+y^2$ 的性质（概念原型），并将发现的一些性质推广到原始的高维函数中。</p>
+<p> <img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/oz5zc.jpg" alt="" title="The Bell Curve &amp; Wave"></p>
+</li>
+<li><p><strong>等高线图</strong>：该图只显示输入空间，适用于<code>二对一</code>的函数。</p>
+<p> <img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/1fntb.jpg" alt="" title="平面的等高线图"></p>
+</li>
+<li><p><strong>参数曲线/平面</strong>：适用于输出空间维度<code>大于</code>输入空间的情况，如 $f(t)=\left[\begin{aligned}2t\\3t \end{aligned}\right]$、$f(t)=\left[\begin{aligned}\sin&amp;(t)\\\cos&amp;(3t)\\3&amp;t \end{aligned}\right]$。</p>
+<ul>
+<li><p>一个输入：$f(t)=\left[\begin{aligned}t\cos(2\pi t)\\t\sin(2\pi t)\end{aligned}\right]$</p>
+<p>  <img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/q7msq.jpg" alt=""></p>
+</li>
+<li><p>两个输入：$f(s,t)=\left[\begin{aligned}t^3&amp;-st\\s&amp;-t\\s&amp;+t\end{aligned}\right]$</p>
+<p>  <img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/qu6f7.jpg" alt="" title="二维空间到三维空间的映射（和 3x2 矩阵一个道理）"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>向量场</strong>：适用于输入空间维度与输出空间维度<code>相等</code>的函数，如 $f(x,y)=\left[\begin{aligned}&amp;1\\y^2&amp;-y\end{aligned}\right]$。</p>
+<p> <img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/s5uyo.jpg" alt=""></p>
+</li>
+<li><p><strong>变换</strong>：可以用于任何函数，通过这种方法可以对函数有更直观的理解（非线性变换）。</p>
+<p> <img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/vacjx.jpg" alt=""></p>
+</li>
+</ol>
+<h2 id="多元函数的导数"><a href="#多元函数的导数" class="headerlink" title="多元函数的导数"></a>多元函数的导数</h2><h3 id="偏导数（Partial-Derivatives）"><a href="#偏导数（Partial-Derivatives）" class="headerlink" title="偏导数（Partial Derivatives）"></a>偏导数（Partial Derivatives）</h3><blockquote>
+<p>In fact, this intuitive feel for the symbol is one of the most useful takeaways from single-variable calculus, and when you really start feeling it in your bones, most of the concepts around derivatives start to click. <strong>直观的理解很重要！</strong></p>
+</blockquote>
+<p>$\frac{\partial f}{\partial x}$（”$\partial$” 读作：/del/ or partial）：tiny change of $f$ with respect to tiny change of $x$</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tzwyf.jpg" alt="" title="直观的理解之「每个方向对函数值的贡献」"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/7qhsu.jpg" alt="" title="直观的理解之「在某个方向上的变化率」"></p>
+<h3 id="梯度和方向导数（Gradient-amp-Directional-Derivatives）"><a href="#梯度和方向导数（Gradient-amp-Directional-Derivatives）" class="headerlink" title="梯度和方向导数（Gradient &amp; Directional Derivatives）"></a>梯度和方向导数（Gradient &amp; Directional Derivatives）</h3><p><strong>方向导数：</strong>是某个方向（任意方向）上的<code>导数</code>，是一个数！$\nabla_{\vec{v}\ }f(x_0,y_0)= \nabla f(x_0,y_0)\cdot \vec{v}$（点积）表示为在 $(x_0,y_0)$ 上沿 $\vec{v}$（不一定是单位向量）方向的变化率。</p>
+<p>可以仔细观察一下<code>偏导</code>和<code>方向导数</code>的定义式：</p>
+<script type="math/tex; mode=display">\frac{\partial f}{\partial x}(\vec{a})=\lim\limits_{h\rightarrow0}\frac{f(\vec{a}+h\hat{i})-f(\vec{a})}{h}</script><script type="math/tex; mode=display">\nabla_{\vec{v}\ }f(\vec{a})=\lim\limits_{h\rightarrow0}\frac{f(\vec{a}+h\vec{v})-f(\vec{a})}{h}</script><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/zagcq.jpg" alt="" title="方向导数的几何意义"></p>
+<p><strong>梯度：</strong>是一个矢量（向量），它所在方向（最陡峭的方向）的<code>方向导数</code>最大，表示为 $\nabla f = \left[\begin{aligned}\frac{\partial}{\partial x}\\\frac{\partial}{\partial y}\end{aligned}\right]$（可以读：nabla, del, grad）。</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/jtf5z.jpg" alt="" title="注意梯度的方向在底部平面上，即用 xy 平面上的一个向量表示方向"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ufetu.jpg" alt="" title="每个方向都有方向导数"></p>
+<p>$\nabla$ 可以看作是一个操作算子（Operator），其输入和输出均是函数 $f$，与 $\frac{d}{dx}$、$\frac{\partial}{\partial x}$ 类似。</p>
+<p><strong>其他问题：</strong></p>
+<ul>
+<li>计算方向导数时要不要将向量归一化？</li>
+</ul>
+<blockquote>
+<p>If the directional derivative is used to compute slope, either $\vec{v}$ must be a unit vector or you must remember to divide by $||\vec{v}||$ at the end. Then you will get $\nabla_{\vec{v}\ }f(\vec{x})=\lim\limits_{h\rightarrow0}\frac{f(\vec{x}+h\vec{v})-f(\vec{x})}{h||\vec{v}||}$.<br>However, this definition puts too much emphasis on the particular use case of finding slope, so I (not me…) prefer to use the original definition and normalize $\vec{v}$ when necessary.</p>
+</blockquote>
+<ul>
+<li>为什么只有一个最大值（方向导数）？</li>
+</ul>
+<p>梯度定义中有「一阶连续偏导」的条件，其意味着可微，也就意味着 $f(x,y)$ 在各个方向的切线都在同一个平面上，即切平面。</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/vhni5.jpg" alt=""></p>
+<p>梯度与方向导数有这样的关系：</p>
+<script type="math/tex; mode=display">\nabla_{\vec{v}\ }f(a,b)=\nabla f(a,b)\cdot \vec{v}</script><p>其中 $\nabla f(a,b)$ 是梯度。如 $\vec{v}$ 是与梯度同方向的单位向量，则方向导数取值最大，用公式可以表示为：</p>
+<script type="math/tex; mode=display">\max_{||\vec{v}||=1}\nabla f(a,b)\cdot \vec{v}</script><p>根据点积的几何意义（投影）可知最大值只有一个，即在两个向量的方向相同的时。</p>
+<h3 id="对参数曲线微分❓（Differentiating-Parametric-Curves）"><a href="#对参数曲线微分❓（Differentiating-Parametric-Curves）" class="headerlink" title="对参数曲线微分❓（Differentiating Parametric Curves）"></a>对参数曲线微分❓（Differentiating Parametric Curves）</h3><p>直接上图看几何意义：</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9e1a4.jpg" alt=""></p>
+<h3 id="多元链式法则（Multivariable-Chain-Rule）"><a href="#多元链式法则（Multivariable-Chain-Rule）" class="headerlink" title="多元链式法则（Multivariable Chain Rule）"></a>多元链式法则（Multivariable Chain Rule）</h3><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/8t1uz.jpg" alt="" title="求导步骤示意图"></p>
+<p><strong>已知：</strong></p>
+<script type="math/tex; mode=display">\vec{v}(t)=\left[\begin{aligned}x(t)\\y(t)\end{aligned}\right]、\vec{v}'(t)=\frac{d\vec{v}}{dt}=\left[\begin{aligned}\frac{dx}{dt}\\\frac{dy}{dt}\end{aligned}\right]</script><script type="math/tex; mode=display">f = f(\vec{v}(t))=f(x(t),y(t))、\frac{df}{d\vec{v}}=\nabla{f}=\left[\begin{aligned}\frac{\partial{f}}{\partial{x}}\\\frac{\partial{f}}{\partial{y}}\end{aligned}\right]</script><p><strong>则有：</strong></p>
+<script type="math/tex; mode=display">\begin{aligned}\frac{df}{dt}&=\frac{d}{dt}f(x(t),y(t))=\nabla{f}\cdot\vec{v}'(t)=\left[\begin{aligned}\frac{\partial{f}}{\partial{x}}\\\frac{\partial{f}}{\partial{y}}\end{aligned}\right]\cdot\left[\begin{aligned}\frac{dx}{dt}\\\frac{dy}{dt}\end{aligned}\right]\\&=\frac{\partial{f}}{\partial{x}}\cdot\frac{dx}{dt}+\frac{\partial{f}}{\partial{y}}\cdot\frac{dy}{dt}\end{aligned}</script><p><strong>几何意义：</strong>上面的 $\nabla{f}\cdot\vec{v}’(t)$ 可以写成 $\nabla_{\vec{v}’(t)\ }f(\vec{v})$，即 $f$ 在 $\vec{v}’(t)$ 方向上的方向导数。</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/rui1m.jpg" alt="" title="多元链式法则的几何意义"></p>
+<p><strong>正规的定义式：</strong>（对比<code>方向导数</code>的定义式）</p>
+<script type="math/tex; mode=display">\begin{aligned}\lim\limits_{h\rightarrow0}\frac{f(\vec{v}(t+h)-f(\vec{v}(t))}{h}&=\lim\limits_{h\rightarrow0}\frac{f(\vec{v}(t)+\frac{d\vec{v}(t)}{dt}h + o(h))-f(\vec{v}(t))}{h}\\&=\nabla_{\vec{v}'(t)\ }f(\vec{v})\end{aligned}</script><h2 id="其它概念"><a href="#其它概念" class="headerlink" title="其它概念"></a>其它概念</h2><h3 id="曲率（Curvature）"><a href="#曲率（Curvature）" class="headerlink" title="曲率（Curvature）"></a>曲率（Curvature）</h3><blockquote>
+<p>how to describe how much you turn?</p>
+</blockquote>
+<p><strong>什么是<code>曲率</code>：</strong>用来描述曲线（在平面、空间上）弯曲程度的量。曲率越大，表示曲线的弯曲程度越大。表示为：$\kappa=||\frac{dT}{d\vec{s}}||$，其中 $T$ 为改变的弧度、$\vec{s}$ 为改变的弧长。</p>
+<p><strong>几何意义：</strong>马住，有点难！</p>
+<p><strong>一般式：</strong>$\kappa = \frac{|x’(t)y’’(t)-y’(t)x’’(t)|}{[x’(t)^2+y’(t^2)]^{\frac{3}{2}}}$。对于圆有：$\kappa = \frac{1}{R}$。</p>
+<p><strong>螺旋线（Helix）：</strong></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/lpw1h.jpg" alt=""></p>
+<p>对应的函数为：$\vec{s}(t)=\left[\begin{aligned}\cos&amp;(t)\\\sin&amp;(t)\\\frac{t}{5}\end{aligned}\right]$；求导得：$\frac{d\vec{s}(t)}{dt}=\left[\begin{aligned}-\sin&amp;(t)\\\cos&amp;(t)\\\frac{t}{5}\end{aligned}\right]$</p>
+<p>单位切线向量（Unit tangent vector）：$T(t)=\frac{\vec{s}’(t)}{||\vec{s}’(t)||} = \left[\begin{aligned}\frac{-\sin(t)}{\sqrt{26}/5}\\\frac{\cos(t)}{\sqrt{26}/5}\\\frac{t/5}{\sqrt{26}/5}\end{aligned}\right]$；求导得：$\frac{dT(t)}{dt}$</p>
+<p>最后求得：$\kappa=||\frac{dT}{d\vec{s}}||=||\frac{dT/dt}{d\vec{s}/dt}||$，代入即可。</p>
+<h3 id="散度（Divergence）"><a href="#散度（Divergence）" class="headerlink" title="散度（Divergence）"></a>散度（Divergence）</h3><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/5sbf0.jpg" alt="" title="粒子在流动"></p>
+<p>适用函数：2D → 2D、3D → 3D。</p>
+<p><strong>定义</strong>：是向量分析中的一个<code>向量算子</code>，将向量空间上的一个<code>向量场</code>对应到一个<code>标量场</code>上。对于函数 $\vec{v}(x,y)=\left[\begin{aligned}P(x,y)\\Q(x,y)\end{aligned}\right]$，其<code>散度</code>为 $\rm{div}\ \vec{v}=\frac{\partial{P}}{\partial{x}}+\frac{\partial{Q}}{\partial{y}}$。</p>
+<p><strong>写法上的<code>Trick</code>：</strong> $\nabla\cdot\vec{v}=\left[\begin{aligned}\frac{\partial}{\partial{x}}\\\frac{\partial}{\partial{y}}\\\frac{\partial}{\partial{z}}\end{aligned}\right]\cdot\left[\begin{aligned}P\\Q\\R\end{aligned}\right]$</p>
+<p><strong>几何上的意义：</strong>如<code>First Component</code>「即 $P(x,y)$」小于 $0$，则从左到右来看向量所指的方向往左边去一点：）</p>
+<h3 id="旋度（Curl）"><a href="#旋度（Curl）" class="headerlink" title="旋度（Curl）"></a>旋度（Curl）</h3><blockquote>
+<p>Curl measures the rotation in a fluid flowing along a vector field. Formally, curl only applies to 3D, but here we cover the concept in 2D to warmup.</p>
+</blockquote>
+<p><strong>2D 下<code>不正式</code>的旋度计算：</strong></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ervs7.jpg" alt=""></p>
+<p><strong>3D 下的定义：</strong>可以表示<code>三维向量场</code>对某一点附近的微元造成的<code>旋转程度</code>。向量场每一点的旋度是一个向量，称为<code>旋度向量</code>，可表示为（运用了<code>Notational Trick</code>）：</p>
+<script type="math/tex; mode=display">\begin{aligned}\rm{curl}\ \vec{v} &= \nabla\times\vec{v}=\left[\begin{aligned}\frac{\partial}{\partial{x}}\\\frac{\partial}{\partial{y}}\\\frac{\partial}{\partial{z}}\end{aligned}\right]\times\left[\begin{aligned}P\\Q\\R\end{aligned}\right]=det\left(\begin{array}\\
+\hat{i} & \hat{j} & \hat{k} \\
+\frac{\partial}{\partial{x}} & \frac{\partial}{\partial{y}} &  \frac{\partial}{\partial{z}} \\
+P & Q & R
+\end{array}\right)\\
+&= (\frac{\partial{R}}{\partial{y}}-\frac{\partial{Q}}{\partial{z}})\hat{i} + (\frac{\partial{P}}{\partial{z}}-\frac{\partial{R}}{\partial{x}})\hat{j} + (\frac{\partial{Q}}{\partial{x}}-\frac{\partial{P}}{\partial{y}})\hat{k}
+\end{aligned}</script><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/gdzqk.jpg" alt="" title="还需要沿着 z 轴复制多份"></p>
+<p><strong>Interesting：</strong>旋度向量的大小等于改点上<code>角速度</code>的两倍。</p>
+<h3 id="拉普拉斯算子（Laplacian）"><a href="#拉普拉斯算子（Laplacian）" class="headerlink" title="拉普拉斯算子（Laplacian）"></a>拉普拉斯算子（Laplacian）</h3><p><strong>定义：</strong>是由<code>欧几里得空间</code>中的一个函数的<code>梯度的散度</code>给出的微分算子。</p>
+<p><strong>先看看 2D 下二阶导的情况：</strong></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9erxj.jpg" alt=""></p>
+<p><strong>公式和几何意义：</strong></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/bo023.jpg" alt=""></p>
+<p><strong>调和函数：</strong>一个二阶可导的函数，其满足拉普拉斯方程，即满足：<script type="math/tex">\frac{\partial^2{f}}{\partial{x_1^2}}+\frac{\partial^2{f}}{\partial{x_2^2}}+\cdots+\frac{\partial^2{f}}{\partial{x_n^2}}=0</script></p>
+<p>上式也经常写作：$\nabla^2f =0$ 或 $\Delta{f}=0$。</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/v5xph.jpg" alt=""></p>
+<p><strong>所以</strong>，当 $f’’ = 0$ 时，该点的值与其附近的点的平均值相等；当 $f’’ &gt; 0$ 时，附近的点的平均值大于该点的值；当 $f’’ &lt; 0$ 时，附件的点的平均值小于该点的值。</p>
+<h3 id="雅克比矩阵（Jacobian-Matrix）"><a href="#雅克比矩阵（Jacobian-Matrix）" class="headerlink" title="雅克比矩阵（Jacobian Matrix）"></a>雅克比矩阵（Jacobian Matrix）</h3><blockquote>
+<p>雅可比矩阵的重要性在于它体系那了一个可微方程与给出点的最优线性逼近，因此，雅可比矩阵类似于多元函数的导数。</p>
+</blockquote>
+<p>给出 $f(\left[\begin{aligned}x\\y\end{aligned}\right])=\left[\begin{aligned}f_1(x,y)\\f_2(x,y)\end{aligned}\right]=\left[\begin{aligned}x + \sin(y)\\y+\sin(x)\end{aligned}\right]$，其对应的<code>非线性变化</code>如下图所示。</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/xzclb.jpg" alt=""></p>
+<p>在以红点为原点的切空间中，该区域可以看成是<code>局部线性的</code>（Locally Linear）。该空间内的变换可以看成是<code>线性变换</code>，其<code>变换矩阵</code>如下：</p>
+<script type="math/tex; mode=display">\left[
+\begin{array}\\
+\frac{\partial{f_1}}{\partial{x}} & \frac{\partial{f_1}}{\partial{y}}\\
+\frac{\partial{f_2}}{\partial{x}} & \frac{\partial{f_2}}{\partial{y}}
+\end{array}
+\right]</script><p>其中：第一列对应了<code>x nudge</code>的变化、第二列对应了<code>y nudge</code>的变化、$f_1$ 对应了水平方向上的移动、$f_2$ 对应了垂直方向上的移动。</p>
+<h2 id="多元导数的应用"><a href="#多元导数的应用" class="headerlink" title="多元导数的应用"></a>多元导数的应用</h2><h3 id="局部线性化逼近（Local-Linearization）"><a href="#局部线性化逼近（Local-Linearization）" class="headerlink" title="局部线性化逼近（Local Linearization）"></a>局部线性化逼近（Local Linearization）</h3><blockquote>
+<p>The idea is to approximate a function near one of its inputs with a <code>simpler function</code> that has the same value at that input.</p>
+</blockquote>
+<p><strong>2D 下的几何意义：</strong>如何控制这个切平面，如图所示。</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9p3dj.jpg" alt=""></p>
+<p>令 $\vec{v} = \left[\begin{aligned}x\\y\end{aligned}\right]$、$\vec{v}_0 = \left[\begin{aligned}x_0\\y_0\end{aligned}\right]$，该切平面可以表示为（可以扩展至更高维）：</p>
+<script type="math/tex; mode=display">\begin{aligned}L_f(x,y)&=f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0)+f(x_0,y_0)\\
+&= \nabla{f(\vec{v}_0)}\cdot(\vec{v}-\vec{v}_0) + f(\vec{v}_0)
+\end{aligned}</script><h3 id="局部二次非线性逼近（Quadratic-Approximations）"><a href="#局部二次非线性逼近（Quadratic-Approximations）" class="headerlink" title="局部二次非线性逼近（Quadratic Approximations）"></a>局部二次非线性逼近（Quadratic Approximations）</h3><blockquote>
+<p>“Quadratic” means product of two variables. $x_0$ is read “x naught”.</p>
+</blockquote>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/u47h3.jpg" alt=""></p>
+<p>可以根据形如 $Q(x,y)=a+bx+cy+dx^2+exy+fy^2$ 去推导，要近似点要满足如下条件：</p>
+<ul>
+<li><p>函数值相等，$f(x,y)=Q(x,y)$</p>
+</li>
+<li><p>一阶偏导都相等，$f_x=Q_x$、$f_y=Q_y$</p>
+</li>
+<li><p>二阶偏导都相等，$f_{xx}=Q_{xx}$、$f_{yy}=Q_{yy}$、$f_{xy}=Q_{yx}$</p>
+</li>
+</ul>
+<p>我就直接丢公式了（相当于线性逼近的扩展）：</p>
+<script type="math/tex; mode=display">\begin{aligned}Q(x,y)&=f(x_0,y_0) + f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0)\\
+&+\frac{1}{2}f_{xx}(x_0,y_0)(x-x_0)^2+f_{xy}(x_0,y_0)(x-x_0)(y-y_0)\\
+&+\frac{1}{2}f_{yy}(x_0,y_0)(y-y_0)^2\end{aligned}</script><p><strong>海森矩阵（Hessian Matrix）：</strong></p>
+<script type="math/tex; mode=display">H_f = \left[\begin{array}\\
+\frac{\partial^2{f}}{\partial{x^2}} & \frac{\partial^2{f}}{\partial{x}\partial{y}}\\
+\frac{\partial^2{f}}{\partial{y}\partial{x}} & \frac{\partial^2{f}}{\partial{y^2}}
+\end{array}\right]</script><p>包装了关于函数 $f$ 的<code>所有二阶偏导</code>，还可以扩展到更高维。</p>
+<p><strong>用途：</strong>局部二次非线性逼近（方便<code>向量化</code>）、其行列式用于二次偏导检测</p>
+<p><strong>向量化：</strong></p>
+<p>我们用 $\vec{v}$ 表示 $[x, y]$，$\vec{v}_0$ 表示 $[x_0, y_0]$，则有</p>
+<script type="math/tex; mode=display">\begin{aligned}\\
+Q(\vec{v})&=f(x_0,y_0) + \left[\begin{array}\\f_x(x_0)\\f_y(y_0)\end{array}\right]\cdot\left[\begin{array}\\x-x_0\\y-y_0\end{array}\right] + [x-x_0\ y-y_0]\left[\begin{array}\\\frac{1}{2}f_{xx} & \frac{1}{2}f_{xy}\\\frac{1}{2}f_{yx} & \frac{1}{2}f_{yy}\end{array}\right]\left[\begin{array}\\x-x_0\\y-y_0\end{array}\right]\\
+&=f(\vec{v}_0) + \nabla{f(\vec{v}_0)}\cdot(\vec{v}-\vec{v}_0) + \frac{1}{2}(\vec{v}-\vec{v}_0)^{T}H_f(\vec{v}-\vec{v}_0)
+\end{aligned}</script><p>总结的一些<code>对应关系</code>：</p>
+<ul>
+<li><p>一元：$\frac{df}{dx}$、$\frac{d^2f}{dx^2}$、$\frac{d^3f}{dx^3}$、…</p>
+</li>
+<li><p>多元：$\nabla{f}$、$H_f$、$\cal{Multilinear\ Algebra}$❓</p>
+</li>
+</ul>
+<h3 id="多元函数的最优化（Optimizing-Multivariable-Functions）"><a href="#多元函数的最优化（Optimizing-Multivariable-Functions）" class="headerlink" title="多元函数的最优化（Optimizing Multivariable Functions）"></a>多元函数的最优化（Optimizing Multivariable Functions）</h3><p><strong>鞍点（Saddle Points）：</strong>在微分方程中，沿着某一方向是稳定的，另一方向是不稳定的奇点，或者不是局部极值点的<code>驻点</code>「neither maxima nor minima」。从不用角度看该点，可以同时具有局部极大值和局部极小值。</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/nopv0.jpg" alt=""></p>
+<p><strong>二阶偏导测试（Second Partial Derivative Test）：</strong></p>
+<p>我们可以用<code>二级导数</code>来判定某个点是否为<code>鞍点</code>。从上图看二阶导数一正一负，不能判断为局部极值点。当出现 $\nabla{f}(x_0,y_0)=0$ 时（Critical Point），我们用以下式子判断是否出现鞍点：</p>
+<script type="math/tex; mode=display">\cal{H}=f_{xx}(x_0,y_0)\ f_{yy}(x_0,y_0)-f_{xy}(x_0,y_0)^2</script><p>若 $\cal{H}&gt;0$，则该点是局部极值点；若 $\cal{H}&lt;0$，则该点是鞍点；若 $\cal{H}=0$，无法判断。</p>
+<p>其中，$\cal{H}=0$ 的情况与下图的情况类似：</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/zckmv.jpg" alt=""></p>
+<p><strong>进一步思考：</strong></p>
+<script type="math/tex; mode=display">f(x)\approx f(a)+f'(a)(x-a)+\frac{1}{2}f''(a)(x-a)^2</script><ul>
+<li><p>当 $f’(a)=0$ 时，$f(x)\approx f(a)+\frac{1}{2}f’’(a)(x-a)^2$，因为 $(x-a)^2\geq 0$，所以 $f’’(a)$ 可以决定局部极小值和局部极大值。</p>
+</li>
+<li><p>当 $f’(a)=0$、$f’’(a)=0$ 时，$f(x)\approx f(a)$ 得到的是一个<code>常量</code>，无法决定是局部极大值还是局部极小值。</p>
+</li>
+</ul>
+<h3 id="拉格朗日乘子法和约束优化（Lagrange-Multipliers-lambda-and-Constrained-Optimization）"><a href="#拉格朗日乘子法和约束优化（Lagrange-Multipliers-lambda-and-Constrained-Optimization）" class="headerlink" title="拉格朗日乘子法和约束优化（Lagrange Multipliers $\lambda$ and Constrained Optimization）"></a>拉格朗日乘子法和约束优化（Lagrange Multipliers $\lambda$ and Constrained Optimization）</h3><p>举个例子：</p>
+<ul>
+<li><p>收入（Revenue）：$R(x,y)=x^2e^yy$</p>
+</li>
+<li><p>预算/成本（Budget）：$B(x,y)=x^2+y^2$</p>
+</li>
+</ul>
+<p>约束问题可以表述：</p>
+<script type="math/tex; mode=display">\max{R(x,y)=x^2e^yy},\\
+\rm{s.t.\ }\mit{B}(x,y)=x^2+y^2=b</script><p>解决该问题的本质是找到 $R(x,y)$ 与 $B(x,y)$ 的等高线相切的点，如下图所示。当 $B(x,y)=b$ 时，红色圆是固定不变，可以调整 $R(x,y)$ 的大小以获得能够满足相切情况的等高线。</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/jtho0.jpg" alt="" title="红线为 B"></p>
+<p>相切的情况意味着<code>梯度方向相同或者相反</code>：$\nabla{R}=\lambda\nabla{B}$，结合以上三个式子就可以求出最优解。</p>
+<p>为了方便计算机计算，我们可以用<code>一个式子</code>表达上述的约束问题：</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tb1o1.jpg" alt="" title="Constrained Problem → Unconstrained Problem（计算机擅长这个）"></p>
+<p><strong>$\lambda$ 有什么含义：</strong></p>
+<p>将 $M^*$ 看成是 $b$ 的函数有 $M^*(b)=R(x^*(b),y^*(b))$，此时 $x^*(b)$ 和 $x^*(b)$ 是隐式函数。此时，我们可以得出 $\lambda^*=\frac{dM^*}{db}$，即 $M^*(b)$ 对于微小变化 $b$ 的变化率为 $\lambda^*$。</p>
+<p><strong>这说明：</strong>如果 $\lambda^* &gt; 0$，说明我们可以使 $b$ 变大，从而使得 $M^*$ 变大，具有应用价值（或者提高一点点 $b$，可以得到<code>大概的变化量</code>！）。</p>
+<p><strong>证明（Proof）：</strong></p>
+<p>$\cal{L}^*$ 和 $\cal{L}$ 不同，前者是四元函数（包含 $b$），后者是三元函数。</p>
+<script type="math/tex; mode=display">\cal{L}^*(x^*(b),y^*(b),\lambda^*(b),b)=R(x^*(b),y^*(b))-\lambda^*(B(x^*(b),y^*(b))-b)</script><script type="math/tex; mode=display">\frac{d\cal{L}^*}{db}=\frac{\partial{\cal{L}^*}}{\partial{x}}\cdot \frac{dx^*}{db} + \frac{\partial{\cal{L}^*}}{\partial{y}}\cdot \frac{dy^*}{db} + \frac{\partial{\cal{L}^*}}{\partial{\lambda}}\cdot \frac{d\lambda^*}{db} + \frac{\partial{\cal{L}^*}}{\partial{b}}\cdot \frac{db}{db}</script><p>其中：$\frac{\partial{\cal{L}^*}}{\partial{x}}$、$\frac{\partial{\cal{L}^*}}{\partial{y}}$、$\frac{\partial{\cal{L}^*}}{\partial{\lambda}}$ 均为 $0$（原因：看看上面图左边的公式），所以原式如下</p>
+<script type="math/tex; mode=display">\frac{d\cal{L}^*}{db}=\frac{\partial{\cal{L}^*}}{\partial{b}}=\lambda^*(b)</script><p><strong>多个条件：</strong>马住❗️</p>
+<p><strong>条件为不等式：</strong>马住❗️</p>
+<p><strong>KKT 条件：</strong>马住❗️</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    Junhao Wang
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://www.junhaow.com/2018/01/27/022 | 陷入多元微积分笔记/" title="陷入多元微积「危机」分时写的笔记">http://www.junhaow.com/2018/01/27/022 | 陷入多元微积分笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多元微积分/" rel="tag"># 多元微积分</a>
+          
+            <a href="/tags/Multivarible-Calculus/" rel="tag"># Multivarible Calculus</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/04/019 | Calculus/" rel="next" title="看不懂的微积分笔记">
+                <i class="fa fa-chevron-left"></i> 看不懂的微积分笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/12/020 | Python中值得注意的几个问题/" rel="prev" title="Python 中值得注意的几个问题">
+                Python 中值得注意的几个问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/handsomecat.jpg" alt="Junhao Wang">
+            
+              <p class="site-author-name" itemprop="name">Junhao Wang</p>
+              <p class="site-description motion-element" itemprop="description">Debug the old world, bug the new world!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/chuckwangg" target="_blank" title="Facebook">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>Facebook</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/junhaowww" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.linkedin.com/in/junhaowww/" target="_blank" title="LinkedIn">
+                      
+                        <i class="fa fa-fw fa-linkedin"></i>LinkedIn</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.douban.com/people/maodai/" target="_blank" title="豆瓣 (Book)">
+                      
+                        <i class="fa fa-fw fa-book"></i>豆瓣 (Book)</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jianshu.com/u/41865efdad5d/" title="Xiaofud" target="_blank">Xiaofud</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.davex.pw/" title="DaveX" target="_blank">DaveX</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://alexfan.xyz/" title="alexfan.xyz" target="_blank">alexfan.xyz</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#多元函数"><span class="nav-number">1.</span> <span class="nav-text">多元函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#向量值函数（Vector-valued-Functions-or-Vector-Functions）"><span class="nav-number">1.1.</span> <span class="nav-text">向量值函数（Vector-valued Functions or Vector Functions）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可视化（Visualization）"><span class="nav-number">1.2.</span> <span class="nav-text">可视化（Visualization）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多元函数的导数"><span class="nav-number">2.</span> <span class="nav-text">多元函数的导数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#偏导数（Partial-Derivatives）"><span class="nav-number">2.1.</span> <span class="nav-text">偏导数（Partial Derivatives）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度和方向导数（Gradient-amp-Directional-Derivatives）"><span class="nav-number">2.2.</span> <span class="nav-text">梯度和方向导数（Gradient &amp; Directional Derivatives）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对参数曲线微分❓（Differentiating-Parametric-Curves）"><span class="nav-number">2.3.</span> <span class="nav-text">对参数曲线微分❓（Differentiating Parametric Curves）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多元链式法则（Multivariable-Chain-Rule）"><span class="nav-number">2.4.</span> <span class="nav-text">多元链式法则（Multivariable Chain Rule）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它概念"><span class="nav-number">3.</span> <span class="nav-text">其它概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#曲率（Curvature）"><span class="nav-number">3.1.</span> <span class="nav-text">曲率（Curvature）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#散度（Divergence）"><span class="nav-number">3.2.</span> <span class="nav-text">散度（Divergence）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#旋度（Curl）"><span class="nav-number">3.3.</span> <span class="nav-text">旋度（Curl）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拉普拉斯算子（Laplacian）"><span class="nav-number">3.4.</span> <span class="nav-text">拉普拉斯算子（Laplacian）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#雅克比矩阵（Jacobian-Matrix）"><span class="nav-number">3.5.</span> <span class="nav-text">雅克比矩阵（Jacobian Matrix）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多元导数的应用"><span class="nav-number">4.</span> <span class="nav-text">多元导数的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#局部线性化逼近（Local-Linearization）"><span class="nav-number">4.1.</span> <span class="nav-text">局部线性化逼近（Local Linearization）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局部二次非线性逼近（Quadratic-Approximations）"><span class="nav-number">4.2.</span> <span class="nav-text">局部二次非线性逼近（Quadratic Approximations）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多元函数的最优化（Optimizing-Multivariable-Functions）"><span class="nav-number">4.3.</span> <span class="nav-text">多元函数的最优化（Optimizing Multivariable Functions）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拉格朗日乘子法和约束优化（Lagrange-Multipliers-lambda-and-Constrained-Optimization）"><span class="nav-number">4.4.</span> <span class="nav-text">拉格朗日乘子法和约束优化（Lagrange Multipliers $\lambda$ and Constrained Optimization）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Junhao Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://junhaow.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.junhaow.com/2018/01/27/022 | 陷入多元微积分笔记/';
+          this.page.identifier = '2018/01/27/022 | 陷入多元微积分笔记/';
+          this.page.title = '陷入多元微积「危机」分时写的笔记';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://junhaow.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+
+</body>
+</html>

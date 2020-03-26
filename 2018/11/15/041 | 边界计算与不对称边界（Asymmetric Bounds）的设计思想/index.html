@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic|Bitter:300,300italic,400,400italic,700,700italic|Bitter:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C Traps and Pitfalls,边界计算,不对称边界,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="如果一个数组有 10 个元素，那么这个数组下标的允许取值范围是什么？   对于 Fortran 语言，数组的下标取值缺省从 1 开始，且允许编程者另外指定数组下标的起始值。 对于 Algol 和 Pascal 语言，数组下标没有缺省的起始值，编程者必须明确指定每个数组的上下界。 对于标准的 Basic 语言，声明一个拥有 10 个元素的数组，实际上编译器分配了 11 个元素空间，下标范围从 0">
+<meta name="keywords" content="C Traps and Pitfalls,边界计算,不对称边界">
+<meta property="og:type" content="article">
+<meta property="og:title" content="边界计算与不对称边界（Asymmetric Bounds）的设计思想">
+<meta property="og:url" content="http://www.junhaow.com/2018/11/15/041 | 边界计算与不对称边界（Asymmetric Bounds）的设计思想/index.html">
+<meta property="og:site_name" content="B_L_OO_GGG">
+<meta property="og:description" content="如果一个数组有 10 个元素，那么这个数组下标的允许取值范围是什么？   对于 Fortran 语言，数组的下标取值缺省从 1 开始，且允许编程者另外指定数组下标的起始值。 对于 Algol 和 Pascal 语言，数组下标没有缺省的起始值，编程者必须明确指定每个数组的上下界。 对于标准的 Basic 语言，声明一个拥有 10 个元素的数组，实际上编译器分配了 11 个元素空间，下标范围从 0">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/z6pdt.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/5ayv9.jpg">
+<meta property="og:updated_time" content="2020-01-24T06:20:59.639Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="边界计算与不对称边界（Asymmetric Bounds）的设计思想">
+<meta name="twitter:description" content="如果一个数组有 10 个元素，那么这个数组下标的允许取值范围是什么？   对于 Fortran 语言，数组的下标取值缺省从 1 开始，且允许编程者另外指定数组下标的起始值。 对于 Algol 和 Pascal 语言，数组下标没有缺省的起始值，编程者必须明确指定每个数组的上下界。 对于标准的 Basic 语言，声明一个拥有 10 个元素的数组，实际上编译器分配了 11 个元素空间，下标范围从 0">
+<meta name="twitter:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/z6pdt.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.junhaow.com/2018/11/15/041 | 边界计算与不对称边界（Asymmetric Bounds）的设计思想/">
+
+
+
+
+
+  <title>边界计算与不对称边界（Asymmetric Bounds）的设计思想 | B_L_OO_GGG</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-146643833-1', 'auto');
+  ga('send', 'pageview');
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">B_L_OO_GGG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Sumomo mo momo mo no uchi</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+
+
+            
+
+            
+
+            
+
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-inbox"></i> <br>
+            
+            Archives
+
+
+            
+
+            
+              <span class="badge">50</span>
+            
+
+            
+
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-studynotes">
+          <a href="/studynotes/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br>
+            
+            Study Notes
+
+
+            
+
+            
+
+            
+              <span class="badge">6</span>
+            
+
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-lc">
+          <a href="/lc/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            LeetCode Book
+
+
+            
+
+            
+
+            
+
+            
+              <span class="badge badge-lc">251 / ∞</span>
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-address-card"></i> <br>
+            
+            About Me
+
+
+            
+
+            
+
+            
+
+            
+
+            
+              <span class="badge-about">👋</span>
+            
+
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.junhaow.com/2018/11/15/041 | 边界计算与不对称边界（Asymmetric Bounds）的设计思想/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Junhao Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/handsomecat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="B_L_OO_GGG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">边界计算与不对称边界（Asymmetric Bounds）的设计思想</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-15T23:51:21-08:00">
+                11/15/2018
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/15/041 | 边界计算与不对称边界（Asymmetric Bounds）的设计思想/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/15/041 | 边界计算与不对称边界（Asymmetric Bounds）的设计思想/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>如果一个数组有 10 个元素，那么这个数组下标的允许取值范围是什么？</p>
+</blockquote>
+<ul>
+<li>对于 Fortran 语言，数组的下标取值缺省从 1 开始，且允许编程者另外指定数组下标的起始值。</li>
+<li>对于 Algol 和 Pascal 语言，数组下标没有缺省的起始值，编程者必须明确指定每个数组的上下界。</li>
+<li>对于标准的 Basic 语言，声明一个拥有 10 个元素的数组，实际上编译器分配了 11 个元素空间，下标范围从 0 到 10。</li>
+</ul>
+<p>在 C 语言中，一个拥有 n 个元素的数组，却不存在下标为 n 的元素，它的元素的下标范围是从 0 到 n - 1。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i, a[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; ++i) &#123;</span><br><span class="line">  a[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>这段代码的本意是将数组 a 中所有的元素赋值为 0。但代码中的 a[10] 将数组 a 之后的一个字（word）的内存被设置为 0。如果用来编译这段程序的编译器按照内存地址递减的方式来给变量分配内存，那么内存中数组之后的一个字实际上是分配给了整型变量 i。此时，本来循环计数器 i 的值为 10，<code>a[10] = 0</code>使得 i 的值变成 0，这就陷入了一个死循环。</p>
+<p>尽管 C 语言的数组会让新手感到困惑，但这种特别的设计正是其最大优势所在。在常见的程序错误中，最难于发现的一类是<code>栏杆错误</code>，也被称为<code>差一错误</code>（off-by-one error）。</p>
+<blockquote>
+<p>《C 专家编程》：C 语言的许多其他特性是<strong>为了方便编译器设计者而建立的。</strong>数组下标为什么从 0 开始而不是 1，因为编译器的设计者选择从 0 开始。<strong>偏移量的概念在他们心中已是根深蒂固</strong>。</p>
+<p>100 英尺长的围栏每隔 10 英尺需要一根支撑用的栏杆，一共需要多少根栏杆呢？</p>
+</blockquote>
+<p>如果不加思考，给出的回答很可能是 10，而正确答案是 11，这就是<code>栏杆错误</code>。它经常发生在循环中的越界问题中，比如 if 中的表达式应该用小于还是小于等于？</p>
+<p>通常，解决这类问题可以参考以下两个原则：</p>
+<ol>
+<li>将问题简化，考虑最简单情况下的特例，然后将结果进一步外推。</li>
+<li>仔细计算边界。</li>
+</ol>
+<p>比如，在写遍历、插入、删除链表中元素的代码时，我们可以先考虑没有元素、只有一个元素、两个元素的情况。若代码满足这几种简单的情况，通常可以满足所有情况。</p>
+<p>再比如，假定整数 x 满足边界条件<code>x &gt;= 16</code>且<code>x &lt;= 37</code>，那么此范围内 x 的可能取值有多少个？千万不要因为 37 - 16 = 21，就直接认为是 21 个。正确的思路是这样的：</p>
+<ul>
+<li>右值 - 左值 = NUM，还要加一还是减一，或是不变？</li>
+<li>举出简单的情况：<code>x &gt;= 16</code>且<code>x &lt;= 16</code>、<code>x &gt;= 16</code>且<code>x &lt;= 17</code>。</li>
+<li>计算后，前者：NUM = 0，实际是 1；后者：NUM = 1，实际是 2。</li>
+<li>外推：个数 = NUM + 1，有 22 个数。</li>
+</ul>
+<p>为了避免这种情况的发生，我们一般用一个<code>下界点</code>和一个<code>上界点</code>来表示一个数值范围，其中<code>下界点</code>包括在取值范围之中，而<code>上界点</code>不在取值范围内。在上例中，范围应该表示为<code>x &gt;= 16</code>且<code>x &lt; 38</code>。</p>
+<p>这种不对称的表达方式也许从数学上而言并不优美，但是对于程序员来说，这种设计有着令人吃惊的简化效果：</p>
+<ol>
+<li>取值范围的大小就是下界与上界之差。38 - 16 刚好等于 22，恰恰是不对称边界所包括的元素个数。</li>
+<li>如果取值范围为空，那么下界等于上界，范围内个数为 0。</li>
+<li>即使取值范围为空，上界也永远不可能小于下界。</li>
+</ol>
+<p>C 数组下标从 0 开始就是运用了这种不对称边界的设计，此时数组的上界就是数组元素的个数。因此，本文开头的代码段应该改写成：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i, a[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i) &#123; <span class="comment">// 而不是写成 i &lt;= 9</span></span><br><span class="line">  a[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另一种考虑不对称边界的方式是，把上界视作序列中第一个<strong>即将被占用</strong>的元素，而把下界视作序列中第一个<strong>即将被释放</strong>的元素，如图所示。</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/z6pdt.jpg" alt="" title="不对称边界示意图"></p>
+<p>这种看待问题的方式对于处理各种不同类型的缓冲区特别有用。例如，某函数的功能是将长度无规律的输入数据送到缓冲区，每当这款内存被填满时，就将缓冲区的内容写出。缓冲区的声明如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 1024</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> buffer[N];</span><br></pre></td></tr></table></figure></p>
+<p>再设置一个指针变量，指向缓冲区的当前位置：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> *bufptr;</span><br></pre></td></tr></table></figure></p>
+<p>我们是让指针 bufptr 始终指向缓冲区中最后一个已占有的字符，还是让它指向缓冲区中之后第一个未被占用的字符？若考虑「不对称边界」的设计思想，后一种选择更为贴切。</p>
+<p>按照「不对称边界」的思想，我们可以这样写：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*bufptr++ = c;  <span class="comment">// 先进行 ++ 运算，所以递增的是 bufptr 本身的值</span></span><br></pre></td></tr></table></figure>
+<p>这个语句把输入字符 c 放到缓冲区中，然后指针 bufptr 递增 1，又指向缓冲区中下一个未被占用的字符。等价于：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*bufptr = c;</span><br><span class="line">bufptr++;</span><br></pre></td></tr></table></figure>
+<p>根据前面所说的第二条效果，当指针 bufptr 与 &amp;buffer[0]（或 buffer）相等时，缓冲区存放的内容为空，因此初始化时缓冲区为空可以这样写：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bufptr = &amp;buffer[<span class="number">0</span>]; <span class="comment">// 或者 buffer</span></span><br></pre></td></tr></table></figure>
+<p>任何时候缓冲区中以存放的字符数都是 bufptr - buffer（字符类型占 1 个字节），因此我们可以通过将这个表达式与 N 进行比较，来判断缓冲区是否已满。当填满时，bufptr - buffer 就等于 N。</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/5ayv9.jpg" alt="" title="缓冲区示意图（灵魂画手）"></p>
+<p>现在，我们写一下 bufwrite 函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// p 指向要写入的字符串的第一个字符，n 是字符个数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bufwrite</span><span class="params">(<span class="keyword">char</span> *p, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (--n &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (bufptr == &amp;buffer[N]) <span class="comment">// 相当于 bufptr - buffer == N</span></span><br><span class="line">      flushbuffer(); <span class="comment">// 将缓冲区的数据写出，并重置指针 bufptr</span></span><br><span class="line">    *bufptr++ = *p++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>--n &gt;= 0</code>是迭代 n 次的一种写法。为了验证这一点，我们可以考察最简单的特例，即 n = 1（还记得前面说的原则吗？）。此外，<code>--n &gt;= 0</code>的效果与<code>n-- &gt; 0</code>一样，一般前者更快（后者需要保存 n 的值，然后做递减，最后用保存的值做比较）。</p>
+<p>值得注意的是，在 bufptr 与 &amp;buffer[N] 的比较中，buffer[N] 这个元素根本不存在，而我们仍然使用<code>if (bufptr == &amp;buffer[N])</code>代替了<code>bufptr &gt; &amp;buffer[N - 1]</code>的写法，原因在于我们要坚持「不对称边界」的原则：我们要比较指针 bufptr 与 缓冲区后一个字符的地址（即上界），而 &amp;buffer[N] 就是这个地址。</p>
+<p>在此，我们并不需要引用一个不存在的元素，而只需要引用这个元素的地址。我们需要保证不对该引用解引，而且在 C 语言中这个地址是的确存在的（ANSI C 标准明确允许这种用法）。</p>
+<p>最后，改进程序，使得它可以一次移动 k 个字符：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">memcpy</span><span class="params">(<span class="keyword">char</span> *dest, <span class="keyword">const</span> <span class="keyword">char</span> *source, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (--k &gt;= <span class="number">0</span>)</span><br><span class="line">    *dest++ = *source++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bufwrite</span><span class="params">(<span class="keyword">char</span> *p, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (n &gt; <span class="number">0</span>) &#123; <span class="comment">// 先比较，所以用 &gt;</span></span><br><span class="line">    <span class="keyword">int</span> k, rem;</span><br><span class="line">    <span class="keyword">if</span> (bufptr == &amp;buffer[N])</span><br><span class="line">      flushbuffer();</span><br><span class="line">    rem = N - (bufptr - buffer); <span class="comment">// rem 剩余可分配的字符个数</span></span><br><span class="line">    k = n &gt; rem ? rem : n; <span class="comment">// n 是需要分配的字符数，若条件满足，下一次肯定要 flushbuffer()</span></span><br><span class="line">    <span class="built_in">memcpy</span>(bufptr, p, k);</span><br><span class="line">    bufptr += k;</span><br><span class="line">    p += k;</span><br><span class="line">    n -= k;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解释见注释。</p>
+<p>以上就是不对称边界的两种应用方式。</p>
+<p>参考：《C 陷阱与缺陷，C Traps and Pitfalls》P45（边界计算与不对称边界）</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    Junhao Wang
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://www.junhaow.com/2018/11/15/041 | 边界计算与不对称边界（Asymmetric Bounds）的设计思想/" title="边界计算与不对称边界（Asymmetric Bounds）的设计思想">http://www.junhaow.com/2018/11/15/041 | 边界计算与不对称边界（Asymmetric Bounds）的设计思想/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-Traps-and-Pitfalls/" rel="tag"># C Traps and Pitfalls</a>
+          
+            <a href="/tags/边界计算/" rel="tag"># 边界计算</a>
+          
+            <a href="/tags/不对称边界/" rel="tag"># 不对称边界</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/22/040 | 如何记住 C 语言运算符优先级表？/" rel="next" title="如何记住 C 语言运算符优先级表？">
+                <i class="fa fa-chevron-left"></i> 如何记住 C 语言运算符优先级表？
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/23/042 | 我是如何高效地使用 MacBook/" rel="prev" title="我是如何高效地使用 MacBook？">
+                我是如何高效地使用 MacBook？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/handsomecat.jpg" alt="Junhao Wang">
+            
+              <p class="site-author-name" itemprop="name">Junhao Wang</p>
+              <p class="site-description motion-element" itemprop="description">Debug the old world, bug the new world!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/chuckwangg" target="_blank" title="Facebook">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>Facebook</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/junhaowww" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.linkedin.com/in/junhaowww/" target="_blank" title="LinkedIn">
+                      
+                        <i class="fa fa-fw fa-linkedin"></i>LinkedIn</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.douban.com/people/maodai/" target="_blank" title="豆瓣 (Book)">
+                      
+                        <i class="fa fa-fw fa-book"></i>豆瓣 (Book)</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jianshu.com/u/41865efdad5d/" title="Xiaofud" target="_blank">Xiaofud</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.davex.pw/" title="DaveX" target="_blank">DaveX</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://alexfan.xyz/" title="alexfan.xyz" target="_blank">alexfan.xyz</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Junhao Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://junhaow.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.junhaow.com/2018/11/15/041 | 边界计算与不对称边界（Asymmetric Bounds）的设计思想/';
+          this.page.identifier = '2018/11/15/041 | 边界计算与不对称边界（Asymmetric Bounds）的设计思想/';
+          this.page.title = '边界计算与不对称边界（Asymmetric Bounds）的设计思想';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://junhaow.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+
+</body>
+</html>

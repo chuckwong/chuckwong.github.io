@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic|Bitter:300,300italic,400,400italic,700,700italic|Bitter:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="junhaow, maodai">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Reference: LeetCodeDifficulty: Medium My Post: [Java] Recursion &amp;amp; Iteration Solutions (DP, Clone, Memoization) Problem Given an integer $n$, generate all structurally unique BST’s (binary search">
+<meta property="og:type" content="website">
+<meta property="og:title" content="95. Unique Binary Search Trees II">
+<meta property="og:url" content="http://www.junhaow.com/lc/problems/dp/95_unique-binary-search-trees-ii.html">
+<meta property="og:site_name" content="B_L_OO_GGG">
+<meta property="og:description" content="Reference: LeetCodeDifficulty: Medium My Post: [Java] Recursion &amp;amp; Iteration Solutions (DP, Clone, Memoization) Problem Given an integer $n$, generate all structurally unique BST’s (binary search">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/sz3zr.jpg">
+<meta property="og:updated_time" content="2019-10-21T07:00:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="95. Unique Binary Search Trees II">
+<meta name="twitter:description" content="Reference: LeetCodeDifficulty: Medium My Post: [Java] Recursion &amp;amp; Iteration Solutions (DP, Clone, Memoization) Problem Given an integer $n$, generate all structurally unique BST’s (binary search">
+<meta name="twitter:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/sz3zr.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.junhaow.com/lc/problems/dp/95_unique-binary-search-trees-ii.html">
+
+
+
+
+
+  <title>95. Unique Binary Search Trees II | B_L_OO_GGG</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-146643833-1', 'auto');
+  ga('send', 'pageview');
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">B_L_OO_GGG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Sumomo mo momo mo no uchi</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+
+
+            
+
+            
+
+            
+
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-inbox"></i> <br>
+            
+            Archives
+
+
+            
+
+            
+              <span class="badge">50</span>
+            
+
+            
+
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-studynotes">
+          <a href="/studynotes/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br>
+            
+            Study Notes
+
+
+            
+
+            
+
+            
+              <span class="badge">6</span>
+            
+
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-lc">
+          <a href="/lc/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            LeetCode Book
+
+
+            
+
+            
+
+            
+
+            
+              <span class="badge badge-lc">251 / ∞</span>
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-address-card"></i> <br>
+            
+            About Me
+
+
+            
+
+            
+
+            
+
+            
+
+            
+              <span class="badge-about">👋</span>
+            
+
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+	<h1 class="post-title" itemprop="name headline">95. Unique Binary Search Trees II</h1>
+
+
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <p><br></p>
+<p>Reference: <a href="https://leetcode.com/problems/unique-binary-search-trees-ii/" target="_blank" rel="noopener">LeetCode</a><br>Difficulty: <span class="orange">Medium</span></p>
+<p>My Post: <a href="https://leetcode.com/problems/unique-binary-search-trees-ii/discuss/410074" target="_blank" rel="noopener">[Java] Recursion &amp; Iteration Solutions (DP, Clone, Memoization)</a></p>
+<h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><blockquote>
+<p>Given an integer $n$, generate all structurally unique BST’s (binary search trees) that store values <code>1 ... n</code>.</p>
+</blockquote>
+<p><strong>Example:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Input: <span class="number">3</span></span><br><span class="line">Output:</span><br><span class="line">[</span><br><span class="line">  [<span class="number">1</span>,<span class="keyword">null</span>,<span class="number">3</span>,<span class="number">2</span>],</span><br><span class="line">  [<span class="number">3</span>,<span class="number">2</span>,<span class="keyword">null</span>,<span class="number">1</span>],</span><br><span class="line">  [<span class="number">3</span>,<span class="number">1</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="number">2</span>],</span><br><span class="line">  [<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>],</span><br><span class="line">  [<span class="number">1</span>,<span class="keyword">null</span>,<span class="number">2</span>,<span class="keyword">null</span>,<span class="number">3</span>]</span><br><span class="line">]</span><br><span class="line">Explanation:</span><br><span class="line">The above output corresponds to the <span class="number">5</span> unique BST<span class="string">'s shown below:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   1         3     3      2      1</span></span><br><span class="line"><span class="string">    \       /     /      / \      \</span></span><br><span class="line"><span class="string">     3     2     1      1   3      2</span></span><br><span class="line"><span class="string">    /     /       \                 \</span></span><br><span class="line"><span class="string">   2     1         2                 3</span></span><br></pre></td></tr></table></figure>
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><h3 id="Recursion"><a href="#Recursion" class="headerlink" title="Recursion"></a>Recursion</h3><p>If we directly apply the solution in <code>96. Unique Binary Search Trees</code>, we have an incorrect result. Consider the following example.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="number">5</span>, i = <span class="number">3</span></span><br><span class="line"><span class="number">2</span> left nodes:  [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="number">2</span> right nodes: [<span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line">n = <span class="number">10</span>, i = <span class="number">8</span></span><br><span class="line"><span class="number">7</span> left nodes:  [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>]</span><br><span class="line"><span class="number">2</span> right nodes: [<span class="number">9</span>, <span class="number">10</span>]</span><br></pre></td></tr></table></figure>
+<p>As you can see, although there are still 2 nodes in the right subtrees, the values are not the same. In the previous approach, it did not handle this situation.</p>
+<p>So rather than passing a parameter <code>n</code> (number of nodes), we now pass down two parameters <code>lo</code> and <code>hi</code> indicating the range of values of a tree.</p>
+<p>For example, <code>generateTrees(1, 5)</code> generate trees whose values range from <code>1</code> to <code>5</code>, and each of them has a chance to be the root, which also includes the information of number of nodes <code>n</code>. Say when the root is <code>3</code>, we calculate <code>generateTrees(1, 2)</code> and <code>generateTrees(4, 5)</code>.</p>
+<p><strong>Note:</strong> When <code>n == 0</code>, it returns <code>[]</code> instead of <code>[[null]]</code>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;TreeNode&gt; <span class="title">generateTrees</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> generateTrees(<span class="number">1</span>, n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> List&lt;TreeNode&gt; <span class="title">generateTrees</span><span class="params">(<span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> n = hi - lo + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">    List&lt;TreeNode&gt; L = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    L.add(<span class="keyword">null</span>);</span><br><span class="line">    <span class="keyword">return</span> L;</span><br><span class="line">  &#125;</span><br><span class="line">  List&lt;TreeNode&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = lo; i &lt;= hi; ++i) &#123;</span><br><span class="line">    List&lt;TreeNode&gt; leftSubtrees = generateTrees(lo, i - <span class="number">1</span>);</span><br><span class="line">    List&lt;TreeNode&gt; rightSubtrees = generateTrees(i + <span class="number">1</span>, hi);</span><br><span class="line">    <span class="keyword">for</span> (TreeNode leftSub : leftSubtrees) &#123;</span><br><span class="line">      <span class="keyword">for</span> (TreeNode rightSub : rightSubtrees) &#123;</span><br><span class="line">        TreeNode newTree = <span class="keyword">new</span> TreeNode(i);</span><br><span class="line">        newTree.left = leftSub;</span><br><span class="line">        newTree.right = rightSub;</span><br><span class="line">        result.add(newTree);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Time:</strong> It is at most bounded by $O(N \times N!)$. A tighter bound would be Catalan number times $N$ since we’ve done $N$ times, which is $N \times G_N = O(N\times\frac{4^N}{N^{3/2}}) = O(\frac{4^N}{N^{1/2}})$.<br><strong>Space:</strong> $O(N \times G_N) = O(\frac{4^N}{N^{1/2}})$</p>
+<h3 id="DP-Clone"><a href="#DP-Clone" class="headerlink" title="DP (Clone)"></a>DP (Clone)</h3><p>Reference: <a href="https://leetcode.wang/leetCode-95-Unique-Binary-Search-TreesII.html" target="_blank" rel="noopener">link</a></p>
+<p>Let’s denote <code>tree[i]</code> as the list of trees of size <code>i</code>. Think of <code>tree[i]</code> as our building blocks for a larger tree.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">Example: n = <span class="number">3</span></span><br><span class="line"></span><br><span class="line">tree[<span class="number">0</span>]:</span><br><span class="line"><span class="keyword">null</span></span><br><span class="line"></span><br><span class="line">tree[<span class="number">1</span>]:</span><br><span class="line">[<span class="number">1</span>]</span><br><span class="line">[<span class="number">2</span>]</span><br><span class="line">[<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">tree[<span class="number">2</span>]:</span><br><span class="line">[<span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"><span class="number">1</span></span><br><span class="line"> \</span><br><span class="line">  <span class="number">2</span>      <span class="comment">// 2 structures</span></span><br><span class="line">  <span class="number">2</span></span><br><span class="line"> /</span><br><span class="line"><span class="number">1</span></span><br><span class="line">[<span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"><span class="number">2</span></span><br><span class="line"> \</span><br><span class="line">  <span class="number">3</span></span><br><span class="line">  <span class="number">3</span></span><br><span class="line"> /</span><br><span class="line"><span class="number">2</span>        <span class="comment">// [1 3] is not possible</span></span><br><span class="line"></span><br><span class="line">tree[<span class="number">3</span>]:  <span class="comment">// (based on tree[1], tree[2])</span></span><br><span class="line">   <span class="number">3</span></span><br><span class="line">  /</span><br><span class="line">[<span class="number">1</span> <span class="number">2</span>]</span><br><span class="line">   <span class="number">1</span></span><br><span class="line">    \</span><br><span class="line">   [<span class="number">2</span> <span class="number">3</span>]</span><br><span class="line">   <span class="number">2</span></span><br><span class="line"> /  \</span><br><span class="line">[<span class="number">1</span>] [<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<p>So we can compute all possible trees for <code>tree[1]</code>, <code>tree[2]</code>, …, then we can construct <code>tree[n]</code> by previous results.</p>
+<p>For a small <code>n = 3</code> , we notice that when we calculate <code>tree[2]</code> we want all possible combinations for <code>tree[2]</code> (<code>[1 2]</code>, <code>[2 3]</code>). <strong>Furthermore</strong>, if we have a large <code>n = 100</code>, we want all the combinations as follows <code>[1 2]</code>, <code>[2 3]</code>, <code>[3 4]</code>, …, <code>[99 100]</code> (each of them has two structures).</p>
+<p>Since these trees have the same two types of structures:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x       y</span><br><span class="line"> \     /</span><br><span class="line">  y   x</span><br></pre></td></tr></table></figure>
+<p>We can actually construct all the trees by <code>[1 2]</code> plus some constant, say <code>offset</code>. For example, <code>[5 6]</code> can be constructed as follows:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>    +<span class="number">4</span>    <span class="number">5</span></span><br><span class="line"> \          \</span><br><span class="line">  <span class="number">2</span>    +<span class="number">4</span>    <span class="number">6</span></span><br><span class="line">------------------</span><br><span class="line">  <span class="number">2</span>    +<span class="number">4</span>    <span class="number">6</span></span><br><span class="line"> /          /</span><br><span class="line"><span class="number">1</span>    +<span class="number">4</span>    <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p>Say the problem is <code>n = 100</code>. During the execution of the algorithm when <code>i = 98</code>, we want to get all possible trees for <code>i = 98</code> as the root. The size of the left subtree is <code>97</code> and the subtree is picked from <code>tree[97]</code>; the size of the right subtree is <code>2</code> and the subtree is picked from <code>tree[2]</code>.</p>
+<p>For the left subtree, we already have <code>tree[97]</code> computed as <code>[1 2 3 ... 97]</code>.</p>
+<p>For the right subtree, we want <code>[99 100]</code>, which can be computed by <code>[1 2]</code> plus <code>offset = 98</code>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>    +<span class="number">98</span>    <span class="number">99</span></span><br><span class="line"> \            \</span><br><span class="line">  <span class="number">2</span>    +<span class="number">98</span>    <span class="number">100</span></span><br><span class="line">------------------</span><br><span class="line">  <span class="number">2</span>    +<span class="number">98</span>    <span class="number">100</span></span><br><span class="line"> /            /</span><br><span class="line"><span class="number">1</span>    +<span class="number">98</span>     <span class="number">99</span></span><br></pre></td></tr></table></figure>
+<p>Therefore, given a tree <code>root</code>, we can generate a new tree by cloning with an <code>offset</code>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// adding offset to each node of a tree root</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> TreeNode <span class="title">clone</span><span class="params">(TreeNode root, <span class="keyword">int</span> offset)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n == <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  TreeNode node = <span class="keyword">new</span> TreeNode(root.val + offset);</span><br><span class="line">  node.left = clone(root.left, offset);</span><br><span class="line">  node.right = clone(root.right, offset);</span><br><span class="line">  <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>For input <code>n</code>, the result we want is <code>tree[n]</code> (<code>[1 2 3 ... n]</code>). Here is the code for <code>generateTrees(n)</code>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;TreeNode&gt; <span class="title">generateTrees</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">  List&lt;TreeNode&gt;[] tree = <span class="keyword">new</span> ArrayList[n + <span class="number">1</span>];</span><br><span class="line">  tree[<span class="number">0</span>] = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">  <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> tree[<span class="number">0</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  tree[<span class="number">0</span>].add(<span class="keyword">null</span>);</span><br><span class="line">  <span class="comment">// Calculate all lengths</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> len = <span class="number">1</span>; len &lt;= n; ++len) &#123;</span><br><span class="line">    tree[len] = <span class="keyword">new</span> ArrayList&lt;&gt;(); <span class="comment">// contains all trees we construct</span></span><br><span class="line">    <span class="comment">// Consider each as the root</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len; ++i) &#123;</span><br><span class="line">      <span class="keyword">int</span> leftSize = i - <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">int</span> rightSize = len - i;</span><br><span class="line">      <span class="keyword">for</span> (TreeNode leftTree : tree[leftSize]) [</span><br><span class="line">        <span class="keyword">for</span> (TreeNode rightTree : tree[rightSize]) &#123;</span><br><span class="line">          TreeNode tree = <span class="keyword">new</span> TreeNode(i);</span><br><span class="line">          tree.left = leftTree;  <span class="comment">// left subtree requires no cloning</span></span><br><span class="line">          tree.right = clone(rightTree, i); <span class="comment">// add i as the offset</span></span><br><span class="line">          tree[len].add(tree);</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> tree[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Time:</strong> <span class="purple">N/A</span> (I don’t know T_T)<br><strong>Space:</strong> <span class="purple">N/A</span> (I don’t know T_T)</p>
+<h3 id="DP-2D"><a href="#DP-2D" class="headerlink" title="DP (2D)"></a>DP (2D)</h3><p>Judge: <code>1ms</code>, faster than <code>99.95%</code>. I have nothing to say.</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/sz3zr.jpg" alt=""></p>
+<p>Here is the code I wrote:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;TreeNode&gt; <span class="title">generateTrees</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">  &#125;</span><br><span class="line">  List&lt;TreeNode&gt;[][] g = <span class="keyword">new</span> ArrayList[n + <span class="number">1</span>][n + <span class="number">1</span>];</span><br><span class="line">  <span class="comment">// init</span></span><br><span class="line">  List&lt;TreeNode&gt; nullList = <span class="keyword">new</span> ArrayList&lt;&gt;(); nullList.add(<span class="keyword">null</span>);</span><br><span class="line">  g[<span class="number">0</span>][<span class="number">0</span>] = nullList;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; ++k) &#123; <span class="comment">// g(0, k)</span></span><br><span class="line">    g[<span class="number">0</span>][k] = nullList;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; ++k) &#123; <span class="comment">// diagonal: one node (itself)</span></span><br><span class="line">    List&lt;TreeNode&gt; oneList = <span class="keyword">new</span> ArrayList&lt;&gt;(); oneList.add(<span class="keyword">new</span> TreeNode(k));</span><br><span class="line">    g[k][k] = oneList;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; ++k) &#123; <span class="comment">// one node above diagonal: nullList</span></span><br><span class="line">    g[k][k - <span class="number">1</span>] = nullList;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// dp</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">1</span>; --i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">      List&lt;TreeNode&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> k = i ; k &lt;= j; ++k) &#123; <span class="comment">// for each k as root [i, j]</span></span><br><span class="line">        List&lt;TreeNode&gt; leftList = (k - <span class="number">1</span> &lt;= n) ? g[i][k - <span class="number">1</span>] : nullList;</span><br><span class="line">        List&lt;TreeNode&gt; rightList = (k + <span class="number">1</span> &lt;= n) ? g[k + <span class="number">1</span>][j] : nullList;</span><br><span class="line">        <span class="keyword">for</span> (TreeNode left : leftList) &#123;</span><br><span class="line">          <span class="keyword">for</span> (TreeNode right: rightList) &#123;</span><br><span class="line">            TreeNode newTree = <span class="keyword">new</span> TreeNode(k);</span><br><span class="line">            newTree.left = left;</span><br><span class="line">            newTree.right = right;</span><br><span class="line">            result.add(newTree);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      g[i][j] = result;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> g[<span class="number">1</span>][n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Time:</strong> <span class="purple">N/A</span> (I don’t know T_T)<br><strong>Space:</strong> <span class="purple">N/A</span> (I don’t know T_T)</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/handsomecat.jpg" alt="Junhao Wang">
+            
+              <p class="site-author-name" itemprop="name">Junhao Wang</p>
+              <p class="site-description motion-element" itemprop="description">Debug the old world, bug the new world!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/chuckwangg" target="_blank" title="Facebook">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>Facebook</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/junhaowww" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.linkedin.com/in/junhaowww/" target="_blank" title="LinkedIn">
+                      
+                        <i class="fa fa-fw fa-linkedin"></i>LinkedIn</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.douban.com/people/maodai/" target="_blank" title="豆瓣 (Book)">
+                      
+                        <i class="fa fa-fw fa-book"></i>豆瓣 (Book)</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jianshu.com/u/41865efdad5d/" title="Xiaofud" target="_blank">Xiaofud</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.davex.pw/" title="DaveX" target="_blank">DaveX</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://alexfan.xyz/" title="alexfan.xyz" target="_blank">alexfan.xyz</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem"><span class="nav-number">1.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis"><span class="nav-number">2.</span> <span class="nav-text">Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Recursion"><span class="nav-number">2.1.</span> <span class="nav-text">Recursion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DP-Clone"><span class="nav-number">2.2.</span> <span class="nav-text">DP (Clone)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DP-2D"><span class="nav-number">2.3.</span> <span class="nav-text">DP (2D)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Junhao Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://junhaow.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.junhaow.com/lc/problems/dp/95_unique-binary-search-trees-ii.html';
+          this.page.identifier = 'lc/problems/dp/95_unique-binary-search-trees-ii.html';
+          this.page.title = '95. Unique Binary Search Trees II';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://junhaow.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+
+</body>
+</html>

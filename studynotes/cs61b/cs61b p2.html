@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic|Bitter:300,300italic,400,400italic,700,700italic|Bitter:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="junhaow, maodai">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="TestingThinking Process Often, development is an incremental process that involves lots of tasks switching and on the fly design modification. Tests provide stability and scaffolding:  Provide confid">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CS 61B | Part 2 | Testing, Inheritance, HOFs, Polymorphism, Package, Access Control">
+<meta property="og:url" content="http://www.junhaow.com/studynotes/cs61b/cs61b p2.html">
+<meta property="og:site_name" content="B_L_OO_GGG">
+<meta property="og:description" content="TestingThinking Process Often, development is an incremental process that involves lots of tasks switching and on the fly design modification. Tests provide stability and scaffolding:  Provide confid">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/m8hnj.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/kglyy.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/b8scz.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/t10c8.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/o7a65.png">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tvc05.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/wtif3.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/j3xla.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/wmvqc.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/totr3.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/fwr4r.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/7tgyb.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/hj8ag.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/1217q.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/8e70u.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/w6hvd.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/mmiqj.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ukdpi.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ffpd0.jpg">
+<meta property="og:updated_time" content="2019-10-07T16:36:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CS 61B | Part 2 | Testing, Inheritance, HOFs, Polymorphism, Package, Access Control">
+<meta name="twitter:description" content="TestingThinking Process Often, development is an incremental process that involves lots of tasks switching and on the fly design modification. Tests provide stability and scaffolding:  Provide confid">
+<meta name="twitter:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/m8hnj.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.junhaow.com/studynotes/cs61b/cs61b p2.html">
+
+
+
+
+
+  <title>CS 61B | Part 2 | Testing, Inheritance, HOFs, Polymorphism, Package, Access Control | B_L_OO_GGG</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-146643833-1', 'auto');
+  ga('send', 'pageview');
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">B_L_OO_GGG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Sumomo mo momo mo no uchi</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+
+
+            
+
+            
+
+            
+
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-inbox"></i> <br>
+            
+            Archives
+
+
+            
+
+            
+              <span class="badge">50</span>
+            
+
+            
+
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-studynotes">
+          <a href="/studynotes/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br>
+            
+            Study Notes
+
+
+            
+
+            
+
+            
+              <span class="badge">6</span>
+            
+
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-lc">
+          <a href="/lc/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            LeetCode Book
+
+
+            
+
+            
+
+            
+
+            
+              <span class="badge badge-lc">251 / ∞</span>
+            
+
+            
+
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-address-card"></i> <br>
+            
+            About Me
+
+
+            
+
+            
+
+            
+
+            
+
+            
+              <span class="badge-about">👋</span>
+            
+
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+	<h1 class="post-title" itemprop="name headline">CS 61B | Part 2 | Testing, Inheritance, HOFs, Polymorphism, Package, Access Control</h1>
+
+
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <p><br></p>
+<h2 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h2><h3 id="Thinking-Process"><a href="#Thinking-Process" class="headerlink" title="Thinking Process"></a>Thinking Process</h3><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/m8hnj.jpg" alt="" title="The Evolution of our Design"></p>
+<p>Often, development is an <code>incremental process</code> that involves lots of tasks switching and on the fly design modification.</p>
+<p>Tests provide <code>stability</code> and <code>scaffolding</code>:</p>
+<ul>
+<li>Provide <code>confidence in basic units</code> and mitigate possibility of breaking them.</li>
+<li>Help you focus on <code>one task</code> at a time.</li>
+</ul>
+<p>In large projects, test also allow you to safely <code>refactor</code> (still have the same function)!</p>
+<h3 id="Four-Philosophies"><a href="#Four-Philosophies" class="headerlink" title="Four Philosophies"></a>Four Philosophies</h3><p>Here we have four testing philosophies:</p>
+<ul>
+<li>Autograder Driven Development (ADD)</li>
+<li>Unit Tests</li>
+<li>Test-Driven Development (TDD)</li>
+<li>Integration Testing</li>
+</ul>
+<h4 id="Autograder-Driven-Development-ADD"><a href="#Autograder-Driven-Development-ADD" class="headerlink" title="Autograder Driven Development (ADD)"></a>Autograder Driven Development (ADD)</h4><p>The worst way to approach programming. This workflow is slow and unsafe!</p>
+<p>Wait for the autograder to run, and test everything at the end of development.</p>
+<h4 id="Unit-Tests"><a href="#Unit-Tests" class="headerlink" title="Unit Tests"></a>Unit Tests</h4><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/kglyy.jpg" alt=""></p>
+<p>But, how do you test units that rely on others. e.g. how do you test <code>addFirst</code> in Project 1?</p>
+<h4 id="Test-Driven-Development-TDD"><a href="#Test-Driven-Development-TDD" class="headerlink" title="Test-Driven Development (TDD)"></a>Test-Driven Development (TDD)</h4><p>It is a <code>repeat process</code> consisting of three parts:</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/b8scz.jpg" alt=""></p>
+<h4 id="Integration-Testing"><a href="#Integration-Testing" class="headerlink" title="Integration Testing"></a>Integration Testing</h4><p>Idea: Tests cover <code>many units at once</code>.</p>
+<p>Not JUnit’s focus, but JUnit can do this.</p>
+<p>But it tests at highest level of abstraction what may <code>miss subtle or rare errors</code>.</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/t10c8.jpg" alt="" title="Dependency"></p>
+<p><strong>Exercise in Study Guide</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testEquals</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">/** Arrays */</span></span><br><span class="line">  <span class="keyword">int</span>[][] a1 = &#123;&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;, &#123;<span class="number">2</span>&#125;, &#123;<span class="number">3</span>&#125;&#125;;</span><br><span class="line">  <span class="keyword">int</span>[][] a2 = &#123;&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>&#125;, &#123;<span class="number">2</span>&#125;, &#123;<span class="number">3</span>&#125;&#125;;</span><br><span class="line">  assertArrayEquals(a1, a2); <span class="comment">/* Test fails */</span></span><br><span class="line">  <span class="comment">/** String (Wrapping Class) */</span></span><br><span class="line">  String s1 = <span class="string">"123123123"</span>;</span><br><span class="line">  String s2 = <span class="string">"123123123"</span>;</span><br><span class="line">  String s3 = <span class="keyword">new</span> String(<span class="string">"123123123"</span>);</span><br><span class="line">  String s4 = <span class="keyword">new</span> String(<span class="string">"123123123"</span>);</span><br><span class="line">  <span class="comment">// Since they are wrapping classes, Java just compare their inside values.</span></span><br><span class="line">  assertEquals(s1, s2); <span class="comment">/* Test pass! */</span></span><br><span class="line">  assertEquals(s3, s4); <span class="comment">/* Test pass! */</span></span><br><span class="line">  assertEquals(s1, s4); <span class="comment">/* Test pass! */</span></span><br><span class="line">  <span class="comment">/** Other Classes - Compare addresses (id) */</span></span><br><span class="line">  Object o1 = <span class="keyword">new</span> Object();</span><br><span class="line">  Object o2 = <span class="keyword">new</span> Object();</span><br><span class="line">  assertEquals(o1, o2); <span class="comment">/* Test fails */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Inheritance-amp-Implements"><a href="#Inheritance-amp-Implements" class="headerlink" title="Inheritance &amp; Implements"></a>Inheritance &amp; Implements</h2><h3 id="Interface-amp-Implementation"><a href="#Interface-amp-Implementation" class="headerlink" title="Interface &amp; Implementation"></a>Interface &amp; Implementation</h3><p>Interface Inheritance (<code>what</code>):</p>
+<ul>
+<li>Subclass inherits <code>signatures</code>, but NOT implementation</li>
+<li>So we can also say it is <code>Signature Inheritance</code>.</li>
+</ul>
+<p>Implementation Inheritance (<code>how</code>):</p>
+<ul>
+<li>Subclasses can inherit <code>signatures AND implementation</code>.</li>
+</ul>
+<h3 id="Static-vs-Dynamic-Type"><a href="#Static-vs-Dynamic-Type" class="headerlink" title="Static vs. Dynamic Type"></a>Static vs. Dynamic Type</h3><p>Every variable in Java has a <code>compile-time type</code>, a.k.a. <code>static type</code>.</p>
+<ul>
+<li>This is the type specified at <code>declaration</code>. Never changes!</li>
+</ul>
+<p>Variables also have a <code>run-time type</code>, a.k.a. <code>dynamic type</code>.</p>
+<ul>
+<li>This is the type specified at <code>instantiation</code> (e.g. when using <code>new</code>).</li>
+<li>Equal to the type of the object really being pointing at.</li>
+</ul>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/o7a65.png" alt="" title="Static Type vs. Dynamic Type"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Animal a =  <span class="keyword">new</span> Animal(<span class="string">"Pluto"</span>, <span class="number">10</span>);</span><br><span class="line">Dog d = <span class="keyword">new</span> Dog(<span class="string">"Fido"</span>, <span class="number">4</span>);</span><br><span class="line">a = <span class="keyword">new</span> Dog(<span class="string">"Spot"</span>, <span class="number">10</span>);</span><br><span class="line">d = a; <span class="comment">// Dog (static)  &lt;-  Animal (static)</span></span><br><span class="line"><span class="comment">// Compiler error because the static type of d is Dog and the static type of a is Animal. We can fix this by casting:</span></span><br><span class="line">d = (Dog) a;</span><br></pre></td></tr></table></figure>
+<p>If Y <code>overrides</code> the method, Y’s method is used instead. This is known as <code>dynamic method selection</code>.</p>
+<p>Implementation inheritance may sound nice, but there are some <code>drawbacks</code>:</p>
+<ul>
+<li>We are fallible humans, and we can’t keep track of everything, so it’s possible that you overrode a method but forgot you did.</li>
+<li>It may be hard to resolve conflicts in case two interfaces give <code>conflicting default methods</code>.</li>
+<li>It encourages overly <code>complex code</code>.</li>
+</ul>
+<h3 id="Encapsulation"><a href="#Encapsulation" class="headerlink" title="Encapsulation"></a>Encapsulation</h3><p>When building large programs, our enemy is <code>complexity</code>.</p>
+<p>Ways of managing complexity (ultimately determine whether a programmer is successful), as shown in Software Engineering lectures:</p>
+<ul>
+<li>Hierarchical <code>abstraction</code> (List, LinkedList, ArrayList)</li>
+<li><code>Design for (future) change</code> (D. Parnas)<ul>
+<li>Organize program around <code>objects</code> (modules)</li>
+<li><code>Let objects decide</code> how things are done. Outsider needs not to know.</li>
+<li><code>Hide information</code> others don’t need (helper functions)</li>
+</ul>
+</li>
+</ul>
+<p>Even when writing tests, you don’t (usually) want to peek inside.</p>
+<p>Ideally, a user should not be able to observe the internal workings of, say, a <code>data structure</code> they are using. Java is a great language for <code>enforcing abstraction</code> barriers with <code>syntax</code> (language aspect).</p>
+<blockquote>
+<p>Later, we use Abstract Data Types (ADTs) to handle what we need.</p>
+</blockquote>
+<p><strong>Inheritance Breaks Encapsulation:</strong></p>
+<p>1st Implementation:</p>
+<p>(The upper box is in superclass)</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tvc05.jpg" alt="" title="1st Implementation - Answer: a"></p>
+<p>2nd Implementation (Really bad):</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/wtif3.jpg" alt="" title="2nd Implementation - Answer: c (infinite loop)"></p>
+<p>By allowing inheritance in a particular situation, we now have a way to peek inside a beautifully encapsulated class. </p>
+<p>We didn’t change anything in overridden <code>barkMany</code>, but someone changed the superclass implementation that they thought it was safe and kapow (爽).</p>
+<h3 id="Type-Checking-amp-Casting"><a href="#Type-Checking-amp-Casting" class="headerlink" title="Type Checking &amp; Casting"></a>Type Checking &amp; Casting</h3><h4 id="Type-Checking"><a href="#Type-Checking" class="headerlink" title="Type Checking"></a>Type Checking</h4><p>Static type is also called <code>compile-time type</code>.</p>
+<p>Override:</p>
+<p>If a method in SLList is overridden by the VengefulSLList class, then the method that is called at runtime is determined by the <code>run-time type</code> (dynamic type) of that variable (<code>dynamic method selection</code>).</p>
+<ul>
+<li>If a method <code>overridden</code>: Call from <code>dynamic type</code>.</li>
+<li>If a method <code>not overriden</code>: Call from <code>static type</code>.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Overridden: removeLast</span></span><br><span class="line"><span class="comment"> * Not Overridden: addLast</span></span><br><span class="line"><span class="comment"> * Only VengefulSLList has printLostItems() method</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">VengefulSLList&lt;Integer&gt; vsl = <span class="keyword">new</span> VengefulSLList&lt;Integer&gt;(<span class="number">9</span>);</span><br><span class="line"><span class="comment">// Static type: VengefulSLList&lt;Integer&gt;</span></span><br><span class="line"><span class="comment">// Dynamic type: VengefulSLList&lt;Integer&gt;</span></span><br><span class="line">SLList&lt;Integer&gt; sl = vsl;</span><br><span class="line"><span class="comment">// Static type: SLList&lt;Integer&gt;</span></span><br><span class="line"><span class="comment">// Dynamic type: VengefulSLList&lt;Integer&gt;</span></span><br><span class="line"></span><br><span class="line">sl.removeLast(); <span class="comment">// Overridden, call dynamic type VengefulSLList&lt;Integer&gt;</span></span><br><span class="line">sl.addLast(<span class="number">50</span>); <span class="comment">// Not overridden, call static type</span></span><br></pre></td></tr></table></figure>
+<p>Compiler is <code>conservative</code> in type checking.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Compile-time Error */</span></span><br><span class="line">sl.printLostItems();</span><br><span class="line"><span class="comment">// Not overridden, call static type. But SLList&lt;Integer&gt; has no idea about printLostItems() in compile-time, even later it knows during runtime.</span></span><br></pre></td></tr></table></figure>
+<p>In general, the compiler only allows method <code>calls and assignments</code> based on <code>compile-time types</code>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">VengefulSLList&lt;Integer&gt; vsl2 = sl;</span><br><span class="line"><span class="comment">// Since the compiler only sees that the static type of sl is SLList, it won't allow a VengefulSLList to hold it.</span></span><br></pre></td></tr></table></figure>
+<p>Also, expressions using the <code>new</code> keyword also have compile-time types.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VengefulSLList&lt;Integer&gt; vsl = <span class="keyword">new</span> SLList&lt;Integer&gt;();</span><br></pre></td></tr></table></figure>
+<p>Above, the compile-time type of the right-hand side of the expression is <code>SLList</code>. The compiler checks if <code>SLList</code> “is-a” <code>VengefulSLList</code>, which it is not in all cases, and thus a compilation error results.</p>
+<p>Further, method calls have compile-time types equal to their <code>declared types</code>. Suppose we have this method:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Dog <span class="title">maxDog</span><span class="params">(Dog d1, Dog d2)</span> </span>&#123; ... &#125;</span><br><span class="line"><span class="comment">/* Any call to maxDog will have compile-time type Dog */</span></span><br><span class="line"></span><br><span class="line">Poodle frank = <span class="keyword">new</span> Poodle(<span class="string">"Frank"</span>, <span class="number">5</span>);</span><br><span class="line">Poodle frankJr = <span class="keyword">new</span> Poodle(<span class="string">"Frank Jr."</span>, <span class="number">15</span>);</span><br><span class="line"></span><br><span class="line">Dog largerDog = maxDog(frank, frankJr); <span class="comment">// okay</span></span><br><span class="line">Poodle largerPoodle = maxDog(frank, frankJr); <span class="comment">// does not compile! </span></span><br><span class="line"><span class="comment">// Return value: RHS (right hand side) has compile-time type Dog, but on the left side it is Poodle and Dog is not a Poodle.</span></span><br></pre></td></tr></table></figure>
+<h4 id="Casting"><a href="#Casting" class="headerlink" title="Casting"></a>Casting</h4><p>Java has a special syntax where you can tell the compiler that a specific expression has a specific <code>compile-time type</code>. This is called <code>casting</code>. With casting, we can tell the compiler to view an expression as a different compile-time type, <code>ignoring its type checking duties</code>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Pass type checking in compile time.</span></span><br><span class="line">Poodle frank = <span class="keyword">new</span> Poodle(<span class="string">"Frank"</span>, <span class="number">5</span>);</span><br><span class="line">Malamute frankSr = <span class="keyword">new</span> Malamute(<span class="string">"Frank Sr."</span>, <span class="number">100</span>);</span><br><span class="line">Poodle largerPoodle = (Poodle) maxDog(frank, frankJr);</span><br><span class="line"><span class="comment">// At runtime, it'll crash when maxDog returns the Malamute.</span></span><br></pre></td></tr></table></figure>
+<p>Should be careful when doing <code>downcasting</code>, especially when downcasting a superclass to a subclass.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* The problem lies in the right hand side. */</span></span><br><span class="line">Animal a = (Dog) <span class="keyword">new</span> Animal(); <span class="comment">// Runtime Error</span></span><br><span class="line"><span class="comment">// Dog is an Animal. Static types are compatible.</span></span><br><span class="line"><span class="comment">// Runtime: </span></span><br><span class="line"><span class="comment">// - Downcasting: Animal is a Dog? No</span></span><br><span class="line"></span><br><span class="line">Dog a = (Dog) <span class="keyword">new</span> Animal(); <span class="comment">// Runtime Error</span></span><br><span class="line"><span class="comment">// - Downcasting. But it is in fact an Animal. Not compatible.</span></span><br></pre></td></tr></table></figure>
+<p>It’s okay if we are sure that the object whose static type is superclass actually has a subclass dynamic type.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Animal a = <span class="keyword">new</span> Dog();</span><br><span class="line">Dog b = a; <span class="comment">// compile error, type-checking error</span></span><br><span class="line">Dog c = (Dog) a; <span class="comment">// pass type-checking and okay in runtime since a is indeed a Dog object.</span></span><br></pre></td></tr></table></figure>
+<h4 id="Method-Preferences"><a href="#Method-Preferences" class="headerlink" title="Method Preferences"></a>Method Preferences</h4><p><strong>Example 0:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Dog d = <span class="keyword">new</span> Dog();</span><br><span class="line">((Animal) d).makeNoise(d);</span><br></pre></td></tr></table></figure>
+<p><code>((Animal) d).makeNoise(d)</code>: In compile-time type checking, when checking to see if a method called <code>makeNoise</code> exists in Animal, do we check for a <code>makeNoise(Dog)</code> method or a <code>makeNoise(Animal)</code> method?</p>
+<ul>
+<li>Compile time (Animal):<ul>
+<li>Check <code>method name</code> -&gt; matched</li>
+<li>Check <code>parameter types</code> -&gt; It depends the methods in Animal class.<ul>
+<li>It can match Animal’s <code>makeNoise(Animal)</code></li>
+<li>Or match <code>makeNoise(Dog)</code></li>
+<li>But it will definitely goes for the later one because it is a more specific match.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Run time (Dog):<ul>
+<li><code>d</code> is a Dog, not an Animal.</li>
+<li>If the method is overridden?<ul>
+<li>Yes. Call the overridden version. (Dynamic Method Selection)</li>
+<li>No. Call the superclass version.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Idea:</strong></p>
+<ul>
+<li>Parameter type-checking <code>prefers specific</code> if possible.</li>
+<li>The order is important:<ul>
+<li><code>Class type</code> Checking:<ul>
+<li>Static type == Dynamic type: <ul>
+<li>Override won’t happen. Overload may happen.</li>
+</ul>
+</li>
+<li>Static type != Dynamic type: <ul>
+<li>If the method is overridden -&gt; dynamic method selection.</li>
+<li>If not -&gt; just call the one matched in superclass.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The method we consider later in run time is the one <code>decided</code> in compile-time type checking.<ul>
+<li>In run time, it won’t change its mind from <code>makeNoise(Dog)</code> to <code>makeNoise(Animal)</code>.</li>
+<li>In run time, we check if this method is overridden to decide if we need <code>dynamic method selection</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Consider the two examples (Very important):</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">makeNoise</span><span class="params">(Animal a)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Dog01"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// public void makeNoise(Dog d) &#123;</span></span><br><span class="line">  <span class="comment">//   System.out.println("Dog02");</span></span><br><span class="line">  <span class="comment">// &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">makeNoise</span><span class="params">(Animal a)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Dog1"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/* Overload */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">makeNoise</span><span class="params">(Dog d)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Dog2"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main</span></span><br><span class="line">Animal a = <span class="keyword">new</span> Dog(); <span class="comment">// a is actually Dog</span></span><br><span class="line">a.makeNoise(<span class="keyword">new</span> Dog()); <span class="comment">// 1: Dog1</span></span><br><span class="line">a.makeNoise(<span class="keyword">new</span> Animal()); <span class="comment">// 2: Dog1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// No dynamic method selection since Dog's makeNoise is not overridden</span></span><br><span class="line">(<span class="keyword">new</span> Dog()).makeNoise(<span class="keyword">new</span> Animal()); <span class="comment">// 3: Dog1</span></span><br><span class="line">(<span class="keyword">new</span> Dog()).makeNoise(<span class="keyword">new</span> Dog()); <span class="comment">// 4: Dog2</span></span><br></pre></td></tr></table></figure>
+<p>Line 1: </p>
+<ul>
+<li>Compile time (Animal):<ul>
+<li>Check <code>method name</code> -&gt; matched</li>
+<li>Check <code>parameter types</code> -&gt; compatible (Dog is an Animal), matched</li>
+</ul>
+</li>
+<li>Run time (Dog):<ul>
+<li><code>a</code> is Dog. The method <code>makeNoise(Animal)</code> is overridden. So it outputs “Dog1”.</li>
+</ul>
+</li>
+</ul>
+<p>Line 2:</p>
+<ul>
+<li>Compile time (Animal):<ul>
+<li>Check <code>method name</code> -&gt; matched</li>
+<li>Check <code>parameter types</code> -&gt; exactly matched</li>
+</ul>
+</li>
+<li>Run time (Dog):<ul>
+<li><code>a</code> is Dog. The method <code>makeNoise(Animal)</code> is overridden. So it outputs “Dog1”.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">makeNoise</span><span class="params">(Animal a)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Dog01"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">makeNoise</span><span class="params">(Dog d)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Dog02"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">makeNoise</span><span class="params">(Animal a)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Dog1"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/* Overridden (not overloaded) */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">makeNoise</span><span class="params">(Dog d)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Dog2"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main</span></span><br><span class="line">Animal a = <span class="keyword">new</span> Dog(); <span class="comment">// a is actually Dog</span></span><br><span class="line">a.makeNoise(<span class="keyword">new</span> Dog()); <span class="comment">// 1: Dog2 &lt;- Difference</span></span><br><span class="line">a.makeNoise(<span class="keyword">new</span> Animal()); <span class="comment">// 2: Dog1</span></span><br></pre></td></tr></table></figure>
+<p>Line 1: </p>
+<ul>
+<li>Compile time (Animal):<ul>
+<li>Check <code>method name</code> -&gt; matched</li>
+<li>Check <code>parameter types</code> -&gt; prefer specific version, exactly matched (<code>makeNoise(Dog)</code>).</li>
+</ul>
+</li>
+<li>Run time (Dog):<ul>
+<li><code>a</code> is Dog. The method <code>makeNoise(Dog)</code> is overridden (not overloaded). So it outputs “Dog2”.</li>
+</ul>
+</li>
+</ul>
+<p>Line 2:</p>
+<ul>
+<li>Compile time (Animal):<ul>
+<li>Check <code>method name</code> -&gt; matched</li>
+<li>Check <code>parameter types</code> -&gt; exactly matched</li>
+</ul>
+</li>
+<li>Run time (Dog):<ul>
+<li><code>a</code> is Dog. The method <code>makeNoise(Animal)</code> is overridden. So it outputs “Dog1”.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Higher-Order-Functions-HoFs"><a href="#Higher-Order-Functions-HoFs" class="headerlink" title="Higher Order Functions (HoFs)"></a>Higher Order Functions (HoFs)</h2><p>Higher Order Function: A function that treats another function as <code>data</code> (or <code>input</code>?).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># In Python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tenX</span><span class="params">(x)</span>:</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">10</span> * x</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_twice</span><span class="params">(f, x)</span>:</span></span><br><span class="line">  <span class="keyword">return</span> f(f(x))</span><br><span class="line"></span><br><span class="line">print(do_twice(tenX, <span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<p>In old school Java (Java 7 and earlier), memory boxes (variables) could not contain pointers to functions. What that means is that we could not write a function that has a “Function” type, as there was simply no type for functions.</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/j3xla.jpg" alt="" title="The Default Way"></p>
+<p>In Java, we can use Interface to do this. Use a Interface class to wrap up a method / function.</p>
+<p>Interface:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IntUnaryFunction</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">apply</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Implementation:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TenX</span> <span class="keyword">implements</span> <span class="title">IntUnaryFunction</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">apply</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">10</span> * x;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Using:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Use Interface IntUnaryFunction rather than TenX - Abstraction</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">do_twice</span><span class="params">(IntUnaryFunction f, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> f.apply(f.apply(x));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  do_twice(<span class="keyword">new</span> TenX(), <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Ex-Examprep-4"><a href="#Ex-Examprep-4" class="headerlink" title="Ex (Examprep 4)"></a>Ex (Examprep 4)</h2><h3 id="Ex-1-Puppers"><a href="#Ex-1-Puppers" class="headerlink" title="Ex 1 (Puppers)"></a>Ex 1 (Puppers)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dog</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bark</span><span class="params">(Dog d)</span> </span>&#123; <span class="comment">/* Method A */</span> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Corgi</span> <span class="keyword">extends</span> <span class="title">Dog</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bark</span><span class="params">(Corgi c)</span> </span>&#123; <span class="comment">/* Method B */</span> &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bark</span><span class="params">(Dog d)</span> </span>&#123; <span class="comment">/* Method C */</span> &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">(Dog d)</span> </span>&#123; <span class="comment">/* Method D */</span> &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">(Corgi c)</span> </span>&#123; <span class="comment">/* Method E */</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>For the following main method, at each call to play or bark, tell us what happens at runtime by selecting which method is run or if there is a compiler error or runtime error.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  Dog d = <span class="keyword">new</span> Corgi();</span><br><span class="line">  Corgi c = <span class="keyword">new</span> Corgi();</span><br><span class="line"></span><br><span class="line">  d.play(d);  <span class="comment">/* Compile-Error: Dog has no method play(Dog) */</span></span><br><span class="line">  d.play(c);  <span class="comment">/* Compile-Error: Dog has no method play(Corgi) */</span></span><br><span class="line">  c.play(d);  <span class="comment">/* Method D */</span></span><br><span class="line">  c.play(c);  <span class="comment">/* Method E */</span></span><br><span class="line"></span><br><span class="line">  c.bark(d);  <span class="comment">/* Method C */</span></span><br><span class="line">  c.bark(c);  <span class="comment">/* Method B */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Notice there is no bark(Corgi c), so d.bark(c) matchs A first, and then matchs C in dynamic method selection.</span></span><br><span class="line">  d.bark(d);  <span class="comment">/* Method C (dynamic selecting) */</span></span><br><span class="line">  d.bark(c);  <span class="comment">/* Method C (dynamic selecting), not B */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Ex-2-Cast-the-line"><a href="#Ex-2-Cast-the-line" class="headerlink" title="Ex 2 (Cast the line)"></a>Ex 2 (Cast the line)</h3><p>Consider each line independently whether it causes a compilation error, runtime error, or runs successfully.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Animal    Tree</span></span><br><span class="line"><span class="comment">// ^  ^</span></span><br><span class="line"><span class="comment">// |   \</span></span><br><span class="line"><span class="comment">// Cat  Dog</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  Cat c = <span class="keyword">new</span> Animal();  <span class="comment">// Compile Error</span></span><br><span class="line">  Animal a = <span class="keyword">new</span> Cat();  <span class="comment">// Okay</span></span><br><span class="line">  Dog d = <span class="keyword">new</span> Cat();     <span class="comment">// Compile Error</span></span><br><span class="line">  Tree t = <span class="keyword">new</span> Animal(); <span class="comment">// Compile Error</span></span><br><span class="line"></span><br><span class="line">  Animal a = (Cat) <span class="keyword">new</span> Cat();     <span class="comment">// Okay</span></span><br><span class="line">  Animal a = (Animal) <span class="keyword">new</span> Cat();  <span class="comment">// Okay</span></span><br><span class="line">  Dog d = (Dog) <span class="keyword">new</span> Animal();     <span class="comment">// Runtime Error</span></span><br><span class="line">  Cat c = (Cat) <span class="keyword">new</span> Dog();        <span class="comment">// Compile Error (not up-or-down casting)</span></span><br><span class="line">  Animal a = (Animal) <span class="keyword">new</span> Tree(); <span class="comment">// Compile Error: The casting is not compatible</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Ex-3-SLList-Vista"><a href="#Ex-3-SLList-Vista" class="headerlink" title="Ex 3 (SLList Vista)"></a>Ex 3 (SLList Vista)</h3><p>indexOf:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// IntList class: </span></span><br><span class="line"><span class="comment">// - item</span></span><br><span class="line"><span class="comment">// - next</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">  IntList p = <span class="keyword">this</span>.first; <span class="comment">// no sentinel</span></span><br><span class="line">  <span class="keyword">while</span> (p != <span class="keyword">null</span>) &#123; <span class="comment">// end at the last item</span></span><br><span class="line">    <span class="keyword">if</span> (p.item == x) &#123;</span><br><span class="line">      <span class="keyword">return</span> index;</span><br><span class="line">    &#125;</span><br><span class="line">    index += <span class="number">1</span>;</span><br><span class="line">    p = p.next;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Polymorphism-vs-HoFs"><a href="#Polymorphism-vs-HoFs" class="headerlink" title="Polymorphism vs. HoFs"></a>Polymorphism vs. HoFs</h2><h3 id="Polymorphism"><a href="#Polymorphism" class="headerlink" title="Polymorphism"></a>Polymorphism</h3><p>Polymorphism, at its core, means <code>many forms</code>. In Java, polymorphism refers to how objects can have many forms or <code>types</code>.</p>
+<p>In object-oriented programming, polymorphism relates to how an object can be regarded as:</p>
+<ul>
+<li>an instance of its <code>own class</code>,</li>
+<li>an instance of its <code>superclass</code>, </li>
+<li>an instance of its <code>superclass&#39;s superclass</code>, </li>
+<li>and so on.</li>
+</ul>
+<blockquote>
+<p>The above statement is very great.</p>
+</blockquote>
+<h3 id="Subtype-Poly-vs-HoF"><a href="#Subtype-Poly-vs-HoF" class="headerlink" title="Subtype Poly. vs. HoF"></a>Subtype Poly. vs. HoF</h3><p>Explicit HoF Approach:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_larger</span><span class="params">(x, y, compare, stringify)</span>:</span>  </span><br><span class="line">  <span class="comment"># callback: a function needs the help of another function (callback) that might not have been written yet (function passing)</span></span><br><span class="line">  <span class="keyword">if</span> compare(x, y):</span><br><span class="line">    <span class="keyword">return</span> stringify(x)</span><br><span class="line">  <span class="keyword">return</span> stringify(y)</span><br></pre></td></tr></table></figure>
+<p>Subtype Polymorphism Approach:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_larger</span><span class="params">(x, y)</span>:</span></span><br><span class="line">  <span class="keyword">if</span> x.largerThan(y): <span class="comment"># x object makes its choices</span></span><br><span class="line">    <span class="keyword">return</span> x.str()</span><br><span class="line">  <span class="keyword">return</span> y.str()</span><br></pre></td></tr></table></figure>
+<p>In Python or C++, the way that the <code>&gt;</code> operator works could be redefined (overloaded) to work in different ways when applied to different types. </p>
+<p>Unfortunately, Java does not have this capability. Instead, we turn to <code>interface inheritance</code> to help us out. We do this by wrapping up the needed function in an interface (e.g. <code>Arrays.sort</code> needs <code>compare</code> which lives inside the <code>comparator</code> interface). <code>Arrays.sort</code> “calls back” whenever it needs a comparison.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">OurComparable</span> </span>&#123;  <span class="comment">// should be "extends Comparable"?</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object o)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">implements</span> <span class="title">OurComparable</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object o)</span> </span>&#123;  <span class="comment">// or Comparable o</span></span><br><span class="line">    Dog uddaDog = (Dog) o;  <span class="comment">// casting</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.size - uddaDog.size;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>So we can generalize the max function.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Maximizer class */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> OurComparable <span class="title">max</span><span class="params">(OurComparable[] items)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> maxDex = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; items.length - <span class="number">1</span>; i += <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">int</span> cmp = items[i].compareTo(items[maxDex]);</span><br><span class="line">    <span class="keyword">if</span> (cmp &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      maxDex = i;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> items[maxDex];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>What are the benefits to this approach?</p>
+<ul>
+<li>No need for maximization code in every class (i.e. no <code>Dog.maxDog(Dog[])</code> function required.<ul>
+<li>We don’t need to know that class should be Dog class.</li>
+</ul>
+</li>
+<li>We have code that operates on multiple types (mostly) gracefully</li>
+</ul>
+<p>Easy Quizzes:</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/wmvqc.jpg" alt="" title="Answer: Dog.java"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/totr3.jpg" alt="" title="Answer: DogLauncher.java (Maximizer.java won&#39;t fail because of abstraction code)"></p>
+<h3 id="Comparable"><a href="#Comparable" class="headerlink" title="Comparable"></a>Comparable<t></t></h3><p>The <code>OurComparable</code> interface that we just built works, but it’s not perfect. Here are some issues with it:</p>
+<ul>
+<li><p><code>Awkward casting</code> to/from Objects</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object o)</span> </span>&#123;  <span class="comment">// or Comparable</span></span><br><span class="line">  Dog uddaDog = (Dog) o;  <span class="comment">// casting</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.size - uddaDog.size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>We made it up.</p>
+<ul>
+<li>No existing classes implement <code>OurComparable</code> (e.g. String, etc.)</li>
+<li>No existing classes use <code>OurComparable</code> (e.g. no built-in max function that uses OurComparable)</li>
+</ul>
+</li>
+</ul>
+<p>The solution? We’ll take advantage of an interface that already exists called <code>Comparable</code>. <code>Comparable</code> is already defined by Java and is used by countless libraries.</p>
+<p>Comparable looks very similar to the <code>OurComparable</code> interface we made, but with one main difference.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Comparable</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(T obj)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The <code>generic type</code> will help us <code>avoid casting</code> an object to a specific type.</p>
+<h3 id="Comparator"><a href="#Comparator" class="headerlink" title="Comparator"></a>Comparator<t></t></h3><p>Let’s start off by defining some terminology.</p>
+<ul>
+<li><code>Natural order</code> - used to refer to the ordering implied in the <code>compareTo</code> method of a particular class. (Dog - size)</li>
+</ul>
+<p>What if we’d like to sort Dogs <code>in a different way</code> than their natural ordering, such as by alphabetical order of their name?</p>
+<p>In explicit HoF approach, we can use <code>compare</code> to specify a different compare function. However, in subtype polymorphism approach, <code>compareTo1</code>, <code>compareTo2</code>, and so forth? No!</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_larger</span><span class="params">(T x, T y, comparator&lt;T&gt; c)</span>:</span></span><br><span class="line">  <span class="keyword">if</span> c.compare(x, y):</span><br><span class="line">    <span class="keyword">return</span> x.str()</span><br><span class="line">  <span class="keyword">return</span> y.str()</span><br></pre></td></tr></table></figure>
+<p>Java’s way of doing this is by using <code>Comparator</code>‘s. Since a comparator is an object, the way we’ll use <code>Comparator</code> is by writing a <code>nested class</code> (so it’s static) inside Dog that implements the <code>Comparator</code> interface.</p>
+<p>Note: It is <code>static</code> because we don’t need to instantiate a Dog to get a NameComparator. Instead, we get it when initializing the class.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Comparator</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">(T o1, T o2)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Now, the Dog class should be like:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Comparator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">Dog</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Dog uddaDog)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.size - uddaDog.size;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Nested class */</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">NameComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">Dog</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Dog a, Dog b)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> a.name.compareTo(b.name);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/** getNameComparator()</span></span><br><span class="line"><span class="comment">   *  public: accessible (set NameComparator class as private)</span></span><br><span class="line"><span class="comment">   *  static: Dog.getNameComparator()</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Comparator&lt;Dog&gt; <span class="title">getNameComparator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> NameComparator();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// We can have other comparators, but we have only one compareTo().</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>In DogLauncher, the code is:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Dog.NameComparator nc = Dog.getNameComparator();</span><br><span class="line"><span class="comment">// or</span></span><br><span class="line">Comparator&lt;Dog&gt; nc = Dog.getNameComparator();</span><br><span class="line"><span class="comment">// or</span></span><br><span class="line">someMethod(data, Dog.getNameComparator()); <span class="comment">// more common</span></span><br></pre></td></tr></table></figure>
+<p>In summary, a <code>Comparable</code> says, “I want to compare myself to another object”. It is imbedded within the object itself, and it defines the <code>natural ordering</code> of a type.</p>
+<p>However, a <code>Comparator</code>, on the other hand, is more like a <code>third party machine</code> that compares two objects to each other. Since there’s <code>only room</code> for one <code>compareTo</code> method, if we want multiple ways to compare, we must turn to <code>Comparator</code>.</p>
+<h2 id="Abstract-Data-Types-ADT"><a href="#Abstract-Data-Types-ADT" class="headerlink" title="Abstract Data Types (ADT)"></a>Abstract Data Types (ADT)</h2><h3 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h3><p>In Java, <code>Deque</code> is called an <code>interface</code>. Conceptually, we call <code>deque</code> an <code>Abstract Data Type</code>. <code>Deque</code> only comes with <code>behaviors</code>, not any concrete ways to exhibit those behaviors. In this way, it is <code>abstract</code>.</p>
+<p><code>Stack</code>: LIFO property<br><code>Queue</code>: FIFO property<br><code>Deque</code>: Both LIFO and FIFO</p>
+<p>In Java, we use interfaces to achieve ADTs:</p>
+<ul>
+<li>Cannot be instantiated.</li>
+<li>Can provide either <code>abstract</code> or <code>concrete</code> methods.<ul>
+<li>Use <code>default</code> keyword for concrete methods.</li>
+</ul>
+</li>
+<li>Can provide only <code>public static final</code> variables.</li>
+<li>Can provide only <code>public</code> methods.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// In an interface class</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">hahah</span><span class="params">()</span></span>; <span class="comment">// Error: Static methods in interfaces should have a body</span></span><br></pre></td></tr></table></figure>
+<h3 id="Abstract-Class"><a href="#Abstract-Class" class="headerlink" title="Abstract Class"></a>Abstract Class</h3><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/fwr4r.jpg" alt="" title="Answer: C"></p>
+<p>Abstract class doesn’t have to implement the method listed in interface.</p>
+<h4 id="Interface-vs-Abstract-Class"><a href="#Interface-vs-Abstract-Class" class="headerlink" title="Interface vs. Abstract Class"></a>Interface vs. Abstract Class</h4><p>Interfaces:</p>
+<ul>
+<li>Primarily for <code>interface inheritance</code>. Limited implementation inheritance.</li>
+<li>Classes can implement <code>multiple interfaces</code>. (main difference)</li>
+</ul>
+<p>Abstract classes:</p>
+<ul>
+<li>Can do anything an interface can do, and more.</li>
+<li>Subclasses <code>only extend one</code> abstract class.</li>
+</ul>
+<h4 id="List-Hierarchy"><a href="#List-Hierarchy" class="headerlink" title="List Hierarchy"></a>List Hierarchy</h4><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/7tgyb.jpg" alt=""></p>
+<p><strong>Why didn’t we use Interface only?</strong></p>
+<p><code>AbstractList</code> provides <code>default</code> implementations for methods. But why not just put them in List itself? No default methods in Java interfaces until 2014, and the <code>AbstractList</code> was public so we can’t just throw it away.</p>
+<p>A more of the real list hierarchy:</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/hj8ag.jpg" alt="" title="More of the real list hierarchy"></p>
+<p>Even more:</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/1217q.jpg" alt="" title="The Whole Shebang"></p>
+<p>When in doubt, try to use <code>interfaces</code> in order to build up abstraction, reduce complexity, and hide unnecessary information.</p>
+<p><strong>Discussion 5:</strong></p>
+<p>Some scenes of application:</p>
+<ul>
+<li><p>Given a news article, find the frequency of each word used in the article:</p>
+<p>Use a <code>map</code>.</p>
+</li>
+<li><p>Given an unsorted array of integers, return the array sorted from least to greatest:</p>
+<p>Use a <code>priority queue</code>. For each integer in the unsorted array, enqueue the integer with a priority equal to its value.</p>
+</li>
+<li><p>Implement the forward and back buttons for a web browser:</p>
+<p><code>Use two stacks</code>, one for each button. Each time you visit a new web page, add the previous page to the back button’s stack, and also clear the forward button stack.</p>
+<p>When you click the back button, add the current page to the forward button stack, and pop a page from the back button stack.</p>
+<p>When you click the forward button, add the current page to the back button stack, and pop a page from the forward button stack.</p>
+</li>
+</ul>
+<h2 id="Ex-Discussion-5"><a href="#Ex-Discussion-5" class="headerlink" title="Ex (Discussion 5)"></a>Ex (Discussion 5)</h2><h3 id="Ex-1-Queue"><a href="#Ex-1-Queue" class="headerlink" title="Ex 1 (Queue)"></a>Ex 1 (Queue)</h3><h4 id="Two-Stack-Version"><a href="#Two-Stack-Version" class="headerlink" title="Two-Stack Version"></a>Two-Stack Version</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Queue</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Stack stack = <span class="keyword">new</span> Stack();</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">enqueue</span><span class="params">(E element)</span> </span>&#123;</span><br><span class="line">    Stack temp = <span class="keyword">new</span> Stack();  <span class="comment">// a temp stack</span></span><br><span class="line">    <span class="keyword">while</span> (!stack.isEmpty()) &#123; <span class="comment">// move to temp stack</span></span><br><span class="line">      temp.push(stack.pop());</span><br><span class="line">    &#125;</span><br><span class="line">    stack.push(element);</span><br><span class="line">    <span class="keyword">while</span> (!temp.isEmpty()) &#123; <span class="comment">// move from temp stack</span></span><br><span class="line">      stack.push(temp.pop());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> E <span class="title">dequeue</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> stack.pop(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>A <code>Stack</code> can also be implemented by two <code>Queue</code>s.</p>
+<h4 id="Recursive-Version"><a href="#Recursive-Version" class="headerlink" title="Recursive Version"></a>Recursive Version</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Queue</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Stack stack = <span class="keyword">new</span> Stack();</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">enqueue</span><span class="params">(E element)</span> </span>&#123; stack.push(element); &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> E <span class="title">dequeue</span><span class="params">()</span> </span>&#123;  <span class="comment">// recursion</span></span><br><span class="line">    <span class="keyword">return</span> dequeue(stack.pop()); </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> E <span class="title">dequeue</span><span class="params">(E previous)</span> </span>&#123; <span class="comment">// consider size = 1</span></span><br><span class="line">    <span class="keyword">if</span> (stack.isEmpty()) &#123;  <span class="comment">// size = 0</span></span><br><span class="line">      <span class="keyword">return</span> previous;  <span class="comment">// previous is the last item</span></span><br><span class="line">    &#125;</span><br><span class="line">    E toReturn = dequeue(stack.pop());</span><br><span class="line">    stack.push(previous);  <span class="comment">// push it back to the stack</span></span><br><span class="line">    <span class="keyword">return</span> toReturn;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Ex-2-TwoSum"><a href="#Ex-2-TwoSum" class="headerlink" title="Ex 2 (TwoSum)"></a>Ex 2 (TwoSum)</h3><p>Given an array of integers $A$ and an integer $k$, return true if any two numbers in the array sum up to $k$, and return false otherwise. How would you do this? Give the main idea and what ADT you would use.</p>
+<p>Brute-force: 2 loops.</p>
+<p>A smarter way (use a map): </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">twoSum</span><span class="params">(<span class="keyword">int</span>[] A, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">  Set&lt;Integer&gt; seenItems = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i : A) &#123;</span><br><span class="line">    <span class="keyword">if</span> (seenItems.contains(k - i)) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    seenItems.add(i);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Ex-3-K-most-Words"><a href="#Ex-3-K-most-Words" class="headerlink" title="Ex 3 (K-most Words)"></a>Ex 3 (K-most Words)</h3><p>Find the <code>k-most</code> common words in a document. Assume that you can represent a string as an array of words, where each word is an element in the array. You might find using <code>multiple data structures</code> useful.</p>
+<p>Keep a count of all the words in the document using a <code>HashMap&lt;String, Integer&gt;.</code> After we go through all of the words, each word will be mapped to how many times it’s appeared.</p>
+<p>Then we can put all the words into a <code>MaxPriorityQueue&lt;String&gt;</code>, using a custom comparator that compares words based on the counts in the HashMap. We can then pop off the k-most common words by just calling poll() on the MaxPriorityQueue k times.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">topFivePopularWords</span><span class="params">(String[] words, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">  <span class="comment">/** Counting words */</span></span><br><span class="line">  Map&lt;String, Integer&gt; counts = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">  <span class="keyword">for</span> (String w : words) &#123;</span><br><span class="line">    counts.put(w, counts.getOrDefault(w, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/** Comparator */</span></span><br><span class="line">  PriorityQueue&lt;String&gt; pq = <span class="keyword">new</span> PriorityQueue&lt;&gt;(<span class="keyword">new</span> Comparator&lt;String&gt;()&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String a, String b)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> counts.get(b) - counts.get(a);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (String w : counts.keySet()) &#123;</span><br><span class="line">    pq.add(w); <span class="comment">/* automatically put in order */</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i += <span class="number">1</span>) &#123;</span><br><span class="line">    System.out.println(pq.poll());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Ex-4-SortedStack"><a href="#Ex-4-SortedStack" class="headerlink" title="Ex 4 (SortedStack)"></a>Ex 4 (SortedStack)</h3><p>Suppose we wanted a data structure <code>SortedStack</code> that takes in integers, and maintains them in sorted order. <code>SortedStack</code> supports two operations: <code>push(int i)</code> and <code>pop()</code>. Popping returns the <code>next smallest</code> item in the SortedStack.</p>
+<p>For example, if we inserted [10, 4, 8, 2, 14, 3] into a SortedStack, and then popped everything off, we would get [2, 3, 4, 8, 10, 14].</p>
+<h4 id="My-Way"><a href="#My-Way" class="headerlink" title="My Way"></a>My Way</h4><p>Not using stacks (iterative way). We have some invariants:</p>
+<ul>
+<li>The smallest item is at the top of stack.</li>
+<li>Push guarantees that the items in stack is in increasing order.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> class <span class="title">SortedStack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  SLList items = <span class="keyword">new</span> SLList();</span><br><span class="line">  <span class="comment">/** Push */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (items.size == <span class="number">0</span>) &#123;</span><br><span class="line">      items.addLast(x);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* From big to small number (First -&gt; Last)*/</span></span><br><span class="line">    IntNode ptr = items.sentinel.next; <span class="comment">/* First element */</span></span><br><span class="line">    <span class="keyword">while</span> (ptr != sentinel) &#123;</span><br><span class="line">      <span class="keyword">if</span> (x &lt;= ptr.item) &#123;</span><br><span class="line">        <span class="comment">/** Insert! But we have no related function of SLList */</span></span><br><span class="line">        ptr.next = <span class="keyword">new</span> IntNode(x, ptr.next);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      ptr = ptr.next;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/** Pop */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (items.size == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> items.removeLast();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h4><p>Using stacks:</p>
+<p>We have two stacks A and B. A holds all the items, and B is our buffer.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SortedStack</span>&lt;<span class="title">Item</span> <span class="keyword">extends</span> <span class="title">Comparable</span>&lt;<span class="title">Item</span>&gt;&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Stack&lt;Item&gt; main;</span><br><span class="line">  <span class="keyword">private</span> Stack&lt;Item&gt; buffer;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">SortedStack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    main = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    buffer = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(Item t)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// keep smaller items away in the buffer</span></span><br><span class="line">    <span class="keyword">while</span> (!main.empty() &amp;&amp; main.peek().compareTo(t) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      buffer.push(main.pop());</span><br><span class="line">    &#125;</span><br><span class="line">    main.push(t);</span><br><span class="line">    <span class="comment">// push back the smaller items</span></span><br><span class="line">    <span class="keyword">while</span> (!buffer.empty( )) &#123;</span><br><span class="line">      main.push(buffer.pop());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Item <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> main.pop();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Package"><a href="#Package" class="headerlink" title="Package"></a>Package</h2><p>Package names give a <code>canonical</code> name for everything. “Canonical” means a unique representation for a thing.</p>
+<h3 id="Importing-Class"><a href="#Importing-Class" class="headerlink" title="Importing Class"></a>Importing Class</h3><p>Here are some different ways we can use a class:</p>
+<ul>
+<li><p>Entire name.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ug.joshh.animal.Dog d = <span class="keyword">new</span> ug.joshh.animal.Dog();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Can use import statement to provide shorthand notation for usage of a single class in a package.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ug.joshh.animal.Dog;</span><br><span class="line">Dog d = <span class="keyword">new</span> Dog();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Wildcard import: Also possible to import multiple classes, but this is often a bad idea!</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ug.joshh.animal.*;</span><br><span class="line">Dog d = <span class="keyword">new</span> Dog();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Import <code>static</code> members:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.assertEquals;</span><br><span class="line">assertEquals(<span class="number">5</span>, <span class="number">5</span>);</span><br><span class="line"><span class="comment">// we usually use (probably only wildcard import used in the course):</span></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*;</span><br></pre></td></tr></table></figure>
+<p>The built-in <code>java.util</code> package provides a number of useful interfaces and implementations.</p>
+<h3 id="Creating-A-Package"><a href="#Creating-A-Package" class="headerlink" title="Creating A Package"></a>Creating A Package</h3><p>The reason why we use Package is to address the fact that classes might share names. A package is a <code>namespace</code> that organizes classes and interfaces.</p>
+<p><strong>Naming convention:</strong> Package name starts with <code>website address</code> (backwards).</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> bearmaps.hw4.wordladderpuzzle;</span><br><span class="line"><span class="keyword">package</span> com.junhaow;</span><br></pre></td></tr></table></figure>
+<p>Two steps:</p>
+<ul>
+<li>At the <code>top</code> of every file in the package, put the package name.</li>
+<li>Make sure that the file is stored in a folder with the appropriate folder name. For a package with name <code>ug.joshh.animal</code>, use folder <code>ug/joshh/animal</code>.</li>
+</ul>
+<h3 id="The-Default-Package"><a href="#The-Default-Package" class="headerlink" title="The Default Package"></a>The Default Package</h3><p>Any Java class without a package name at the top are part of the <code>default package</code>. In other words, from now on, when writing real programs, your Java files should always start with a default package declaration.</p>
+<p><strong>Idea:</strong> Ensure that we never have two classes with the same name at any situation.</p>
+<p>But, you cannot import code from the default package! For example, if I were to create a <code>DogLauncher</code> class in the default package in a <code>DogLauncher.java</code> file, I would be unable to access this <code>DogLauncher</code> class anywhere else <code>outside of the default package</code>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cat.place;</span><br><span class="line"></span><br><span class="line">DogLauncher.launch(); <span class="comment">// don't work</span></span><br><span class="line"><span class="keyword">default</span>.DogLauncher.launch(); <span class="comment">// doesn't exist</span></span><br></pre></td></tr></table></figure>
+<h3 id="JAR-Files"><a href="#JAR-Files" class="headerlink" title="JAR Files"></a>JAR Files</h3><p>JAR file are just <code>zip files</code>.</p>
+<ul>
+<li>They do not keep your code safe!</li>
+<li>Easy to unzip and transform back into .Java files (from .class).</li>
+</ul>
+<p><strong>Note:</strong> Do not share <code>.jar</code> files of your projects with other students.</p>
+<h2 id="Ex-Guide"><a href="#Ex-Guide" class="headerlink" title="Ex (Guide)"></a>Ex (Guide)</h2><h3 id="Ex-1-Q-amp-A"><a href="#Ex-1-Q-amp-A" class="headerlink" title="Ex 1 (Q&amp;A)"></a>Ex 1 (Q&amp;A)</h3><ul>
+<li><p>If an <code>abstract class</code> extends an <code>abstract class</code>, would it need to have function definitions for the abstract methods in the parent class? Similarly would an <code>interface</code> that implements another <code>interface</code> have to implement the non-default methods in the parent interface.</p>
+<p>No. No. If not implementing in the subclass or subinterface, the sub-subclass or sub-subinterface should do the job.</p>
+</li>
+<li><p>Can an <code>abstract class</code> be the subclass of a <code>normal class</code>?</p>
+<p>Yes. (The default package)</p>
+</li>
+</ul>
+<h3 id="Ex-2-Same-Method-Name"><a href="#Ex-2-Same-Method-Name" class="headerlink" title="Ex 2 (Same Method Name)"></a>Ex 2 (Same Method Name)</h3><p>Consider the following code:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tree</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bark</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"haha - Tree"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Dog</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">bark</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"haha - Dog"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TreeDog</span> <span class="keyword">extends</span> <span class="title">Tree</span> <span class="keyword">implements</span> <span class="title">Dog</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    TreeDog td = <span class="keyword">new</span> TreeDog();</span><br><span class="line">    td.bark();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The output is:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">haha - Dog</span><br></pre></td></tr></table></figure>
+<h2 id="Autoboxing"><a href="#Autoboxing" class="headerlink" title="Autoboxing"></a>Autoboxing</h2><p>How it works (<code>wrapper type</code> and <code>primitive type</code>):</p>
+<ul>
+<li>If Java code expects a wrapper type and gets a primitive, it is <code>autoboxed</code>.</li>
+<li>If the code expects a primitive and gets a wrapper, it is <code>unboxed</code>.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Not a magic */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Integer</span> <span class="keyword">extends</span> <span class="title">Number</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> value;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Integer</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.value = value;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Note:</p>
+<ul>
+<li>Arrays are never autoboxed/unboxed, e.g. an <code>Integer[]</code> cannot be used in place of an <code>int[]</code> (or vice versa).</li>
+<li>Autoboxing / unboxing incurs a <code>measurable</code> performance impact!</li>
+<li>Wrapper types use <code>much</code> more memory than primitive types because of object overheads.</li>
+</ul>
+<p>Space occupied:</p>
+<ul>
+<li>Addresses are 64 bits.</li>
+<li>ints are 32 bits.</li>
+<li>All Java objects take 64 bits + their fields.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bleepblorp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Integer x = <span class="keyword">new</span> Integer(<span class="number">5</span>);</span><br><span class="line">  System.out.println(x);</span><br><span class="line">  <span class="comment">// Output: 64 (address) + 64 (other information) + 32 (int)</span></span><br><span class="line">  <span class="comment">//         = 160</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Access-Control"><a href="#Access-Control" class="headerlink" title="Access Control"></a>Access Control</h2><h3 id="Access-Modifier"><a href="#Access-Modifier" class="headerlink" title="Access Modifier"></a>Access Modifier</h3><p>How do public and private behave with packages and subclasses?</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/8e70u.jpg" alt="" title="Access Table"></p>
+<ul>
+<li><p><strong>Public:</strong> This keyword opens up the access to everyone! This is generally what <code>clients</code> of the package can rely on to use. </p>
+<ul>
+<li>Once deployed, the public members’ signatures should not change. It’s like a <code>promise</code> and <code>contract</code> to people using this public code that it will always be accessible to them. </li>
+<li>Usually if developers want to “get rid of” something that’s public, rather than removing it, they would call it <code>deprecated</code> instead. </li>
+<li>TL;DR: Open and promised to the world.</li>
+</ul>
+</li>
+<li><p><strong>Protected:</strong> Protected members are protected from the <code>outside</code> world. </p>
+<ul>
+<li>Classes within the <code>same package</code> and <code>subclasses</code> can access these members, but the rest of the world (e.g. classes external to the package or non-subclasses) cannot!</li>
+<li>TL;DR: Subtypes might need it, but subtype clients will not.</li>
+</ul>
+</li>
+<li><p><strong>Package Private:</strong> This is the default access given to Java members if there is no explicit modifier written.</p>
+<ul>
+<li>Package private entails that classes that belong in the same package can access, but not subclasses!</li>
+<li>The original owners of the class that’s being extended may not want certain features or members to be tampered with, if people choose to extend it — hence, package-private allows those who are familiar with the inner workings of the program to access and modify certain members, whereas it blocks those who are subclassing from doing the same. </li>
+<li>TL;DR: Only classes that live in the same package can access.</li>
+</ul>
+</li>
+<li><p><strong>Private:</strong> Only code from the <code>given class</code> can access private members.</p>
+<ul>
+<li>It is truly private from everything else, as subclasses, packages, and other external classes cannot access private members.</li>
+<li>TL;DR: Only the class needs this piece of code.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> syntax3.map;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayMap</span></span></span><br><span class="line"><span class="class">  <span class="title">int</span> <span class="title">size</span></span>; <span class="comment">// package-private</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> syntax3.map;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyonicArrayMap</span> <span class="keyword">extends</span> <span class="title">ArrayMap</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">MyonicArrayMap</span><span class="params">(<span class="keyword">int</span> s)</span> </span>&#123;</span><br><span class="line">    size = s; </span><br><span class="line">    <span class="comment">// Will this work? Yes, because it is part of the same package</span></span><br><span class="line">    <span class="comment">// Don't need to think about whether it is part of the same subclass</span></span><br><span class="line">    <span class="comment">// Default access (package private) only supports Class, Package</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> syntax3.map;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MapHelper</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printSize</span><span class="params">(ArrayMap am)</span> </span>&#123;</span><br><span class="line">    System.out.println(am.size); <span class="comment">// OK. It's part of the same package</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Subtleties:</strong></p>
+<p>Interface methods are public in default.</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/w6hvd.jpg" alt="" title="Access Is Based Only on Static Types - Client has no idea about HasHair but BlackHole"></p>
+<h3 id="Nested-class"><a href="#Nested-class" class="headerlink" title="Nested class"></a>Nested class</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">int</span> outvar;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> invar;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>In the example above: Anybody can create an Outer, anybody can create an Inner, and anybody can access an Inner’s variable. And an Inner can access this.outvar.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">int</span> outvar;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> invar;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>In the example above, Inner is private. At this point, the access modifiers to all of inners’ members are <strong>irrelevant</strong>.</p>
+<ul>
+<li>An Outer <code>can access</code> an Inner’s variables. The reason is that “Inner” is a subordinate slave of Outer, and thus has no personal possessions.</li>
+<li>We can change public (invar) to anything and have no observable effect (its function has been shadowed).</li>
+<li>Classes other than Outer cannot make or access Inner anymore. Common for things like LinkedListDeque (make your IntNode class private).</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> outvar;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> invar;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      outvar = <span class="number">5</span>; <span class="comment">/* OKAY */</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>In the example above, can an Inner access an Outer’s outvar? Yes, it can because Inner is part of the Outer class.</p>
+<p>What could I do so that an Inner can’t use outvar?</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> outvar;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> invar;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      outvar = <span class="number">5</span>;  <span class="comment">// I cannot access my enclosing instance's outvar</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Can I instantiate a non-static inner class (nested class) without an outer instance?</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 1 */</span></span><br><span class="line">Outer out = <span class="keyword">new</span> Outer();</span><br><span class="line">Outer.Inner in1 = out.new Inner();</span><br><span class="line"><span class="comment">/** 2 */</span></span><br><span class="line">Outer.Inner in2 = <span class="keyword">new</span> Outer().new Inner();</span><br></pre></td></tr></table></figure>
+<h2 id="Discussion-6"><a href="#Discussion-6" class="headerlink" title="Discussion 6"></a>Discussion 6</h2><h3 id="Exception"><a href="#Exception" class="headerlink" title="Exception"></a>Exception</h3><p>There are 2 overarching types of exceptions:</p>
+<ul>
+<li><p>Checked</p>
+<p>You must either wrap them in a <code>try/catch block</code> or pass the buck by using <code>throws exception</code> in the method header.</p>
+</li>
+<li><p>Unchecked</p>
+<p>You don’t need to handle these. They are typically an error on a user’s part, which can’t really be helped.</p>
+</li>
+</ul>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/mmiqj.jpg" alt="" title="Exception Hierarchy"></p>
+<h3 id="Iterators-and-Iterables"><a href="#Iterators-and-Iterables" class="headerlink" title="Iterators and Iterables"></a>Iterators and Iterables</h3><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ukdpi.jpg" alt=""></p>
+<h2 id="Ex-Discussion-6"><a href="#Ex-Discussion-6" class="headerlink" title="Ex (Discussion 6)"></a>Ex (Discussion 6)</h2><h3 id="Ex-1-AltList"><a href="#Ex-1-AltList" class="headerlink" title="Ex 1 (AltList)"></a>Ex 1 (AltList)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> AltList&lt;X, Y&gt; <span class="title">pairSwapped</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  AltList&lt;Y, X&gt; ret = <span class="keyword">new</span> AltList&lt;Y, X&gt;(next.item, <span class="keyword">new</span> AltList&lt;X, Y&gt;(item, <span class="keyword">null</span>));</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Recursive */</span></span><br><span class="line">  <span class="keyword">if</span> (next.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">    ret.next.next = next.next.pairSwapped();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Iterative */</span></span><br><span class="line">  AltList&lt;X, Y&gt; ptr = next.next;</span><br><span class="line">  AltList&lt;Y, X&gt; newPtr = ret;</span><br><span class="line">  <span class="keyword">while</span> (ptr != <span class="keyword">null</span>) &#123;</span><br><span class="line">    newPtr.next.next = <span class="keyword">new</span> AltList&lt;Y, X&gt;(ptr.next.item, <span class="keyword">new</span> AltList&lt;X, Y&gt;(ptr.item, <span class="keyword">null</span>))</span><br><span class="line">    newPtr = newPtr.next.next;</span><br><span class="line">    ptr = ptr.next.next;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Ex-2-Every-K-th-Element"><a href="#Ex-2-Every-K-th-Element" class="headerlink" title="Ex 2 (Every K-th Element)"></a>Ex 2 (Every K-th Element)</h3><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ffpd0.jpg" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">KthIntList</span> <span class="keyword">implements</span> <span class="title">Iterator</span>&lt;<span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> IntList curList;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">int</span> k;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">boolean</span> hasNext;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">KthIntList</span><span class="params">(IntList L, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.curList = L;</span><br><span class="line">    <span class="keyword">this</span>.k = k;</span><br><span class="line">    <span class="keyword">this</span>.hasNext = <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.hasNext;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Returns the next K-th element of the IntList given in the constructor</span></span><br><span class="line"><span class="comment">   * Returns the 0-th element firsts. Throws a NoSuchElementException if</span></span><br><span class="line"><span class="comment">   * there are no Integers available to return.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Integer <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (curList == <span class="keyword">null</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    Integer ret = curList.item;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> count = k;</span><br><span class="line">    <span class="keyword">while</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      curList = curList.next;</span><br><span class="line">      count -= <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">if</span> (curList == <span class="keyword">null</span>) &#123;</span><br><span class="line">        hasNext = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/handsomecat.jpg" alt="Junhao Wang">
+            
+              <p class="site-author-name" itemprop="name">Junhao Wang</p>
+              <p class="site-description motion-element" itemprop="description">Debug the old world, bug the new world!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/chuckwangg" target="_blank" title="Facebook">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>Facebook</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/junhaowww" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.linkedin.com/in/junhaowww/" target="_blank" title="LinkedIn">
+                      
+                        <i class="fa fa-fw fa-linkedin"></i>LinkedIn</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.douban.com/people/maodai/" target="_blank" title="豆瓣 (Book)">
+                      
+                        <i class="fa fa-fw fa-book"></i>豆瓣 (Book)</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jianshu.com/u/41865efdad5d/" title="Xiaofud" target="_blank">Xiaofud</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.davex.pw/" title="DaveX" target="_blank">DaveX</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://alexfan.xyz/" title="alexfan.xyz" target="_blank">alexfan.xyz</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Testing"><span class="nav-number">1.</span> <span class="nav-text">Testing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-Process"><span class="nav-number">1.1.</span> <span class="nav-text">Thinking Process</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Four-Philosophies"><span class="nav-number">1.2.</span> <span class="nav-text">Four Philosophies</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Autograder-Driven-Development-ADD"><span class="nav-number">1.2.1.</span> <span class="nav-text">Autograder Driven Development (ADD)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Unit-Tests"><span class="nav-number">1.2.2.</span> <span class="nav-text">Unit Tests</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Test-Driven-Development-TDD"><span class="nav-number">1.2.3.</span> <span class="nav-text">Test-Driven Development (TDD)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Integration-Testing"><span class="nav-number">1.2.4.</span> <span class="nav-text">Integration Testing</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inheritance-amp-Implements"><span class="nav-number">2.</span> <span class="nav-text">Inheritance &amp; Implements</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Interface-amp-Implementation"><span class="nav-number">2.1.</span> <span class="nav-text">Interface &amp; Implementation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Static-vs-Dynamic-Type"><span class="nav-number">2.2.</span> <span class="nav-text">Static vs. Dynamic Type</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Encapsulation"><span class="nav-number">2.3.</span> <span class="nav-text">Encapsulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Type-Checking-amp-Casting"><span class="nav-number">2.4.</span> <span class="nav-text">Type Checking &amp; Casting</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-Checking"><span class="nav-number">2.4.1.</span> <span class="nav-text">Type Checking</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Casting"><span class="nav-number">2.4.2.</span> <span class="nav-text">Casting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Method-Preferences"><span class="nav-number">2.4.3.</span> <span class="nav-text">Method Preferences</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Higher-Order-Functions-HoFs"><span class="nav-number">3.</span> <span class="nav-text">Higher Order Functions (HoFs)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ex-Examprep-4"><span class="nav-number">4.</span> <span class="nav-text">Ex (Examprep 4)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ex-1-Puppers"><span class="nav-number">4.1.</span> <span class="nav-text">Ex 1 (Puppers)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ex-2-Cast-the-line"><span class="nav-number">4.2.</span> <span class="nav-text">Ex 2 (Cast the line)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ex-3-SLList-Vista"><span class="nav-number">4.3.</span> <span class="nav-text">Ex 3 (SLList Vista)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Polymorphism-vs-HoFs"><span class="nav-number">5.</span> <span class="nav-text">Polymorphism vs. HoFs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Polymorphism"><span class="nav-number">5.1.</span> <span class="nav-text">Polymorphism</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Subtype-Poly-vs-HoF"><span class="nav-number">5.2.</span> <span class="nav-text">Subtype Poly. vs. HoF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparable"><span class="nav-number">5.3.</span> <span class="nav-text">Comparable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparator"><span class="nav-number">5.4.</span> <span class="nav-text">Comparator</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract-Data-Types-ADT"><span class="nav-number">6.</span> <span class="nav-text">Abstract Data Types (ADT)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Interface"><span class="nav-number">6.1.</span> <span class="nav-text">Interface</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract-Class"><span class="nav-number">6.2.</span> <span class="nav-text">Abstract Class</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Interface-vs-Abstract-Class"><span class="nav-number">6.2.1.</span> <span class="nav-text">Interface vs. Abstract Class</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#List-Hierarchy"><span class="nav-number">6.2.2.</span> <span class="nav-text">List Hierarchy</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ex-Discussion-5"><span class="nav-number">7.</span> <span class="nav-text">Ex (Discussion 5)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ex-1-Queue"><span class="nav-number">7.1.</span> <span class="nav-text">Ex 1 (Queue)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Two-Stack-Version"><span class="nav-number">7.1.1.</span> <span class="nav-text">Two-Stack Version</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Recursive-Version"><span class="nav-number">7.1.2.</span> <span class="nav-text">Recursive Version</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ex-2-TwoSum"><span class="nav-number">7.2.</span> <span class="nav-text">Ex 2 (TwoSum)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ex-3-K-most-Words"><span class="nav-number">7.3.</span> <span class="nav-text">Ex 3 (K-most Words)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ex-4-SortedStack"><span class="nav-number">7.4.</span> <span class="nav-text">Ex 4 (SortedStack)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#My-Way"><span class="nav-number">7.4.1.</span> <span class="nav-text">My Way</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Answer"><span class="nav-number">7.4.2.</span> <span class="nav-text">Answer</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Package"><span class="nav-number">8.</span> <span class="nav-text">Package</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Importing-Class"><span class="nav-number">8.1.</span> <span class="nav-text">Importing Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Creating-A-Package"><span class="nav-number">8.2.</span> <span class="nav-text">Creating A Package</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Default-Package"><span class="nav-number">8.3.</span> <span class="nav-text">The Default Package</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JAR-Files"><span class="nav-number">8.4.</span> <span class="nav-text">JAR Files</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ex-Guide"><span class="nav-number">9.</span> <span class="nav-text">Ex (Guide)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ex-1-Q-amp-A"><span class="nav-number">9.1.</span> <span class="nav-text">Ex 1 (Q&amp;A)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ex-2-Same-Method-Name"><span class="nav-number">9.2.</span> <span class="nav-text">Ex 2 (Same Method Name)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Autoboxing"><span class="nav-number">10.</span> <span class="nav-text">Autoboxing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Access-Control"><span class="nav-number">11.</span> <span class="nav-text">Access Control</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Access-Modifier"><span class="nav-number">11.1.</span> <span class="nav-text">Access Modifier</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nested-class"><span class="nav-number">11.2.</span> <span class="nav-text">Nested class</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Discussion-6"><span class="nav-number">12.</span> <span class="nav-text">Discussion 6</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exception"><span class="nav-number">12.1.</span> <span class="nav-text">Exception</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iterators-and-Iterables"><span class="nav-number">12.2.</span> <span class="nav-text">Iterators and Iterables</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ex-Discussion-6"><span class="nav-number">13.</span> <span class="nav-text">Ex (Discussion 6)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ex-1-AltList"><span class="nav-number">13.1.</span> <span class="nav-text">Ex 1 (AltList)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ex-2-Every-K-th-Element"><span class="nav-number">13.2.</span> <span class="nav-text">Ex 2 (Every K-th Element)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Junhao Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://junhaow.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.junhaow.com/studynotes/cs61b/cs61b p2.html';
+          this.page.identifier = 'studynotes/cs61b/cs61b p2.html';
+          this.page.title = 'CS 61B | Part 2 | Testing, Inheritance, HOFs, Polymorphism, Package, Access Control';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://junhaow.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  
+
+  
+  
+
+
+  
+
+  
+
+
+</body>
+</html>
