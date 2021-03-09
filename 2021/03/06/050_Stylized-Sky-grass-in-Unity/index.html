@@ -139,7 +139,7 @@
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/cyod1.png">
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/niyql.JPG">
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/2jp8m.gif">
-<meta property="og:image" content="http://kylehalladay.com/images/post_images/2014-06-30/gpgpu.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/twin1.jpg">
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/5c7ag.png">
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/44sn3.png">
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/8tx4z.png">
@@ -150,7 +150,7 @@
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/vfeyh.png">
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/641jj.gif">
 <meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/sypqs.png">
-<meta property="og:updated_time" content="2021-03-09T00:27:46.761Z">
+<meta property="og:updated_time" content="2021-03-09T00:32:19.567Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Making Sky&#39;s Stylized Grass with Compute Shader in Unity">
 <meta name="twitter:description" content="Sky: Children of the Light is one of my favorite games I am playing recently. During the pandemic, it is a great place where we are able to meet people (or even friends) from all over the world. Beyon">
@@ -566,7 +566,7 @@
         <p><a href="https://thatskygame.com/" target="_blank" rel="noopener">Sky: Children of the Light</a> is one of my favorite games I am playing recently. During the pandemic, it is a great place where we are able to meet people (or even friends) from all over the world. Beyond the plot, music, and cosmetics, I enjoyed every second when I was sliding on those beautiful lands, especially the stylized grass on top of them. In this post, I will share my experience in reproducing the grass in Unity under Universal Render Pipeline (v7.5.3). You will get result like the following:</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/cyod1.png" alt="" title="Sky&#39;s Stylized Grass in Unity"></p>
 <a id="more"></a>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/niyql.JPG" alt="" title="Stylized Grass in Sky: Children of the Light (my in-game screenshot)"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/niyql.JPG" alt="" title="Stylized Grass in Sky: Children of the Light (in-game screenshot)"></p>
 <p>Be aware that this post is not a tutorial, but you will find all the information you need from attached references (tutorial blogs, YouTube videos, etc) and the comments I wrote in source files. Unusually, I decided to use compute shaders because I develop on Metal API and it does not support geometry shaders. Don’t worry! It is much easier to implement the same effect in a geometry shader (less 1,000 lines of code I believe).</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/2jp8m.gif" alt="" title="Reproduce Sky&#39;s Stylized Grass in Unity"></p>
 <h2 id="How-To-Set-Up-TL-DR"><a href="#How-To-Set-Up-TL-DR" class="headerlink" title="How To Set Up (TL;DR)"></a>How To Set Up (TL;DR)</h2><p>You can use the shaders and scripts I wrote right away. To make the shaders more usable in games, I paint the grass with the help of the <a href="https://www.youtube.com/watch?v=xKJHL8nQiuM&amp;ab_channel=MinionsArt" target="_blank" rel="noopener">painter tool</a> made by MinionsArt. Check out the website if you are interested in learning how the tool works from behind. I made some changes to the two original files to add shortcut and compute shader support.</p>
@@ -621,7 +621,7 @@
 <li><a href="https://www.patreon.com/posts/geometry-grass-46836032" target="_blank" rel="noopener">Geometry Grass Shader + Tool video + update</a> (by MinionsArt)</li>
 </ul>
 <h2 id="Compute-Shader"><a href="#Compute-Shader" class="headerlink" title="Compute Shader"></a>Compute Shader</h2><h3 id="Learning-Resources"><a href="#Learning-Resources" class="headerlink" title="Learning Resources"></a>Learning Resources</h3><p>Compute shaders provide the possibility that we can send processing tasks from CPU to GPU. These tasks include but is not limited to procedural generation (e.g. terrain creation), physics simulation, etc. In our case, we use them to replace the role of geometry shader in the graphics pipeline. Compute buffers are the places where these two processing units communicate data. We will define some data structures here.</p>
-<p><img src="http://kylehalladay.com/images/post_images/2014-06-30/gpgpu.jpg" alt="" title="Comparison between CPU and GPU (source is attached)"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/twin1.jpg" alt="" title="Comparison between CPU and GPU (source is attached)"></p>
 <p>There are a bunch of great tutorials regarding compute shaders. I recommend going over the following videos in order to have a conceptual and practical overview of this technique.</p>
 <ol>
 <li><a href="https://youtu.be/BrZ4pWwkpto" target="_blank" rel="noopener">Getting Started with Compute Shaders in Unity</a> (by Game Dev Guide)</li>
