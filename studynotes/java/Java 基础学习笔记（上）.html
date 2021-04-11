@@ -1,274 +1,152 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic|Bitter:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.junhaow.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
-
-  <meta name="description" content="由于太久没碰 Java，而且以前也没有进行系统的学习，最近想通过一些网课先过一遍基础语法和常用 API。我先看了 Udemy 的 Java Programming Masterclass for Software Developers，但看到一半就弃坑了，因为这个课是给零基础的人设计的，讲得太啰嗦了，而且教的内容也太浅了（不过我倒是学了很多 IntelliJ IDEA 的使用技巧）。 之后无意">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Java 基础学习笔记（上） | B_L_OO_GGG</title><meta name="author" content="Junhao Wang"><meta name="copyright" content="Junhao Wang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="由于太久没碰 Java，而且以前也没有进行系统的学习，最近想通过一些网课先过一遍基础语法和常用 API。我先看了 Udemy 的 Java Programming Masterclass for Software Developers，但看到一半就弃坑了，因为这个课是给零基础的人设计的，讲得太啰嗦了，而且教的内容也太浅了（不过我倒是学了很多 IntelliJ IDEA 的使用技巧）。 之后无意">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Java 基础学习笔记（上）">
 <meta property="og:url" content="http://www.junhaow.com/studynotes/java/Java%20%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%8A%EF%BC%89.html">
 <meta property="og:site_name" content="B_L_OO_GGG">
 <meta property="og:description" content="由于太久没碰 Java，而且以前也没有进行系统的学习，最近想通过一些网课先过一遍基础语法和常用 API。我先看了 Udemy 的 Java Programming Masterclass for Software Developers，但看到一半就弃坑了，因为这个课是给零基础的人设计的，讲得太啰嗦了，而且教的内容也太浅了（不过我倒是学了很多 IntelliJ IDEA 的使用技巧）。 之后无意">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/1h362.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/l8wkm.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/iexh0.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/by3zw.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ale2i.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/zwpbq.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/yn368.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/yasac.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/1aq9b.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/vclwx.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/if1nx.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/v4ew1.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/he0r0.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/xgzmc.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/aqvyb.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/89tub.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/cmult.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9mwh6.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/df361.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/x5vhi.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/8wp6j.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/0edst.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/yznxn.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/kkc2f.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/532t4.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/cucvr.jpg">
-<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/wy1uu.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
 <meta property="article:published_time" content="2019-02-04T23:55:06.000Z">
 <meta property="article:modified_time" content="2019-04-26T09:05:32.000Z">
 <meta property="article:author" content="Junhao Wang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/1h362.jpg">
-
-<link rel="canonical" href="http://www.junhaow.com/studynotes/java/Java%20%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%8A%EF%BC%89">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : false,
-    lang   : 'en'
-  };
-</script>
-
-  <title>Java 基础学习笔记（上） | B_L_OO_GGG
-</title>
-  
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146643833-1"></script>
-    <script>
-      if (CONFIG.hostname === location.hostname) {
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-146643833-1');
-      }
-    </script>
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://www.junhaow.com/studynotes/java/Java%20%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%8A%EF%BC%89"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-146643833-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-146643833-1');
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '04/26/2019 02:05'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-</head>
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container">
-    <div class="headband"></div>
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">B_L_OO_GGG</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">Sumomo mo momo mo no uchi</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-inbox fa-fw"></i>Archives<span class="badge">50</span></a>
-
-  </li>
-        <li class="menu-item menu-item-studynotes">
-
-    <a href="/studynotes/" rel="section"><i class="fa fa-pencil-alt fa-fw"></i>Study Notes</a>
-
-  </li>
-        <li class="menu-item menu-item-lc">
-
-    <a href="/lc/" rel="section"><i class="fa fa-th fa-fw"></i>LeetCode Book</a>
-
-  </li>
-        <li class="menu-item menu-item-games">
-
-    <a href="/games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>Games I've Played</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-grin-squint fa-fw"></i>About Me</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
-        </a>
-      </li>
-  </ul>
-</nav>
-
-
-
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="Searching..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-  </div>
-</div>
-
-    </div>
-  </div>
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
-
-          <div class="content page posts-expand">
-            
-
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-    
-    
-    <div class="post-block" lang="en">
-      <header class="post-header">
-
-<h1 class="post-title" itemprop="name headline">Java 基础学习笔记（上）
-</h1>
-
-<div class="post-meta">
-  
-  <ul class="breadcrumb">
-          
-            <li><a href="/studynotes/">STUDYNOTES</a></li>
-            <li><a href="/studynotes/java/">JAVA</a></li>
-            <li>JAVA 基础学习笔记（上）</li>
-          
-  </ul>
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-          <br>
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">50</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">118</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/studynotes/"><i class="fa-fw fas fa-pencil-alt"></i><span> Study Notes</span></a></div><div class="menus_item"><a class="site-page" href="/lc/"><i class="fa-fw fas fa-list"></i><span> LeetCode Book</span></a></div><div class="menus_item"><a class="site-page" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> Games I've Played</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-grin-squint"></i><span> About Me</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">B_L_OO_GGG</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/studynotes/"><i class="fa-fw fas fa-pencil-alt"></i><span> Study Notes</span></a></div><div class="menus_item"><a class="site-page" href="/lc/"><i class="fa-fw fas fa-list"></i><span> LeetCode Book</span></a></div><div class="menus_item"><a class="site-page" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> Games I've Played</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-grin-squint"></i><span> About Me</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">Java 基础学习笔记（上）</h1></div></header><main class="layout" id="content-inner"><div id="page"><div id="article-container"><br>
 
 <p>由于太久没碰 Java，而且以前也没有进行系统的学习，最近想通过一些网课先过一遍基础语法和常用 API。我先看了 Udemy 的 Java Programming Masterclass for Software Developers，但看到一半就弃坑了，因为这个课是给零基础的人设计的，讲得太啰嗦了，而且教的内容也太浅了（不过我倒是学了很多 IntelliJ IDEA 的使用技巧）。</p>
 <p>之后无意中看到了廖雪峰的 Java SE 课程，个人感觉非常棒，很适合有其他 OOP 基础的人学习（16 小时、讲解深度适中、干货多）。本文笔记基于这个课程。在学习的过程中，我还阅读很多关于泛型、内存模型等知识的博客文章，毕竟课程的讲解深度有限，这些内容还是挺难理解的（我的两本 Java 经典书籍刚到货，估计之后可以学到更多高级和底层的内容）。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>快速介绍 Java 的历史，讲解 Java 基本语法、数据类型，掌握如何使用 Eclipse IDE 并快速编写简单的 Java 程序。</p>
 <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Sun 公司<code>James Gosling</code>为手持设备开发的嵌入式编程语言。Java 原名为 Oak，1995 年改名为 Java 正式推出。</p>
@@ -1151,7 +1029,7 @@
 <h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>如果没有泛型，需要强制转型来引用里面的对象，如：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ArrayList 里面没有用到泛型，一律用 Object</span></span><br><span class="line">ArrayList list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">list.add(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">String first = (String) list.get(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
 
-<p>必须把 ArrayList 变成一种模板 ArrayList<T>，也可以叫做参数类类型。</T></p>
+<p>必须把 ArrayList 变成一种模板 ArrayList<T>，也可以叫做参数类类型。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayList</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> T[] array;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(T e)</span> </span>&#123; ... &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span> <span class="params">(<span class="keyword">int</span> index)</span> </span>&#123; ... &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123; ... &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ArrayList&lt;String&gt; strList = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br></pre></td></tr></table></figure>
 
 <p>注意泛型的继承关系：</p>
@@ -1168,12 +1046,12 @@
 
 <h4 id="编写泛型"><a href="#编写泛型" class="headerlink" title="编写泛型"></a>编写泛型</h4><ul>
 <li>编写泛型类比普通类复杂</li>
-<li>泛型类一般用在集合类，如：ArrayList<T></T></li>
+<li>泛型类一般用在集合类，如：ArrayList<T></li>
 <li><strong>很少需要编写泛型类</strong></li>
 </ul>
 <p>泛型类型<code>&lt;T&gt;</code>不能用于静态方法：</p>
 <ul>
-<li>编译错误：编译器无法在静态字段或静态方法中使用泛型类型 <T>。</T></li>
+<li>编译错误：编译器无法在静态字段或静态方法中使用泛型类型 <T>。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Pair&lt;T&gt; <span class="title">create</span><span class="params">(T first, T last)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Pair&lt;T&gt;(first, last);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -1186,7 +1064,7 @@
 <p>擦拭法是 Java 泛型的实现方式。在泛型代码编译的时候，编译器其实把所有类型的泛型类型 T 视为 Object 类型。换句话说，虚拟机其实对泛型一无所知，所有的工作都是编译器做的。最终加了强制转换。</p>
 <p>擦拭法的局限：</p>
 <ul>
-<li><T> 不能是基本类型（和 C++ 的不同，但是可以用包装类解决这个问题）</T></li>
+<li><T> 不能是基本类型（和 C++ 的不同，但是可以用包装类解决这个问题）</li>
 <li>Object 字段无法持有基本类型</li>
 <li>无法取得带泛型的 Class（因为在编译后就不存在范型类型了）</li>
 <li>无法判断带泛型的 Class</li>
@@ -1196,7 +1074,7 @@
 <p>不能实例化 T 类型，因为擦拭后实际上是 new Object()。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Pair</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> T first;</span><br><span class="line">  <span class="keyword">private</span> T last;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Pair</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// compile error:</span></span><br><span class="line">    first = <span class="keyword">new</span> T();</span><br><span class="line">    last = <span class="keyword">new</span> T();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Pair&lt;String&gt; pair = <span class="keyword">new</span> Pair&lt;&gt;();</span><br></pre></td></tr></table></figure>
 
-<p>而应该借助 Class<T>：</T></p>
+<p>而应该借助 Class<T>：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Constructor</span></span><br><span class="line"><span class="keyword">private</span> T first;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Pair</span><span class="params">(Class&lt;T&gt; clazz)</span> </span>&#123;</span><br><span class="line">    first = clazz.newInstance();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// main</span></span><br><span class="line">Pair&lt;String&gt; pair = <span class="keyword">new</span> Pair&lt;&gt;(String.class); <span class="comment">// OK</span></span><br><span class="line">Pair&lt;String&gt; pair = <span class="keyword">new</span> Pair&lt;&gt;(Integer.class); <span class="comment">// error</span></span><br></pre></td></tr></table></figure>
 
 <p>再有，要注意擦拭法带来的方法重名问题：</p>
@@ -1204,9 +1082,9 @@
 
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/xgzmc.jpg" title="范型方法"></p>
 <p>在调用泛型方法的时候，在不指定泛型的情况下，泛型变量的类型为该方法中的<code>几种类型的同一个父类的最小级</code>，直到 Object。在指定泛型的时候，该方法中的几种类型必须是该泛型实例类型或者其子类。</p>
-<p>泛型继承：子类可以获取父类的泛型类型 <T>。</T></p>
+<p>泛型继承：子类可以获取父类的泛型类型 <T>。</p>
 <ul>
-<li>父类的类型是 Pair<Integer></Integer></li>
+<li>父类的类型是 Pair<Integer></li>
 <li>子类的类型是 IntPair</li>
 <li>子类可以获取父类的泛型类型 Integer</li>
 </ul>
@@ -1215,7 +1093,7 @@
 <p>Type 接口：</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/aqvyb.jpg"></p>
 <h4 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h4><p>转移阵地：<a target="_blank" rel="noopener" href="http://junhaow.com/2019/02/14/046%20%7C%20%E5%A5%BD%E5%A5%BD%E8%B0%83%E6%88%8F%20Java%20%E8%8C%83%E5%9E%8B%E4%B8%AD%E7%9A%84%E9%80%9A%E9%85%8D%E7%AC%A6%E4%BB%A5%E5%8F%8A%E8%BE%B9%E7%95%8C%E9%99%90%E5%AE%9A%E8%A7%84%E5%88%99/">好好调戏 Java 范型中的通配符以及边界限定规则</a></p>
-<h3 id="泛型和反射"><a href="#泛型和反射" class="headerlink" title="泛型和反射"></a>泛型和反射</h3><p>部分反射 API 是泛型，如 Class<T>：</T></p>
+<h3 id="泛型和反射"><a href="#泛型和反射" class="headerlink" title="泛型和反射"></a>泛型和反射</h3><p>部分反射 API 是泛型，如 Class<T>：</p>
 <ul>
 <li>T newInstance()。</li>
 </ul>
@@ -1227,7 +1105,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;? <span class="keyword">super</span> String&gt; sup = clazz.getSuperclass();</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>Constructor<T></T></li>
+<li>Constructor<T></li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;Integer&gt; clazz = Integer.class;</span><br><span class="line">Constructor&lt;Integer&gt; cons = clazz.getConstructor(<span class="keyword">int</span>.class);</span><br><span class="line">Integer i = cons.newInstance(<span class="number">123</span>);</span><br></pre></td></tr></table></figure>
 
@@ -1241,7 +1119,7 @@
 
 <p>不能直接创建 T[] 数组：擦拭后代码变成 new Object[5]。</p>
 <ol>
-<li>借助 Class<T>：</T></li>
+<li>借助 Class<T>：</li>
 </ol>
   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Abc</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="comment">// compile error</span></span><br><span class="line">  T[] createArray() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> T[<span class="number">5</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 必须借助 Class&lt;T&gt;</span></span><br><span class="line">  T[] createArray(Class&lt;T&gt; cls) &#123;</span><br><span class="line">    <span class="keyword">return</span> (T[]) Array.newInstance(cls, <span class="number">5</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -1275,8 +1153,8 @@
 <li>Vector：一种线程安全的 List 实现</li>
 <li>Stack：基于 Vector 实现的 LIFO 的栈</li>
 </ul>
-<p>还有，Enumeration<E> 是遗留接口，已被 Iterator<E> 取代。</E></E></p>
-<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><p>List<E> 是一种有序链表：</E></p>
+<p>还有，Enumeration<E> 是遗留接口，已被 Iterator<E> 取代。</p>
+<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><p>List<E> 是一种有序链表：</p>
 <ul>
 <li>void add(E e) 在末尾添加一个元素</li>
 <li>void add(int index, E e) 在指定索引添加一个元素</li>
@@ -1288,14 +1166,14 @@
 <p>数组也是有序结构，但是大小固定，且删除元素时需要移动后续元素：</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/89tub.jpg" title="移动后续元素"></p>
 <p>List 的元素可以重复，且可以是 null。</p>
-<p>ArrayList<E>：内部使用数组存储所有元素。当元素满了时候，会先创建一个新的数组，在复制过去。</E></p>
-<p>ListedList<E>：内部每个元素都指向下一个元素。</E></p>
+<p>ArrayList<E>：内部使用数组存储所有元素。当元素满了时候，会先创建一个新的数组，在复制过去。</p>
+<p>ListedList<E>：内部每个元素都指向下一个元素。</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/cmult.jpg"></p>
 <p>遍历数组的方式：</p>
 <ul>
 <li><p>在 for 中用 get(i) 来访问，对 ArrayList 来讲效率高，而对 LinkedList 来说较低。</p>
 </li>
-<li><p>Iterator<E></E></p>
+<li><p>Iterator<E></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Iterator&lt;String&gt; it = list.iterator(); it.hasNext(); ) &#123; </span><br><span class="line">  String s = it.next();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>foreach（所有实现了 Iterable 接口都可以用这个方法遍历）<br>编译器会自动地把 foreach 循环改写成上面的 Iterator 迭代方式。</p>
 </li>
@@ -1304,13 +1182,13 @@
 <ul>
 <li>把 List<E> 变为 Array：<ul>
 <li>Object[] toArray()</li>
-<li><T> T[] toArray(T[] a)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Integer[] array = list.toArray(<span class="keyword">new</span> Integer[<span class="number">2</span>]);</span><br><span class="line"><span class="comment">// &#123;1, 2, 3&#125;   new Integer[2] 无效，会被扔掉</span></span><br><span class="line">Integer[] array2 = list.toArray(<span class="keyword">new</span> Integer[<span class="number">5</span>]);</span><br><span class="line"><span class="comment">// &#123;1, 2, 3, null, null&#125;</span></span><br><span class="line">Integer[] array3 = list.toArray(<span class="keyword">new</span> Integer[list.size()]);</span><br><span class="line"><span class="comment">// 最好的办法，大小一一对应。</span></span><br></pre></td></tr></table></figure></T></li>
+<li><T> T[] toArray(T[] a)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Integer[] array = list.toArray(<span class="keyword">new</span> Integer[<span class="number">2</span>]);</span><br><span class="line"><span class="comment">// &#123;1, 2, 3&#125;   new Integer[2] 无效，会被扔掉</span></span><br><span class="line">Integer[] array2 = list.toArray(<span class="keyword">new</span> Integer[<span class="number">5</span>]);</span><br><span class="line"><span class="comment">// &#123;1, 2, 3, null, null&#125;</span></span><br><span class="line">Integer[] array3 = list.toArray(<span class="keyword">new</span> Integer[list.size()]);</span><br><span class="line"><span class="comment">// 最好的办法，大小一一对应。</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-</E></li>
+</li>
 <li>把 Array 变为 List<E>：<ul>
-<li><T> List<T> Arrays.asList(T… a)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Integer[] array = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">List&lt;Integer&gt; list = Arrays.asList(array);</span><br><span class="line"></span><br><span class="line"><span class="comment">// **注意返回的 list 并不是 ArrayList，而是 List**</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个 list 对象实际上是 Array 内部实现的一个 List 类，并且是只读的。</span></span><br><span class="line">list.add(<span class="number">4</span>);  <span class="comment">// UnsupportedOperationException!</span></span><br><span class="line"><span class="comment">// 如果想创建 ArrayList，还需做：</span></span><br><span class="line">List&lt;Integer&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">arrayList.addAll(list);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者一行代码：</span></span><br><span class="line">List&lt;Integer&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;&gt;(Arrays.asList(array));</span><br><span class="line"><span class="comment">// 注意，如果不需要可变的 list，就没必要再转换成 ArrayList</span></span><br></pre></td></tr></table></figure></T></T></li>
+<li><T> List<T> Arrays.asList(T… a)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Integer[] array = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">List&lt;Integer&gt; list = Arrays.asList(array);</span><br><span class="line"></span><br><span class="line"><span class="comment">// **注意返回的 list 并不是 ArrayList，而是 List**</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个 list 对象实际上是 Array 内部实现的一个 List 类，并且是只读的。</span></span><br><span class="line">list.add(<span class="number">4</span>);  <span class="comment">// UnsupportedOperationException!</span></span><br><span class="line"><span class="comment">// 如果想创建 ArrayList，还需做：</span></span><br><span class="line">List&lt;Integer&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">arrayList.addAll(list);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者一行代码：</span></span><br><span class="line">List&lt;Integer&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;&gt;(Arrays.asList(array));</span><br><span class="line"><span class="comment">// 注意，如果不需要可变的 list，就没必要再转换成 ArrayList</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-</E></li>
+</li>
 </ul>
 <h4 id="equals"><a href="#equals" class="headerlink" title="equals()"></a>equals()</h4><p>List 中的 contains 和 indexOf 会用到所存对象的 equals 方法。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span> == o) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (o <span class="keyword">instanceof</span> Person) &#123;</span><br><span class="line">    Person p = (Person) o;</span><br><span class="line">    <span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">return</span> p.name.equals(<span class="keyword">this</span>.name) &amp;&amp; p.age == <span class="keyword">this</span>.age; <span class="comment">// 但这里有个问题 p.name 可能是空，会报错</span></span><br><span class="line">    <span class="comment">// 2</span></span><br><span class="line">    <span class="keyword">return</span> (p.name == <span class="keyword">this</span>.name || p.name != <span class="keyword">null</span> &amp;&amp; p.name.equals(<span class="keyword">this</span>.name)) &amp;&amp; p.age == <span class="keyword">this</span>.age; <span class="comment">// 但这样写好麻烦</span></span><br><span class="line">    <span class="comment">// 3</span></span><br><span class="line">    <span class="keyword">return</span> Objects.equals(p.name, <span class="keyword">this</span>.name) &amp;&amp; p.age == <span class="keyword">this</span>.age;</span><br><span class="line">    <span class="comment">// Objects.equals()</span></span><br><span class="line">    <span class="comment">// null vs. null -&gt; true</span></span><br><span class="line">    <span class="comment">// null vs. &quot;abc&quot; -&gt; false</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1383,7 +1261,7 @@
 </ul>
 </li>
 </ul>
-<p>Set<E> 用于存储不重复的元素集合：</E></p>
+<p>Set<E> 用于存储不重复的元素集合：</p>
 <ul>
 <li>boolean add(E e)</li>
 <li>boolean remove(Object o)</li>
@@ -1397,7 +1275,7 @@
 <li>TreeSet 是有序的</li>
 <li>实现了 SortedSet 接口的是有序的</li>
 </ul>
-<h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><h4 id="使用-Queue"><a href="#使用-Queue" class="headerlink" title="使用 Queue"></a>使用 Queue</h4><p>Queue<E> 实现了一个先进先出（FIFO）的队列。LinkedList 实现了 Queue<E> 接口。</E></E></p>
+<h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><h4 id="使用-Queue"><a href="#使用-Queue" class="headerlink" title="使用 Queue"></a>使用 Queue</h4><p>Queue<E> 实现了一个先进先出（FIFO）的队列。LinkedList 实现了 Queue<E> 接口。</p>
 <ul>
 <li>获取队列长度：size()</li>
 <li>添加元素到队尾：boolean add(E e) / boolean offer(E e)</li>
@@ -1407,9 +1285,9 @@
 <p>为什么都有两种方法？</p>
 <p>当添加或获取元素失败时，左边的方法返回 Exception，右边的方法返回 false 或 null。</p>
 <p>可以先用 isEmpty 判断，避免把 null 添加到队列。</p>
-<h4 id="使用-PriorityQueue"><a href="#使用-PriorityQueue" class="headerlink" title="使用 PriorityQueue"></a>使用 PriorityQueue</h4><p>PriorityQueue<E> 的出队顺序与元素的优先级有关，remove() / poll(）总是取优先级最高的元素。</E></p>
+<h4 id="使用-PriorityQueue"><a href="#使用-PriorityQueue" class="headerlink" title="使用 PriorityQueue"></a>使用 PriorityQueue</h4><p>PriorityQueue<E> 的出队顺序与元素的优先级有关，remove() / poll(）总是取优先级最高的元素。</p>
 <p>放入 PriorityQueue 的元素必须实现 Comparable 接口，或者通过在 new 的时候传入 Comparator 自定义排序的算法。</p>
-<h4 id="使用-Deque"><a href="#使用-Deque" class="headerlink" title="使用 Deque"></a>使用 Deque</h4><p>Deque<E> 实现一个双端队列（Double Ended Queue）。</E></p>
+<h4 id="使用-Deque"><a href="#使用-Deque" class="headerlink" title="使用 Deque"></a>使用 Deque</h4><p>Deque<E> 实现一个双端队列（Double Ended Queue）。</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9mwh6.jpg" title="Queue 和 Deque 常用的方法"></p>
 <p>Deque 还有：</p>
 <ul>
@@ -1456,20 +1334,20 @@
 </ul>
 <p>创建空集合（不可变）：</p>
 <ul>
-<li>List<T> emptyList()</T></li>
+<li>List<T> emptyList()</li>
 <li>Map&lt;K, V&gt; emptyMap()</li>
-<li>Set<T> emptySet()</T></li>
+<li>Set<T> emptySet()</li>
 </ul>
 <p>创建单元素集合（不可变）：</p>
 <ul>
-<li>Set<T> singleton(T o)</T></li>
-<li>List<T> singletonList(T o)</T></li>
+<li>Set<T> singleton(T o)</li>
+<li>List<T> singletonList(T o)</li>
 <li>Map&lt;K, V&gt; singletonMap(K key, V value)</li>
 </ul>
 <p>对 List 排序（必须传入可变 List）：</p>
 <ul>
-<li>void sort(List<T> list)</T></li>
-<li>void sort(List<T> list, Comparator&lt;? super T&gt; c)</T></li>
+<li>void sort(List<T> list)</li>
+<li>void sort(List<T> list, Comparator&lt;? super T&gt; c)</li>
 </ul>
 <p>随机重置 list 的元素顺序：</p>
 <ul>
@@ -1477,16 +1355,16 @@
 </ul>
 <p>把可变集合变为不可变集合：</p>
 <ul>
-<li>List<T> unmodifiableList(List&lt;? extends T&gt; list)</T></li>
-<li>Set<T> unmodifiableSet(Set&lt;? extends T&gt; set)</T></li>
+<li>List<T> unmodifiableList(List&lt;? extends T&gt; list)</li>
+<li>Set<T> unmodifiableSet(Set&lt;? extends T&gt; set)</li>
 <li>Map&lt;K, V&gt; unmodifiableMap(Map&lt;? extends K, ? extends V&gt; m)</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注意：通过 list 引用还是可以改的，所以最好写成一行（不要创建 list 引用）</span></span><br><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;(Arrays.asList(<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>));</span><br><span class="line">List&lt;String&gt; readOnlyList = Collections.unmodifiableList(list);</span><br><span class="line">System.out.println(readOnlyList);</span><br><span class="line">list.add(<span class="string">&quot;X&quot;</span>);</span><br><span class="line">System.out.println(readOnlyList);</span><br></pre></td></tr></table></figure>
 
 <p>把线程不安全的集合变为线程安全的集合：</p>
 <ul>
-<li>List<T> synchronizedList(List<T> list)</T></T></li>
-<li>Set<T> synchronizedSet(Set<T> s)</T></T></li>
+<li>List<T> synchronizedList(List<T> list)</li>
+<li>Set<T> synchronizedSet(Set<T> s)</li>
 <li>Map&lt;K, V&gt; synchronizedSet(Map&lt;K, V&gt; m)</li>
 <li>…（不推荐使用，有更好的方法）</li>
 </ul>
@@ -1630,280 +1508,122 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">OutputStream output = <span class="keyword">new</span> FileOutputStream(filename);</span><br><span class="line">Writer writer = <span class="keyword">new</span> OutputStreamWriter(output, <span class="string">&quot;UTF-8&quot;</span>)</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">writer.close();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以用 OutputStream 转换编码</span></span><br><span class="line"><span class="keyword">try</span> (Writer writer = <span class="keyword">new</span> OutputStreamWriter(<span class="keyword">new</span> FileOutputStream(<span class="string">&quot;output.txt&quot;</span>, <span class="string">&quot;UTF-8&quot;</span>))) &#123;</span><br><span class="line">  <span class="comment">// foo</span></span><br><span class="line">&#125; <span class="comment">// 用了 try(resource) 就不用手动去关闭了</span></span><br></pre></td></tr></table></figure>
 
+</div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/avatar/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Junhao Wang</div><div class="author-info__description">Debug the old world, bug the new world!</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">50</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">118</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">10</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/junhaowww"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://twitter.com/junhaowww" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a><a class="social-icon" href="https://www.linkedin.com/in/junhaowww" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a><a class="social-icon" href="https://www.douban.com/people/maodai" target="_blank" title="豆瓣（Book）"><i class="fa fa-book"></i></a><a class="social-icon" href="mailto:junhaowanggg@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-bolt"></i><span>Newest Comments</span></div><div class="aside-list"><span>loading...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            <a class="card-more-btn" href="/categories/" title="More">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Anything/"><span class="card-category-list-name">Anything</span><span class="card-category-list-count">10</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C</span><span class="card-category-list-count">18</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Math/"><span class="card-category-list-name">Math</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Music/"><span class="card-category-list-name">Music</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/OS/"><span class="card-category-list-name">OS</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Reading-Notes/"><span class="card-category-list-name">Reading Notes</span><span class="card-category-list-count">5</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/i/" style="font-size: 1.1em; color: #999">++i</a> <a href="/tags/ANSI-C/" style="font-size: 1.1em; color: #999">ANSI C</a> <a href="/tags/Abstract-Class/" style="font-size: 1.1em; color: #999">Abstract Class</a> <a href="/tags/Argument/" style="font-size: 1.1em; color: #999">Argument</a> <a href="/tags/AutoLayout/" style="font-size: 1.1em; color: #999">AutoLayout</a> <a href="/tags/C/" style="font-size: 1.5em; color: #99a9bf">C</a> <a href="/tags/C-Traps-and-Pitfalls/" style="font-size: 1.5em; color: #99a9bf">C Traps and Pitfalls</a> <a href="/tags/C11/" style="font-size: 1.1em; color: #999">C11</a> <a href="/tags/C89/" style="font-size: 1.1em; color: #999">C89</a> <a href="/tags/C90/" style="font-size: 1.1em; color: #999">C90</a> <a href="/tags/C99/" style="font-size: 1.1em; color: #999">C99</a> <a href="/tags/CPU-%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/" style="font-size: 1.1em; color: #999">CPU 工作模式</a> <a href="/tags/Calculus/" style="font-size: 1.1em; color: #999">Calculus</a> <a href="/tags/Compute-Shader/" style="font-size: 1.1em; color: #999">Compute Shader</a> <a href="/tags/Covariant/" style="font-size: 1.1em; color: #999">Covariant</a> <a href="/tags/English/" style="font-size: 1.1em; color: #999">English</a> <a href="/tags/Expert-C-Programming/" style="font-size: 1.5em; color: #99a9bf">Expert C Programming</a> <a href="/tags/GCD/" style="font-size: 1.1em; color: #999">GCD</a> <a href="/tags/GRE/" style="font-size: 1.1em; color: #999">GRE</a> <a href="/tags/Grass/" style="font-size: 1.1em; color: #999">Grass</a> <a href="/tags/Hexo/" style="font-size: 1.1em; color: #999">Hexo</a> <a href="/tags/Interface/" style="font-size: 1.1em; color: #999">Interface</a> <a href="/tags/Iteration/" style="font-size: 1.1em; color: #999">Iteration</a> <a href="/tags/Java/" style="font-size: 1.5em; color: #99a9bf">Java</a> <a href="/tags/K-R-C/" style="font-size: 1.1em; color: #999">K&R C</a> <a href="/tags/LinkedList/" style="font-size: 1.1em; color: #999">LinkedList</a> <a href="/tags/Logic/" style="font-size: 1.1em; color: #999">Logic</a> <a href="/tags/Mac/" style="font-size: 1.5em; color: #99a9bf">Mac</a> <a href="/tags/Markdown/" style="font-size: 1.1em; color: #999">Markdown</a> <a href="/tags/Mou/" style="font-size: 1.1em; color: #999">Mou</a> <a href="/tags/Multivarible-Calculus/" style="font-size: 1.1em; color: #999">Multivarible Calculus</a> <a href="/tags/Probability/" style="font-size: 1.1em; color: #999">Probability</a> <a href="/tags/Protected-Mode/" style="font-size: 1.1em; color: #999">Protected Mode</a> <a href="/tags/Python/" style="font-size: 1.1em; color: #999">Python</a> <a href="/tags/Real-Mode/" style="font-size: 1.1em; color: #999">Real Mode</a> <a href="/tags/Recursion/" style="font-size: 1.1em; color: #999">Recursion</a> <a href="/tags/Shader/" style="font-size: 1.1em; color: #999">Shader</a> <a href="/tags/Sky/" style="font-size: 1.1em; color: #999">Sky</a> <a href="/tags/Stack/" style="font-size: 1.1em; color: #999">Stack</a> <a href="/tags/TypeFu/" style="font-size: 1.1em; color: #999">TypeFu</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">50</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">82.3k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-04-11T19:05:46.019Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2015 - 2021 By Junhao Wang</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">return 0;</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadDisqus () {
+  var disqus_config = function () {
+    this.page.url = 'http://www.junhaow.com/studynotes/java/Java%20%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%8A%EF%BC%89.html'
+    this.page.identifier = 'studynotes/java/Java 基础学习笔记（上）.html'
+    this.page.title = 'Java 基础学习笔记（上）'
+  };
 
-      </div>
-      
-      
-      
-    </div>
-    
-  <ul class="breadcrumb">
-          
-            <li><a href="/studynotes/">STUDYNOTES</a></li>
-            <li><a href="/studynotes/java/">JAVA</a></li>
-            <li>JAVA 基础学习笔记（上）</li>
-          
-  </ul>
-
-    
-    
-    
-
-
-          </div>
-          
-    
-  <div class="comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-    </div>
-  </div>
-  
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
+  window.disqusReset = () => {
+    DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
   }
-</script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">基本类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">引用类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.3.1.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">1.3.2.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">1.3.3.</span> <span class="nav-text">多维数组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA"><span class="nav-number">1.4.</span> <span class="nav-text">格式化输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD"><span class="nav-number">1.5.</span> <span class="nav-text">条件判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.6.</span> <span class="nav-text">循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0"><span class="nav-number">1.7.</span> <span class="nav-text">命令行参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">面向对象编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">一些概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD"><span class="nav-number">2.3.</span> <span class="nav-text">重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF"><span class="nav-number">2.4.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%80%81"><span class="nav-number">2.5.</span> <span class="nav-text">多态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-number">2.6.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.7.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%AD%97%E6%AE%B5%E5%92%8C%E6%96%B9%E6%B3%95"><span class="nav-number">2.8.</span> <span class="nav-text">静态字段和方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%85"><span class="nav-number">2.9.</span> <span class="nav-text">包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.10.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#classpath-%E5%92%8C-jar"><span class="nav-number">2.11.</span> <span class="nav-text">classpath 和 jar</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#classpath"><span class="nav-number">2.11.1.</span> <span class="nav-text">classpath</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jar-%E5%8C%85"><span class="nav-number">2.11.2.</span> <span class="nav-text">jar 包</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB"><span class="nav-number">2.12.</span> <span class="nav-text">字符串类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9E%84%E5%BB%BA%E7%B1%BB"><span class="nav-number">2.13.</span> <span class="nav-text">字符串构建类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F"><span class="nav-number">2.14.</span> <span class="nav-text">编码方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.15.</span> <span class="nav-text">包装类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaBean"><span class="nav-number">2.16.</span> <span class="nav-text">JavaBean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E7%B1%BB"><span class="nav-number">2.17.</span> <span class="nav-text">枚举类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-number">2.18.</span> <span class="nav-text">常用工具类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="nav-number">3.1.</span> <span class="nav-text">错误处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%BC%82%E5%B8%B8"><span class="nav-number">3.1.1.</span> <span class="nav-text">基本异常</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8%EF%BC%88Catch%EF%BC%89"><span class="nav-number">3.1.2.</span> <span class="nav-text">捕获异常（Catch）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%EF%BC%88Throw%EF%BC%89"><span class="nav-number">3.1.3.</span> <span class="nav-text">抛出异常（Throw）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8"><span class="nav-number">3.1.4.</span> <span class="nav-text">自定义异常</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%AD%E8%A8%80%E4%B8%8E%E6%97%A5%E5%BF%97"><span class="nav-number">3.2.</span> <span class="nav-text">断言与日志</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%AD%E8%A8%80"><span class="nav-number">3.2.1.</span> <span class="nav-text">断言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A5%E5%BF%97"><span class="nav-number">3.2.2.</span> <span class="nav-text">日志</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E4%B8%8E%E6%B3%9B%E5%9E%8B"><span class="nav-number">4.</span> <span class="nav-text">反射与泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84"><span class="nav-number">4.1.</span> <span class="nav-text">反射</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Class-%E7%B1%BB"><span class="nav-number">4.1.1.</span> <span class="nav-text">Class 类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E5%AD%97%E6%AE%B5"><span class="nav-number">4.1.2.</span> <span class="nav-text">访问字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">4.1.3.</span> <span class="nav-text">调用方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">4.1.4.</span> <span class="nav-text">调用构造方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB"><span class="nav-number">4.1.5.</span> <span class="nav-text">获取继承关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E8%A7%A3"><span class="nav-number">4.2.</span> <span class="nav-text">注解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3"><span class="nav-number">4.2.1.</span> <span class="nav-text">使用注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3"><span class="nav-number">4.2.2.</span> <span class="nav-text">定义注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%B3%A8%E8%A7%A3"><span class="nav-number">4.2.3.</span> <span class="nav-text">处理注解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B"><span class="nav-number">4.3.</span> <span class="nav-text">泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">4.3.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%B3%9B%E5%9E%8B"><span class="nav-number">4.3.2.</span> <span class="nav-text">使用泛型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E6%B3%9B%E5%9E%8B"><span class="nav-number">4.3.3.</span> <span class="nav-text">编写泛型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E6%96%B9%E6%B3%95"><span class="nav-number">4.3.4.</span> <span class="nav-text">泛型方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%93%A6%E6%8B%AD%E6%B3%95%EF%BC%88Type-Erasure%EF%BC%89"><span class="nav-number">4.3.5.</span> <span class="nav-text">擦拭法（Type Erasure）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E9%85%8D%E7%AC%A6"><span class="nav-number">4.3.6.</span> <span class="nav-text">通配符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E5%92%8C%E5%8F%8D%E5%B0%84"><span class="nav-number">4.4.</span> <span class="nav-text">泛型和反射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E6%95%B0%E7%BB%84"><span class="nav-number">4.5.</span> <span class="nav-text">泛型数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E5%90%88"><span class="nav-number">5.</span> <span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B-1"><span class="nav-number">5.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List"><span class="nav-number">5.2.</span> <span class="nav-text">List</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#equals"><span class="nav-number">5.2.1.</span> <span class="nav-text">equals()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map"><span class="nav-number">5.3.</span> <span class="nav-text">Map</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Map"><span class="nav-number">5.3.1.</span> <span class="nav-text">使用 Map</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#equals-amp-hashCode"><span class="nav-number">5.3.2.</span> <span class="nav-text">equals() &amp; hashCode()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Properties"><span class="nav-number">5.3.3.</span> <span class="nav-text">Properties</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set"><span class="nav-number">5.4.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue"><span class="nav-number">5.5.</span> <span class="nav-text">Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Queue"><span class="nav-number">5.5.1.</span> <span class="nav-text">使用 Queue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-PriorityQueue"><span class="nav-number">5.5.2.</span> <span class="nav-text">使用 PriorityQueue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Deque"><span class="nav-number">5.5.3.</span> <span class="nav-text">使用 Deque</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack"><span class="nav-number">5.6.</span> <span class="nav-text">Stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-number">5.7.</span> <span class="nav-text">最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%99%E5%AF%B9%E8%B1%A1%E6%B7%BB%E5%8A%A0-Iterator-%E7%89%B9%E6%80%A7"><span class="nav-number">5.7.1.</span> <span class="nav-text">给对象添加 Iterator 特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Collections"><span class="nav-number">5.7.2.</span> <span class="nav-text">使用 Collections</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO-%E7%BC%96%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text">IO 编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IO-%E5%9F%BA%E7%A1%80"><span class="nav-number">6.1.</span> <span class="nav-text">IO 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B-2"><span class="nav-number">6.1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#File-%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.1.2.</span> <span class="nav-text">File 对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Input-%E5%92%8C-Output"><span class="nav-number">6.2.</span> <span class="nav-text">Input 和 Output</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#InputStream"><span class="nav-number">6.2.1.</span> <span class="nav-text">InputStream</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OutputStream"><span class="nav-number">6.2.2.</span> <span class="nav-text">OutputStream</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Filter-%E6%A8%A1%E5%BC%8F%EF%BC%88Decorator-%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-number">6.2.3.</span> <span class="nav-text">Filter 模式（Decorator 模式）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C-Zip"><span class="nav-number">6.2.4.</span> <span class="nav-text">操作 Zip</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#classpath-%E8%B5%84%E6%BA%90"><span class="nav-number">6.2.5.</span> <span class="nav-text">classpath 资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">6.2.6.</span> <span class="nav-text">序列化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reader-%E5%92%8C-Writer"><span class="nav-number">6.3.</span> <span class="nav-text">Reader 和 Writer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Reader"><span class="nav-number">6.3.1.</span> <span class="nav-text">Reader</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Writer"><span class="nav-number">6.3.2.</span> <span class="nav-text">Writer</span></a></li></ol></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Junhao Wang"
-      src="/images/cat_with_glasses.jpg">
-  <p class="site-author-name" itemprop="name">Junhao Wang</p>
-  <div class="site-description" itemprop="description">Debug the old world, bug the new world!</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">50</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-        <span class="site-state-item-count">10</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-        <span class="site-state-item-count">118</span>
-        <span class="site-state-item-name">tags</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://twitter.com/junhaowww" title="Twitter → https://twitter.com/junhaowww" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://github.com/junhaowww" title="GitHub → https://github.com/junhaowww" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/junhaowww/" title="LinkedIn → https://www.linkedin.com/in/junhaowww/" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>LinkedIn</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://www.douban.com/people/maodai/" title="豆瓣 (Book) → https://www.douban.com/people/maodai/" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>豆瓣 (Book)</a>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-  </div>
-
-
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
-      Links
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="https://www.jianshu.com/u/41865efdad5d/" title="https://www.jianshu.com/u/41865efdad5d/" rel="noopener" target="_blank">Xiaofud</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://www.davex.pw/" title="https://www.davex.pw/" rel="noopener" target="_blank">DaveX</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://" title="http://" rel="noopener" target="_blank">alexfan.xyz</a>
-        </li>
-    </ul>
-  </div>
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Junhao Wang</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
-  </div>
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="Total Visitors">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="Total Views">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-<script>
-  function loadCount() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://junhaow.disqus.com/count.js';
-    s.id = 'dsq-count-scr';
-    (d.head || d.body).appendChild(s);
-  }
-  // defer loading until the whole page loading is completed
-  window.addEventListener('load', loadCount, false);
-</script>
-<script>
-  var disqus_config = function() {
-    this.page.url = "http://www.junhaow.com/studynotes/java/Java%20%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%8A%EF%BC%89.html";
-    this.page.identifier = "studynotes/java/Java 基础学习笔记（上）.html";
-    this.page.title = "Java 基础学习笔记（上）";
-    };
-  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
-    if (window.DISQUS) {
-      DISQUS.reset({
-        reload: true,
-        config: disqus_config
-      });
-    } else {
+  if (window.DISQUS) disqusReset()
+  else {
+    (function() { 
       var d = document, s = d.createElement('script');
       s.src = 'https://junhaow.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', '' + +new Date());
+      s.setAttribute('data-timestamp', +new Date());
       (d.head || d.body).appendChild(s);
-    }
-  });
-</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    })();
+  }
+}
 
-</body>
-</html>
+if ('Disqus' === 'Disqus' || !false) {
+  if (false) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+  else loadDisqus()
+} else {
+  function loadOtherComment () {
+    loadDisqus()
+  }
+}
+</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[image]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[link]') // replace url
+    content = content.replace(/<code>.*?<\/code>/gi, '[code]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    fetch('https://disqus.com/api/3.0/forums/listPosts.json?forum=junhaow&related=thread&limit=6&api_key=9AouxDFpQCAlmHWv0HK3jV1Pp4Yq4T7kGncBGbAzFOXAeZTSKkt9YWshqSYb68Rq')
+      .then(response => response.json())
+      .then(data => {
+        const disqusArray = data.response.map(item => {
+          return {
+            'avatar': item.author.avatar.cache,
+            'content': changeContent(item.message),
+            'nick': item.author.name,
+            'url': item.url,
+            'date': item.createdAt
+          }
+        })
+
+        saveToLocal.set('disqus-newest-comments', JSON.stringify(disqusArray), 10/(60*24))
+        generateHtml(disqusArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "Unable to get the data, please make sure the settings are correct."
+      })
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick}</span><time> / ${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += 'No Comment'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('disqus-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
