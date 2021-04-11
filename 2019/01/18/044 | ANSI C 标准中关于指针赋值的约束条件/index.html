@@ -1,37 +1,665 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic|Bitter:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.junhaow.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="先看一段包含警告的代码： 123456void foo(const char **p) &amp;#123; &amp;#125; int main(int argc, char **argv) &amp;#123;    foo(argv);&amp;#125;&#x2F;&#x2F; warning: argument is incompatible with prototype 我们可能认为，由于实参char *s与形参const char">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ANSI C 标准中关于指针赋值的约束条件">
+<meta property="og:url" content="http://www.junhaow.com/2019/01/18/044%20|%20ANSI%20C%20%E6%A0%87%E5%87%86%E4%B8%AD%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88%E8%B5%8B%E5%80%BC%E7%9A%84%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6/index.html">
+<meta property="og:site_name" content="B_L_OO_GGG">
+<meta property="og:description" content="先看一段包含警告的代码： 123456void foo(const char **p) &amp;#123; &amp;#125; int main(int argc, char **argv) &amp;#123;    foo(argv);&amp;#125;&#x2F;&#x2F; warning: argument is incompatible with prototype 我们可能认为，由于实参char *s与形参const char">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-01-18T22:58:31.000Z">
+<meta property="article:modified_time" content="2020-01-24T18:50:25.000Z">
+<meta property="article:author" content="Junhao Wang">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="const">
+<meta property="article:tag" content="Expert C Programming">
+<meta property="article:tag" content="赋值">
+<meta property="article:tag" content="约束条件">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.junhaow.com/2019/01/18/044%20|%20ANSI%20C%20%E6%A0%87%E5%87%86%E4%B8%AD%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88%E8%B5%8B%E5%80%BC%E7%9A%84%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6/">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
 
-{% block page_class %}page-post-detail{% endblock %}
+  <title>ANSI C 标准中关于指针赋值的约束条件 | B_L_OO_GGG</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146643833-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-146643833-1');
+      }
+    </script>
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">B_L_OO_GGG</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Sumomo mo momo mo no uchi</p>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-inbox fa-fw"></i>Archives<span class="badge">50</span></a>
+
+  </li>
+        <li class="menu-item menu-item-studynotes">
+
+    <a href="/studynotes/" rel="section"><i class="fa fa-pencil-alt fa-fw"></i>Study Notes</a>
+
+  </li>
+        <li class="menu-item menu-item-lc">
+
+    <a href="/lc/" rel="section"><i class="fa fa-th fa-fw"></i>LeetCode Book</a>
+
+  </li>
+        <li class="menu-item menu-item-games">
+
+    <a href="/games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>Games I've Played</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-grin-squint fa-fw"></i>About Me</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://www.junhaow.com/2019/01/18/044%20|%20ANSI%20C%20%E6%A0%87%E5%87%86%E4%B8%AD%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88%E8%B5%8B%E5%80%BC%E7%9A%84%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat_with_glasses.jpg">
+      <meta itemprop="name" content="Junhao Wang">
+      <meta itemprop="description" content="Debug the old world, bug the new world!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="B_L_OO_GGG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ANSI C 标准中关于指针赋值的约束条件
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 01/18/2019 14:58" itemprop="dateCreated datePublished" datetime="2019-01-18T14:58:31-08:00">01/18/2019</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 01/24/2020 10:50" itemprop="dateModified" datetime="2020-01-24T10:50:25-08:00">01/24/2020</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/01/18/044%20%7C%20ANSI%20C%20%E6%A0%87%E5%87%86%E4%B8%AD%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88%E8%B5%8B%E5%80%BC%E7%9A%84%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/01/18/044 | ANSI C 标准中关于指针赋值的约束条件/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>先看一段包含警告的代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> **p)</span> </span>&#123; &#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span> </span>&#123;</span><br><span class="line">    foo(argv);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// warning: argument is incompatible with prototype</span></span><br></pre></td></tr></table></figure>
+<p>我们可能认为，由于实参<code>char *s</code>与形参<code>const char *p</code>应该是相容的（标准库中所有的字符串处理函数都是这样写的），那么，为什么实参<code>char **argv</code>与形参<code>const char **p</code>却不能相容呢？</p>
+<a id="more"></a>
+
+<h2 id="容易混淆的-const"><a href="#容易混淆的-const" class="headerlink" title="容易混淆的 const"></a>容易混淆的 const</h2><p>回答上述问题前先看一下关键字 const 的用法和实际使用的含义。注意，它不能把变量变成常量！在一个符号前加上 const 限定符只是<strong>表示这个符号不能被赋值</strong>。</p>
+<blockquote>
+<p>这意味着，我们可以取一个 const 变量的地址，并且可以改变它的值（但最好还是不要这样）。回首往事，const 关键字原先如果命名为 readonly 就好多了，因为 readonly 没有不能改变的意思（外部可以去改变），而 const 只表示自身不会变。const 的最简单用法：</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> num1 = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<p>当在赋值号两边加上指针，就要注意了：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *num2 = &amp;num1;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">27</span>;</span><br><span class="line">num2 = &amp;i;</span><br></pre></td></tr></table></figure>
+
+<p>const 修饰符修饰的不是 int 指针，而是 int 本身，意味着 int 不能被改变，而 int 指针的值（地址）可以被改写。const 最有用的地方就是用来修饰函数的形参，这样表示该函数不会去修改实参指针所指向的数据内容。它声称「我给你一个指向它的指针，但你不能修改它」。这个约定类似于<code>void *</code>的用法。尽管它可以用于任何类型，但通常被限定于把指针从一种类型转换为另一种类型。</p>
+<p>总结：</p>
+<ul>
+<li>int const *p（int 只读）</li>
+<li>const int *p（int 只读）</li>
+<li>int * const p（指针只读）</li>
+<li>int const * const p（都只读）</li>
+</ul>
+<h2 id="指针赋值的约束条件"><a href="#指针赋值的约束条件" class="headerlink" title="指针赋值的约束条件"></a>指针赋值的约束条件</h2><p>回到问题本身，ANSI C 标准中有这么一句话（约束条件）：</p>
+<blockquote>
+<p>每个实参都应该具有自己的类型，这样它的值就可以赋值给它所对应的形参类型的对象（该对象的类型不能含有限定符）。</p>
+</blockquote>
+<p>这就是说参数传递过程类似于赋值。所以，这样的代码也是非法的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> **cp;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> **ccp;</span><br><span class="line">ccp = cp;</span><br></pre></td></tr></table></figure>
+
+<p>要使指针的赋值合法，必须满足下列约束条件：</p>
+<ol>
+<li>两个操作数都是指向有限定符或无限定符的相容类型的指针。</li>
+<li>左边指针所指向的类型必须具有右边指针所指向类型的全部限定符（「无限定符」也被看作是一种限定符）。</li>
+</ol>
+<p>先来看一下为什么实参<code>char *</code>和<code>const char *</code>匹配，即：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *cp;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *ccp;</span><br><span class="line">ccp = cp;</span><br></pre></td></tr></table></figure>
+
+<p>它之所以合法，是因为它满足：</p>
+<ul>
+<li>左操作数是一个指向有 const 限定符修饰的 char 的指针。</li>
+<li>右操作数是一个指向没有限定符修饰的 char 的指针。（相当于空集可以包含于其它集合）</li>
+<li>char 类型与 char 类型是相容的，左操作数所指向的类型具有右操作数所指向的类型的限定符（无 + const）。</li>
+</ul>
+<p>注意，反过来就不能赋值了，比如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp = ccp; <span class="comment">// 产生警告</span></span><br></pre></td></tr></table></figure>
+
+<p>类似地，<code>const char **</code>是一个指向没有限定符修饰的指针类型。注意两个指针<strong>本身</strong><code>const char **</code>和<code>char **</code>都没有被 const 限定符修饰。然而，它们指向的类型不一样，<code>const char **</code>指向 **const char ***，<code>char **</code>指向 **char ***。</p>
+<ul>
+<li><code>const char</code>和<code>char</code> → 相容</li>
+<li><code>const char *</code>和<code>char *</code> → 不相容（注意注意！有点奇葩！）</li>
+<li>我猜<code>char * const</code>和<code>char *</code>是相容的。</li>
+</ul>
+<p><strong>相容性是不能传递的。</strong></p>
+<p>换言之，</p>
+<ul>
+<li>左操作数的类型是 FOO_2，它是一个指向 FOO 的指针，而 FOO 是一个没有限定符的指针，它指向一个带有 const 限定符的 char 类型。</li>
+<li>右操作符的类型是 BAZ_2，它是一个指向 BAZ 的指针，而 BAZ 是一个没有限定符的指针，它指向一个没有限定符的字符类型。</li>
+</ul>
+<p><code>FOO</code>和<code>BAZ</code>所指向的类型是相容的，而且它们本身都没有限定符，所以两者之间可以赋值（注意只是单向的）。但是<code>FOO</code>和<code>BAZ</code>所指向的类型相容并不意味着<code>FOO_2</code>和<code>BAZ_2</code>所指向的类型也相容，所以即使<code>FOO_2</code>和<code>BAZ_2</code>都没有限定符，但它们之间不能进行赋值（双向都不行，因为所指向的对象本身不相容）。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>《C 专家编程》（Expert C Programming）p19-21</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Junhao Wang
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://www.junhaow.com/2019/01/18/044%20|%20ANSI%20C%20%E6%A0%87%E5%87%86%E4%B8%AD%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88%E8%B5%8B%E5%80%BC%E7%9A%84%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6/" title="ANSI C 标准中关于指针赋值的约束条件">http://www.junhaow.com/2019/01/18/044 | ANSI C 标准中关于指针赋值的约束条件/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C</a>
+              <a href="/tags/const/" rel="tag"><i class="fa fa-tag"></i> const</a>
+              <a href="/tags/Expert-C-Programming/" rel="tag"><i class="fa fa-tag"></i> Expert C Programming</a>
+              <a href="/tags/%E8%B5%8B%E5%80%BC/" rel="tag"><i class="fa fa-tag"></i> 赋值</a>
+              <a href="/tags/%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6/" rel="tag"><i class="fa fa-tag"></i> 约束条件</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/01/03/043%20%7C%20%E5%B0%8F%E7%AC%A8%E9%9C%96%E8%8B%B1%E8%AF%AD%E7%AC%94%E8%AE%B0%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" rel="prev" title="英语鬼才：小笨霖英语笔记学习记录">
+      <i class="fa fa-chevron-left"></i> 英语鬼才：小笨霖英语笔记学习记录
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/29/045%20%7C%20%E3%80%8A%E7%A0%81%E5%86%9C%E7%BF%BB%E8%BA%AB%E3%80%8B%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E7%9A%84%E6%91%98%E6%8A%84%E7%AC%94%E8%AE%B0/" rel="next" title="《码农翻身》公众号文章的摘抄笔记">
+      《码农翻身》公众号文章的摘抄笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E6%98%93%E6%B7%B7%E6%B7%86%E7%9A%84-const"><span class="nav-number">1.</span> <span class="nav-text">容易混淆的 const</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E8%B5%8B%E5%80%BC%E7%9A%84%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">指针赋值的约束条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Junhao Wang"
+      src="/images/cat_with_glasses.jpg">
+  <p class="site-author-name" itemprop="name">Junhao Wang</p>
+  <div class="site-description" itemprop="description">Debug the old world, bug the new world!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">118</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/junhaowww" title="Twitter → https://twitter.com/junhaowww" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/junhaowww" title="GitHub → https://github.com/junhaowww" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/junhaowww/" title="LinkedIn → https://www.linkedin.com/in/junhaowww/" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>LinkedIn</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/maodai/" title="豆瓣 (Book) → https://www.douban.com/people/maodai/" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>豆瓣 (Book)</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.jianshu.com/u/41865efdad5d/" title="https://www.jianshu.com/u/41865efdad5d/" rel="noopener" target="_blank">Xiaofud</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.davex.pw/" title="https://www.davex.pw/" rel="noopener" target="_blank">DaveX</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://" title="http://" rel="noopener" target="_blank">alexfan.xyz</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Junhao Wang</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://junhaow.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://www.junhaow.com/2019/01/18/044%20|%20ANSI%20C%20%E6%A0%87%E5%87%86%E4%B8%AD%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88%E8%B5%8B%E5%80%BC%E7%9A%84%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6/";
+    this.page.identifier = "2019/01/18/044 | ANSI C 标准中关于指针赋值的约束条件/";
+    this.page.title = "ANSI C 标准中关于指针赋值的约束条件";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://junhaow.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

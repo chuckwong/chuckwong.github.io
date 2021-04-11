@@ -1,37 +1,717 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic|Bitter:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.junhaow.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="最近在朋友圈看到一篇解释i++和++i的文章，觉得非常有意思，就把要点记录下来。  你的解释不是我想要的…  先看两段代码HelloWorld_1和HelloWorld_2： 123456789&#x2F;&#x2F; HelloWorld_1.javapublic class HelloWorld_1 &amp;#123;    public static void main(String[] args) &amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习 i++ 和 ++i 的本质区别">
+<meta property="og:url" content="http://www.junhaow.com/2018/08/07/035%20|%20%E5%AD%A6%E4%B9%A0%20i++%20%E5%92%8C%20++i%20%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%8C%BA%E5%88%AB/index.html">
+<meta property="og:site_name" content="B_L_OO_GGG">
+<meta property="og:description" content="最近在朋友圈看到一篇解释i++和++i的文章，觉得非常有意思，就把要点记录下来。  你的解释不是我想要的…  先看两段代码HelloWorld_1和HelloWorld_2： 123456789&#x2F;&#x2F; HelloWorld_1.javapublic class HelloWorld_1 &amp;#123;    public static void main(String[] args) &amp;#123;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tfego.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/bgwky.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/gjmyj.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/metfe.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ptguh.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/gegfj.jpg">
+<meta property="article:published_time" content="2018-08-07T17:30:05.000Z">
+<meta property="article:modified_time" content="2019-06-08T22:14:54.000Z">
+<meta property="article:author" content="Junhao Wang">
+<meta property="article:tag" content="i++">
+<meta property="article:tag" content="++i">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tfego.jpg">
+
+<link rel="canonical" href="http://www.junhaow.com/2018/08/07/035%20|%20%E5%AD%A6%E4%B9%A0%20i++%20%E5%92%8C%20++i%20%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%8C%BA%E5%88%AB/">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
 
-{% block page_class %}page-post-detail{% endblock %}
+  <title>学习 i++ 和 ++i 的本质区别 | B_L_OO_GGG</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146643833-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-146643833-1');
+      }
+    </script>
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">B_L_OO_GGG</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Sumomo mo momo mo no uchi</p>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-inbox fa-fw"></i>Archives<span class="badge">50</span></a>
+
+  </li>
+        <li class="menu-item menu-item-studynotes">
+
+    <a href="/studynotes/" rel="section"><i class="fa fa-pencil-alt fa-fw"></i>Study Notes</a>
+
+  </li>
+        <li class="menu-item menu-item-lc">
+
+    <a href="/lc/" rel="section"><i class="fa fa-th fa-fw"></i>LeetCode Book</a>
+
+  </li>
+        <li class="menu-item menu-item-games">
+
+    <a href="/games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>Games I've Played</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-grin-squint fa-fw"></i>About Me</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://www.junhaow.com/2018/08/07/035%20|%20%E5%AD%A6%E4%B9%A0%20i++%20%E5%92%8C%20++i%20%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%8C%BA%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat_with_glasses.jpg">
+      <meta itemprop="name" content="Junhao Wang">
+      <meta itemprop="description" content="Debug the old world, bug the new world!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="B_L_OO_GGG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          学习 i++ 和 ++i 的本质区别
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 08/07/2018 10:30" itemprop="dateCreated datePublished" datetime="2018-08-07T10:30:05-07:00">08/07/2018</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 06/08/2019 15:14" itemprop="dateModified" datetime="2019-06-08T15:14:54-07:00">06/08/2019</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/08/07/035%20%7C%20%E5%AD%A6%E4%B9%A0%20i++%20%E5%92%8C%20++i%20%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%8C%BA%E5%88%AB/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/08/07/035 | 学习 i++ 和 ++i 的本质区别/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>最近在朋友圈看到一篇解释<code>i++</code>和<code>++i</code>的文章，觉得非常有意思，就把要点记录下来。</p>
+<blockquote>
+<p>你的解释不是我想要的…</p>
+</blockquote>
+<p>先看两段代码<code>HelloWorld_1</code>和<code>HelloWorld_2</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HelloWorld_1.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld_1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        i = i++;</span><br><span class="line">        System.out.println(i); <span class="comment">// 0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HelloWorld_2.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld_2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        i = ++i;</span><br><span class="line">        System.out.println(i); <span class="comment">// 1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>大家应该一眼就知道运行结果，第一段代码是 0，第二段代码是 1，但关键是：<strong>为什么只是换了一下顺序，结果就不一样了？</strong></p>
+<p>一般的解释：<code>i = i++</code>，会先赋值，再加一，所以结果是 0，而<code>i = ++i</code>，会先把 i 加一，然后再赋值，所以结果是 1。</p>
+<blockquote>
+<p>全场感叹，都向那位同学投以敬佩的目光，毕竟他的理论足以解释现象。</p>
+</blockquote>
+<p>然而，提问的人说了一句，<strong>“你的解释不是我想要的……”</strong></p>
+<p>一般的解释不能说不对，但是没有说到关键点上，因为这是以<strong>高级语言的角度</strong>来解释的。为了深入理解，我们需要从<strong>更低级的层面</strong>去获取答案。</p>
+<p>Java 的跨平台靠 JVM（Java 虚拟机）这个翻译官来实现。你写好的代码，会被编译成一个<code>.class</code>文件，也就是 Java 字节码文件，这里面记录的是一系列要在 JVM 执行的指令。接着，你拿着这份字节码指令，去到任意一个 JVM（Linux 的 JVM、OS X 的 JVM），它们都会帮你把它翻译成不同平台所对应的机器指令（机器码）。这就实现了跨平台。</p>
+<p>回到问题，<code>i++</code>和<code>++i</code>为什么会不一样呢？我们先通过<code>javac</code>和<code>javap</code>命令获得字节码指令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac HelloWorld_1.java</span><br></pre></td></tr></table></figure>
+<p>可以得到<code>HelloWorld_1.class</code>文件。class 文件里面都是二进制的数据，因为这些都是告诉 JVM 要做什么事情的指令，而机器只看得懂二进制。所以，我们需要对这个二进制反汇编，把它变成人类看得懂的语言。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javap -c HelloWorld_1.class</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong>为了方便比较，源代码中的<code>System.out.println(i)</code>已被删掉。</p>
+<p>命令执行后，控制台打印出一系列的字节码指令，其中main函数的字节码指令如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(java.lang.String[])</span></span>;</span><br><span class="line">  Code:</span><br><span class="line">     <span class="number">0</span>: iconst_0</span><br><span class="line">     <span class="number">1</span>: istore_1</span><br><span class="line">     <span class="number">2</span>: iload_1</span><br><span class="line">     <span class="number">3</span>: iinc <span class="number">1</span>, <span class="number">1</span></span><br><span class="line">     <span class="number">6</span>: istore_1</span><br><span class="line">     <span class="number">7</span>: <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+
+<p>这一串的指令，主要涉及到两个数据结构，一个是操作数栈（operand stack），另一个是局部变量表（local variable）。前者是栈，后者是数组。</p>
+<ol>
+<li><p>iconst_0</p>
+<p> 把一个值为 0 的 int 值压到操作数栈中。<br> <img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tfego.jpg"></p>
+</li>
+<li><p>istore_1</p>
+<p> 从操作数栈中弹出一个值，存放到局部变量表下标为 1 的位置（为什么不是 0 或者 2 ？因为前面有个 String 数组的参数 args，所以不是 0。又因为方法是 static 的，没有 this 引用，所以不是 2）。<br> <img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/bgwky.jpg"></p>
+<p> 以上两条指令对应的是第一行代码<code>int i = 0</code>，它实现了给 i 赋值，并且把 i 放到局部变量表的功能。接下来是<code>i = i++</code>对应的指令。</p>
+</li>
+<li><p>iload_1</p>
+<p> 把局部变量表中索引为 1 的值压到操作数栈中（表中的值仍存在）。<br> <img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/gjmyj.jpg"></p>
+</li>
+<li><p>iinc 1, 1</p>
+<p> 对局部变量表索引为 1 的值进行加一操作。iinc 指令第一个参数代表索引值，第二个参数代表加多少。<br> <img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/metfe.jpg"></p>
+<p> 此时，局部变量表中 i 的值等于 1，为什么最后打印出来还是 0 呢？问题出在最后一条指令。</p>
+</li>
+<li><p>istore_1</p>
+<p> 从操作数栈中弹出一个值，将它赋值给局部变量表中索引为 1 的值。<br> <img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ptguh.jpg"></p>
+<p> 完蛋，这下 i 又变成 0 了！</p>
+</li>
+</ol>
+<p>这就是 i 为 0 的本质原因。向别人解释的时候可以总结为以下三点：</p>
+<ol>
+<li>赋值的本质是<strong>两步操作</strong>，先将等号右边的值压进操作数栈（iload），再将操作数栈中的值弹出至局部变量表中对应的位置上（istore）。</li>
+<li>++ 的本质是<code>iinc</code>指令，操作的对象<strong>局部变量表</strong>，而不是操作数栈。</li>
+<li><code>i = i++</code>对应三条指令的顺序是：iload_1、iinc 1,1、istore_1。</li>
+</ol>
+<p>至于<code>i = ++i</code>，它与前者的区别在 iload_1 和 iinc 的顺序上。当 iinc 在前，赋值前局部变量表中对应的值已为 1，且赋值操作的两条指令相邻，不存在归零现象。</p>
+<p>最后，本文所提到的操作数栈和局部变量表只是 JVM 运行时数据区域中很小的一块（JVM Stack， 虚拟机栈），完整的模型图如下：</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/gegfj.jpg" title="JVM 运行时数据区域图"></p>
+<p>参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/WlfauLoyJtMeINL336XatQ">Java 第一课 by Bridge4You</a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Junhao Wang
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://www.junhaow.com/2018/08/07/035%20|%20%E5%AD%A6%E4%B9%A0%20i++%20%E5%92%8C%20++i%20%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%8C%BA%E5%88%AB/" title="学习 i++ 和 ++i 的本质区别">http://www.junhaow.com/2018/08/07/035 | 学习 i++ 和 ++i 的本质区别/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/i/" rel="tag"><i class="fa fa-tag"></i> i++</a>
+              <a href="/tags/i/" rel="tag"><i class="fa fa-tag"></i> ++i</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/07/31/034%20%7C%20%E4%B8%8D%E8%A6%81%E5%86%8D%E6%B7%B7%E6%B7%86%20C%20%E8%AF%AD%E8%A8%80%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E%E5%92%8C%E5%AE%9A%E4%B9%89/" rel="prev" title="不要再混淆 C 语言变量的声明和定义">
+      <i class="fa fa-chevron-left"></i> 不要再混淆 C 语言变量的声明和定义
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/08/15/036%20%7C%20%E5%85%B3%E4%BA%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E7%9A%84%E6%80%BB%E7%BB%93/" rel="next" title="关于操作系统内存管理的总结">
+      关于操作系统内存管理的总结 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Junhao Wang"
+      src="/images/cat_with_glasses.jpg">
+  <p class="site-author-name" itemprop="name">Junhao Wang</p>
+  <div class="site-description" itemprop="description">Debug the old world, bug the new world!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">118</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/junhaowww" title="Twitter → https://twitter.com/junhaowww" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/junhaowww" title="GitHub → https://github.com/junhaowww" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/junhaowww/" title="LinkedIn → https://www.linkedin.com/in/junhaowww/" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>LinkedIn</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/maodai/" title="豆瓣 (Book) → https://www.douban.com/people/maodai/" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>豆瓣 (Book)</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.jianshu.com/u/41865efdad5d/" title="https://www.jianshu.com/u/41865efdad5d/" rel="noopener" target="_blank">Xiaofud</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.davex.pw/" title="https://www.davex.pw/" rel="noopener" target="_blank">DaveX</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://" title="http://" rel="noopener" target="_blank">alexfan.xyz</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Junhao Wang</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://junhaow.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://www.junhaow.com/2018/08/07/035%20|%20%E5%AD%A6%E4%B9%A0%20i++%20%E5%92%8C%20++i%20%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%8C%BA%E5%88%AB/";
+    this.page.identifier = "2018/08/07/035 | 学习 i++ 和 ++i 的本质区别/";
+    this.page.title = "学习 i++ 和 ++i 的本质区别";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://junhaow.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

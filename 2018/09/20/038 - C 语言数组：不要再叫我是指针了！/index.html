@@ -1,37 +1,761 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic|Bitter:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.junhaow.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="在整理有关指针和数组名之间的隐式转换、二维数组、指针数组等笔记时，总感觉自己对指针和数组本身概念的理解比较模糊，因此特地整理此文，梳理思路。 指针和数组之间没有任何关系！指针就是指针，指针变量在 32 位系统下，永远占 4 个字节，其值为一个内存的地址。指针可以指向任何地方，但是不是任何地方都能通过这个指针变量访问到。数组就是数组，其大小与元素的类型和个数有关。定义数组时必须指定其元素的类型和个数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C 语言数组：不要再叫我是指针了！">
+<meta property="og:url" content="http://www.junhaow.com/2018/09/20/038%20-%20C%20%E8%AF%AD%E8%A8%80%E6%95%B0%E7%BB%84%EF%BC%9A%E4%B8%8D%E8%A6%81%E5%86%8D%E5%8F%AB%E6%88%91%E6%98%AF%E6%8C%87%E9%92%88%E4%BA%86%EF%BC%81/index.html">
+<meta property="og:site_name" content="B_L_OO_GGG">
+<meta property="og:description" content="在整理有关指针和数组名之间的隐式转换、二维数组、指针数组等笔记时，总感觉自己对指针和数组本身概念的理解比较模糊，因此特地整理此文，梳理思路。 指针和数组之间没有任何关系！指针就是指针，指针变量在 32 位系统下，永远占 4 个字节，其值为一个内存的地址。指针可以指向任何地方，但是不是任何地方都能通过这个指针变量访问到。数组就是数组，其大小与元素的类型和个数有关。定义数组时必须指定其元素的类型和个数">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-09-21T04:33:05.000Z">
+<meta property="article:modified_time" content="2020-01-24T19:18:06.000Z">
+<meta property="article:author" content="Junhao Wang">
+<meta property="article:tag" content="指针">
+<meta property="article:tag" content="数组">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.junhaow.com/2018/09/20/038%20-%20C%20%E8%AF%AD%E8%A8%80%E6%95%B0%E7%BB%84%EF%BC%9A%E4%B8%8D%E8%A6%81%E5%86%8D%E5%8F%AB%E6%88%91%E6%98%AF%E6%8C%87%E9%92%88%E4%BA%86%EF%BC%81/">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
 
-{% block page_class %}page-post-detail{% endblock %}
+  <title>C 语言数组：不要再叫我是指针了！ | B_L_OO_GGG</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146643833-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-146643833-1');
+      }
+    </script>
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">B_L_OO_GGG</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Sumomo mo momo mo no uchi</p>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-inbox fa-fw"></i>Archives<span class="badge">50</span></a>
+
+  </li>
+        <li class="menu-item menu-item-studynotes">
+
+    <a href="/studynotes/" rel="section"><i class="fa fa-pencil-alt fa-fw"></i>Study Notes</a>
+
+  </li>
+        <li class="menu-item menu-item-lc">
+
+    <a href="/lc/" rel="section"><i class="fa fa-th fa-fw"></i>LeetCode Book</a>
+
+  </li>
+        <li class="menu-item menu-item-games">
+
+    <a href="/games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>Games I've Played</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-grin-squint fa-fw"></i>About Me</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://www.junhaow.com/2018/09/20/038%20-%20C%20%E8%AF%AD%E8%A8%80%E6%95%B0%E7%BB%84%EF%BC%9A%E4%B8%8D%E8%A6%81%E5%86%8D%E5%8F%AB%E6%88%91%E6%98%AF%E6%8C%87%E9%92%88%E4%BA%86%EF%BC%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat_with_glasses.jpg">
+      <meta itemprop="name" content="Junhao Wang">
+      <meta itemprop="description" content="Debug the old world, bug the new world!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="B_L_OO_GGG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C 语言数组：不要再叫我是指针了！
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 09/20/2018 21:33" itemprop="dateCreated datePublished" datetime="2018-09-20T21:33:05-07:00">09/20/2018</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 01/24/2020 11:18" itemprop="dateModified" datetime="2020-01-24T11:18:06-08:00">01/24/2020</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/09/20/038%20-%20C%20%E8%AF%AD%E8%A8%80%E6%95%B0%E7%BB%84%EF%BC%9A%E4%B8%8D%E8%A6%81%E5%86%8D%E5%8F%AB%E6%88%91%E6%98%AF%E6%8C%87%E9%92%88%E4%BA%86%EF%BC%81/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/09/20/038 - C 语言数组：不要再叫我是指针了！/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在整理有关指针和数组名之间的隐式转换、二维数组、指针数组等笔记时，总感觉自己对指针和数组本身概念的理解比较模糊，因此特地整理此文，梳理思路。</p>
+<p><strong>指针和数组之间没有任何关系！</strong>指针就是指针，指针变量在 32 位系统下，永远占 4 个字节，其值为一个内存的地址。指针可以指向任何地方，但是不是任何地方都能通过这个指针变量访问到。数组就是数组，其大小与元素的类型和个数有关。定义数组时必须指定其元素的类型和个数。数组可以存任何类型的数据，但不能存函数。</p>
+<p>为什么很多人容易把数组和指针混淆，甚至认为指针和数组是一样的？最主要的原因是它们都可以<code>以指针形式</code>和<code>以数组下标形式</code>这两种形式去访问。</p>
+<a id="more"></a>
+
+<h2 id="两种访问指针和数组的形式"><a href="#两种访问指针和数组的形式" class="headerlink" title="两种访问指针和数组的形式"></a>两种访问指针和数组的形式</h2><h3 id="访问一个指针"><a href="#访问一个指针" class="headerlink" title="访问一个指针"></a>访问一个指针</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *p = <span class="string">&quot;abcdef&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这里定义了一个指针变量 p，本身在栈上占 4 个字节，p 里存储的是一块内存的首地址。这块内存在常量区，其大小为 7 字节。由于这块内存没有名字，对这块内存的访问完全是<code>匿名</code>的。我们可以通过两种方式进行访问：</p>
+<ul>
+<li><p>以指针形式访问</p>
+<p>  <code>*(p + 4)</code>，先取出 p 里存储的地址值，然后加上 4 个字符大小的偏移量，得到新的地址，最后取出新地址上的值。</p>
+</li>
+<li><p>以数组下标形式访问</p>
+<p>  <code>p[4]</code>，<strong>但是编译器总是把以下标的形式的操作解析为以指针的形式的操作</strong>。因此，以下标的形式访问在本质上与以指针的形式访问没有区别，只是写法上不同。此外，比较有趣的是，我们可以将<code>p[4]</code>写成<code>4[p]</code>，编译器并不会报错，因为它将<code>4[p]</code>解析为<code>*(4 + p)</code>。</p>
+</li>
+</ul>
+<h3 id="访问一个数组"><a href="#访问一个数组" class="headerlink" title="访问一个数组"></a>访问一个数组</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[] = <span class="string">&quot;123456&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这里定义了一个数组 a，a 拥有 7 个字符类型的元素，其空间大小为 7 字节（包括<code>&#39;\0&#39;</code>）。数组 a 本身在栈上，对 a 元素的访问必须先根据数组的名字 a 找到数组第一个元素的地址，然后根据偏移量找到相应的值。这是一种典型的<code>具名+匿名</code>访问。</p>
+<ul>
+<li><p>以指针形式访问</p>
+<p>  <code>*(a + 4)</code>，a 这时候代表的是数组第一个元素的地址，然后加上 4 个字符的偏移量得到新的地址，最后取出地址上的值。</p>
+</li>
+<li><p>以下标形式访问</p>
+<p>  <code>a[4]</code>，同理转换成以指针访问的形式。</p>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>由上面的分析，我们可以看到，指针和数组是两个完全不一样的东西，只是它们都可以<code>以指针形式</code>或<code>以下标形式</code>进行访问。访问指针是完全匿名的访问，而访问数组是典型的<code>具名+匿名</code>访问。最后，一定要注意的是<code>以 XXX 形式访问</code>这种表达方式。</p>
+<h2 id="a-和-amp-a-的区别"><a href="#a-和-amp-a-的区别" class="headerlink" title="a 和 &amp;a 的区别"></a>a 和 &amp;a 的区别</h2><p>对于 <code>int a[4]</code>，a 有两种含义：</p>
+<ul>
+<li>指向第一个元素的指针</li>
+<li>指向数组的指针</li>
+</ul>
+<p><strong>两者的值相等，但意义不同</strong>。在多数情况下，a 可以看做是指向第一个元素的指针，即在加减运算中表现为指向 int 类型的指针。（但注意的是，a 不是变量，不可以被赋值）</p>
+<p>因此，我们可以这样写：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = a; <span class="comment">// 等价于 int *p = &amp;a[0];</span></span><br></pre></td></tr></table></figure>
+
+<p>然而，数组名 a 在以下两种情况下不能当做指向第一个元素的指针：</p>
+<ol>
+<li><p><code>sizeof(a)</code></p>
+<p> 得到的是数组的大小，即 16 字节。而不是将其理解为 int 类型指针的大小，即 8 字节（假定在 64 位系统下）。<strong>但是就像之前说的，它表现为一个指向 int 类型指针。</strong></p>
+</li>
+<li><p><code>sizeof(&amp;a)</code></p>
+<p> 得到的是指向长度为 4 的数组的指针（64 位下 8 字节），即<code>int (*)[4]</code>类型，运算时位移量是按照整个数组大小进行计算，即<code>&amp;a + 1</code>表示的是下一个数组。注意，这里的 4 不能省略，因为指向不确定长度的指针是没有意义的，编译器若不知道指向数组的大小，就无法获得位移量并编译指针的加减运算。<strong>它表现得像一个数组指针。</strong></p>
+<p> 如果要定义一个指向该数组的指针，应该这么写：</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> (*p)[<span class="number">4</span>] = &amp;a; <span class="comment">// 而不是 int *p = &amp;a;</span></span><br><span class="line"><span class="comment">// sizeof(&amp;a) 的值为 8，指针类型的大小</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><strong>注意：</strong>数组 a 并没有被转换成指针，尽管有的文章这么说。</p>
+<h2 id="指针和数组的定义与声明"><a href="#指针和数组的定义与声明" class="headerlink" title="指针和数组的定义与声明"></a>指针和数组的定义与声明</h2><p>为了进一步说明指针和数组是两个独立的概念，我们还可以通过定义与声明的角度去理解。</p>
+<h3 id="定义为数组，声明为指针"><a href="#定义为数组，声明为指针" class="headerlink" title="定义为数组，声明为指针"></a>定义为数组，声明为指针</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件 1 - 定义</span></span><br><span class="line"><span class="keyword">char</span> a[<span class="number">100</span>];</span><br><span class="line"><span class="comment">// 文件 2 - 声明</span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">char</span> *a;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error: redeclaration of &#x27;abc&#x27; with a different type: &#x27;char *&#x27; vs &#x27;char [100]&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意到了吗，they are different types！</strong></p>
+<p>数组就是数组，指针就是指针，它们是完全不同的两码事。<code>char a[100]</code>是定义，系统为它分配了 100 字节的内存空间。在文件 2 下，编译器认为 a 是一个指针变量，在 64 位下占 8 个字节。虽然在文件 1 下，编译器知道 a 是一个数组，但在文件 2 下，编译器并不知道这一点，此时大小存在冲突。</p>
+<p>此外，在文件 1 中，分配的内存空间中存的是 char 元素，是内容本身；而在文件 2 中，编译器将这些内容理解为 8 个字节的地址。</p>
+<h4 id="进一步解释（参考-Expert-C-Programming）"><a href="#进一步解释（参考-Expert-C-Programming）" class="headerlink" title="进一步解释（参考 Expert C Programming）"></a>进一步解释（参考 Expert C Programming）</h4><p>首先，需要注意<code>地址 y</code>和<code>地址 p 的内容</code>两者的区别，这相当微妙，而且在大多数编程语言中我们用同一个符号来表示这两样东西。</p>
+<ul>
+<li>左值：出现在赋值符左边的符号，编译时可知，表示存储结果的地方。</li>
+<li>右值：出现在赋值符右边的符号，运行时才知，表示为地址的内容。</li>
+</ul>
+<p>C 语言引入<strong>可修改的左值</strong>这个术语。数组名是个左值，但不能被修改。标准规定赋值符<code>必须</code>用可修改的左值作为它左边的操作数，即只能给可以修改的东西赋值，所以这就是为什么数组名不能被赋值的原因。</p>
+<p>再看：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">char</span> a[]; <span class="comment">// √</span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">char</span> *a; <span class="comment">// ✕</span></span><br></pre></td></tr></table></figure>
+
+<p>这里的关键之处在于每个符号的地址在编译时可知。所以，如果编译器需要一个地址（可能还需要偏移量）来执行某种操作，它就可以直接进行操作，并不需要增加指令首先取得具体的地址。</p>
+<p>相反，对于指针，必须首先知道在运行时取得它的当前值。第一个声明<code>extern char a[]</code>提示了 a 是一个数组，也就是一个内存地址（链接时符号都被替换成真正的地址）；第二个声明<code>extern char *a</code>告诉编译器 a 是一个指针，我们只知道指针本身所在的地址，而不知道它所指向 char 对象的地址（即变量的值）。</p>
+<h3 id="定义为指针，声明为数组"><a href="#定义为指针，声明为数组" class="headerlink" title="定义为指针，声明为数组"></a>定义为指针，声明为数组</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件 1 - 定义</span></span><br><span class="line"><span class="keyword">char</span> *a;</span><br><span class="line"><span class="comment">// 文件 2 - 声明</span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">char</span> a[<span class="number">100</span>];</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error: redeclaration of &#x27;abc&#x27; with a different type: &#x27;char [100]&#x27; vs &#x27;char *&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>同理。</p>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>通过上面的分析，我们应该知道数组与指针的的确确是两码事了。他们之间是不可以混淆的，但是我们可以说「以 XXX 的形式」访问数组的元素或指针指向的内容。此外，以后一定要确认你的代码在一个地方定义为指针，在别的地方也只能声明为指针；在一个的地方定义为数组，在别的地方也只能声明为数组。</p>
+<p><strong>注意：</strong>在指针参数中存在隐式转换，两者是可以转换的（可参考：<a href="https://www.junhaow.com/2018/10/01/039%20%7C%20%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2%EF%BC%9A%E6%8A%8A%20C%20%E8%AF%AD%E8%A8%80%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%8C%87%E9%92%88/">隐式转换：把 C 语言数组转换为指针</a>）。</p>
+<p>指针与数组的特性总结（来源请看参考）：</p>
+<table>
+<thead>
+<tr>
+<th>指针</th>
+<th>数组</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>保存数据的地址，任何存入变量的数据都会被当做地址来处理。变量本身的地址由编译器另外存储，我们并不知道在哪里。</td>
+<td>保存数据。数组名代表的是数组第一个元素的地址，而不是数组的地址；<code>&amp;数组名</code>才是整个数组的地址。a 本身的地址由编译器另外存储，我们并不知道在哪里。</td>
+</tr>
+<tr>
+<td>间接访问数据：访问是<code>完全匿名</code>的。首先取得变量的内容，把它作为地址，然后根据这个地址提取或写入数据。</td>
+<td>直接访问数据：数组名就是整个数组的名字，数组内每个元素没有名字。只能通过<code>具名+匿名</code>的方式来访问某个元素，不能把整个数组当做一个整体进行读写操作。</td>
+</tr>
+<tr>
+<td>通常用于动态数据结构，相关的函数有 malloc 和 free。</td>
+<td>通常用于存储固定数目且数据类型相同的元素，隐式分配和销毁。</td>
+</tr>
+<tr>
+<td>通常指向匿名数据（也可以指向具名数据）</td>
+<td>自身为具名数据（数组名）</td>
+</tr>
+<tr>
+<td>初始化时编译器并不为指针所指向的对象分配空间，只分配指针本身，除非在定义时同时赋值给指针一个字符串常量。</td>
+<td>数组在初始化时为对象分配了空间。</td>
+</tr>
+</tbody></table>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://c.biancheng.net/cpp/html/475.html">C 语言指针与数组之间的恩恩怨怨</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/41805285">C 中，数组名跟指针有区别吗？</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Junhao Wang
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://www.junhaow.com/2018/09/20/038%20-%20C%20%E8%AF%AD%E8%A8%80%E6%95%B0%E7%BB%84%EF%BC%9A%E4%B8%8D%E8%A6%81%E5%86%8D%E5%8F%AB%E6%88%91%E6%98%AF%E6%8C%87%E9%92%88%E4%BA%86%EF%BC%81/" title="C 语言数组：不要再叫我是指针了！">http://www.junhaow.com/2018/09/20/038 - C 语言数组：不要再叫我是指针了！/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%8C%87%E9%92%88/" rel="tag"><i class="fa fa-tag"></i> 指针</a>
+              <a href="/tags/%E6%95%B0%E7%BB%84/" rel="tag"><i class="fa fa-tag"></i> 数组</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/08/27/037%20%7C%20CPU%20%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%AE%9E%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/" rel="prev" title="CPU 的两种工作模式：实模式和保护模式">
+      <i class="fa fa-chevron-left"></i> CPU 的两种工作模式：实模式和保护模式
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/10/01/039%20%7C%20%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2%EF%BC%9A%E6%8A%8A%20C%20%E8%AF%AD%E8%A8%80%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%8C%87%E9%92%88/" rel="next" title="隐式转换：把 C 语言数组转换为指针">
+      隐式转换：把 C 语言数组转换为指针 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%E8%AE%BF%E9%97%AE%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">两种访问指针和数组的形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E4%B8%80%E4%B8%AA%E6%8C%87%E9%92%88"><span class="nav-number">1.1.</span> <span class="nav-text">访问一个指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84"><span class="nav-number">1.2.</span> <span class="nav-text">访问一个数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#a-%E5%92%8C-amp-a-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.</span> <span class="nav-text">a 和 &amp;a 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%A3%B0%E6%98%8E"><span class="nav-number">3.</span> <span class="nav-text">指针和数组的定义与声明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%BA%E6%95%B0%E7%BB%84%EF%BC%8C%E5%A3%B0%E6%98%8E%E4%B8%BA%E6%8C%87%E9%92%88"><span class="nav-number">3.1.</span> <span class="nav-text">定义为数组，声明为指针</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E8%A7%A3%E9%87%8A%EF%BC%88%E5%8F%82%E8%80%83-Expert-C-Programming%EF%BC%89"><span class="nav-number">3.1.1.</span> <span class="nav-text">进一步解释（参考 Expert C Programming）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%BA%E6%8C%87%E9%92%88%EF%BC%8C%E5%A3%B0%E6%98%8E%E4%B8%BA%E6%95%B0%E7%BB%84"><span class="nav-number">3.2.</span> <span class="nav-text">定义为指针，声明为数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Junhao Wang"
+      src="/images/cat_with_glasses.jpg">
+  <p class="site-author-name" itemprop="name">Junhao Wang</p>
+  <div class="site-description" itemprop="description">Debug the old world, bug the new world!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">118</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/junhaowww" title="Twitter → https://twitter.com/junhaowww" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/junhaowww" title="GitHub → https://github.com/junhaowww" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/junhaowww/" title="LinkedIn → https://www.linkedin.com/in/junhaowww/" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>LinkedIn</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/maodai/" title="豆瓣 (Book) → https://www.douban.com/people/maodai/" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>豆瓣 (Book)</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.jianshu.com/u/41865efdad5d/" title="https://www.jianshu.com/u/41865efdad5d/" rel="noopener" target="_blank">Xiaofud</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.davex.pw/" title="https://www.davex.pw/" rel="noopener" target="_blank">DaveX</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://" title="http://" rel="noopener" target="_blank">alexfan.xyz</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Junhao Wang</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://junhaow.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://www.junhaow.com/2018/09/20/038%20-%20C%20%E8%AF%AD%E8%A8%80%E6%95%B0%E7%BB%84%EF%BC%9A%E4%B8%8D%E8%A6%81%E5%86%8D%E5%8F%AB%E6%88%91%E6%98%AF%E6%8C%87%E9%92%88%E4%BA%86%EF%BC%81/";
+    this.page.identifier = "2018/09/20/038 - C 语言数组：不要再叫我是指针了！/";
+    this.page.title = "C 语言数组：不要再叫我是指针了！";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://junhaow.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

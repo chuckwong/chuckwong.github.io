@@ -1,70 +1,776 @@
-{% extends '_layout.swig' %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-  {% block title %}{#
-  #}{% set page_title_suffix = ' | ' + config.title %}{#
+<link rel="stylesheet" href="/css/main.css">
 
-  #}{% if page.type === "categories" and not page.title %}{#
-    #}{{ __('title.category') + page_title_suffix }}{#
-  #}{% elif page.type === "tags" and not page.title %}{#
-    #}{{ __('title.tag') + page_title_suffix }}{#
-  #}{% else %}{#
-    #}{{ page.title + page_title_suffix }}{#
-  #}{% endif %}{#
-#}{% endblock %}
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic|Bitter:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.junhaow.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-{% block content %}
+  <meta name="description" content="Reference: Problem I, Problem II, Problem III EPI 11.10Difficulty: Medium My Post: All-In-One Summary (Single Number I, II, III) Single Number I Given a non-empty array of integers, every element ap">
+<meta property="og:type" content="website">
+<meta property="og:title" content="136. Single Number I, II, III">
+<meta property="og:url" content="http://www.junhaow.com/lc/problems/bitwise/136_single-number-i-ii-iii.html">
+<meta property="og:site_name" content="B_L_OO_GGG">
+<meta property="og:description" content="Reference: Problem I, Problem II, Problem III EPI 11.10Difficulty: Medium My Post: All-In-One Summary (Single Number I, II, III) Single Number I Given a non-empty array of integers, every element ap">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/7ywr3.jpg">
+<meta property="article:published_time" content="2020-04-17T20:45:11.972Z">
+<meta property="article:modified_time" content="2019-07-18T01:36:02.000Z">
+<meta property="article:author" content="Junhao Wang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/7ywr3.jpg">
 
-  <div id="posts" class="posts-expand">
-    {##################}
-    {### PAGE BLOCK ###}
-    {##################}
-    <div class="post-block page">
-      {% include '_partials/page-header.swig' %}
-      {#################}
-      {### PAGE BODY ###}
-      {#################}
-      <div class="post-body{% if theme.han %} han-init-context{% endif %}{% if page.direction && page.direction.toLowerCase() === 'rtl' %} rtl{% endif %}">
-        {# tagcloud page support #}
-        {% if page.type === "tags" %}
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                {{ _p('counter.tag_cloud', site.tags.length) }}
-            </div>
-            <div class="tag-cloud-tags">
-              {{ tagcloud({min_font: 12, max_font: 30, amount: 300, color: true, start_color: '#ccc', end_color: '#111'}) }}
-            </div>
-          </div>
-        {% elif page.type === 'categories' %}
-          <div class="category-all-page">
-            <div class="category-all-title">
-                {{ _p('counter.categories', site.categories.length) }}
-            </div>
-            <div class="category-all">
-              {{ list_categories() }}
-            </div>
-          </div>
-        {% else %}
-          {{ page.content }}
-        {% endif %}
-      </div>
-      {#####################}
-      {### END PAGE BODY ###}
-      {#####################}
+<link rel="canonical" href="http://www.junhaow.com/lc/problems/bitwise/136_single-number-i-ii-iii">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'en'
+  };
+</script>
+
+  <title>136. Single Number I, II, III | B_L_OO_GGG
+</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146643833-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-146643833-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-    {######################}
-    {### END PAGE BLOCK ###}
-    {######################}
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">B_L_OO_GGG</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Sumomo mo momo mo no uchi</p>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-inbox fa-fw"></i>Archives<span class="badge">50</span></a>
+
+  </li>
+        <li class="menu-item menu-item-studynotes">
+
+    <a href="/studynotes/" rel="section"><i class="fa fa-pencil-alt fa-fw"></i>Study Notes</a>
+
+  </li>
+        <li class="menu-item menu-item-lc">
+
+    <a href="/lc/" rel="section"><i class="fa fa-th fa-fw"></i>LeetCode Book</a>
+
+  </li>
+        <li class="menu-item menu-item-games">
+
+    <a href="/games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>Games I've Played</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-grin-squint fa-fw"></i>About Me</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content page posts-expand">
+            
+
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">136. Single Number I, II, III
+</h1>
+
+<div class="post-meta">
+  
+  <ul class="breadcrumb">
+          
+            <li><a href="/lc/">LC</a></li>
+            <li><a href="/lc/problems/">PROBLEMS</a></li>
+            <li><a href="/lc/problems/bitwise/">BITWISE</a></li>
+            <li>136_SINGLE-NUMBER-I-II-III</li>
+          
+  </ul>
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <br>
+
+<p>Reference: <a target="_blank" rel="noopener" href="https://leetcode.com/problems/single-number/">Problem I</a>, <a target="_blank" rel="noopener" href="https://leetcode.com/problems/single-number-ii/">Problem II</a>, <a target="_blank" rel="noopener" href="https://leetcode.com/problems/single-number-iii/">Problem III</a> <span class="gray">EPI 11.10</span><br>Difficulty: <span class="orange">Medium</span></p>
+<p>My Post: <a target="_blank" rel="noopener" href="https://leetcode.com/problems/single-number-iii/discuss/326622/all-in-one-summary-single-number-i-ii-iii">All-In-One Summary (Single Number I, II, III)</a></p>
+<h2 id="Single-Number-I"><a href="#Single-Number-I" class="headerlink" title="Single Number I"></a>Single Number I</h2><blockquote>
+<p>Given a <code>non-empty</code> array of integers, every element appears twice except for one. Find that single one.</p>
+</blockquote>
+<p><strong>Follow-up:</strong> Your algorithm should have a <code>linear runtime</code> complexity. Could you implement it <code>without using extra memory</code>?</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: [<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line">Output: <span class="number">1</span></span><br><span class="line">Input: [<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">Output: <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+
+<p><strong>Methods:</strong></p>
+<ol>
+<li>Brute-force</li>
+</ol>
+<ul>
+<li><code>Option 1</code>: Check each item with the rest of items.<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> n = nums.length;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123; <span class="comment">// examining i</span></span><br><span class="line">    <span class="keyword">boolean</span> isSingle = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; ++j) &#123;</span><br><span class="line">      <span class="keyword">if</span> (i == j) <span class="keyword">continue</span>; <span class="comment">// except itself</span></span><br><span class="line">      </span><br><span class="line">      <span class="keyword">if</span> (nums[i] == nums[j]) &#123; <span class="comment">// found duplicate numbers</span></span><br><span class="line">        isSingle = <span class="keyword">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSingle) &#123;</span><br><span class="line">      <span class="keyword">return</span> nums[i];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<strong>Time:</strong> $O(N^2)$<br><strong>Space:</strong> $O(1)$</li>
+<li><code>Option 2</code>:<ul>
+<li>Iterate over all the elements in <code>nums</code>.</li>
+<li>If some number in <code>nums</code> is new to array, append it.</li>
+<li>If some number is already in the array, remove it.</li>
+<li><strong>Time:</strong> $O(N^2)$</li>
+<li><strong>Space:</strong> $O(N)$</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>Hash Table<ul>
+<li>For the <code>Option 2</code> above, we can optimize it by using a hash set since <code>add</code> and <code>remove</code> operations take only $O(1)$ time.</li>
+<li>The way to get the value in a set is to iterate it.<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HashSet</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">  Set&lt;Integer&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> val : nums) &#123;</span><br><span class="line">    <span class="keyword">if</span> (set.contains(val)) &#123;</span><br><span class="line">      set.remove(val);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      set.add(val);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;      </span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> val : set) &#123;</span><br><span class="line">    <span class="keyword">return</span> val;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<p>  <strong>Time:</strong> $O(N)$<br>  <strong>Space:</strong> $O(N)$<br>3. Math</p>
+<ul>
+<li>Use the following equation to solve the problem:</li>
+<li>$2 \times (a + b + c) - (a + a + b + b + c) = c$<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">  Set&lt;Integer&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> val : nums) &#123;</span><br><span class="line">    sum += val;</span><br><span class="line">    set.add(val);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">int</span> setSum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> val : set) &#123;</span><br><span class="line">    setSum += val;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span> * setSum - sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>  <strong>Time:</strong> $O(N)$<br>  <strong>Space:</strong> $O(N)$<br>4. Bit Manipulation</p>
+<ul>
+<li>If we take <code>XOR</code> of zero and some bit, it will return that bit:<ul>
+<li><code>a ^ 0 = a</code></li>
+</ul>
+</li>
+<li>If we take <code>XOR</code> of two same bits, it will return $0$:<ul>
+<li><code>a ^ a = 0</code></li>
+</ul>
+</li>
+<li>So we have: <code>a ^ b ^ a = (a ^ a) ^ b = b</code>.</li>
+<li>The numbers that occur twice will be reduced to zero.<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> val : nums) &#123;</span><br><span class="line">    a ^= val;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>  <strong>Time:</strong> $O(N)$<br>  <strong>Space:</strong> $O(1)$</p>
+<h2 id="Single-Number-II"><a href="#Single-Number-II" class="headerlink" title="Single Number II"></a>Single Number II</h2><blockquote>
+<p>Given a <code>non-empty</code> array of integers, every element appears three times except for one. Find that single one.</p>
+</blockquote>
+<p><strong>Follow-up:</strong> Your algorithm should have a <code>linear runtime</code> complexity. Could you implement it <code>without using extra memory</code>?</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: [<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>]</span><br><span class="line">Output: <span class="number">3</span></span><br><span class="line">Input: [<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">99</span>]</span><br><span class="line">Output: <span class="number">99</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Methods</strong></p>
+<ol>
+<li>Brute-force (same as Problem I)</li>
+<li>Hash Table<ul>
+<li>Use a hash map to count the number of occurrence.</li>
+<li><strong>Time:</strong> $O(N)$</li>
+<li><strong>Space:</strong> $O(N)$</li>
+</ul>
+</li>
+<li>Math (same as Problem I)<ul>
+<li>$3 \times (a + b + c) - (a + a + a + b + b + b + c) = c$</li>
+</ul>
+</li>
+<li>Bit Manipulation (Generalized)<ul>
+<li>See details below.</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// k = 3 / 11 (m = 2), p = 1</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> x1 = <span class="number">0</span>, x2 = <span class="number">0</span>, mask = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> val : nums) &#123;</span><br><span class="line">    x2 = x2 ^ (x1 &amp; val);</span><br><span class="line">    x1 = x1 ^ val;</span><br><span class="line">    mask = ~(x2 &amp; x1);</span><br><span class="line">    x2 = x2 &amp; mask;</span><br><span class="line">    x1 = x1 &amp; mask;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// p = 1, final state: x2 = 0, x1 = 1</span></span><br><span class="line">  <span class="keyword">return</span> x1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Generalized-Method"><a href="#Generalized-Method" class="headerlink" title="Generalized Method"></a>Generalized Method</h2><p>Reference: <a target="_blank" rel="noopener" href="https://leetcode.com/problems/single-number-ii/discuss/43295">Detailed explanation and generalization of the bitwise operation method for single numbers
+</a></p>
+<h3 id="Design-Counting-System"><a href="#Design-Counting-System" class="headerlink" title="Design Counting System"></a>Design Counting System</h3><h4 id="Update-A-State"><a href="#Update-A-State" class="headerlink" title="Update A State"></a>Update A State</h4><p>The problem can be generalized as follows:</p>
+<ul>
+<li>Given an array of integers, every element appears <code>k</code> (<code>k &gt; 1</code>) times except for one which appears <code>p</code> times (<code>p &gt;= 1, p % k != 0</code>). Find that single one.</li>
+</ul>
+<p>The idea is to design a way to count the number of 1-bit digits. If the number of 1-bit digits equals <code>k</code>, we restore the counting system to <code>0</code> and make it start over.</p>
+<p>To represent this counting system, we can use <code>m-bit</code> binary form <code>xm, ..., x2, x1</code>. Here are four properties of the counter:</p>
+<ul>
+<li>There is an initial state of the counter, say $0$.</li>
+<li>For each input, if we hit <code>0</code>, the counting bit <code>xi</code> should remain unchanged.</li>
+<li>Otherwise (hit <code>1</code>), the bit should increase by one.</li>
+<li>In order to cover <code>k</code> counts (states), we require <code>2^m &gt;= k</code>, which means we need <code>m</code> bits that satisfy <code>m &gt;= logk</code>.</li>
+</ul>
+<p>For example, if we need three states (<code>k = 3</code>), we can use <code>m = 2</code> bits to represent this.</p>
+<ul>
+<li>State 1: <code>x2 = 0, x1 = 0</code></li>
+<li>State 2: <code>x2 = 0, x1 = 1</code></li>
+<li>State 3: <code>x2 = 1, x1 = 0</code></li>
+</ul>
+<p>The key part is: how each bit changes as we are going through the array.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">         x3   x2   x1</span><br><span class="line">State <span class="number">1</span>:  <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span></span><br><span class="line">State <span class="number">2</span>:  <span class="number">0</span>    <span class="number">0</span>    <span class="number">1</span></span><br><span class="line">State <span class="number">3</span>:  <span class="number">0</span>    <span class="number">1</span>    <span class="number">0</span></span><br><span class="line">State <span class="number">4</span>:  <span class="number">0</span>    <span class="number">1</span>    <span class="number">1</span></span><br><span class="line">State <span class="number">5</span>:  <span class="number">1</span>    <span class="number">0</span>    <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>We can observe that:</p>
+<ul>
+<li>The <code>x1</code> column changes from 0 to 1 or from 0 to 1 successively, and if it encounter a <code>1</code>, it should change. So we can use bit-toggle operation <code>^= 1</code>.<ul>
+<li><code>x1 = x1 ^ val</code> (val could be <code>1</code> or <code>0</code>)</li>
+</ul>
+</li>
+<li>The <code>x2</code> column changes when <code>x1</code> changes from <code>0</code> to <code>1</code>. Thus we can express this as follows:<ul>
+<li><code>x2 = x2 ^ (x1 &amp; val)</code></li>
+</ul>
+</li>
+<li>The <code>x3</code> column then could be expressed similarly:<ul>
+<li><code>x3 = x3 ^ (x2 &amp; x1 &amp; val)</code></li>
+</ul>
+</li>
+<li>To generalize, <code>xm</code> could be expressed as follows:<ul>
+<li><code>xm = xm ^ (xm-1 &amp; ... &amp; x2 &amp; x1 &amp; val)</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="Reset-A-State"><a href="#Reset-A-State" class="headerlink" title="Reset A State"></a>Reset A State</h4><p>Also, we need to design a cutting mechanism to reset the counting if it hits one for <code>k</code> times. To this end, we apply bitwise <code>AND</code> to those <code>x</code> values with some <code>mask</code> to reset the bits.</p>
+<p>Specifically, we want a <code>mask</code> that will be <code>0</code> only when the count reaches <code>k</code> and be <code>1</code> for all other count cases.</p>
+<p>How do we achieve that?</p>
+<p>For example, check out the examples when <code>k = 2</code> and <code>k = 3</code>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">          x2   x1  +<span class="number">1</span>  x2   x1  =&gt;  x2   x1</span><br><span class="line">State <span class="number">1</span>:   <span class="number">0</span>    <span class="number">0</span>       <span class="number">0</span>    <span class="number">1</span>  =&gt;   <span class="number">0</span>    <span class="number">1</span></span><br><span class="line">State <span class="number">2</span>:   <span class="number">0</span>    <span class="number">1</span>       <span class="number">1</span>    <span class="number">0</span>  =&gt;   <span class="number">0</span>    <span class="number">1</span></span><br><span class="line">k = <span class="number">2</span>:                  <span class="number">1</span>    <span class="number">0</span>  =&gt;   <span class="number">0</span>    <span class="number">0</span></span><br><span class="line"></span><br><span class="line">          x2   x1  +<span class="number">1</span>  x2   x1  =&gt;  x2   x1</span><br><span class="line">State <span class="number">1</span>:   <span class="number">0</span>    <span class="number">0</span>       <span class="number">0</span>    <span class="number">1</span>  =&gt;   <span class="number">0</span>    <span class="number">1</span></span><br><span class="line">State <span class="number">2</span>:   <span class="number">0</span>    <span class="number">1</span>       <span class="number">1</span>    <span class="number">0</span>  =&gt;   <span class="number">0</span>    <span class="number">1</span></span><br><span class="line">State <span class="number">3</span>:   <span class="number">1</span>    <span class="number">0</span>       <span class="number">1</span>    <span class="number">1</span>  =&gt;   <span class="number">1</span>    <span class="number">0</span></span><br><span class="line">k = <span class="number">3</span>:                  <span class="number">1</span>    <span class="number">1</span>  =&gt;   <span class="number">0</span>    <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>When the bits of <code>x</code> are the same as <code>k</code>‘s, it should be reset.</p>
+<ul>
+<li>If the bit of <code>k</code> is <code>1</code>, the <code>mask</code> should be <code>~x</code>.</li>
+<li>If the bit of <code>k</code> is <code>0</code>, the <code>mask</code> should be <code>x</code>.</li>
+</ul>
+<p>Combining all of them together:</p>
+<ul>
+<li>The <code>mask</code> should be <code>~(ym &amp; ... &amp; y2 &amp; y1)</code>.<ul>
+<li>If <code>k = 1</code>, <code>y = x</code>.</li>
+<li>If <code>k = 0</code>, <code>y = ~x</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Therefore, as for the examples above:</p>
+<ul>
+<li><code>k = 2 (1 0)</code>: the mask is <code>~(x2 &amp; ~x1)</code>.</li>
+<li><code>k = 3 (1 1)</code>: the mask is <code>~(x2 &amp; x1)</code>.</li>
+</ul>
+<p>One more example for <code>k = 5 (101)</code>, the mask is <code>~(x3 &amp; ~x2 &amp; x1)</code>.</p>
+<h4 id="Combination"><a href="#Combination" class="headerlink" title="Combination"></a>Combination</h4><p>To this point, we can write out the code for this counting system for <code>k = 3</code>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x1 = <span class="number">0</span>, x2 = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> val : nums) &#123;</span><br><span class="line">  <span class="comment">// update the state</span></span><br><span class="line">  x2 = x2 ^ (x1 &amp; val);</span><br><span class="line">  x1 = x1 ^ val;</span><br><span class="line">  <span class="comment">// mask</span></span><br><span class="line">  mask = ~(x2 &amp; x1);</span><br><span class="line">  x2 = x2 &amp; mask;</span><br><span class="line">  x1 = x1 &amp; mask;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Back-To-Problem"><a href="#Back-To-Problem" class="headerlink" title="Back To Problem"></a>Back To Problem</h3><p>It’s time to generalize our results from 1-bit number case to 32-bit integers. With the help of bitwise operations, we may be able to manage all the 32 bits (counters) collectively instead of using 32 32-bit integers.</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/7ywr3.jpg"></p>
+<p>The question is how to get the result from the <code>x</code> values in those counters. By now, we notice that the counters’ states are only contributed by the number we want. Let’s say the number appear $p$ times, so there should be $p$ <code>1</code> which have entered the counters. Since $p$ could be very large, we need to do <code>p&#39; = p % k</code> to know the exact numbers of <code>1</code>.</p>
+<p>Notice that if <code>p % k == 0</code>, this method is no longer effective for this problem.</p>
+<ul>
+<li><p>For example, if <code>k = 2 (1 0), p = 1 (0 1)</code>, the final state of <code>1</code>‘s corresponding counter’s state should be <code>x2 = 0, x1 = 1</code>. So we just need to return <code>x1</code> as our result.</p>
+</li>
+<li><p>For another example, if <code>k = 2 (1 0), p = 2 (1 0)</code>, the final state of <code>1</code>‘s corresponding counter’s state should be <code>x2 = 0, x1 = 0</code>. However, since it is also the same case of <code>0</code>, we cannot extract the bits that are <code>1</code>.</p>
+</li>
+<li><p>For another example , if <code>k = 4 (1 0 0), p = 3 (0 1 1)</code>, the final state of <code>1</code>‘s corresponding counter’s state should be <code>x3 = 0, x2 = 1, x1 = 1</code>. So, we just need to return <code>x2 | x1</code>, or <code>x2</code>, or <code>x1</code> as our results.</p>
+</li>
+</ul>
+<h2 id="Single-Number-III"><a href="#Single-Number-III" class="headerlink" title="Single Number III"></a>Single Number III</h2><blockquote>
+<p>Given an array of numbers <code>nums</code>, in which <code>exactly two elements</code> appear only once and all the other elements appear <code>exactly twice</code>. Find the two elements that appear only <code>once</code>.</p>
+</blockquote>
+<p><strong>Note:</strong> The order of the result is not important. So in the above example, <code>[5, 3]</code> is also correct.</p>
+<p><strong>Follow-up:</strong> Your algorithm should have a <code>linear runtime</code> complexity. Could you implement it <code>without using extra memory</code>?</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input:  [<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>]</span><br><span class="line">Output: [<span class="number">3</span>,<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Methods</strong></p>
+<ol>
+<li>Brute-force (same as Problem I)<ul>
+<li>Use <code>stream()</code> to convert <code>List&lt;Integer&gt;</code> to <code>int[]</code>.<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] singleNumber(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">  <span class="keyword">int</span> n = nums.length;</span><br><span class="line">  List&lt;Integer&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123; <span class="comment">// examing i</span></span><br><span class="line">    <span class="keyword">boolean</span> isSingle = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; ++j) &#123;</span><br><span class="line">      <span class="keyword">if</span> (i == j) <span class="keyword">continue</span>; <span class="comment">// except itself</span></span><br><span class="line">      </span><br><span class="line">      <span class="keyword">if</span> (nums[i] == nums[j]) &#123; <span class="comment">// found duplicate numbers</span></span><br><span class="line">        isSingle = <span class="keyword">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSingle) &#123;</span><br><span class="line">      result.add(nums[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result.stream().filter(Objects::nonNull).mapToInt(Integer::intValue).toArray();</span><br><span class="line">  <span class="comment">// OR: return new int[] &#123; result.get(0), result.get(1) &#125;;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>Hash Table<ul>
+<li>Use a hash set.<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] singleNumber(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">  Set&lt;Integer&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> val : nums) &#123;</span><br><span class="line">    <span class="keyword">if</span> (set.contains(val)) &#123;</span><br><span class="line">      set.remove(val);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      set.add(val);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> set.stream().filter(Objects::nonNull).mapToInt(Integer::intValue).toArray();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<p>  <strong>Time:</strong> $O(N)$<br>  <strong>Space:</strong> $O(N)$<br>3. Math (not applicable)<br>4. Bit Manipulation (<a target="_blank" rel="noopener" href="https://leetcode.com/problems/single-number-iii/discuss/68900">reference</a>)</p>
+<ul>
+<li>This time we need one more trick. We need to put those distinct single numbers into two groups.</li>
+<li>Let <code>a</code> and <code>b</code> be the two unique numbers.</li>
+<li><strong>In the first pass</strong>, we use <code>^</code> to get the value <code>a ^ b</code>. With this value, we extract any bit which has value <code>1</code>. The bit values of <code>a</code> and <code>b</code> in this position must be different.</li>
+<li><strong>In the second pass</strong>, we separate numbers into two groups, one group with that bit set, and another group with that bit unset.<ul>
+<li>Notice that the size of each group could be different, but we have guaranteed that <code>a</code> and <code>b</code> are not in the same group, and other same numbers are in the same group (<code>since they both have that bit set or unset</code>).    - Under this condition, we can extract <code>a</code> and <code>b</code> in each group by the method proposed in the Problem I.</li>
+</ul>
+</li>
+</ul>
+<p>  <strong>Time:</strong> $O(N)$<br>  <strong>Space:</strong> $O(1)$</p>
+<p><strong>Note:</strong> Be careful of the precedence of <code>&amp;</code> and <code>&gt;</code>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] singleNumber(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">  <span class="comment">// First Pass</span></span><br><span class="line">  <span class="keyword">int</span> abXor = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> val : nums) &#123;</span><br><span class="line">    abXor ^= val;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Isolate one &quot;1&quot; bit in the abXor</span></span><br><span class="line">  <span class="keyword">int</span> mask = abXor &amp; ~(abXor - <span class="number">1</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Second Pass</span></span><br><span class="line">  <span class="keyword">int</span> a = <span class="number">0</span>, b = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> val : nums) &#123;</span><br><span class="line">    <span class="keyword">if</span> ((val &amp; mask) &gt; <span class="number">0</span>) &#123; <span class="comment">// with that bit set</span></span><br><span class="line">      a = a ^ val;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// with that bit unset</span></span><br><span class="line">      b = b ^ val;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[] &#123; a, b &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+      </div>
+      
+      
+      
+    </div>
+    
+  <ul class="breadcrumb">
+          
+            <li><a href="/lc/">LC</a></li>
+            <li><a href="/lc/problems/">PROBLEMS</a></li>
+            <li><a href="/lc/problems/bitwise/">BITWISE</a></li>
+            <li>136_SINGLE-NUMBER-I-II-III</li>
+          
+  </ul>
+
+    
+    
+    
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number-I"><span class="nav-number">1.</span> <span class="nav-text">Single Number I</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number-II"><span class="nav-number">2.</span> <span class="nav-text">Single Number II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generalized-Method"><span class="nav-number">3.</span> <span class="nav-text">Generalized Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Design-Counting-System"><span class="nav-number">3.1.</span> <span class="nav-text">Design Counting System</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Update-A-State"><span class="nav-number">3.1.1.</span> <span class="nav-text">Update A State</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reset-A-State"><span class="nav-number">3.1.2.</span> <span class="nav-text">Reset A State</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Combination"><span class="nav-number">3.1.3.</span> <span class="nav-text">Combination</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Back-To-Problem"><span class="nav-number">3.2.</span> <span class="nav-text">Back To Problem</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Number-III"><span class="nav-number">4.</span> <span class="nav-text">Single Number III</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Junhao Wang"
+      src="/images/cat_with_glasses.jpg">
+  <p class="site-author-name" itemprop="name">Junhao Wang</p>
+  <div class="site-description" itemprop="description">Debug the old world, bug the new world!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">118</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/junhaowww" title="Twitter → https://twitter.com/junhaowww" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/junhaowww" title="GitHub → https://github.com/junhaowww" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/junhaowww/" title="LinkedIn → https://www.linkedin.com/in/junhaowww/" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>LinkedIn</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/maodai/" title="豆瓣 (Book) → https://www.douban.com/people/maodai/" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>豆瓣 (Book)</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.jianshu.com/u/41865efdad5d/" title="https://www.jianshu.com/u/41865efdad5d/" rel="noopener" target="_blank">Xiaofud</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.davex.pw/" title="https://www.davex.pw/" rel="noopener" target="_blank">DaveX</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://" title="http://" rel="noopener" target="_blank">alexfan.xyz</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Junhao Wang</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://junhaow.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://www.junhaow.com/lc/problems/bitwise/136_single-number-i-ii-iii.html";
+    this.page.identifier = "lc/problems/bitwise/136_single-number-i-ii-iii.html";
+    this.page.title = "136. Single Number I, II, III";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://junhaow.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

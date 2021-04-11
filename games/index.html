@@ -1,70 +1,668 @@
-{% extends '_layout.swig' %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-  {% block title %}{#
-  #}{% set page_title_suffix = ' | ' + config.title %}{#
+<link rel="stylesheet" href="/css/main.css">
 
-  #}{% if page.type === "categories" and not page.title %}{#
-    #}{{ __('title.category') + page_title_suffix }}{#
-  #}{% elif page.type === "tags" and not page.title %}{#
-    #}{{ __('title.tag') + page_title_suffix }}{#
-  #}{% else %}{#
-    #}{{ page.title + page_title_suffix }}{#
-  #}{% endif %}{#
-#}{% endblock %}
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic|Bitter:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.junhaow.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-{% block content %}
+  <meta name="description" content="Games I’ve played and enjoyed a lot: Monster Hunter: Rise（怪物猎人：崛起） &gt; 40 hrs   PUBG（绝地求生：大逃杀）  Sky: Children of the Light（光遇）&gt; 300 hrs     Grand Auto Theft: Vice City（侠盗猎车手：罪恶都市） Pummel Party（揍">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Games I&#39;ve Played">
+<meta property="og:url" content="http://www.junhaow.com/games/index.html">
+<meta property="og:site_name" content="B_L_OO_GGG">
+<meta property="og:description" content="Games I’ve played and enjoyed a lot: Monster Hunter: Rise（怪物猎人：崛起） &gt; 40 hrs   PUBG（绝地求生：大逃杀）  Sky: Children of the Light（光遇）&gt; 300 hrs     Grand Auto Theft: Vice City（侠盗猎车手：罪恶都市） Pummel Party（揍">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/zsvmo.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ok48q.JPG">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/lnc92.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/6ao1s.JPG">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/san7o.JPG">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/d5mio.JPG">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ighm5.JPG">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/mh8nc.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/rztc0.png">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/qi79h.PNG">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/vs4ai.png">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/4lkfc.png">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/jgtiy.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/omuu7.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/zusbp.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/h2vkm.JPG">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/yjauz.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/n1cvc.png">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/54a4m.png">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/3064u.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/dpr2f.png">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/3jaui.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/l8izv.png">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/5blp4.JPG">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/7lj2m.png">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9kx6e.png">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/704yo.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/lapke.png">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/x7765.jpeg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/fd3oo.PNG">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9oqri.png">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/v94z7.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/4nffy.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/annfb.JPG">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tp7pt.png">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/47uam.png">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ith0f.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/wpxxo.JPG">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/2z9fd.png">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ci5tp.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ph94w.PNG">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/dazqe.JPG">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/w9cbr.JPG">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/cuz9c.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/g67so.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/t307t.PNG">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/2r02f.JPG">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/rcjd8.png">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/kcqja.png">
+<meta property="article:published_time" content="2021-04-11T07:35:18.694Z">
+<meta property="article:modified_time" content="2021-04-11T07:35:18.694Z">
+<meta property="article:author" content="Junhao Wang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/zsvmo.jpg">
 
-  <div id="posts" class="posts-expand">
-    {##################}
-    {### PAGE BLOCK ###}
-    {##################}
-    <div class="post-block page">
-      {% include '_partials/page-header.swig' %}
-      {#################}
-      {### PAGE BODY ###}
-      {#################}
-      <div class="post-body{% if theme.han %} han-init-context{% endif %}{% if page.direction && page.direction.toLowerCase() === 'rtl' %} rtl{% endif %}">
-        {# tagcloud page support #}
-        {% if page.type === "tags" %}
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                {{ _p('counter.tag_cloud', site.tags.length) }}
-            </div>
-            <div class="tag-cloud-tags">
-              {{ tagcloud({min_font: 12, max_font: 30, amount: 300, color: true, start_color: '#ccc', end_color: '#111'}) }}
-            </div>
-          </div>
-        {% elif page.type === 'categories' %}
-          <div class="category-all-page">
-            <div class="category-all-title">
-                {{ _p('counter.categories', site.categories.length) }}
-            </div>
-            <div class="category-all">
-              {{ list_categories() }}
-            </div>
-          </div>
-        {% else %}
-          {{ page.content }}
-        {% endif %}
-      </div>
-      {#####################}
-      {### END PAGE BODY ###}
-      {#####################}
+<link rel="canonical" href="http://www.junhaow.com/games/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Games I've Played | B_L_OO_GGG
+</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146643833-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-146643833-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-    {######################}
-    {### END PAGE BLOCK ###}
-    {######################}
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">B_L_OO_GGG</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Sumomo mo momo mo no uchi</p>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-inbox fa-fw"></i>Archives<span class="badge">50</span></a>
+
+  </li>
+        <li class="menu-item menu-item-studynotes">
+
+    <a href="/studynotes/" rel="section"><i class="fa fa-pencil-alt fa-fw"></i>Study Notes</a>
+
+  </li>
+        <li class="menu-item menu-item-lc">
+
+    <a href="/lc/" rel="section"><i class="fa fa-th fa-fw"></i>LeetCode Book</a>
+
+  </li>
+        <li class="menu-item menu-item-games">
+
+    <a href="/games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>Games I've Played</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-grin-squint fa-fw"></i>About Me</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content page posts-expand">
+            
+
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">Games I've Played
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <br>
+
+<p><strong>Games I’ve played and enjoyed a lot:</strong></p>
+<p>Monster Hunter: Rise（怪物猎人：崛起） <span class="orange">&gt; 40 hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/zsvmo.jpg"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ok48q.JPG"></p>
+<p>PUBG（绝地求生：大逃杀）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/lnc92.jpg"></p>
+<p>Sky: Children of the Light（光遇）<span class="orange">&gt; 300 hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/6ao1s.JPG"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/san7o.JPG"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/d5mio.JPG"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ighm5.JPG"></p>
+<p>Grand Auto Theft: Vice City（侠盗猎车手：罪恶都市）</p>
+<p>Pummel Party（揍击派对）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/mh8nc.jpg"></p>
+<p>Deep Rock Galactic（深岩银河）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/rztc0.png"></p>
+<p>Among Us（在我们当中）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/qi79h.PNG"></p>
+<p>Apex Legends（Apex英雄）<span class="orange">&gt; 700 hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/vs4ai.png"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/4lkfc.png"></p>
+<p>Call of Duty: Black Ops Cold War（使命召唤 ：黑色行动冷战）</p>
+<p>Phasmophobia（恐鬼症）</p>
+<p>Rainbow Six: Siege（彩虹六号：围攻）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/jgtiy.jpg"></p>
+<p>Borderlands 3（无主之地3）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/omuu7.jpg"></p>
+<p>Gunfire Reborn（枪火重生）<span class="orange">&gt; 50 hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/zusbp.jpg"></p>
+<p>Monster Hunter: Generations Ultimate（怪物猎人GU）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/h2vkm.JPG"></p>
+<p>SpeedRunners（极速奔跑者）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/yjauz.jpg"></p>
+<p>Grand Theft Auto V（侠盗猎车手5）<span class="orange">&gt; 50 hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/n1cvc.png"></p>
+<p>Call of Duty: Modern Warfare（现代战争）<span class="orange">&gt; 50 hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/54a4m.png"></p>
+<p>Fortnite（堡垒之夜）<span class="orange">&gt; 50 hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/3064u.jpg"></p>
+<p>Overwatch（守望先锋）<span class="orange">&gt; 100 hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/dpr2f.png"></p>
+<p>Titanfall 2（泰坦陨落2）<span class="orange">&gt; 50 hrs</span></p>
+<p>Battlefield 1（战地1）<span class="orange">&gt; 100 hrs</span></p>
+<p>Insurgency（叛乱）<span class="orange">&gt; 50 hrs</span></p>
+<p>BombSquad（炸弹小分队）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/3jaui.jpg"></p>
+<p>Vainglory（虚荣）<span class="orange">&gt; 100 hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/l8izv.png"></p>
+<p>Titanfall（泰坦陨落）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/5blp4.JPG"></p>
+<p>PUBG: Mobile（绝地求生：刺激战场）<span class="orange">&gt; 200 hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/7lj2m.png"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9kx6e.png"></p>
+<p>Rules of Survival（终结者2：审判日）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/704yo.jpg"></p>
+<p>Knives Out（荒野行动）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/lapke.png"></p>
+<p>Boom Beach（海岛奇兵）</p>
+<p>Dota 2（刀塔2）<span class="orange">&gt; 50 hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/x7765.jpeg"></p>
+<p>Clash of Clans（部落冲突）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/fd3oo.PNG"></p>
+<p>Battlefield 4（战地4）<span class="orange">&gt; 100 hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9oqri.png"></p>
+<p>Metal of Honor 2010（荣誉勋章2010）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/v94z7.jpg"></p>
+<p>Counter-Strike: Global Offensive（反恐精英：全球攻势）<span class="orange">&gt; 100 hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/4nffy.jpg"></p>
+<p>Team Fortress 2（军团要塞2）<span class="orange">&gt; 100 hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/annfb.JPG"></p>
+<p>Battlefield 3（战地3）<a target="_blank" rel="noopener" href="https://youtu.be/JHF-auHt6bw">CN-Chuck Frag Movie</a> <span class="orange">&gt; 200 hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tp7pt.png"></p>
+<p>TopGun (<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=V0rj6gJhM2Q&t=2s&ab_channel=%E5%93%81%E5%A6%82%E7%9A%84%E7%8C%AB%E6%B2%A1%E8%A1%A3%E6%9C%8D">Movie Clip</a>)</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/47uam.png"></p>
+<p>Dead Space: Mobile（死亡空间：手游版）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ith0f.jpg"></p>
+<p>Unturned（未转变者）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/wpxxo.JPG"></p>
+<p>Modern Combat 4: Zero Hour（现代战争4:决战时刻）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/2z9fd.png"></p>
+<p>Bullet Force（子弹力量）</p>
+<p>Trigger Fist（先发制人）</p>
+<p>Battlefield: Bad Company 2（战地：叛逆连队2）(<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=37pJgZokN-M&ab_channel=%E5%93%81%E5%A6%82%E7%9A%84%E7%8C%AB%E6%B2%A1%E8%A1%A3%E6%9C%8D">CN-Chuck Frag Movie</a>) <span class="orange">&gt; 400 hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ci5tp.jpg"></p>
+<p>Minecraft（我的世界）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ph94w.PNG"></p>
+<p>Warface（战争前线）(<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=WmZRukJfKYk&ab_channel=%E5%93%81%E5%A6%82%E7%9A%84%E7%8C%AB%E6%B2%A1%E8%A1%A3%E6%9C%8D">Movie for my club</a>)</p>
+<p>Call of Duty 9: Black Ops II（使命召唤：黑色行动2）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/dazqe.JPG"></p>
+<p>Call of Duty 8: Modern Warfare 3（使命召唤：现代战争3）<span class="orange">&gt; 200 hrs</span></p>
+<p>Portal 2（传送门2）</p>
+<p>Left 4 Dead 2（求生之路2）<span class="orange">&gt; 50 hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/w9cbr.JPG"></p>
+<p>Counter-Strike: Source（反恐精英：起源）<span class="orange">&gt; 100 hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/cuz9c.jpg"></p>
+<p>Call of Duty: Black Ops（使命召唤：黑色行动）</p>
+<p>Call of Duty 6: Modern Warfare 2（使命召唤：现代战争2）<span class="orange">&gt; 200 hrs</span></p>
+<p>A.V.A（战地之王）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/g67so.jpg"></p>
+<p>Call of Duty 4: Modern Warfare（使命召唤：现代战争）<span class="orange">&gt; 300 hrs</span></p>
+<p>特种部队</p>
+<p>Monster Hunter: Portable 2nd G（怪物猎人P2G）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/t307t.PNG"></p>
+<p>Final Fantasy VII（最终幻想7）<span class="orange">&gt; 50 hrs</span></p>
+<p>Grand Auto Theft: Vice City Stories（侠盗猎车手：罪恶都市传奇）</p>
+<p>突袭OL</p>
+<p>Crossfire（穿越火线）<span class="orange">&gt; ??? hrs</span></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/2r02f.JPG"></p>
+<p>Fantasy Westward Journey（梦幻西游）<span class="orange">&gt; ??? hrs</span></p>
+<p>Kart Rider（跑跑卡丁车）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/rcjd8.png"></p>
+<p>Little Fighter 2（小朋友齐打交2）</p>
+<p>Crazy Arcade（泡泡堂）</p>
+<p>Counter-Strike 1.6（反恐精英1.6）</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/kcqja.png"></p>
+<p>Counter-Strike 1.5（反恐精英1.5）</p>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Junhao Wang"
+      src="/images/cat_with_glasses.jpg">
+  <p class="site-author-name" itemprop="name">Junhao Wang</p>
+  <div class="site-description" itemprop="description">Debug the old world, bug the new world!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">118</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/junhaowww" title="Twitter → https://twitter.com/junhaowww" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/junhaowww" title="GitHub → https://github.com/junhaowww" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/junhaowww/" title="LinkedIn → https://www.linkedin.com/in/junhaowww/" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>LinkedIn</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/maodai/" title="豆瓣 (Book) → https://www.douban.com/people/maodai/" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>豆瓣 (Book)</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.jianshu.com/u/41865efdad5d/" title="https://www.jianshu.com/u/41865efdad5d/" rel="noopener" target="_blank">Xiaofud</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.davex.pw/" title="https://www.davex.pw/" rel="noopener" target="_blank">DaveX</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://" title="http://" rel="noopener" target="_blank">alexfan.xyz</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Junhao Wang</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://junhaow.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://www.junhaow.com/games/index.html";
+    this.page.identifier = "games/index.html";
+    this.page.title = "Games I've Played";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://junhaow.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

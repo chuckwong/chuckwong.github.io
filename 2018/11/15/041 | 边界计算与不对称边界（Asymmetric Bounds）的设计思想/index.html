@@ -1,37 +1,730 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic|Bitter:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.junhaow.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="如果一个数组有 10 个元素，那么这个数组下标的允许取值范围是什么？   对于 Fortran 语言，数组的下标取值缺省从 1 开始，且允许编程者另外指定数组下标的起始值。 对于 Algol 和 Pascal 语言，数组下标没有缺省的起始值，编程者必须明确指定每个数组的上下界。 对于标准的 Basic 语言，声明一个拥有 10 个元素的数组，实际上编译器分配了 11 个元素空间，下标范围从 0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="边界计算与不对称边界（Asymmetric Bounds）的设计思想">
+<meta property="og:url" content="http://www.junhaow.com/2018/11/15/041%20|%20%E8%BE%B9%E7%95%8C%E8%AE%A1%E7%AE%97%E4%B8%8E%E4%B8%8D%E5%AF%B9%E7%A7%B0%E8%BE%B9%E7%95%8C%EF%BC%88Asymmetric%20Bounds%EF%BC%89%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/index.html">
+<meta property="og:site_name" content="B_L_OO_GGG">
+<meta property="og:description" content="如果一个数组有 10 个元素，那么这个数组下标的允许取值范围是什么？   对于 Fortran 语言，数组的下标取值缺省从 1 开始，且允许编程者另外指定数组下标的起始值。 对于 Algol 和 Pascal 语言，数组下标没有缺省的起始值，编程者必须明确指定每个数组的上下界。 对于标准的 Basic 语言，声明一个拥有 10 个元素的数组，实际上编译器分配了 11 个元素空间，下标范围从 0">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/z6pdt.jpg">
+<meta property="og:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/5ayv9.jpg">
+<meta property="article:published_time" content="2018-11-16T07:51:21.000Z">
+<meta property="article:modified_time" content="2020-01-24T06:20:59.000Z">
+<meta property="article:author" content="Junhao Wang">
+<meta property="article:tag" content="C Traps and Pitfalls">
+<meta property="article:tag" content="边界计算">
+<meta property="article:tag" content="不对称边界">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/z6pdt.jpg">
+
+<link rel="canonical" href="http://www.junhaow.com/2018/11/15/041%20|%20%E8%BE%B9%E7%95%8C%E8%AE%A1%E7%AE%97%E4%B8%8E%E4%B8%8D%E5%AF%B9%E7%A7%B0%E8%BE%B9%E7%95%8C%EF%BC%88Asymmetric%20Bounds%EF%BC%89%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
 
-{% block page_class %}page-post-detail{% endblock %}
+  <title>边界计算与不对称边界（Asymmetric Bounds）的设计思想 | B_L_OO_GGG</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146643833-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-146643833-1');
+      }
+    </script>
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">B_L_OO_GGG</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Sumomo mo momo mo no uchi</p>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-inbox fa-fw"></i>Archives<span class="badge">50</span></a>
+
+  </li>
+        <li class="menu-item menu-item-studynotes">
+
+    <a href="/studynotes/" rel="section"><i class="fa fa-pencil-alt fa-fw"></i>Study Notes</a>
+
+  </li>
+        <li class="menu-item menu-item-lc">
+
+    <a href="/lc/" rel="section"><i class="fa fa-th fa-fw"></i>LeetCode Book</a>
+
+  </li>
+        <li class="menu-item menu-item-games">
+
+    <a href="/games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>Games I've Played</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-grin-squint fa-fw"></i>About Me</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://www.junhaow.com/2018/11/15/041%20|%20%E8%BE%B9%E7%95%8C%E8%AE%A1%E7%AE%97%E4%B8%8E%E4%B8%8D%E5%AF%B9%E7%A7%B0%E8%BE%B9%E7%95%8C%EF%BC%88Asymmetric%20Bounds%EF%BC%89%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat_with_glasses.jpg">
+      <meta itemprop="name" content="Junhao Wang">
+      <meta itemprop="description" content="Debug the old world, bug the new world!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="B_L_OO_GGG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          边界计算与不对称边界（Asymmetric Bounds）的设计思想
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 11/15/2018 23:51" itemprop="dateCreated datePublished" datetime="2018-11-15T23:51:21-08:00">11/15/2018</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 01/23/2020 22:20" itemprop="dateModified" datetime="2020-01-23T22:20:59-08:00">01/23/2020</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/11/15/041%20%7C%20%E8%BE%B9%E7%95%8C%E8%AE%A1%E7%AE%97%E4%B8%8E%E4%B8%8D%E5%AF%B9%E7%A7%B0%E8%BE%B9%E7%95%8C%EF%BC%88Asymmetric%20Bounds%EF%BC%89%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/15/041 | 边界计算与不对称边界（Asymmetric Bounds）的设计思想/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>如果一个数组有 10 个元素，那么这个数组下标的允许取值范围是什么？</p>
+</blockquote>
+<ul>
+<li>对于 Fortran 语言，数组的下标取值缺省从 1 开始，且允许编程者另外指定数组下标的起始值。</li>
+<li>对于 Algol 和 Pascal 语言，数组下标没有缺省的起始值，编程者必须明确指定每个数组的上下界。</li>
+<li>对于标准的 Basic 语言，声明一个拥有 10 个元素的数组，实际上编译器分配了 11 个元素空间，下标范围从 0 到 10。</li>
+</ul>
+<p>在 C 语言中，一个拥有 n 个元素的数组，却不存在下标为 n 的元素，它的元素的下标范围是从 0 到 n - 1。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i, a[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; ++i) &#123;</span><br><span class="line">  a[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>这段代码的本意是将数组 a 中所有的元素赋值为 0。但代码中的 a[10] 将数组 a 之后的一个字（word）的内存被设置为 0。如果用来编译这段程序的编译器按照内存地址递减的方式来给变量分配内存，那么内存中数组之后的一个字实际上是分配给了整型变量 i。此时，本来循环计数器 i 的值为 10，<code>a[10] = 0</code>使得 i 的值变成 0，这就陷入了一个死循环。</p>
+<p>尽管 C 语言的数组会让新手感到困惑，但这种特别的设计正是其最大优势所在。在常见的程序错误中，最难于发现的一类是<code>栏杆错误</code>，也被称为<code>差一错误</code>（off-by-one error）。</p>
+<blockquote>
+<p>《C 专家编程》：C 语言的许多其他特性是<strong>为了方便编译器设计者而建立的。</strong>数组下标为什么从 0 开始而不是 1，因为编译器的设计者选择从 0 开始。<strong>偏移量的概念在他们心中已是根深蒂固</strong>。</p>
+</blockquote>
+<blockquote>
+<p>100 英尺长的围栏每隔 10 英尺需要一根支撑用的栏杆，一共需要多少根栏杆呢？</p>
+</blockquote>
+<p>如果不加思考，给出的回答很可能是 10，而正确答案是 11，这就是<code>栏杆错误</code>。它经常发生在循环中的越界问题中，比如 if 中的表达式应该用小于还是小于等于？</p>
+<p>通常，解决这类问题可以参考以下两个原则：</p>
+<ol>
+<li>将问题简化，考虑最简单情况下的特例，然后将结果进一步外推。</li>
+<li>仔细计算边界。</li>
+</ol>
+<p>比如，在写遍历、插入、删除链表中元素的代码时，我们可以先考虑没有元素、只有一个元素、两个元素的情况。若代码满足这几种简单的情况，通常可以满足所有情况。</p>
+<p>再比如，假定整数 x 满足边界条件<code>x &gt;= 16</code>且<code>x &lt;= 37</code>，那么此范围内 x 的可能取值有多少个？千万不要因为 37 - 16 = 21，就直接认为是 21 个。正确的思路是这样的：</p>
+<ul>
+<li>右值 - 左值 = NUM，还要加一还是减一，或是不变？</li>
+<li>举出简单的情况：<code>x &gt;= 16</code>且<code>x &lt;= 16</code>、<code>x &gt;= 16</code>且<code>x &lt;= 17</code>。</li>
+<li>计算后，前者：NUM = 0，实际是 1；后者：NUM = 1，实际是 2。</li>
+<li>外推：个数 = NUM + 1，有 22 个数。</li>
+</ul>
+<p>为了避免这种情况的发生，我们一般用一个<code>下界点</code>和一个<code>上界点</code>来表示一个数值范围，其中<code>下界点</code>包括在取值范围之中，而<code>上界点</code>不在取值范围内。在上例中，范围应该表示为<code>x &gt;= 16</code>且<code>x &lt; 38</code>。</p>
+<p>这种不对称的表达方式也许从数学上而言并不优美，但是对于程序员来说，这种设计有着令人吃惊的简化效果：</p>
+<ol>
+<li>取值范围的大小就是下界与上界之差。38 - 16 刚好等于 22，恰恰是不对称边界所包括的元素个数。</li>
+<li>如果取值范围为空，那么下界等于上界，范围内个数为 0。</li>
+<li>即使取值范围为空，上界也永远不可能小于下界。</li>
+</ol>
+<p>C 数组下标从 0 开始就是运用了这种不对称边界的设计，此时数组的上界就是数组元素的个数。因此，本文开头的代码段应该改写成：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i, a[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i) &#123; <span class="comment">// 而不是写成 i &lt;= 9</span></span><br><span class="line">  a[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>另一种考虑不对称边界的方式是，把上界视作序列中第一个<strong>即将被占用</strong>的元素，而把下界视作序列中第一个<strong>即将被释放</strong>的元素，如图所示。</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/z6pdt.jpg" title="不对称边界示意图"></p>
+<p>这种看待问题的方式对于处理各种不同类型的缓冲区特别有用。例如，某函数的功能是将长度无规律的输入数据送到缓冲区，每当这款内存被填满时，就将缓冲区的内容写出。缓冲区的声明如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 1024</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> buffer[N];</span><br></pre></td></tr></table></figure>
+<p>再设置一个指针变量，指向缓冲区的当前位置：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> *bufptr;</span><br></pre></td></tr></table></figure>
+<p>我们是让指针 bufptr 始终指向缓冲区中最后一个已占有的字符，还是让它指向缓冲区中之后第一个未被占用的字符？若考虑「不对称边界」的设计思想，后一种选择更为贴切。</p>
+<p>按照「不对称边界」的思想，我们可以这样写：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*bufptr++ = c;  <span class="comment">// 先进行 ++ 运算，所以递增的是 bufptr 本身的值</span></span><br></pre></td></tr></table></figure>
+<p>这个语句把输入字符 c 放到缓冲区中，然后指针 bufptr 递增 1，又指向缓冲区中下一个未被占用的字符。等价于：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*bufptr = c;</span><br><span class="line">bufptr++;</span><br></pre></td></tr></table></figure>
+
+<p>根据前面所说的第二条效果，当指针 bufptr 与 &amp;buffer[0]（或 buffer）相等时，缓冲区存放的内容为空，因此初始化时缓冲区为空可以这样写：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bufptr = &amp;buffer[<span class="number">0</span>]; <span class="comment">// 或者 buffer</span></span><br></pre></td></tr></table></figure>
+
+<p>任何时候缓冲区中以存放的字符数都是 bufptr - buffer（字符类型占 1 个字节），因此我们可以通过将这个表达式与 N 进行比较，来判断缓冲区是否已满。当填满时，bufptr - buffer 就等于 N。</p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/5ayv9.jpg" title="缓冲区示意图（灵魂画手）"></p>
+<p>现在，我们写一下 bufwrite 函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// p 指向要写入的字符串的第一个字符，n 是字符个数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bufwrite</span><span class="params">(<span class="keyword">char</span> *p, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (--n &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (bufptr == &amp;buffer[N]) <span class="comment">// 相当于 bufptr - buffer == N</span></span><br><span class="line">      flushbuffer(); <span class="comment">// 将缓冲区的数据写出，并重置指针 bufptr</span></span><br><span class="line">    *bufptr++ = *p++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>--n &gt;= 0</code>是迭代 n 次的一种写法。为了验证这一点，我们可以考察最简单的特例，即 n = 1（还记得前面说的原则吗？）。此外，<code>--n &gt;= 0</code>的效果与<code>n-- &gt; 0</code>一样，一般前者更快（后者需要保存 n 的值，然后做递减，最后用保存的值做比较）。</p>
+<p>值得注意的是，在 bufptr 与 &amp;buffer[N] 的比较中，buffer[N] 这个元素根本不存在，而我们仍然使用<code>if (bufptr == &amp;buffer[N])</code>代替了<code>bufptr &gt; &amp;buffer[N - 1]</code>的写法，原因在于我们要坚持「不对称边界」的原则：我们要比较指针 bufptr 与 缓冲区后一个字符的地址（即上界），而 &amp;buffer[N] 就是这个地址。</p>
+<p>在此，我们并不需要引用一个不存在的元素，而只需要引用这个元素的地址。我们需要保证不对该引用解引，而且在 C 语言中这个地址是的确存在的（ANSI C 标准明确允许这种用法）。</p>
+<p>最后，改进程序，使得它可以一次移动 k 个字符：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">memcpy</span><span class="params">(<span class="keyword">char</span> *dest, <span class="keyword">const</span> <span class="keyword">char</span> *source, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (--k &gt;= <span class="number">0</span>)</span><br><span class="line">    *dest++ = *source++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bufwrite</span><span class="params">(<span class="keyword">char</span> *p, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (n &gt; <span class="number">0</span>) &#123; <span class="comment">// 先比较，所以用 &gt;</span></span><br><span class="line">    <span class="keyword">int</span> k, rem;</span><br><span class="line">    <span class="keyword">if</span> (bufptr == &amp;buffer[N])</span><br><span class="line">      flushbuffer();</span><br><span class="line">    rem = N - (bufptr - buffer); <span class="comment">// rem 剩余可分配的字符个数</span></span><br><span class="line">    k = n &gt; rem ? rem : n; <span class="comment">// n 是需要分配的字符数，若条件满足，下一次肯定要 flushbuffer()</span></span><br><span class="line">    <span class="built_in">memcpy</span>(bufptr, p, k);</span><br><span class="line">    bufptr += k;</span><br><span class="line">    p += k;</span><br><span class="line">    n -= k;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解释见注释。</p>
+<p>以上就是不对称边界的两种应用方式。</p>
+<p>参考：《C 陷阱与缺陷，C Traps and Pitfalls》P45（边界计算与不对称边界）</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Junhao Wang
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://www.junhaow.com/2018/11/15/041%20|%20%E8%BE%B9%E7%95%8C%E8%AE%A1%E7%AE%97%E4%B8%8E%E4%B8%8D%E5%AF%B9%E7%A7%B0%E8%BE%B9%E7%95%8C%EF%BC%88Asymmetric%20Bounds%EF%BC%89%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/" title="边界计算与不对称边界（Asymmetric Bounds）的设计思想">http://www.junhaow.com/2018/11/15/041 | 边界计算与不对称边界（Asymmetric Bounds）的设计思想/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/C-Traps-and-Pitfalls/" rel="tag"><i class="fa fa-tag"></i> C Traps and Pitfalls</a>
+              <a href="/tags/%E8%BE%B9%E7%95%8C%E8%AE%A1%E7%AE%97/" rel="tag"><i class="fa fa-tag"></i> 边界计算</a>
+              <a href="/tags/%E4%B8%8D%E5%AF%B9%E7%A7%B0%E8%BE%B9%E7%95%8C/" rel="tag"><i class="fa fa-tag"></i> 不对称边界</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/10/22/040%20%7C%20%E5%A6%82%E4%BD%95%E8%AE%B0%E4%BD%8F%20C%20%E8%AF%AD%E8%A8%80%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7%E8%A1%A8%EF%BC%9F/" rel="prev" title="如何记住 C 语言运算符优先级表？">
+      <i class="fa fa-chevron-left"></i> 如何记住 C 语言运算符优先级表？
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/12/23/042%20%7C%20%E6%88%91%E6%98%AF%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E4%BD%BF%E7%94%A8%20MacBook/" rel="next" title="我是如何高效地使用 MacBook？">
+      我是如何高效地使用 MacBook？ <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Junhao Wang"
+      src="/images/cat_with_glasses.jpg">
+  <p class="site-author-name" itemprop="name">Junhao Wang</p>
+  <div class="site-description" itemprop="description">Debug the old world, bug the new world!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">118</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/junhaowww" title="Twitter → https://twitter.com/junhaowww" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/junhaowww" title="GitHub → https://github.com/junhaowww" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/junhaowww/" title="LinkedIn → https://www.linkedin.com/in/junhaowww/" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>LinkedIn</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/maodai/" title="豆瓣 (Book) → https://www.douban.com/people/maodai/" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>豆瓣 (Book)</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.jianshu.com/u/41865efdad5d/" title="https://www.jianshu.com/u/41865efdad5d/" rel="noopener" target="_blank">Xiaofud</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.davex.pw/" title="https://www.davex.pw/" rel="noopener" target="_blank">DaveX</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://" title="http://" rel="noopener" target="_blank">alexfan.xyz</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Junhao Wang</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://junhaow.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://www.junhaow.com/2018/11/15/041%20|%20%E8%BE%B9%E7%95%8C%E8%AE%A1%E7%AE%97%E4%B8%8E%E4%B8%8D%E5%AF%B9%E7%A7%B0%E8%BE%B9%E7%95%8C%EF%BC%88Asymmetric%20Bounds%EF%BC%89%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/";
+    this.page.identifier = "2018/11/15/041 | 边界计算与不对称边界（Asymmetric Bounds）的设计思想/";
+    this.page.title = "边界计算与不对称边界（Asymmetric Bounds）的设计思想";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://junhaow.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

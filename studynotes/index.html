@@ -1,70 +1,642 @@
-{% extends '_layout.swig' %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-  {% block title %}{#
-  #}{% set page_title_suffix = ' | ' + config.title %}{#
+<link rel="stylesheet" href="/css/main.css">
 
-  #}{% if page.type === "categories" and not page.title %}{#
-    #}{{ __('title.category') + page_title_suffix }}{#
-  #}{% elif page.type === "tags" and not page.title %}{#
-    #}{{ __('title.tag') + page_title_suffix }}{#
-  #}{% else %}{#
-    #}{{ page.title + page_title_suffix }}{#
-  #}{% endif %}{#
-#}{% endblock %}
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic|Bitter:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.junhaow.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-{% block content %}
+  <meta name="description" content="It is just for personal use, not for distribution &amp; commercial use. I have added almost all source information in each page. If you think it’s a problem, please feel free to contact me and I wi">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Study Notes">
+<meta property="og:url" content="http://www.junhaow.com/studynotes/index.html">
+<meta property="og:site_name" content="B_L_OO_GGG">
+<meta property="og:description" content="It is just for personal use, not for distribution &amp; commercial use. I have added almost all source information in each page. If you think it’s a problem, please feel free to contact me and I wi">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-03-12T01:21:19.000Z">
+<meta property="article:modified_time" content="2021-03-22T20:01:35.666Z">
+<meta property="article:author" content="Junhao Wang">
+<meta name="twitter:card" content="summary">
 
-  <div id="posts" class="posts-expand">
-    {##################}
-    {### PAGE BLOCK ###}
-    {##################}
-    <div class="post-block page">
-      {% include '_partials/page-header.swig' %}
-      {#################}
-      {### PAGE BODY ###}
-      {#################}
-      <div class="post-body{% if theme.han %} han-init-context{% endif %}{% if page.direction && page.direction.toLowerCase() === 'rtl' %} rtl{% endif %}">
-        {# tagcloud page support #}
-        {% if page.type === "tags" %}
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                {{ _p('counter.tag_cloud', site.tags.length) }}
-            </div>
-            <div class="tag-cloud-tags">
-              {{ tagcloud({min_font: 12, max_font: 30, amount: 300, color: true, start_color: '#ccc', end_color: '#111'}) }}
-            </div>
-          </div>
-        {% elif page.type === 'categories' %}
-          <div class="category-all-page">
-            <div class="category-all-title">
-                {{ _p('counter.categories', site.categories.length) }}
-            </div>
-            <div class="category-all">
-              {{ list_categories() }}
-            </div>
-          </div>
-        {% else %}
-          {{ page.content }}
-        {% endif %}
-      </div>
-      {#####################}
-      {### END PAGE BODY ###}
-      {#####################}
+<link rel="canonical" href="http://www.junhaow.com/studynotes/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Study Notes | B_L_OO_GGG
+</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146643833-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-146643833-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-    {######################}
-    {### END PAGE BLOCK ###}
-    {######################}
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">B_L_OO_GGG</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Sumomo mo momo mo no uchi</p>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-inbox fa-fw"></i>Archives<span class="badge">50</span></a>
+
+  </li>
+        <li class="menu-item menu-item-studynotes">
+
+    <a href="/studynotes/" rel="section"><i class="fa fa-pencil-alt fa-fw"></i>Study Notes</a>
+
+  </li>
+        <li class="menu-item menu-item-lc">
+
+    <a href="/lc/" rel="section"><i class="fa fa-th fa-fw"></i>LeetCode Book</a>
+
+  </li>
+        <li class="menu-item menu-item-games">
+
+    <a href="/games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>Games I've Played</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-grin-squint fa-fw"></i>About Me</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content page posts-expand">
+            
+
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">Study Notes
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <br>
+
+<blockquote>
+<p>It is just for personal use, not for distribution &amp; commercial use. I have added almost all source information in each page. If you think it’s a problem, please feel free to contact me and I will remove the related items.</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Read</span>(); <span class="built_in">Try</span>(); <span class="built_in">CopyAndPaste</span>();</span><br><span class="line"><span class="keyword">if</span> (isContentLong) <span class="built_in">Synthesize</span>();  <span class="comment">// make it more readable...</span></span><br><span class="line"><span class="keyword">else</span> <span class="built_in">JustCutOff</span>();</span><br><span class="line"><span class="keyword">while</span> (!gotIt) &#123;  <span class="comment">// non-stop loop T_T</span></span><br><span class="line">  <span class="built_in">Review</span>(); <span class="built_in">Synthesize</span>(newInterpretation);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><span class="blue">v1.x</span> | x = revision count</p>
+</blockquote>
+<p><strong>Table Of Contents</strong>:</p>
+<ul>
+<li><a href="#computer-graphics">Computer Graphics</a></li>
+<li><a href="#cs-61b-data-structures">CS 61B (Data Structures)</a></li>
+<li><a href="#csapp--cse-351-computer-systems">CSAPP / CSE 351 (Computer Systems)</a></li>
+<li><a href="#object-oriented-design">Object-Oriented Design</a></li>
+<li><a href="#c">C++</a></li>
+<li><a href="#java">Java</a></li>
+<li><a href="#python">Python</a></li>
+<li><a href="#other">Other</a></li>
+</ul>
+<span id="computer-graphics">
+## Computer Graphics
+
+<blockquote>
+<p>Great resources I used when I am learning and enjoying computer graphics! 🥲</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learnopengl.com/">LearnOpenGL</a></li>
+<li><a target="_blank" rel="noopener" href="http://barbic.usc.edu/cs420-s21/">CSCI420</a>: Computer Graphics</li>
+<li><a target="_blank" rel="noopener" href="https://bytes.usc.edu/cs580/s21_cgMlArVr3D/home/index.html">CSCI580</a>: 3D Graphics and Rendering</li>
+<li><a target="_blank" rel="noopener" href="https://sites.cs.ucsb.edu/~lingqi/teaching/games101.html">GAMES101</a> / <a target="_blank" rel="noopener" href="https://sites.cs.ucsb.edu/~lingqi/teaching/cs180.html">CS180</a>: Introduction to Computer Graphics</li>
+<li><a target="_blank" rel="noopener" href="https://www.scratchapixel.com/">Scratchapixel</a><ul>
+<li>It has everything! Content about Monte Carlo is awesome!</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ssloy/tinyrenderer/wiki/Lesson-0:-getting-started">TinyRenderer</a> (software rasterizer)</li>
+<li><a target="_blank" rel="noopener" href="https://sites.cs.ucsb.edu/~lingqi/teaching/games202.html">GAMES202</a> / <a target="_blank" rel="noopener" href="https://sites.cs.ucsb.edu/~lingqi/teaching/cs291a.html">CS291A</a>: Real-Time High Quality Rendering</li>
+<li><a target="_blank" rel="noopener" href="https://raytracing.github.io/">Ray Tracing In One Weekend Book Series</a> (high-quality ray tracer)</li>
+</ul>
+<span id="cs-61b-data-structures">
+## CS 61B (Data Structures)
+
+<blockquote>
+<p>Spring 2018 (Part 1 ~ 2) &amp; Spring 2019 (Part 3 ~ 14) | Joshua Hug | Berkeley<br>Lecture Notes + My Notes &amp; Code + Extra Contents (AVL, Floyd-Warshall, etc.)</p>
+</blockquote>
+<p><strong>Lectures (1 ~ 40) &amp; Discussions &amp; Homeworks (0 ~ 4) &amp; Exercise &amp; Labs (0 ~ 13)</strong></p>
+<ul>
+<li><a href="cs61b/cs61b%20p1.html">CS 61B | Part 1 | List (Linked List &amp; Array List)</a> <span class="blue">v1.3</span></li>
+<li><a href="cs61b/cs61b%20p2.html">CS 61B | Part 2 | Testing, Inheritances, HOFs, Polymorphism, Package, Access Control</a> <span class="blue">v1.3</span></li>
+<li><a href="cs61b/cs61b%20p3.html">CS 61B | Part 3 | Asymptotic, Disjoint Set (Dynamic Connectivity)</a> <span class="blue">v1.3</span></li>
+<li><a href="cs61b/cs61b%20p4.html">CS 61B | Part 4 | ADTs, Set, Map, Binary Search Tree (BST)</a> <span class="blue">v1.2</span></li>
+<li><a href="cs61b/cs61b%20p5.html">CS 61B | Part 5 | Self-Balancing Trees (B-Tree, Red Black Tree, AVL, Splay Tree)</a> <span class="blue">v1.2</span></li>
+<li><a href="cs61b/cs61b%20p6.html">CS 61B | Part 6 | Hashing, PQs and Heaps</a> <span class="blue">v1.1</span></li>
+<li><a href="cs61b/cs61b%20p7.html">CS 61B | Part 7 | Data Structures Summary</a> <span class="blue">v1.2</span></li>
+<li><a href="cs61b/cs61b%20p8.html">CS 61B | Part 8 | Tries (Prefix), Range Searching and Multi-Dimensional Data</a> <span class="blue">v1.2</span></li>
+<li><a href="cs61b/cs61b%20p9.html">CS 61B | Part 9 | Tree &amp; Graph Traversals (DFS / BFS)</a> <span class="blue">v1.2</span></li>
+<li><a href="cs61b/cs61b%20p10.html">CS 61B | Part 10 | Shortest Paths (SP), Minimum Spanning Trees (MST)</a> <span class="blue">v1.2</span></li>
+<li><a href="cs61b/cs61b%20p11.html">CS 61B | Part 11 | Topological Sort, DAG-LPT, DAG-SPT, DP, LIS / LLIS</a> <span class="blue">v1.2</span></li>
+<li><a href="cs61b/cs61b%20p12.html">CS 61B | Part 12 | Selection &amp; Heap, Merge, Insertion &amp; Shell’s Sort</a> <span class="blue">v1.2</span></li>
+<li><a href="cs61b/cs61b%20p13.html">CS 61B | Part 13 | Bubble &amp; Quick Sort, Stability, Bounds, Radix Sort, Comparisons</a> <span class="blue">v1.1</span></li>
+<li><a href="cs61b/cs61b%20p15.html">CS 61B | Part 14 | Compression, P = NP?, Conclusions</a> <span class="blue">v1.1</span></li>
+</ul>
+<p><strong>Interesting Projects &amp; Challenge Labs</strong></p>
+<ul>
+<li>CS 61B | Project 0 | NBody: <a target="_blank" rel="noopener" href="https://sp18.datastructur.es/materials/proj/proj0/proj0">Guide</a> &amp; <a target="_blank" rel="noopener" href="https://github.com/junhaowww/cs61b-sp18/tree/master/proj0">Code</a> <span class="blue">v1.0</span></li>
+<li><a href="cs61b/cs61b%20proj1.html">CS 61B | Project 1 | Data Structures (Deque API)</a> <span class="blue">v1.0</span></li>
+<li>CS 61B | Project 2AB | ArrayExtrinsicMinPQ &amp; KDTree: <a target="_blank" rel="noopener" href="https://sp19.datastructur.es/materials/proj/proj2ab/proj2ab#required-files-for-proj2a">Guide</a> &amp; <a target="_blank" rel="noopener" href="https://github.com/junhaowww/cs61b-sp18/tree/master/proj2ab/bearmaps">Code</a> <span class="blue">v1.0</span></li>
+<li><a href="cs61b/cs61b%20clab8%20flight.html">CS 61B | Challenge Lab 8 | Flight Problem (HeapPQ)</a> <span class="blue">v1.0</span></li>
+<li><a href="cs61b/cs61b%20clab8%20string.html">CS 61B | Challenge Lab 8 | String Matching Problem (Rabin-Karp algorithm)</a> <span class="blue">v1.0</span></li>
+</ul>
+<p><strong>Exams</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/junhaowww/cs61b-sp18/blob/master/exams/cs61b-sp18-mt1_JunhaoWang.pdf">CS 61B | Midterm 1 (pdf)</a> <span class="blue">v1.0</span></li>
+</ul>
+<span id="csapp--cse-351-computer-systems">
+## CSAPP / CSE 351 (Computer Systems)
+
+<ul>
+<li><a href="csapp/01_CSAPP%20:%20CSE351%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E6%A6%82%E8%A6%81%20&%20%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86%EF%BC%89.html">CSAPP / CSE 351 学习笔记（概要 &amp; 信息的表示和处理）</a> <span class="blue">v1.2</span></li>
+<li><a href="csapp/02_CSAPP%20:%20CSE351%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA%20&%20%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%20Assembly%EF%BC%89.html">CSAPP / CSE 351 学习笔记（机器级表示 &amp; 汇编语言 Assembly）</a> <span class="blue">v1.2</span></li>
+<li><a href="csapp/03_CSAPP%20:%20CSE351%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%A4%84%E7%90%86%E5%99%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%20&%20%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%E6%80%A7%E8%83%BD%EF%BC%89.html">CSAPP / CSE 351 学习笔记（处理器体系结构 &amp; 优化程序性能）</a>  <span class="blue">v1.2</span></li>
+<li><a href="csapp/04_CSAPP%20:%20CSE351%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84%20The%20Memory%20Hierarchy%20&%20Cache%EF%BC%89.html">CSAPP / CSE 351 学习笔记（存储器层次结构 The Memory Hierarchy &amp; Cache）</a> <span class="blue">v1.2</span></li>
+<li><a href="csapp/05_CSAPP%20:%20CSE351%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E9%93%BE%E6%8E%A5%20Linking%EF%BC%89.html">CSAPP / CSE 351 学习笔记（链接 Linking）</a> <span class="blue">v1.2</span></li>
+<li><a href="csapp/06_CSAPP%20:%20CSE351%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%BC%82%E5%B8%B8%E6%8E%A7%E5%88%B6%E6%B5%81%20Exceptional%20Control%20Flow%EF%BC%89.html">CSAPP / CSE 351 学习笔记（异常控制流 Exceptional Control Flow）</a> <span class="blue">v1.2</span></li>
+<li><a href="csapp/07_CSAPP%20:%20CSE351%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%20Virtual%20Memory%EF%BC%89.html">CSAPP / CSE 351 学习笔记（虚拟内存 Virtual Memory）</a> <span class="blue">v1.1</span></li>
+<li><a href="csapp/08_CSAPP%20:%20CSE351%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E7%B3%BB%E7%BB%9F%E7%BA%A7%20IO%20&%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%EF%BC%89.html">CSAPP / CSE 351 学习笔记（系统级 I/O &amp; 网络编程）</a> <span class="blue">v1.2</span></li>
+<li><a href="csapp/09_CSAPP%20:%20CSE351%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%89.html">CSAPP / CSE 351 学习笔记（并发编程）</a> <span class="blue">v1.2</span></li>
+<li><a href="csapp/010_CSAPP%20:%20CSE351%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Java%20vs.%20C%EF%BC%89.html">CSAPP / CSE 351 学习笔记（Java vs. C）</a> <span class="blue">v1.2</span></li>
+</ul>
+<span id="object-oriented-design">
+## Object-Oriented Design
+
+<ul>
+<li><a href="ood/epi_ood.html">EPI | Object-Oriented Design (Common Design Patterns)</a></li>
+</ul>
+<span id="c">
+## C++
+
+<p><strong>LearnCpp.com</strong> [<a target="_blank" rel="noopener" href="https://www.learncpp.com/">link</a>]</p>
+<ul>
+<li><a href="cpp/learncpp/Study%20Notes%20on%20LearnCpp%20Part%201.html">Study Notes on LearnCpp (Part 1 - Basic)</a> <span class="blue">v1.1</span></li>
+<li><a href="cpp/learncpp/Study%20Notes%20on%20LearnCpp%20Part%202.html">Study Notes on LearnCpp (Part 2 - Strings, Pointers/References, Functions)</a> <span class="blue">v1.1</span></li>
+<li><a href="cpp/learncpp/Study%20Notes%20on%20LearnCpp%20Part%203.html">Study Notes on LearnCpp (Part 3 - OOP, Overload Operators)</a> <span class="blue">v1.1</span></li>
+<li><a href="cpp/learncpp/Study%20Notes%20on%20LearnCpp%20Part%204.html">Study Notes on LearnCpp (Part 4 - Object Relationships, Inheritance)</a> <span class="blue">v1.1</span></li>
+<li><a href="cpp/learncpp/Study%20Notes%20on%20LearnCpp%20Part%205.html">Study Notes on LearnCpp (Part 5 - Virtual Functions, Templates)</a> <span class="blue">v1.1</span></li>
+<li><a href="cpp/learncpp/Study%20Notes%20on%20LearnCpp%20Part%206.html">Study Notes on LearnCpp (Part 6 - Exceptions, Smart Pointers)</a> <span class="blue">v1.0</span></li>
+<li><a href="cpp/learncpp/Study%20Notes%20on%20LearnCpp%20Part%207.html">Study Notes on LearnCpp (Part 7 - STL, I/O, Updates, Appendix)</a> <span class="blue">v1.1</span></li>
+</ul>
+<span id="java">
+## Java
+
+<ul>
+<li><a href="java/Java%20%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%8A%EF%BC%89.html">Java 基础学习笔记（上）</a> <span class="blue">v1.1</span></li>
+<li><a href="java/Java%20%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%8B%EF%BC%89.html">Java 基础学习笔记（下）</a> <span class="blue">v1.1</span></li>
+<li>Nice articles about <code>Java Inside</code>:<ul>
+<li>A broad view of <code>Byte Code</code>:<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/richaaaard/p/6196351.html">JVM 内部原理（二）— 基本概念之字节码</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/richaaaard/p/6214929.html">JVM 内部原理（六）— Java 字节码基础之一</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/luanlouis/article/details/39892027">Class 文件基本组织结构</a> <code>Class 文件字节码结构组织图</code></li>
+<li><a target="_blank" rel="noopener" href="http://blog.jamesdbloom.com/JavaCodeToByteCode_PartOne.html#variables">Java Code To Byte Code - Part One</a></li>
+</ul>
+</li>
+<li><code>JVM</code>:<ul>
+<li><a target="_blank" rel="noopener" href="http://blog.jamesdbloom.com/JVMInternals.html#class_file_structure">Java Internals</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<span id="python">
+## Python
+
+<ul>
+<li><a href="python/Python%20%E5%BB%96%E9%9B%AA%E5%B3%B0%E7%BD%91%E7%AB%99%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html">Python 廖雪峰网站学习笔记</a> <span class="blue">v1.1</span></li>
+</ul>
+<span id="other">
+## Other
+
+<ul>
+<li><a target="_blank" rel="noopener" href="https://juejin.im/post/5deb47146fb9a01662435779">CMake Tutorial</a> <span class="blue">very good!</span></li>
+</ul>
+</span></span></span></span></span></span></span></span>
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Junhao Wang"
+      src="/images/cat_with_glasses.jpg">
+  <p class="site-author-name" itemprop="name">Junhao Wang</p>
+  <div class="site-description" itemprop="description">Debug the old world, bug the new world!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">118</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/junhaowww" title="Twitter → https://twitter.com/junhaowww" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/junhaowww" title="GitHub → https://github.com/junhaowww" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/junhaowww/" title="LinkedIn → https://www.linkedin.com/in/junhaowww/" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>LinkedIn</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/maodai/" title="豆瓣 (Book) → https://www.douban.com/people/maodai/" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>豆瓣 (Book)</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.jianshu.com/u/41865efdad5d/" title="https://www.jianshu.com/u/41865efdad5d/" rel="noopener" target="_blank">Xiaofud</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.davex.pw/" title="https://www.davex.pw/" rel="noopener" target="_blank">DaveX</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://" title="http://" rel="noopener" target="_blank">alexfan.xyz</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Junhao Wang</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://junhaow.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://www.junhaow.com/studynotes/index.html";
+    this.page.identifier = "studynotes/index.html";
+    this.page.title = "Study Notes";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://junhaow.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
