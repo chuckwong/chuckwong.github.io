@@ -6,8 +6,8 @@
 <meta property="og:description" content="Tree TraversalA tree consists of:  A set of nodes. A set of edges that connect those nodes. Constraint: There is an exactly one path between any two nodes.    Trees are a more general concept.  Orga">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://www.junhaow.com/resources/banner/banner_1.jpg">
-<meta property="article:published_time" content="2020-04-17T20:45:12.604Z">
-<meta property="article:modified_time" content="2019-09-09T16:24:01.000Z">
+<meta property="article:published_time" content="2021-04-12T06:21:49.779Z">
+<meta property="article:modified_time" content="2021-04-12T06:21:49.779Z">
 <meta property="article:author" content="Junhao Wang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://www.junhaow.com/resources/banner/banner_1.jpg"><link rel="shortcut icon" href="/resources/favicon/favicon.ico"><link rel="canonical" href="http://www.junhaow.com/studynotes/cs61b/cs61b%20p9"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-146643833-1"></script><script>window.dataLayer = window.dataLayer || [];
@@ -60,7 +60,7 @@ gtag('config', 'UA-146643833-1');
   isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '09/09/2019 09:24'
+  postUpdate: '04/11/2021 23:21'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -173,12 +173,12 @@ gtag('config', 'UA-146643833-1');
 </li>
 </ul>
 <p>Pre-order and post-order generalize naturally to trees with arbitrary numbers of children. However, in-order only makes sense for binary trees.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/yrliy.png" title="A Useful Visual Trick"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/yrliy.png" alt="A Useful Visual Trick"></p>
 <p><strong>What Good Are All These Traversals?</strong></p>
 <p>Pre-order:</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/z8mhi.png" title="Directory Listing (Pre-order)"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/z8mhi.png" alt="Directory Listing (Pre-order)"></p>
 <p>Post-order:</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/07vom.png" title="Gathering File Sizes (Post-order)"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/07vom.png" alt="Gathering File Sizes (Post-order)"></p>
 <h2 id="Graphs"><a href="#Graphs" class="headerlink" title="Graphs"></a>Graphs</h2><h3 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h3><p>A <code>graph</code> consists of:</p>
 <ul>
 <li>A set of nodes.</li>
@@ -194,9 +194,9 @@ gtag('config', 'UA-146643833-1');
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/o3su9.png"></p>
 <p>Since simple graph is more often in usage. In 61B, all graphs will be simple and we call them just “graphs” rather than “simple graphs”.</p>
 <p><strong>Graph Types:</strong></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/l1bno.png" title="Graph Types"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/l1bno.png" alt="Graph Types"></p>
 <p><strong>More Graph Terminology:</strong></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/vji51.png" title="Graph Terminology"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/vji51.png" alt="Graph Terminology"></p>
 <p>Note that the <code>length of a path</code> is determined by the <code>number of edges</code>.</p>
 <h3 id="Graph-Problems"><a href="#Graph-Problems" class="headerlink" title="Graph Problems"></a>Graph Problems</h3><p>There are lots of interesting questions we can ask about a graph:</p>
 <ul>
@@ -225,7 +225,7 @@ gtag('config', 'UA-146643833-1');
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isConnected</span><span class="params">(Node s, Node t)</span> </span>&#123;</span><br><span class="line">  mark(s); <span class="comment">// visit</span></span><br><span class="line">  <span class="keyword">if</span> (s == t) &#123; <span class="comment">// consider the base case! Only one vertex.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">for</span> v in <span class="title">neighbors</span><span class="params">(s)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// recursive call</span></span><br><span class="line">    <span class="keyword">if</span> (!isMarked(v) &amp;&amp; isConnected(v, t)) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Follow the example in these <a target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1OHRI7Q_f8hlwjRJc8NPBUc1cMu5KhINH1xGXWDfs_dA/edit#slide=id.g76e0dad85_2_380">slides</a> to see how.</p>
-<h3 id="Traversal-DFS"><a href="#Traversal-DFS" class="headerlink" title="Traversal: DFS"></a>Traversal: DFS</h3><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/02a68.png" title="BFS vs. DFS from Discussion 11, 2018 Spring"></p>
+<h3 id="Traversal-DFS"><a href="#Traversal-DFS" class="headerlink" title="Traversal: DFS"></a>Traversal: DFS</h3><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/02a68.png" alt="BFS vs. DFS from Discussion 11, 2018 Spring"></p>
 <p>The idea of exploring a <code>neighbor&#39;s entire subgraph</code> before moving on to the next neighbor is known as <code>Depth First Traversal/Search</code>. It is called “depth first” because you go as deep as possible.</p>
 <p>Explore $1$’s subgraph completely before using the edge $0-3$.</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/so9lo.png"></p>
@@ -233,16 +233,16 @@ gtag('config', 'UA-146643833-1');
 <p>DFS is a very powerful technique that can be used for many types of graph problems.</p>
 <p>Let’s discuss an algorithm that computes a path to every vertex. (DepthFirstPaths)</p>
 <p><strong>DepthFirstPaths Demo:</strong></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tzkhz.png" title="DepthFirstPaths Demo"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tzkhz.png" alt="DepthFirstPaths Demo"></p>
 <p>Demo: <a target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1lTo8LZUGi3XQ1VlOmBUF9KkJTW_JWsw_DOPq8VBiI3A/edit#slide=id.g76e0dad85_2_380">link (important)</a></p>
 <p>We just developed a depth-first traversal (like pre-order, in-order, post-order) but for graphs.</p>
 <p><strong>Intuitively</strong>, we’re going deep (i.e., down our family tree to our first child, our first child’s first child a.k.a. our first grandchild, our first grandchild’s first child, and so on… visiting this entire lineage), <code>before we even touch our second child</code>.</p>
 <p><strong>Example:</strong></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/l5d79.png" title="DFS Pre-order &amp; Post-order, BFS order"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/l5d79.png" alt="DFS Pre-order &amp; Post-order, BFS order"></p>
 <h3 id="Traversal-BFS"><a href="#Traversal-BFS" class="headerlink" title="Traversal: BFS"></a>Traversal: BFS</h3><p><strong>Note:</strong> BFS pseudocode is exactly the same as DFS except with a <code>queue</code> instead of a <code>stack</code>.</p>
 <p>BFS has the cool feature of <code>finding the shortest path</code> from one node to all other nodes in terms of number of edges.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/izo6x.png" title="Shortest Paths Challenge"></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/8tvhi.png" title="Breadth First Search"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/izo6x.png" alt="Shortest Paths Challenge"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/8tvhi.png" alt="Breadth First Search"></p>
 <p>Demo: <a target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1JoYCelH4YE6IkSMq_LfTJMzJ00WxDj7rEa49gYmAtc4/edit?usp=sharing">Breadth First Paths</a></p>
 <p>Example: <a target="_blank" rel="noopener" href="https://oracleofbacon.org/">The Oracle of Bacon</a></p>
 <h3 id="API-Integer-Vertices"><a href="#API-Integer-Vertices" class="headerlink" title="API: Integer Vertices"></a>API: Integer Vertices</h3><p>Our choices can have profound implications on:</p>
@@ -252,9 +252,9 @@ gtag('config', 'UA-146643833-1');
 <li>Difficulty of implementing various graph algorithms.</li>
 </ul>
 <p>For example, using a map to store labels / weights (String to Integer):</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tjpuz.png" title="Integer Vertices"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tjpuz.png" alt="Integer Vertices"></p>
 <p><strong>Graph API:</strong></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/atnj3.png" title="API from the optional textbook"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/atnj3.png" alt="API from the optional textbook"></p>
 <p>Some features:</p>
 <ul>
 <li><code>Number of vertices</code> $V$ must be specified in advance.</li>
@@ -271,7 +271,7 @@ gtag('config', 'UA-146643833-1');
 
 <p>The runtime is $O(V + E)$. The first loop takes $O(V)$ since each vertex is visited once; the print statement takes $O(E)$ in total.</p>
 <p>So, our choice of Graph API has deep implications on the implementation of DFS, BFS, print, and other graph “clients”.</p>
-<h3 id="Graph-Representations"><a href="#Graph-Representations" class="headerlink" title="Graph Representations"></a>Graph Representations</h3><h4 id="Adjacency-Matrix"><a href="#Adjacency-Matrix" class="headerlink" title="Adjacency Matrix"></a>Adjacency Matrix</h4><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/kzgb2.png" title="Adjacency Matrix"></p>
+<h3 id="Graph-Representations"><a href="#Graph-Representations" class="headerlink" title="Graph Representations"></a>Graph Representations</h3><h4 id="Adjacency-Matrix"><a href="#Adjacency-Matrix" class="headerlink" title="Adjacency Matrix"></a>Adjacency Matrix</h4><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/kzgb2.png" alt="Adjacency Matrix"></p>
 <p><code>G.adj(2)</code> would return an iterator where we can call <code>next()</code> up to two times:</p>
 <ul>
 <li>returns $1$</li>
@@ -279,11 +279,11 @@ gtag('config', 'UA-146643833-1');
 </ul>
 <p>Total runtime to iterate over all neighbors of $v$ is $\Theta(V)$. Underlying code has to iterate through entire array to handle <code>next()</code> and <code>hasNext()</code> calls.</p>
 <p>So the <code>print()</code> takes $\Theta(V^2)$ time. Again, the inner loop takes $O(V)$ time because each vertex is visited.</p>
-<h4 id="Edge-Sets"><a href="#Edge-Sets" class="headerlink" title="Edge Sets"></a>Edge Sets</h4><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/6vzwc.png" title="Edge Sets"></p>
+<h4 id="Edge-Sets"><a href="#Edge-Sets" class="headerlink" title="Edge Sets"></a>Edge Sets</h4><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/6vzwc.png" alt="Edge Sets"></p>
 <p>So the <code>print()</code> takes $O(E)$ time.</p>
-<h4 id="Adjacency-Lists"><a href="#Adjacency-Lists" class="headerlink" title="Adjacency Lists"></a>Adjacency Lists</h4><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/60wi8.png" title="Adjacency Lists"></p>
+<h4 id="Adjacency-Lists"><a href="#Adjacency-Lists" class="headerlink" title="Adjacency Lists"></a>Adjacency Lists</h4><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/60wi8.png" alt="Adjacency Lists"></p>
 <p>So what is the runtime of <code>print()</code>?</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/92ddn.png" title="Graph Printing Runtime"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/92ddn.png" alt="Graph Printing Runtime"></p>
 <p><strong>The answer:</strong></p>
 <p>Best case: $O(V)$<br>Worst case: $O(V^2)$</p>
 <p><strong>Note:</strong> They can be expressed as $O(V + E)$.</p>
@@ -308,7 +308,7 @@ gtag('config', 'UA-146643833-1');
 <p>Additionally, each loop we have to call <code>G.adj(v)</code> or <code>v += 1</code>, which in total takes $O(V)$.</p>
 <p>Therefore, the runtime is $O(V + E)$.</p>
 <p><strong>Summary:</strong></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9eo9i.png" title="Runtime of some basic operations for each representation"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9eo9i.png" alt="Runtime of some basic operations for each representation"></p>
 <p><strong>Note:</strong> <code>print()</code> and <code>hasEdge(s, t)</code> operations are not part of the Graph class’s API.</p>
 <p>In practice, adjacency lists are most common. </p>
 <ul>
@@ -344,7 +344,7 @@ gtag('config', 'UA-146643833-1');
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/i80dc.png"></p>
 <p><strong>What is the runtime of the constructor?</strong></p>
 <p>Refer to the demo for visualization: <a target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1lTo8LZUGi3XQ1VlOmBUF9KkJTW_JWsw_DOPq8VBiI3A/edit#slide=id.g76e0dad85_2_380">Demo</a></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/rn0zr.png" title="T means 2 times"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/rn0zr.png" alt="T means 2 times"></p>
 <ul>
 <li>The number of <code>if (!marked[w])</code> calls is $\sim{2E}$.</li>
 <li>The number of <code>dfs()</code> calls is $V$.</li>
@@ -364,24 +364,24 @@ gtag('config', 'UA-146643833-1');
 <p><strong>Note:</strong> Can’t say $\Theta(V + E)$, e.g. graph with no edges touching source.</p>
 <p>Space is $\Theta(V)$. Need arrays of length $V$ to store information.</p>
 <h3 id="Code-BFS"><a href="#Code-BFS" class="headerlink" title="Code: BFS"></a>Code: BFS</h3><p><strong>Note:</strong> Check mark before enqueued (after forlooping neighbors).<br><strong>Note:</strong> Mark when <code>enqueued</code>.<br><strong>Note:</strong> Update <code>edgeTo</code> after checking and when enqueued (in forlooping).<br><strong>Note:</strong> Output when <code>dequeued</code>.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/34f0e.png" title="BreathFirstPaths Implementation"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/34f0e.png" alt="BreathFirstPaths Implementation"></p>
 <p>Notice that after dequeuing a vertex we don’t check if it is marked, because according to <code>mark when enqueuing</code> the vertex must have been marked.</p>
 <p>Cost model: </p>
 <ul>
 <li><code>dequeue()</code> or <code>G.adj(v)</code></li>
 <li><code>if (!marked[w]) checks</code> or <code>next()</code></li>
 </ul>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/p0xsi.png" title="Runtime Summary (Adjacency Lists)"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/p0xsi.png" alt="Runtime Summary (Adjacency Lists)"></p>
 <p><strong>What happens if we use adjacency matrix?</strong></p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/5o8u5.png"></p>
 <p>It takes $O(V^2)$.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tish8.png" title="Runtime Summary (Adjacency Matrix)"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tish8.png" alt="Runtime Summary (Adjacency Matrix)"></p>
 <h2 id="Ex-Guide"><a href="#Ex-Guide" class="headerlink" title="Ex (Guide)"></a>Ex (Guide)</h2><h3 id="Tree-Traversal-1"><a href="#Tree-Traversal-1" class="headerlink" title="Tree Traversal"></a>Tree Traversal</h3><h4 id="Ex-1-Pre-order-In-order"><a href="#Ex-1-Pre-order-In-order" class="headerlink" title="Ex 1 (Pre-order = In-order)"></a>Ex 1 (Pre-order = In-order)</h4><p><a target="_blank" rel="noopener" href="http://inst.eecs.berkeley.edu/~cs61b/fa14/ta-materials/discussion7.pdf">Question 1</a> from the Fall 2014 discussion worksheet.</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/wlc7w.png"></p>
 <p>Pre-order: <code>10, 2, 5, 7, 8, 3, 0, 2</code><br>In-order: <code>5, 2, 7, 8, 10, 3, 0, 2</code><br>Post-order: <code>5, 8, 7, 2, 2, 0, 3, 10</code></p>
 <p>Bonus: The height in this case is $N - 1$ (I think the answer is incorrect). It means all nodes have only right children.</p>
 <p>Height is the number of edges along the path. And this is the version used in CS 61B.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/rj1dv.jpg" title="depth vs. height"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/rj1dv.jpg" alt="depth vs. height"></p>
 <p>Source: <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/2603692/what-is-the-difference-between-tree-depth-and-height">link</a></p>
 <h4 id="Ex-2-Diameter"><a href="#Ex-2-Diameter" class="headerlink" title="Ex 2 (Diameter)"></a>Ex 2 (Diameter)</h4><blockquote>
 <p>Very interesting!</p>
@@ -456,7 +456,7 @@ gtag('config', 'UA-146643833-1');
 <p>An undirected graph is said to be <code>bipartite</code> if all of its vertices can be divided into two disjoint sets $U$ and $V$ such that every edge connects an item in $U$ to an item in $V$. For example, the graph on the right is bipartite, whereas on the graph on the left is not. Provide an algorithm which determines whether or not a graph is bipartite. What is the runtime of your algorithm?</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/nqzzt.png"></p>
 <p>To solve this problem, we simply run a special version of <code>DFS</code> or <code>BFS</code> from any vertex. This special version marks the <code>start vertex</code> with a $U$, then each of its children with a $V$, and each of <code>their children</code> with a $U$, and so forth.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/u1d7b.png" title="Not bipartite"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/u1d7b.png" alt="Not bipartite"></p>
 <p>If any vertex already has a $U$ and the visited vertex has a $V$ (or vice-versa), then the graph is not bipartite. <code>In other words</code>, if any vertex which is marked $U$ finds a neighbor which is already marked $U$, <code>break</code>, and the graph is not bipartite.</p>
 <p>If the algorithm completes, marking every vertex in the graph, then it is bipartite.</p>
 <p>If the graph is not connected, we repeat this process for each connected component.</p>
@@ -547,7 +547,7 @@ gtag('config', 'UA-146643833-1');
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Anything/"><span class="card-category-list-name">Anything</span><span class="card-category-list-count">10</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C</span><span class="card-category-list-count">18</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Math/"><span class="card-category-list-name">Math</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Music/"><span class="card-category-list-name">Music</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/OS/"><span class="card-category-list-name">OS</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Reading-Notes/"><span class="card-category-list-name">Reading Notes</span><span class="card-category-list-count">5</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/i/" style="font-size: 1.1em; color: #999">++i</a> <a href="/tags/ANSI-C/" style="font-size: 1.1em; color: #999">ANSI C</a> <a href="/tags/Abstract-Class/" style="font-size: 1.1em; color: #999">Abstract Class</a> <a href="/tags/Argument/" style="font-size: 1.1em; color: #999">Argument</a> <a href="/tags/AutoLayout/" style="font-size: 1.1em; color: #999">AutoLayout</a> <a href="/tags/C/" style="font-size: 1.5em; color: #99a9bf">C</a> <a href="/tags/C-Traps-and-Pitfalls/" style="font-size: 1.5em; color: #99a9bf">C Traps and Pitfalls</a> <a href="/tags/C11/" style="font-size: 1.1em; color: #999">C11</a> <a href="/tags/C89/" style="font-size: 1.1em; color: #999">C89</a> <a href="/tags/C90/" style="font-size: 1.1em; color: #999">C90</a> <a href="/tags/C99/" style="font-size: 1.1em; color: #999">C99</a> <a href="/tags/CPU-%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/" style="font-size: 1.1em; color: #999">CPU 工作模式</a> <a href="/tags/Calculus/" style="font-size: 1.1em; color: #999">Calculus</a> <a href="/tags/Compute-Shader/" style="font-size: 1.1em; color: #999">Compute Shader</a> <a href="/tags/Covariant/" style="font-size: 1.1em; color: #999">Covariant</a> <a href="/tags/English/" style="font-size: 1.1em; color: #999">English</a> <a href="/tags/Expert-C-Programming/" style="font-size: 1.5em; color: #99a9bf">Expert C Programming</a> <a href="/tags/GCD/" style="font-size: 1.1em; color: #999">GCD</a> <a href="/tags/GRE/" style="font-size: 1.1em; color: #999">GRE</a> <a href="/tags/Grass/" style="font-size: 1.1em; color: #999">Grass</a> <a href="/tags/Hexo/" style="font-size: 1.1em; color: #999">Hexo</a> <a href="/tags/Interface/" style="font-size: 1.1em; color: #999">Interface</a> <a href="/tags/Iteration/" style="font-size: 1.1em; color: #999">Iteration</a> <a href="/tags/Java/" style="font-size: 1.5em; color: #99a9bf">Java</a> <a href="/tags/K-R-C/" style="font-size: 1.1em; color: #999">K&R C</a> <a href="/tags/LinkedList/" style="font-size: 1.1em; color: #999">LinkedList</a> <a href="/tags/Logic/" style="font-size: 1.1em; color: #999">Logic</a> <a href="/tags/Mac/" style="font-size: 1.5em; color: #99a9bf">Mac</a> <a href="/tags/Markdown/" style="font-size: 1.1em; color: #999">Markdown</a> <a href="/tags/Mou/" style="font-size: 1.1em; color: #999">Mou</a> <a href="/tags/Multivarible-Calculus/" style="font-size: 1.1em; color: #999">Multivarible Calculus</a> <a href="/tags/Probability/" style="font-size: 1.1em; color: #999">Probability</a> <a href="/tags/Protected-Mode/" style="font-size: 1.1em; color: #999">Protected Mode</a> <a href="/tags/Python/" style="font-size: 1.1em; color: #999">Python</a> <a href="/tags/Real-Mode/" style="font-size: 1.1em; color: #999">Real Mode</a> <a href="/tags/Recursion/" style="font-size: 1.1em; color: #999">Recursion</a> <a href="/tags/Shader/" style="font-size: 1.1em; color: #999">Shader</a> <a href="/tags/Sky/" style="font-size: 1.1em; color: #999">Sky</a> <a href="/tags/Stack/" style="font-size: 1.1em; color: #999">Stack</a> <a href="/tags/TypeFu/" style="font-size: 1.1em; color: #999">TypeFu</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">50</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">82.3k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-04-12T02:03:21.414Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2015 - 2021 By Junhao Wang</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">return 0;</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script>function panguFn () {
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/iOS/" style="font-size: 1.45em; color: rgb(47, 42, 177)">iOS</a><a href="/tags/Xcode/" style="font-size: 1.15em; color: rgb(60, 170, 68)">Xcode</a><a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 1.15em; color: rgb(192, 157, 54)">插件</a><a href="/tags/UIScrollView/" style="font-size: 1.15em; color: rgb(13, 132, 114)">UIScrollView</a><a href="/tags/UITableView/" style="font-size: 1.15em; color: rgb(191, 15, 42)">UITableView</a><a href="/tags/AutoLayout/" style="font-size: 1.15em; color: rgb(82, 42, 182)">AutoLayout</a><a href="/tags/%E7%9E%8E%E6%89%AF/" style="font-size: 1.15em; color: rgb(40, 39, 127)">瞎扯</a><a href="/tags/Mac/" style="font-size: 1.3em; color: rgb(32, 149, 179)">Mac</a><a href="/tags/TypeFu/" style="font-size: 1.15em; color: rgb(108, 84, 94)">TypeFu</a><a href="/tags/%E7%BB%83%E6%89%93%E5%AD%97/" style="font-size: 1.15em; color: rgb(12, 86, 66)">练打字</a><a href="/tags/Hexo/" style="font-size: 1.15em; color: rgb(161, 192, 24)">Hexo</a><a href="/tags/%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/" style="font-size: 1.15em; color: rgb(28, 177, 155)">本地图片</a><a href="/tags/Unity/" style="font-size: 1.3em; color: rgb(102, 20, 114)">Unity</a><a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 1.15em; color: rgb(64, 41, 18)">游戏</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1.15em; color: rgb(57, 148, 155)">数据结构</a><a href="/tags/LinkedList/" style="font-size: 1.15em; color: rgb(53, 144, 23)">LinkedList</a><a href="/tags/C/" style="font-size: 1.3em; color: rgb(161, 41, 79)">C</a><a href="/tags/%E6%B1%95%E5%A4%A7%E8%AF%BE%E7%A8%8B%E8%A1%A8/" style="font-size: 1.15em; color: rgb(26, 181, 58)">汕大课程表</a><a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 1.15em; color: rgb(87, 110, 120)">音乐</a><a href="/tags/%E7%AE%A1%E4%B9%90%E5%9B%A2/" style="font-size: 1.15em; color: rgb(104, 178, 115)">管乐团</a><a href="/tags/Markdown/" style="font-size: 1.15em; color: rgb(48, 156, 33)">Markdown</a><a href="/tags/Mou/" style="font-size: 1.15em; color: rgb(155, 96, 117)">Mou</a><a href="/tags/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 1.15em; color: rgb(112, 108, 4)">人工神经网络</a><a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 1.15em; color: rgb(19, 76, 6)">多线程</a><a href="/tags/GCD/" style="font-size: 1.15em; color: rgb(97, 16, 112)">GCD</a><a href="/tags/GRE/" style="font-size: 1.15em; color: rgb(22, 119, 162)">GRE</a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 1.15em; color: rgb(190, 75, 48)">英语</a><a href="/tags/%E9%80%BB%E8%BE%91/" style="font-size: 1.15em; color: rgb(92, 141, 117)">逻辑</a><a href="/tags/Argument/" style="font-size: 1.15em; color: rgb(107, 35, 29)">Argument</a><a href="/tags/Logic/" style="font-size: 1.15em; color: rgb(115, 72, 9)">Logic</a><a href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/" style="font-size: 1.15em; color: rgb(103, 92, 81)">微积分</a><a href="/tags/Calculus/" style="font-size: 1.15em; color: rgb(168, 25, 182)">Calculus</a><a href="/tags/Python/" style="font-size: 1.15em; color: rgb(146, 197, 30)">Python</a><a href="/tags/%E6%A6%82%E7%8E%87/" style="font-size: 1.15em; color: rgb(182, 9, 59)">概率</a><a href="/tags/Probability/" style="font-size: 1.15em; color: rgb(160, 139, 18)">Probability</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%A4%A7%E5%B0%8F/" style="font-size: 1.15em; color: rgb(43, 47, 56)">数据类型大小</a><a href="/tags/size-t/" style="font-size: 1.15em; color: rgb(63, 75, 21)">size_t</a><a href="/tags/%E8%A1%A5%E7%A0%81/" style="font-size: 1.15em; color: rgb(53, 121, 110)">补码</a><a href="/tags/unsigned/" style="font-size: 1.15em; color: rgb(71, 28, 148)">unsigned</a><a href="/tags/signed/" style="font-size: 1.15em; color: rgb(125, 40, 124)">signed</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">50</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">82.3k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-04-12T10:08:00.697Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2015 - 2021 By Junhao Wang</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">return 0;</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script>function panguFn () {
   if (typeof pangu === 'object') pangu.autoSpacingPage()
   else {
     getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')

@@ -6,8 +6,8 @@
 <meta property="og:description" content="Bubble SortIdeaReference: wiki Bubble sort (or sinking sort) is a simple sorting algorithm that repeatedly steps through the list, compares adjacent pairs and swaps them if they are in the wrong or">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://www.junhaow.com/resources/banner/banner_1.jpg">
-<meta property="article:published_time" content="2020-04-17T20:45:12.596Z">
-<meta property="article:modified_time" content="2019-10-15T07:22:28.000Z">
+<meta property="article:published_time" content="2021-04-12T06:31:29.816Z">
+<meta property="article:modified_time" content="2021-04-12T06:31:29.816Z">
 <meta property="article:author" content="Junhao Wang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://www.junhaow.com/resources/banner/banner_1.jpg"><link rel="shortcut icon" href="/resources/favicon/favicon.ico"><link rel="canonical" href="http://www.junhaow.com/studynotes/cs61b/cs61b%20p13"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-146643833-1"></script><script>window.dataLayer = window.dataLayer || [];
@@ -60,7 +60,7 @@ gtag('config', 'UA-146643833-1');
   isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '10/15/2019 00:22'
+  postUpdate: '04/11/2021 23:31'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -159,7 +159,7 @@ gtag('config', 'UA-146643833-1');
 </blockquote>
 <p>Quicksort was the name chosen by Tony Hoare for <code>Partition Sort</code>. For most common situations, it is empirically the <code>fastest</code> sort. He was lucky that the name was correct.</p>
 <p>Problem:</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/2tky7.png" title="The cat wore a beautiful hat."></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/2tky7.png" alt="The cat wore a beautiful hat."></p>
 <p>Limitation at the time:</p>
 <ul>
 <li>Dictionary stored on long piece of tapes, sentence is an array in RAM.<ul>
@@ -173,7 +173,7 @@ gtag('config', 'UA-146643833-1');
 </li>
 </ul>
 <h3 id="Partitioning"><a href="#Partitioning" class="headerlink" title="Partitioning"></a>Partitioning</h3><p>Interview Question:</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/zzxwh.png" title="Interview Question"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/zzxwh.png" alt="Interview Question"></p>
 <p><strong>Approach 1:</strong> Scan from the right edge of the list.</p>
 <ul>
 <li>If anything is smaller, stick it in the leftmost.</li>
@@ -197,14 +197,14 @@ gtag('config', 'UA-146643833-1');
 <li>Quicksort left half.</li>
 <li>Quicksort right half.</li>
 </ul>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/jvmly.png" title="After doing Quicksort left half"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/jvmly.png" alt="After doing Quicksort left half"></p>
 <p>Demo: <a target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1QjAs-zx1i0_XWlLqsKtexb-iueao9jNLkN-gW9QxAD0/edit#slide=id.g463de7561_042">link</a></p>
 <h3 id="Runtime"><a href="#Runtime" class="headerlink" title="Runtime"></a>Runtime</h3><h4 id="Fastest-Sort"><a href="#Fastest-Sort" class="headerlink" title="Fastest Sort"></a>Fastest Sort</h4><p>Partitioning takes $\Theta(K)$ time, where $K$ is the number of elements being partitioned.</p>
 <p><strong>Interesting Twist:</strong> Overall runtime will depend crucially on <code>where pivot ends up</code>.</p>
 <p><strong>Best Case:</strong> Pivot Always Lands in the Middle. ==&gt; $\Theta(N\log{N})$</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/xffvx.png" title="Best Case: Pivot Always Lands in the Middle"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/xffvx.png" alt="Best Case: Pivot Always Lands in the Middle"></p>
 <p><strong>Worst Case:</strong> Pivot Always Lands at the Beginning. ==&gt; $\Theta(N^2)$</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/6395y.png" title="Worst Case: Pivot Always Lands at the Beginning"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/6395y.png" alt="Worst Case: Pivot Always Lands at the Beginning"></p>
 <p>In summary:</p>
 <ul>
 <li>Best Case: $\Theta(N\log{N})$</li>
@@ -229,10 +229,10 @@ gtag('config', 'UA-146643833-1');
 <p>The answer: It takes $\Theta(N\log{N})$ <code>on average</code>.</p>
 <p>Note: Rigorous proof requires probability theory + calculus, but <code>intuition</code> + <code>empirical analysis</code> will be convincible.</p>
 <h4 id="Argument"><a href="#Argument" class="headerlink" title="Argument"></a>Argument</h4><p><strong>Argument 1:</strong> 10% Case</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ta3ez.png" title="Argument 1: 10% Case"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ta3ez.png" alt="Argument 1: 10% Case"></p>
 <p><strong>Punchline:</strong> Even if you are unlucky enough to have a pivot that never lands anywhere near the middle, but at least always <code>10%</code> from the edge, runtime is still $O(N\log{N})$.</p>
 <p><strong>Argument 2:</strong> Quicksort is BST sort (Gez!)</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/k4or5.png" title="Argument 2: Quicksort is BST sort"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/k4or5.png" alt="Argument 2: Quicksort is BST sort"></p>
 <p><strong>Note:</strong> Whenever comparison happens in your partition, think of the comparison and insertion processes in BST. Also, notice that the worst case in BST insertion is $\Theta(N)$.</p>
 <p><strong>Argument 3:</strong> Empirical Quicksort Runtimes</p>
 <p>For $N$ items:</p>
@@ -240,7 +240,7 @@ gtag('config', 'UA-146643833-1');
 <li>Average number of compares to complete Quicksort: $\sim 2N \ln{N}$</li>
 <li>Standard deviation: $\sqrt{(21-2\pi^2)/3}N \approx 0.6482776N$</li>
 </ul>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/4bgzo.png" title="Runtime Histogram"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/4bgzo.png" alt="Runtime Histogram"></p>
 <p><strong>Note:</strong> It means the probability of worst case is quite low.</p>
 <h4 id="Avoid-Worst-Case"><a href="#Avoid-Worst-Case" class="headerlink" title="Avoid Worst Case"></a>Avoid Worst Case</h4><p>If pivot always lands somewhere “good”, Quicksort is $\Theta(N\log{N})$. However, the very rare $\Theta(N^2)$ cases do happen in practice.</p>
 <ul>
@@ -293,7 +293,7 @@ gtag('config', 'UA-146643833-1');
 <p><strong>4. Preprocess the Array</strong></p>
 <p>There may be no obvious way to do this.</p>
 <p><strong>Sorting Summary (So far):</strong></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/8ngic.png" title="Sorting Summary (So far)"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/8ngic.png" alt="Sorting Summary (So far)"></p>
 <p>Note: Heapsort has <code>bad caching performance</code>, basically because it’s jumping all over the place (sinking) to find children or parents.</p>
 <h3 id="In-place-Partition"><a href="#In-place-Partition" class="headerlink" title="In-place Partition"></a>In-place Partition</h3><p><strong>Better Scheme:</strong> Tony originally proposed a scheme called <code>Hoare&#39;s Partitioning</code> where two pointers walk towards each other.</p>
 <p>Hoare’s Partitioning:</p>
@@ -309,7 +309,7 @@ gtag('config', 'UA-146643833-1');
 <li>When pointers cross, it’s done.</li>
 <li>Swap pivot with the right pointer <code>j</code>.</li>
 </ul>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/d5fwd.png" title="L = i; G = j"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/d5fwd.png" alt="L = i; G = j"></p>
 <p>Note: </p>
 <ul>
 <li><code>Hating equal items</code> is necessary when we have an array of many duplicate items.<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">piv                  j&lt;-j</span><br><span class="line">6 <span class="number"> 6 </span><span class="number"> 6 </span><span class="number"> 6 </span><span class="number"> 6 </span><span class="number"> 6 </span><span class="number"> 6 </span><span class="number"> 6 </span> 6</span><br><span class="line">   i-------------------&gt;i</span><br><span class="line">^                    ^</span><br><span class="line">---------------------- Swap  </span><br></pre></td></tr></table></figure></li>
@@ -321,7 +321,7 @@ gtag('config', 'UA-146643833-1');
 <p>Demo: <a target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1DOnWS59PJOa-LaBfttPRseIpwLGefZkn450TMSSUiQY/pub?start=false&loop=false&delayms=3000&slide=id.g463de7561_042">link</a></p>
 <p><strong>Compare to Mergesort:</strong></p>
 <p>Using Tony Hoare’s two pointer scheme, Quicksort is better than Mergesort!</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/2g5ch.png" title="Mergesort vs. Quicksort"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/2g5ch.png" alt="Mergesort vs. Quicksort"></p>
 <h3 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h3><h4 id="Okay-Version"><a href="#Okay-Version" class="headerlink" title="Okay Version"></a>Okay Version</h4><p><strong>Caveat:</strong></p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">         <span class="attribute">i</span>/j</span><br><span class="line"><span class="attribute">data</span>: <span class="number">2</span>  <span class="number">5</span> </span><br><span class="line">         <span class="attribute">j</span>  i    // i moves first</span><br><span class="line"><span class="attribute">data</span>: <span class="number">2</span>  <span class="number">5</span></span><br></pre></td></tr></table></figure>
 
@@ -351,26 +351,26 @@ gtag('config', 'UA-146643833-1');
 <li><strong>Approach 2:</strong> Build a balanced BST, and take the root, but it only works if the tree is perfectly balanced.</li>
 <li><strong>Approach 3:</strong> Sort and take the middle. (X)</li>
 </ul>
-<h4 id="PICK"><a href="#PICK" class="headerlink" title="PICK"></a>PICK</h4><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/q5i2f.png" title="Median Identification (BFPRT / PICK)"></p>
+<h4 id="PICK"><a href="#PICK" class="headerlink" title="PICK"></a>PICK</h4><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/q5i2f.png" alt="Median Identification (BFPRT / PICK)"></p>
 <p>What happens if we use this algorithm in Quicksort?</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/a02r9.png"></p>
 <p>Cost to compute medians is too high. So, we have to live with worst case $\Theta(N^2)$ if we want good practical performance.</p>
 <h4 id="Quick-Select"><a href="#Quick-Select" class="headerlink" title="Quick Select"></a>Quick Select</h4><p>It turns out that <code>partitioning</code> can be used to find the exact median. The resulting algorithm is the <code>best</code> known median identification algorithm.</p>
 <p>Demo:</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/e90qy.png" title="Quick Select"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/e90qy.png" alt="Quick Select"></p>
 <p>Runtime:</p>
 <p>Worst case: $\Theta(N^2)$ occurs if array is in sorted order.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/8ycfi.png" title="Worst Case"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/8ycfi.png" alt="Worst Case"></p>
 <p>On average, Quick Select will take $\Theta(N)$ time.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/nxi9i.png" title="Expected Performance"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/nxi9i.png" alt="Expected Performance"></p>
 <p>Although it is bound by $\Theta(N^2)$, it is better than PICK on average (just like Mergesort vs. Quicksort).</p>
 <p>However, if we apply Quick Select to Quicksort, resulting algorithm is <code>still quite slow</code>. It is <code>strange</code> to do a bunch of partitions to identify the optimal item to partition around.</p>
 <h2 id="Property-Stability"><a href="#Property-Stability" class="headerlink" title="Property: Stability"></a>Property: Stability</h2><p>Stable: <code>Order of equivalent</code> items is preserved.</p>
 <p>Stable Example:</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/iy8zi.png" title="Stable Example"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/iy8zi.png" alt="Stable Example"></p>
 <p>Note: Equivalent items don’t <code>cross over</code> when being stably sorted.</p>
 <p>Unstable Example:</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/1c7f8.png" title="Unstable Example"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/1c7f8.png" alt="Unstable Example"></p>
 <p>Sorting instability can be really annoying.</p>
 <ul>
 <li><p>Is insertion sort stable?</p>
@@ -378,7 +378,7 @@ gtag('config', 'UA-146643833-1');
 </li>
 <li><p>Is Quicksort stable?</p>
 <p>Depends on your partitioning strategy. Quicksort LTHS is not stable.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/4nizg.png" title="Quicksort LTHS"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/4nizg.png" alt="Quicksort LTHS"></p>
 </li>
 </ul>
 <p>Besides, Heapsort is not stable. Mergesort is stable.</p>
@@ -457,7 +457,7 @@ gtag('config', 'UA-146643833-1');
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ugimc.png"></p>
 <p>Notice that if we ask the first two questions <code>a &lt; b</code> and <code>b &lt; c</code>, and the answers are <code>Yes</code> and <code>No</code>, we can’t know the sorted order.</p>
 <p>We can see the decision tree here:</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/mnx0k.png" title="Puppy, Cat, Dog - A Graphical Picture for N = 3"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/mnx0k.png" alt="Puppy, Cat, Dog - A Graphical Picture for N = 3"></p>
 <p>How many questions would you need to ask to definitely solve the “puppy, cat, dog, walrus” problem?</p>
 <p>The answer is 5.</p>
 <ul>
@@ -477,7 +477,7 @@ gtag('config', 'UA-146643833-1');
 <p>Deriving a sequence of yes/no questions to identify these animals is hard, but we can use <code>sorting</code> to solve the problem.</p>
 <p>In other words, this problem can reduce to sorting problem. Thus, <code>any lower bound</code> on difficulty of this game must also apply to sorting.</p>
 <p>Since we have a lower bound on this game that it takes $\Omega(\log{(N!)})$ comparisons to solve such a puzzle in the worst case, sorting with comparisons also takes $\Omega(\log{(N!)})$ comparisons in the worst case.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/gjo8y.png" title="Sorting Lower Bound"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/gjo8y.png" alt="Sorting Lower Bound"></p>
 <p>Since we have $\log{(N!)} \in \Omega(N\log{N})$, $\log{(N!)}$ grows at least quickly as $N\log{N}$, we can say the lower bound of TUCS is  $\Omega(N\log{N})$.</p>
 <p>Finally, any comparison based sort requires at least order $N\log{N}$ comparisons in its worst case.</p>
 <p>Informally, we can say: TUCS &gt;= Puppy, cat, dog &gt;= $\log{(N!)}$ &gt;= $N\log{N}$</p>
@@ -492,9 +492,9 @@ gtag('config', 'UA-146643833-1');
 <p>Question: If we avoid comparing anything, can we do better in $\Theta(N)$ time?</p>
 <h2 id="Dodge-The-Bounds"><a href="#Dodge-The-Bounds" class="headerlink" title="Dodge The Bounds"></a>Dodge The Bounds</h2><p>We know that the ultimate comparison based sorting algorithm has a worst case runtime of $\Theta(N\log{N})$. But what if we don’t compare at all?</p>
 <h3 id="Sleep-Sort"><a href="#Sleep-Sort" class="headerlink" title="Sleep Sort"></a>Sleep Sort</h3><p>Example #1: Sleep Sort (for sorting integers, not good)</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ve6pv.png" title="Sleep Sort"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ve6pv.png" alt="Sleep Sort"></p>
 <h3 id="Counting-Sort"><a href="#Counting-Sort" class="headerlink" title="Counting Sort"></a>Counting Sort</h3><h4 id="Simplest-Case"><a href="#Simplest-Case" class="headerlink" title="Simplest Case"></a>Simplest Case</h4><p>Example #2: Counting Sort (Exploiting Space Instead of Time)</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/pf7ay.png" title="Counting Sort"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/pf7ay.png" alt="Counting Sort"></p>
 <p>We just sorted $N$ items in $\Theta(N)$ worst case time, avoiding answer yes/no questions.</p>
 <p>Simplest Case: Keys are unique integers from $0$ to $N-1$.</p>
 <p>However, we may have some <code>complex cases</code>:</p>
@@ -510,11 +510,11 @@ gtag('config', 'UA-146643833-1');
 <li>Based on the <code>count array</code>, initialize the <code>starting point array</code>.</li>
 <li>Iterate through list, guided by the <code>starting point array</code> to insert item into the <code>sorted array</code>, and update the <code>starting point array</code>.</li>
 </ul>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/sbzf8.png" title="Alphabet Case"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/sbzf8.png" alt="Alphabet Case"></p>
 <p>Demo: <a target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1vmVKHRSwb5WN1rHvktplbPGecHChxOwWa7ovRuiLzbA/edit#slide=id.g582f6c5a07_0_0">link</a></p>
 <h4 id="Runtime-1"><a href="#Runtime-1" class="headerlink" title="Runtime"></a>Runtime</h4><p>Question: For sorting an array of the 100 largest cities by population, which sort do you think has a better expected worst case runtime in seconds, <code>Counting Sort</code> or <code>Quicksort</code>?</p>
 <p>The answer is <code>Quicksort</code>.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/27fus.png" title="Sorting Cities"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/27fus.png" alt="Sorting Cities"></p>
 <p>Question: What is the runtime for counting sort on $N$ keys with alphabet of size $R$?</p>
 <p><strong>Note:</strong> Treat $R$ as a variable, not a constant.</p>
 <p>Runtime Analysis: Total runtime is $\Theta(N + R)$.</p>
@@ -538,27 +538,27 @@ gtag('config', 'UA-146643833-1');
 <p><strong>Bottom Line:</strong> If $N \geq R$, then we can expect reasonable performance.</p>
 <p>So, if we want to sort <code>really really big</code> collections of items from <code>some</code> alphabet, counting sort is better.</p>
 <p><strong>Sort Summary (So Far):</strong></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/0txq7.png" title="Sort Summary (So Far)"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/0txq7.png" alt="Sort Summary (So Far)"></p>
 <p><strong>Note:</strong> Counting sort is nice, but alphabetic restriction limits usefulness. Also, it is not practical to store things like strings which have an infinite collection of keys.</p>
 <h2 id="Radix-Sort"><a href="#Radix-Sort" class="headerlink" title="Radix Sort"></a>Radix Sort</h2><p>Although strings belong to an infinite collection of keys, they consist of characters from a <code>finite alphabet</code>.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9zjte.png" title="Strings consist of characters from a finite alphabet"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9zjte.png" alt="Strings consist of characters from a finite alphabet"></p>
 <h3 id="LSD-Radix-Sort"><a href="#LSD-Radix-Sort" class="headerlink" title="LSD Radix Sort"></a>LSD Radix Sort</h3><p>LSD stands for <code>Least Significant Digit</code>, which is from rightmost digit towards left.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/n5o4e.png" title="LSD"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/n5o4e.png" alt="LSD"></p>
 <p><strong>Note:</strong> The LSD is stable.</p>
 <p>Runtime: $\Theta(WN + WR)$, where $W$ is the width fo .each item in # digits.</p>
 <p>Non-Equal Key Lengths:</p>
 <p>When keys are of different lengths, we can treat empty spaces as less than all other characters.</p>
 <h3 id="MSD-Radix-Sort"><a href="#MSD-Radix-Sort" class="headerlink" title="MSD Radix Sort"></a>MSD Radix Sort</h3><p>MSD stands for <code>Most Significant Digit</code>, which is from leftmost digit towards right.</p>
 <p><strong>Problem:</strong> If we treat MSD as what LSD did previously, it will end up a bad result.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/37coc.png" title="MSD Problem"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/37coc.png" alt="MSD Problem"></p>
 <p><strong>Solution:</strong> Sort each subproblem separately.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/z3pal.png" title="MSD Solution"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/z3pal.png" alt="MSD Solution"></p>
 <p>Runtime:</p>
 <p><strong>Best Case:</strong> We finish in one counting sort pass (the top digit is unique), looking only at the top digit: $\Theta(N + R)$.</p>
 <p><strong>Worst Case:</strong> We have to look at every character, <code>degenerating</code> to LSD sort: $\Theta(WN + WR)$.</p>
 <p><strong>Note:</strong> MSD has <code>bad caching performance</code>.</p>
 <p><strong>Sorting Runtime Summary:</strong></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/b6z82.png" title="Sorting Runtime Summary"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/b6z82.png" alt="Sorting Runtime Summary"></p>
 <h2 id="Radix-vs-Comparison"><a href="#Radix-vs-Comparison" class="headerlink" title="Radix vs. Comparison"></a>Radix vs. Comparison</h2><h3 id="Intuitive-Look"><a href="#Intuitive-Look" class="headerlink" title="Intuitive Look"></a>Intuitive Look</h3><p><strong>Question:</strong> Mergesort requires $\Theta(N\log{N})$ compares. What is Mergesort’s runtime  on strings of length $W$?</p>
 <p>It depends.</p>
 <ul>
@@ -585,14 +585,14 @@ gtag('config', 'UA-146643833-1');
 </ul>
 </li>
 <li>If strings are very <code>similar</code> to each other.<ul>
-<li>Each Mergesort comparison takes $\Theta(W)$ time.<br><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/0udcz.png" title="Mergesort hates this case"></li>
+<li>Each Mergesort comparison takes $\Theta(W)$ time.<br><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/0udcz.png" alt="Mergesort hates this case"></li>
 </ul>
 </li>
 </ul>
 <p>Mergesort is faster:</p>
 <ul>
 <li>Strings are highly dissimilar from each other.<ul>
-<li>Each Mergesort comparison may finish early which costs constant time $\Theta(1)$.<br><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/d4tnh.png" title="Mergesort lives this case"></li>
+<li>Each Mergesort comparison may finish early which costs constant time $\Theta(1)$.<br><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/d4tnh.png" alt="Mergesort lives this case"></li>
 </ul>
 </li>
 </ul>
@@ -611,7 +611,7 @@ gtag('config', 'UA-146643833-1');
 <li><p>Mergesort:</p>
 <p>Let’s first consider <code>merge(100)</code>.</p>
 <p>Note: Merging 100 equal items results in <code>always picking left</code>.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/6zbr4.png" title="Merging 100 items"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/6zbr4.png" alt="Merging 100 items"></p>
 <ul>
 <li>Comparing <code>A[0]</code> to <code>A[50]</code>: 2000 character examinations.</li>
 <li>Comparing <code>A[1]</code> to <code>A[50]</code>: 2000 character examinations.</li>
@@ -622,7 +622,7 @@ gtag('config', 'UA-146643833-1');
 </ul>
 <p>So, merging $N$ strings of 1000 equal characters requires $1000N$ examinations.</p>
 <p>Since we have this recursive structure:</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/qo277.png" title="Merging Structure"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/qo277.png" alt="Merging Structure"></p>
 <p>$100000 + 50000 \times 2 + 25000 \times 4 + \ldots + merge(1) \times 100000 = ~660000$ characters.</p>
 <p>In total, we will examine approximately $1000N \times \log{N}$ characters.</p>
 </li>
@@ -649,7 +649,7 @@ gtag('config', 'UA-146643833-1');
 <p>Example: The code below creates Linked List, 1000 at a time. Then repeat this 500 times yields an interesting result.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JITDemo1</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NUM_LISTS = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">500</span>; ++i) &#123;</span><br><span class="line">      <span class="keyword">long</span> startTime = System.nanoTime();</span><br><span class="line">      <span class="comment">// Create 1000 linked lists</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; NUM_LISTS; ++j) &#123;</span><br><span class="line">        LinkedList&lt;Integer&gt; L = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">long</span> endTime = System.nanoTime();</span><br><span class="line">      System.out.println(i + <span class="string">&quot;: &quot;</span> + endTime - startTime);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/je98v.png" title="Runtime Graph"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/je98v.png" alt="Runtime Graph"></p>
 <ul>
 <li><code>1st Optimization</code>: Not sure what it does.</li>
 <li><code>2nd Optimization</code>: Stops creating linked lists since we’re not actually using them.</li>
@@ -680,22 +680,22 @@ gtag('config', 'UA-146643833-1');
 <li>Option 2: Mods and floorMods and division operations to get the particular digit for integer. (faster and more general)</li>
 </ul>
 <p>Note: Using the option 2, there’s no reason to stick with the base 10. We could instead treat as a base 16, 256, 65536 number.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ss2us.png" title="LSD Radix Sort on Integers with Different Base"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ss2us.png" alt="LSD Radix Sort on Integers with Different Base"></p>
 <p>Runtime depends on the alphabet size.</p>
 <ul>
 <li>Size of the counting array $\Theta(R)$.</li>
 <li>Size of the width of the number $\Theta(W)$.</li>
 </ul>
 <p>According to a computational experiment, a result of sorting 100,000,000 integers is as followed:</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ui5tb.png" title="Sorting 100,000,000 Integers"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ui5tb.png" alt="Sorting 100,000,000 Integers"></p>
 <h2 id="Sorting-Summary"><a href="#Sorting-Summary" class="headerlink" title="Sorting Summary"></a>Sorting Summary</h2><p>Three basic flavors: Comparison, Alphabet, and Radix based.</p>
 <p>Each can be useful in different circumstances, but the important part was the analysis and the deep thought.</p>
 <p><strong>Sort vs. Search:</strong></p>
 <p>Search problem data structures:</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/y0q9w.png" title="Search Problem Data Structures"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/y0q9w.png" alt="Search Problem Data Structures"></p>
 <p>There are some interesting connections between sorting and searching (retrieval of interested data).</p>
 <p>Connection:</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/kg7oe.png" title="Connection Between Sorting and Searching"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/kg7oe.png" alt="Connection Between Sorting and Searching"></p>
 <p>Questions:</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/dz3hv.png"></p>
 <h2 id="Ex-Guide"><a href="#Ex-Guide" class="headerlink" title="Ex (Guide)"></a>Ex (Guide)</h2><h3 id="Ex-1-Which-Sort"><a href="#Ex-1-Which-Sort" class="headerlink" title="Ex 1 (Which Sort?)"></a>Ex 1 (Which Sort?)</h3><p>My Fall 2013 midterm, <a target="_blank" rel="noopener" href="http://www.cs.princeton.edu/courses/archive/fall13/cos226/exams/mid-f13.pdf">problem 7</a>.</p>
@@ -763,7 +763,7 @@ gtag('config', 'UA-146643833-1');
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Anything/"><span class="card-category-list-name">Anything</span><span class="card-category-list-count">10</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C</span><span class="card-category-list-count">18</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Math/"><span class="card-category-list-name">Math</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Music/"><span class="card-category-list-name">Music</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/OS/"><span class="card-category-list-name">OS</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Reading-Notes/"><span class="card-category-list-name">Reading Notes</span><span class="card-category-list-count">5</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/i/" style="font-size: 1.1em; color: #999">++i</a> <a href="/tags/ANSI-C/" style="font-size: 1.1em; color: #999">ANSI C</a> <a href="/tags/Abstract-Class/" style="font-size: 1.1em; color: #999">Abstract Class</a> <a href="/tags/Argument/" style="font-size: 1.1em; color: #999">Argument</a> <a href="/tags/AutoLayout/" style="font-size: 1.1em; color: #999">AutoLayout</a> <a href="/tags/C/" style="font-size: 1.5em; color: #99a9bf">C</a> <a href="/tags/C-Traps-and-Pitfalls/" style="font-size: 1.5em; color: #99a9bf">C Traps and Pitfalls</a> <a href="/tags/C11/" style="font-size: 1.1em; color: #999">C11</a> <a href="/tags/C89/" style="font-size: 1.1em; color: #999">C89</a> <a href="/tags/C90/" style="font-size: 1.1em; color: #999">C90</a> <a href="/tags/C99/" style="font-size: 1.1em; color: #999">C99</a> <a href="/tags/CPU-%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/" style="font-size: 1.1em; color: #999">CPU 工作模式</a> <a href="/tags/Calculus/" style="font-size: 1.1em; color: #999">Calculus</a> <a href="/tags/Compute-Shader/" style="font-size: 1.1em; color: #999">Compute Shader</a> <a href="/tags/Covariant/" style="font-size: 1.1em; color: #999">Covariant</a> <a href="/tags/English/" style="font-size: 1.1em; color: #999">English</a> <a href="/tags/Expert-C-Programming/" style="font-size: 1.5em; color: #99a9bf">Expert C Programming</a> <a href="/tags/GCD/" style="font-size: 1.1em; color: #999">GCD</a> <a href="/tags/GRE/" style="font-size: 1.1em; color: #999">GRE</a> <a href="/tags/Grass/" style="font-size: 1.1em; color: #999">Grass</a> <a href="/tags/Hexo/" style="font-size: 1.1em; color: #999">Hexo</a> <a href="/tags/Interface/" style="font-size: 1.1em; color: #999">Interface</a> <a href="/tags/Iteration/" style="font-size: 1.1em; color: #999">Iteration</a> <a href="/tags/Java/" style="font-size: 1.5em; color: #99a9bf">Java</a> <a href="/tags/K-R-C/" style="font-size: 1.1em; color: #999">K&R C</a> <a href="/tags/LinkedList/" style="font-size: 1.1em; color: #999">LinkedList</a> <a href="/tags/Logic/" style="font-size: 1.1em; color: #999">Logic</a> <a href="/tags/Mac/" style="font-size: 1.5em; color: #99a9bf">Mac</a> <a href="/tags/Markdown/" style="font-size: 1.1em; color: #999">Markdown</a> <a href="/tags/Mou/" style="font-size: 1.1em; color: #999">Mou</a> <a href="/tags/Multivarible-Calculus/" style="font-size: 1.1em; color: #999">Multivarible Calculus</a> <a href="/tags/Probability/" style="font-size: 1.1em; color: #999">Probability</a> <a href="/tags/Protected-Mode/" style="font-size: 1.1em; color: #999">Protected Mode</a> <a href="/tags/Python/" style="font-size: 1.1em; color: #999">Python</a> <a href="/tags/Real-Mode/" style="font-size: 1.1em; color: #999">Real Mode</a> <a href="/tags/Recursion/" style="font-size: 1.1em; color: #999">Recursion</a> <a href="/tags/Shader/" style="font-size: 1.1em; color: #999">Shader</a> <a href="/tags/Sky/" style="font-size: 1.1em; color: #999">Sky</a> <a href="/tags/Stack/" style="font-size: 1.1em; color: #999">Stack</a> <a href="/tags/TypeFu/" style="font-size: 1.1em; color: #999">TypeFu</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">50</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">82.3k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-04-12T02:03:21.414Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2015 - 2021 By Junhao Wang</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">return 0;</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script>function panguFn () {
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/iOS/" style="font-size: 1.45em; color: rgb(47, 42, 177)">iOS</a><a href="/tags/Xcode/" style="font-size: 1.15em; color: rgb(60, 170, 68)">Xcode</a><a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 1.15em; color: rgb(192, 157, 54)">插件</a><a href="/tags/UIScrollView/" style="font-size: 1.15em; color: rgb(13, 132, 114)">UIScrollView</a><a href="/tags/UITableView/" style="font-size: 1.15em; color: rgb(191, 15, 42)">UITableView</a><a href="/tags/AutoLayout/" style="font-size: 1.15em; color: rgb(82, 42, 182)">AutoLayout</a><a href="/tags/%E7%9E%8E%E6%89%AF/" style="font-size: 1.15em; color: rgb(40, 39, 127)">瞎扯</a><a href="/tags/Mac/" style="font-size: 1.3em; color: rgb(32, 149, 179)">Mac</a><a href="/tags/TypeFu/" style="font-size: 1.15em; color: rgb(108, 84, 94)">TypeFu</a><a href="/tags/%E7%BB%83%E6%89%93%E5%AD%97/" style="font-size: 1.15em; color: rgb(12, 86, 66)">练打字</a><a href="/tags/Hexo/" style="font-size: 1.15em; color: rgb(161, 192, 24)">Hexo</a><a href="/tags/%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/" style="font-size: 1.15em; color: rgb(28, 177, 155)">本地图片</a><a href="/tags/Unity/" style="font-size: 1.3em; color: rgb(102, 20, 114)">Unity</a><a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 1.15em; color: rgb(64, 41, 18)">游戏</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1.15em; color: rgb(57, 148, 155)">数据结构</a><a href="/tags/LinkedList/" style="font-size: 1.15em; color: rgb(53, 144, 23)">LinkedList</a><a href="/tags/C/" style="font-size: 1.3em; color: rgb(161, 41, 79)">C</a><a href="/tags/%E6%B1%95%E5%A4%A7%E8%AF%BE%E7%A8%8B%E8%A1%A8/" style="font-size: 1.15em; color: rgb(26, 181, 58)">汕大课程表</a><a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 1.15em; color: rgb(87, 110, 120)">音乐</a><a href="/tags/%E7%AE%A1%E4%B9%90%E5%9B%A2/" style="font-size: 1.15em; color: rgb(104, 178, 115)">管乐团</a><a href="/tags/Markdown/" style="font-size: 1.15em; color: rgb(48, 156, 33)">Markdown</a><a href="/tags/Mou/" style="font-size: 1.15em; color: rgb(155, 96, 117)">Mou</a><a href="/tags/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 1.15em; color: rgb(112, 108, 4)">人工神经网络</a><a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 1.15em; color: rgb(19, 76, 6)">多线程</a><a href="/tags/GCD/" style="font-size: 1.15em; color: rgb(97, 16, 112)">GCD</a><a href="/tags/GRE/" style="font-size: 1.15em; color: rgb(22, 119, 162)">GRE</a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 1.15em; color: rgb(190, 75, 48)">英语</a><a href="/tags/%E9%80%BB%E8%BE%91/" style="font-size: 1.15em; color: rgb(92, 141, 117)">逻辑</a><a href="/tags/Argument/" style="font-size: 1.15em; color: rgb(107, 35, 29)">Argument</a><a href="/tags/Logic/" style="font-size: 1.15em; color: rgb(115, 72, 9)">Logic</a><a href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/" style="font-size: 1.15em; color: rgb(103, 92, 81)">微积分</a><a href="/tags/Calculus/" style="font-size: 1.15em; color: rgb(168, 25, 182)">Calculus</a><a href="/tags/Python/" style="font-size: 1.15em; color: rgb(146, 197, 30)">Python</a><a href="/tags/%E6%A6%82%E7%8E%87/" style="font-size: 1.15em; color: rgb(182, 9, 59)">概率</a><a href="/tags/Probability/" style="font-size: 1.15em; color: rgb(160, 139, 18)">Probability</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%A4%A7%E5%B0%8F/" style="font-size: 1.15em; color: rgb(43, 47, 56)">数据类型大小</a><a href="/tags/size-t/" style="font-size: 1.15em; color: rgb(63, 75, 21)">size_t</a><a href="/tags/%E8%A1%A5%E7%A0%81/" style="font-size: 1.15em; color: rgb(53, 121, 110)">补码</a><a href="/tags/unsigned/" style="font-size: 1.15em; color: rgb(71, 28, 148)">unsigned</a><a href="/tags/signed/" style="font-size: 1.15em; color: rgb(125, 40, 124)">signed</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">50</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">82.3k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-04-12T10:08:00.697Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2015 - 2021 By Junhao Wang</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">return 0;</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script>function panguFn () {
   if (typeof pangu === 'object') pangu.autoSpacingPage()
   else {
     getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')

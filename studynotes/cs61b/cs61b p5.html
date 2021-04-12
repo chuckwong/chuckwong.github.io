@@ -6,8 +6,8 @@
 <meta property="og:description" content="Balanced BSTsDefinitionDefinition: definition-of-a-balanced-tree There are several ways to define “Balanced”. The main goal is to keep the heights of all nodes to be $O(\log{N})$ (whose height is of">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://www.junhaow.com/resources/banner/banner_1.jpg">
-<meta property="article:published_time" content="2020-04-17T20:45:12.601Z">
-<meta property="article:modified_time" content="2019-07-04T17:26:06.000Z">
+<meta property="article:published_time" content="2021-04-12T06:13:41.731Z">
+<meta property="article:modified_time" content="2021-04-12T06:13:41.731Z">
 <meta property="article:author" content="Junhao Wang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://www.junhaow.com/resources/banner/banner_1.jpg"><link rel="shortcut icon" href="/resources/favicon/favicon.ico"><link rel="canonical" href="http://www.junhaow.com/studynotes/cs61b/cs61b%20p5"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-146643833-1"></script><script>window.dataLayer = window.dataLayer || [];
@@ -60,7 +60,7 @@ gtag('config', 'UA-146643833-1');
   isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '07/04/2019 10:26'
+  postUpdate: '04/11/2021 23:13'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -182,9 +182,9 @@ gtag('config', 'UA-146643833-1');
 <p>The <code>height</code> of the tree determines the worst-case runtime, because in the worst case the node we are looking for is at the bottom of the tree. Similarly, the <code>average depth</code> determines the average-case runtime.</p>
 <p><strong>Orders matter!</strong></p>
 <p>The order you insert nodes into a BST determines its height.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/gaiv0.jpg" title="BSTs in Practice - The Order We Add Nodes =&gt; Shape"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/gaiv0.jpg" alt="BSTs in Practice - The Order We Add Nodes =&gt; Shape"></p>
 <p>What about trees that you’d build during real world applications? One way to approximate this is to consider randomized BSTs.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/icck8.jpg" title="Simulation: Trees Built from Random Inserts (opt stands for the optimal BST&#39;s worst runtime)"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/icck8.jpg" alt="Simulation: Trees Built from Random Inserts (opt stands for the optimal BST&#39;s worst runtime)"></p>
 <p>Therefore, <code>Average Depth</code> is expected to be $\sim 2 \ln{N} = \Theta(\log{N})$ with random inserts. </p>
 <p>Note: $\sim$ is the same thing as Big Theta, but you don’t drop the <code>multiplicative constants</code>.</p>
 <p>If $N$ distinct keys are inserted in random order, expected <code>tree heights</code> is $\sim 4.311 \ln{N}$. Thus, worst case runtime for <code>contains</code> operation is $\Theta(\log{N})$ on a tree built with random inserts.</p>
@@ -193,7 +193,7 @@ gtag('config', 'UA-146643833-1');
 <p>The fact is that we can’t always insert our items in a random order, because data comes in over time, don’t have all at once (e.g. dates of events).</p>
 <h2 id="B-Trees"><a href="#B-Trees" class="headerlink" title="B-Trees"></a>B-Trees</h2><p>Also called <code>2-3</code>, <code>2-3-4</code> Trees.</p>
 <h3 id="Crazy-Idea"><a href="#Crazy-Idea" class="headerlink" title="Crazy Idea"></a>Crazy Idea</h3><p>The problem with BST’s is that we always insert at a leaf node. This is what causes the height to increase.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9q6zw.jpg" title="But this may lead to a runtime of $N$ again"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9q6zw.jpg" alt="But this may lead to a runtime of $N$ again"></p>
 <blockquote>
 <p>Never add a leaf node!</p>
 </blockquote>
@@ -213,11 +213,11 @@ gtag('config', 'UA-146643833-1');
 <li>If this results in the parent node having 4 nodes, then pop up the middle left node again, rearranging the children accordingly.</li>
 <li>Repeat this process until the parent node can accommodate or you get to the root.</li>
 </ul>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/uqfrf.png" title="Practice - Add 20, 21 to the tree"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/uqfrf.png" alt="Practice - Add 20, 21 to the tree"></p>
 <p><strong>Add: Chain Reaction</strong></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/o2frf.png" title="Practice - Add 25, 26 to the tree"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/o2frf.png" alt="Practice - Add 25, 26 to the tree"></p>
 <p><strong>What Happens If The Root Is Too Full?</strong></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/m0ifx.png" title="Move 17 up, and split"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/m0ifx.png" alt="Move 17 up, and split"></p>
 <p><strong>Observation:</strong> Splitting-trees (B-trees) have perfect balance.</p>
 <ul>
 <li>If we split the root, <code>every node</code> gets pushed down by exactly one level.</li>
@@ -226,7 +226,7 @@ gtag('config', 'UA-146643833-1');
 <blockquote>
 <p>The origin of “B-tree” has never been explained by the authors. As we shall see, “balanced,” “broad,” or “bushy” might apply. Others suggest that the “B” stands for Boeing. Because of his contributions, however, it seems appropriate to think of B-trees as “Bayer”-trees.<br>                 – Douglas Corner (The Ubiquitous B-Tree)</p>
 </blockquote>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/mi9m9.png" title="A note on Terminology"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/mi9m9.png" alt="A note on Terminology"></p>
 <p><strong>B-Trees Usage:</strong></p>
 <p>B-Trees are most popular in two specific contexts:</p>
 <ul>
@@ -239,9 +239,9 @@ gtag('config', 'UA-146643833-1');
 </ul>
 </li>
 </ul>
-<h3 id="Invariants"><a href="#Invariants" class="headerlink" title="Invariants"></a>Invariants</h3><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/kn524.png" title="Exercise 1 - Height = 2"></p>
+<h3 id="Invariants"><a href="#Invariants" class="headerlink" title="Invariants"></a>Invariants</h3><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/kn524.png" alt="Exercise 1 - Height = 2"></p>
 <p>Interactive demo: <a target="_blank" rel="noopener" href="https://tinyurl.com/balanceYD">link</a></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/xz8s8.png" title="Exercise 2 - Height = 1"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/xz8s8.png" alt="Exercise 2 - Height = 1"></p>
 <p>No matter the insertion order you choose, resulting B-Tree is <code>always bushy</code>.</p>
 <p><strong>Why?</strong></p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/7lqru.png"></p>
@@ -251,7 +251,7 @@ gtag('config', 'UA-146643833-1');
 <li>A non-leaf node with $k$ items must have exactly $k + 1$ children. ($k + 1$ gaps between items)</li>
 </ul>
 <p>These invariants guarantee that trees are bushy.</p>
-<h3 id="Runtime-Analysis"><a href="#Runtime-Analysis" class="headerlink" title="Runtime Analysis"></a>Runtime Analysis</h3><h4 id="Height"><a href="#Height" class="headerlink" title="Height"></a>Height</h4><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/qcr55.png" title="Height of a B-Tree with Limit L"></p>
+<h3 id="Runtime-Analysis"><a href="#Runtime-Analysis" class="headerlink" title="Runtime Analysis"></a>Runtime Analysis</h3><h4 id="Height"><a href="#Height" class="headerlink" title="Height"></a>Height</h4><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/qcr55.png" alt="Height of a B-Tree with Limit L"></p>
 <p>Thus, the height is between $\sim\log_{L+1}{(N)}$ and $\sim\log_2{(N)}$</p>
 <p>More items in a node =&gt; More branches =&gt; More stuff for the same height</p>
 <h4 id="contains"><a href="#contains" class="headerlink" title="contains"></a>contains</h4><ul>
@@ -285,7 +285,7 @@ gtag('config', 'UA-146643833-1');
 <li>Then we <code>delete</code> the successor value (always be in a leaf node, because the tree is bushy!)</li>
 </ul>
 <p>Example: <code>delete(17)</code></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/phkcc.png" title="Swap 17 with its successor 18, then delete 17"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/phkcc.png" alt="Swap 17 with its successor 18, then delete 17"></p>
 <p>If the leaf has multiple keys, the deletion is trivial. Just simply remove the item. <strong>What about Single-Key Leaves?</strong></p>
 <p>We need to keep the invariants (Any node with k items must have k + 1 children!). So, we’ll leave an empty node, which must be filled.</p>
 <p><strong>Note:</strong> It depends on the number of parent keys and sibling keys.</p>
@@ -297,18 +297,18 @@ gtag('config', 'UA-146643833-1');
 <li>$X$ steals parent’s item. Parent steals sibling’s item.</li>
 <li>If $X$ was not a leaf node, $X$ steals one of sibling’s subtrees.</li>
 </ul>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/hhs40.png" title="Try to fill in X in the diagram so that the result is a valid 2-3 tree"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/hhs40.png" alt="Try to fill in X in the diagram so that the result is a valid 2-3 tree"></p>
 <p>Another example: Try to delete 17 from the tree below.</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ct094.png"></p>
 <p>Answer:</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/uqxpg.png" title="Swap 17 with 19, then delete 17; steal from sibling"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/uqxpg.png" alt="Swap 17 with 19, then delete 17; steal from sibling"></p>
 </li>
 <li><p>FIEN Case 2A: <code>Multi-Key Parent</code></p>
 <ul>
 <li>$X$ and right sibling steal parent’s keys. <code>Middle sibling</code> moves into the parent.</li>
 <li>Subtrees are passed along so that every node has the correct children.</li>
 </ul>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/1fwa1.png" title="Example"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/1fwa1.png" alt="Example"></p>
 <p>Another example: Try to delete root 3</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/vq7re.png"></p>
 </li>
@@ -341,7 +341,7 @@ gtag('config', 'UA-146643833-1');
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/uduos.png"></p>
 <h3 id="Ex-3"><a href="#Ex-3" class="headerlink" title="Ex 3"></a>Ex 3</h3><p><a target="_blank" rel="noopener" href="https://tbp.berkeley.edu/exams/5286/download/">Problem 8b</a> of the Spring 2016 Midterm 2</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/kjhqs.png"></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/rkr6a.png" title="Possible Sequence: 1, 2, 3, 4, 5, 6, 7, 8, 9"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/rkr6a.png" alt="Possible Sequence: 1, 2, 3, 4, 5, 6, 7, 8, 9"></p>
 <p><a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/BTree.html">Visual helper</a></p>
 <h2 id="Tree-Rotation"><a href="#Tree-Rotation" class="headerlink" title="Tree Rotation"></a>Tree Rotation</h2><h3 id="Issues-of-B-Trees"><a href="#Issues-of-B-Trees" class="headerlink" title="Issues of B-Trees"></a>Issues of B-Trees</h3><p>Wonderfully balanced as they are, B-Trees are really <code>difficult to implement</code>. We need to keep track of the different nodes and the splitting process is pretty complicated. As computer scientists who appreciate good code and a good challenge, let’s find another way to create a balanced tree.</p>
 <p>Issues:</p>
@@ -355,7 +355,7 @@ gtag('config', 'UA-146643833-1');
 <blockquote>
 <p>Beautiful algorithms are, unfortunately, not always the most useful. - Knuth</p>
 </blockquote>
-<h3 id="Rotation"><a href="#Rotation" class="headerlink" title="Rotation"></a>Rotation</h3><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/teyf1.png" title="5 types of possible 3-node BSTs"></p>
+<h3 id="Rotation"><a href="#Rotation" class="headerlink" title="Rotation"></a>Rotation</h3><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/teyf1.png" alt="5 types of possible 3-node BSTs"></p>
 <p>Given any BST, it is possible to move to a different configuration using “rotation”.</p>
 <p>More generally, for $N$ items, there are <code>Catalan(N)</code> (number of states of many recursive data structures) different BSTs.</p>
 <p>In general, we can move from any configuration (bushy tree) to any other in <code>2n - 6</code> rotations.</p>
@@ -365,12 +365,12 @@ gtag('config', 'UA-146643833-1');
 <li>Alternatively, merging $G$ and $P$, then sending $G$ down and left.</li>
 </ul>
 <p><code>rotateRight(G)</code>: Let $x$ be the left child of $G$. Make $G$ the new right child of $x$.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ys9c1.jpg" title="rotateLeft(G)"></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/dfrnz.jpg" title="Rotate a subtree"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ys9c1.jpg" alt="rotateLeft(G)"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/dfrnz.jpg" alt="Rotate a subtree"></p>
 <p><strong>Practice: (make it bushy)</strong></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/83vmb.png" title="There are other correct answers as well!"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/83vmb.png" alt="There are other correct answers as well!"></p>
 <p>Note: In the middle case, <code>rotate(3)</code> is undefined.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/xgu37.png" title="Rotation Pattern"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/xgu37.png" alt="Rotation Pattern"></p>
 <p><strong>Usage:</strong></p>
 <ul>
 <li>Can shorten (or lengthen) a tree.</li>
@@ -414,7 +414,7 @@ gtag('config', 'UA-146643833-1');
 <li>No node has <code>two red links</code> including the link to its parent (up) and links to children (down). Otherwise it’d be analogous to a 4-node.</li>
 <li><code>Every path</code> from root to a leaf has <code>same number of black links</code>, because 2-3 trees have the same number of links to every half (only number of red links vary). Therefore, LLRBs are balanced.</li>
 </ul>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/t748k.png" title="Do it again!"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/t748k.png" alt="Do it again!"></p>
 <p><strong>Important Idea of Runtime:</strong> </p>
 <p>We know an LLRB’s height is no more than around double the height of its 2-3 tree. Since the 2-3 tree has the height that is logarithmic in the number of items, the LLRB is also logarithmic in the number of items.</p>
 <p><strong>One last question: Where do LLRBs come from?</strong></p>
@@ -428,7 +428,7 @@ gtag('config', 'UA-146643833-1');
 <li>When performing LLRB operations, <code>pretend</code> like you’re a 2-3 tree.</li>
 <li>Preservation of the correspondence will involve tree rotations.</li>
 </ul>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/frxfu.png" title="Horizontal Red Links"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/frxfu.png" alt="Horizontal Red Links"></p>
 <h4 id="Task-1-Insertion-Color"><a href="#Task-1-Insertion-Color" class="headerlink" title="Task #1: Insertion Color"></a>Task #1: Insertion Color</h4><p>Should we use a red or black link when inserting?</p>
 <p>Use <code>RED</code>! In 2-3 trees, new values are ALWAYS added to a leaf node (at first).</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9vhu1.png"></p>
@@ -438,9 +438,9 @@ gtag('config', 'UA-146643833-1');
 <p>We will represent temporary <code>4-nodes</code> as BST nodes with <code>two red links</code>. This state is only temporary, so temporary violation of “left leaning” is OK.</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/vv4ut.png"></p>
 <h4 id="Task-3-Double-Insertion-on-the-Left"><a href="#Task-3-Double-Insertion-on-the-Left" class="headerlink" title="Task #3: Double Insertion on the Left"></a>Task #3: Double Insertion on the Left</h4><p>Suppose we have the LLRB below and insert $E$. We end up with the wrong representation for our temporary 4-node. We need to do some rotations.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/i7ft7.png" title="rotateRight(Z)"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/i7ft7.png" alt="rotateRight(Z)"></p>
 <h4 id="Task-4-Splitting-Temporary-4-Nodes"><a href="#Task-4-Splitting-Temporary-4-Nodes" class="headerlink" title="Task #4: Splitting Temporary 4-Nodes"></a>Task #4: Splitting Temporary 4-Nodes</h4><p>Suppose we have the LLRB below which includes a temporary 4-node. Flip the color of all edges touching B.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/3e6s3.png" title="Flip the colors of all edges touching B"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/3e6s3.png" alt="Flip the colors of all edges touching B"></p>
 <h4 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h4><ul>
 <li>When inserting: <ul>
 <li>Use a <code>red link</code>.</li>
@@ -464,10 +464,10 @@ gtag('config', 'UA-146643833-1');
 <li>It is possible that a rotation or flip operation will cause an additional violation that needs fixing.</li>
 </ul>
 <p>For example:</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/39l4q.png" title="Invalid representation"></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/6jwyr.png" title="rotateLeft(B)"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/39l4q.png" alt="Invalid representation"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/6jwyr.png" alt="rotateLeft(B)"></p>
 <p><strong>Exercise:</strong></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/vek6e.png" title="Very interesting!"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/vek6e.png" alt="Very interesting!"></p>
 <p>Answer: <a target="_blank" rel="noopener" href="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/3dr02.png">link (my drawing)</a></p>
 <p>What about inserting 1 through 7?</p>
 <p>Answer: <a target="_blank" rel="noopener" href="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/a0ogy.png">link (my drawing)</a></p>
@@ -496,7 +496,7 @@ gtag('config', 'UA-146643833-1');
 <p><code>Question</code>: Can we search in a sorted <code>linked list</code> (a sorted array can apply Binary Search because of random access) in better than $O(n)$ time?</p>
 <p><code>Idea</code>: Create multiple layers so that we can skip some nodes.</p>
 <p>The upper layer works as an <code>express lane</code> which connects only main outer stations, and the lower layer works as a <code>normal lane</code> which connects every station.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/gu7z4.jpg" title="Skip List (Two layers)"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/gu7z4.jpg" alt="Skip List (Two layers)"></p>
 <p>Suppose we want to search for 50, we start from first node of “express lane” and keep moving on “express lane” till we find a node whose next is greater than 50. </p>
 <p>What is the time complexity with two layers?</p>
 <p>The worst case time complexity is number of nodes on “express lane” plus number of nodes in a segment (nodes between adjacent two “express lane” nodes). Suppose we have $n$ nodes on “normal lane”, $\sqrt{n}$ nodes on “express lane”, and we equally divide the “normal lane”, then there will be $\sqrt{n}$ nodes in every segment (interesting).</p>
@@ -522,7 +522,7 @@ gtag('config', 'UA-146643833-1');
 <p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/avl-tree-set-1-insertion/">AVL Tree | Set 1 (Insertion)</a></p>
 <p><strong>Definition:</strong> AVL (named after inventors Adelson-Velsky and Landis) tree is a self-balancing Binary Search Tree (BST) where the difference between heights of left and right subtrees cannot be more than one <code>for all nodes</code>.</p>
 <h3 id="Why-log-N"><a href="#Why-log-N" class="headerlink" title="Why log N?"></a>Why log N?</h3><p>The AVL tree always has at most 1-level difference between child subtrees for all nodes. If the difference is so big, you can imagine all nodes grow on the left side of a tree, which then increases the height of a tree.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/98tmw.png" title="灵魂画手见笑了"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/98tmw.png" alt="灵魂画手见笑了"></p>
 <p>Since the tree looks bushy with this constraint, the height of the AVL tree is $\log{N}$ and is balanced.</p>
 <p>Further, insertion takes $O(\log{N})$. Every time a node is added to the AVL tree, you need to update the height of the parents all the way up to the root. Since the tree is balanced, updating heights will traverse only the linked-list structure with the newly inserted node in the tail, which takes also $O(\log{N})$.</p>
 <p><a target="_blank" rel="noopener" href="https://people.csail.mit.edu/alinush/6.006-spring-2014/avl-height-proof.pdf">AVL trees height proof (optional)</a></p>
@@ -632,7 +632,7 @@ gtag('config', 'UA-146643833-1');
 <p>Unlike other self-balancing BSTs, a ScapeGoat tree doesn’t require extra space per node. For example, Red Black Tree nodes are required to have color fields.</p>
 <h2 id="Treaps"><a href="#Treaps" class="headerlink" title="Treaps"></a>Treaps</h2><p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/treap-a-randomized-binary-search-tree/">Treap (A Randomized Binary Search Tree)</a></p>
 <p>Treap is a randomized binary search tree. Like Red-Black and AVL Trees, Treap is a Balanced Binary Search Tree, but <code>not guaranteed</code> to have height as $O(\log{N})$. The idea is to use <code>Randomization</code> and <code>Binary Heap property</code> to <strong>maintain balance with high probability</strong>. The expected time complexity of search, insert and delete is $O(\log{N})$.</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/qaks5.jpg" title="Treap"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/qaks5.jpg" alt="Treap"></p>
 <p><a target="_blank" rel="noopener" href="https://cp-algorithms.com/data_structures/treap.html#toc-tgt-0">More about Treap</a></p>
 <p><code>Priorities</code> allow to <code>uniquely</code> specify the tree that will be constructed (of course, it does not depend on the order in which values are added), which can be proved using the corresponding theorem.</p>
 <p>Obviously, if you <code>choose the priorities randomly</code>, you will get non-degenerate trees on average, which will ensure $O(\log{N})$ complexity for the main operations.</p>
@@ -642,13 +642,13 @@ gtag('config', 'UA-146643833-1');
 <li>Perform standard BST insert.</li>
 <li>Use rotations to make sure that inserted node’s priority follows <code>max heap property</code>.</li>
 </ul>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/zp0vu.jpg" title="Example: insert(80)"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/zp0vu.jpg" alt="Example: insert(80)"></p>
 <p><strong>Delete: (e.g. x)</strong></p>
 <ul>
 <li>If node to be deleted is a leaf, delete it.</li>
 <li>Else replace node’s priority with <code>minus infinite</code> (-INF), and do appropriate rotations to bring the node down to a leaf.</li>
 </ul>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/f5myq.jpg" title="Example: delete(50)"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/f5myq.jpg" alt="Example: delete(50)"></p>
 <h2 id="Handle-Duplicate-Keys"><a href="#Handle-Duplicate-Keys" class="headerlink" title="Handle Duplicate Keys"></a>Handle Duplicate Keys</h2><p>A <code>simple solution</code> is to allow same keys on right side (also left side).</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">     <span class="number">12</span></span><br><span class="line">    /  \</span><br><span class="line">  <span class="number">10</span>   <span class="number">20</span></span><br><span class="line"> /  \   /</span><br><span class="line"><span class="number">9</span>   <span class="number">11</span> <span class="number">12</span> </span><br><span class="line">   /     \</span><br><span class="line">  <span class="number">10</span>      <span class="number">12</span></span><br></pre></td></tr></table></figure>
 
@@ -670,7 +670,7 @@ gtag('config', 'UA-146643833-1');
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Anything/"><span class="card-category-list-name">Anything</span><span class="card-category-list-count">10</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C</span><span class="card-category-list-count">18</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Math/"><span class="card-category-list-name">Math</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Music/"><span class="card-category-list-name">Music</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/OS/"><span class="card-category-list-name">OS</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Reading-Notes/"><span class="card-category-list-name">Reading Notes</span><span class="card-category-list-count">5</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/i/" style="font-size: 1.1em; color: #999">++i</a> <a href="/tags/ANSI-C/" style="font-size: 1.1em; color: #999">ANSI C</a> <a href="/tags/Abstract-Class/" style="font-size: 1.1em; color: #999">Abstract Class</a> <a href="/tags/Argument/" style="font-size: 1.1em; color: #999">Argument</a> <a href="/tags/AutoLayout/" style="font-size: 1.1em; color: #999">AutoLayout</a> <a href="/tags/C/" style="font-size: 1.5em; color: #99a9bf">C</a> <a href="/tags/C-Traps-and-Pitfalls/" style="font-size: 1.5em; color: #99a9bf">C Traps and Pitfalls</a> <a href="/tags/C11/" style="font-size: 1.1em; color: #999">C11</a> <a href="/tags/C89/" style="font-size: 1.1em; color: #999">C89</a> <a href="/tags/C90/" style="font-size: 1.1em; color: #999">C90</a> <a href="/tags/C99/" style="font-size: 1.1em; color: #999">C99</a> <a href="/tags/CPU-%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/" style="font-size: 1.1em; color: #999">CPU 工作模式</a> <a href="/tags/Calculus/" style="font-size: 1.1em; color: #999">Calculus</a> <a href="/tags/Compute-Shader/" style="font-size: 1.1em; color: #999">Compute Shader</a> <a href="/tags/Covariant/" style="font-size: 1.1em; color: #999">Covariant</a> <a href="/tags/English/" style="font-size: 1.1em; color: #999">English</a> <a href="/tags/Expert-C-Programming/" style="font-size: 1.5em; color: #99a9bf">Expert C Programming</a> <a href="/tags/GCD/" style="font-size: 1.1em; color: #999">GCD</a> <a href="/tags/GRE/" style="font-size: 1.1em; color: #999">GRE</a> <a href="/tags/Grass/" style="font-size: 1.1em; color: #999">Grass</a> <a href="/tags/Hexo/" style="font-size: 1.1em; color: #999">Hexo</a> <a href="/tags/Interface/" style="font-size: 1.1em; color: #999">Interface</a> <a href="/tags/Iteration/" style="font-size: 1.1em; color: #999">Iteration</a> <a href="/tags/Java/" style="font-size: 1.5em; color: #99a9bf">Java</a> <a href="/tags/K-R-C/" style="font-size: 1.1em; color: #999">K&R C</a> <a href="/tags/LinkedList/" style="font-size: 1.1em; color: #999">LinkedList</a> <a href="/tags/Logic/" style="font-size: 1.1em; color: #999">Logic</a> <a href="/tags/Mac/" style="font-size: 1.5em; color: #99a9bf">Mac</a> <a href="/tags/Markdown/" style="font-size: 1.1em; color: #999">Markdown</a> <a href="/tags/Mou/" style="font-size: 1.1em; color: #999">Mou</a> <a href="/tags/Multivarible-Calculus/" style="font-size: 1.1em; color: #999">Multivarible Calculus</a> <a href="/tags/Probability/" style="font-size: 1.1em; color: #999">Probability</a> <a href="/tags/Protected-Mode/" style="font-size: 1.1em; color: #999">Protected Mode</a> <a href="/tags/Python/" style="font-size: 1.1em; color: #999">Python</a> <a href="/tags/Real-Mode/" style="font-size: 1.1em; color: #999">Real Mode</a> <a href="/tags/Recursion/" style="font-size: 1.1em; color: #999">Recursion</a> <a href="/tags/Shader/" style="font-size: 1.1em; color: #999">Shader</a> <a href="/tags/Sky/" style="font-size: 1.1em; color: #999">Sky</a> <a href="/tags/Stack/" style="font-size: 1.1em; color: #999">Stack</a> <a href="/tags/TypeFu/" style="font-size: 1.1em; color: #999">TypeFu</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">50</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">82.3k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-04-12T02:03:21.414Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2015 - 2021 By Junhao Wang</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">return 0;</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script>function panguFn () {
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/iOS/" style="font-size: 1.45em; color: rgb(47, 42, 177)">iOS</a><a href="/tags/Xcode/" style="font-size: 1.15em; color: rgb(60, 170, 68)">Xcode</a><a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 1.15em; color: rgb(192, 157, 54)">插件</a><a href="/tags/UIScrollView/" style="font-size: 1.15em; color: rgb(13, 132, 114)">UIScrollView</a><a href="/tags/UITableView/" style="font-size: 1.15em; color: rgb(191, 15, 42)">UITableView</a><a href="/tags/AutoLayout/" style="font-size: 1.15em; color: rgb(82, 42, 182)">AutoLayout</a><a href="/tags/%E7%9E%8E%E6%89%AF/" style="font-size: 1.15em; color: rgb(40, 39, 127)">瞎扯</a><a href="/tags/Mac/" style="font-size: 1.3em; color: rgb(32, 149, 179)">Mac</a><a href="/tags/TypeFu/" style="font-size: 1.15em; color: rgb(108, 84, 94)">TypeFu</a><a href="/tags/%E7%BB%83%E6%89%93%E5%AD%97/" style="font-size: 1.15em; color: rgb(12, 86, 66)">练打字</a><a href="/tags/Hexo/" style="font-size: 1.15em; color: rgb(161, 192, 24)">Hexo</a><a href="/tags/%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/" style="font-size: 1.15em; color: rgb(28, 177, 155)">本地图片</a><a href="/tags/Unity/" style="font-size: 1.3em; color: rgb(102, 20, 114)">Unity</a><a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 1.15em; color: rgb(64, 41, 18)">游戏</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1.15em; color: rgb(57, 148, 155)">数据结构</a><a href="/tags/LinkedList/" style="font-size: 1.15em; color: rgb(53, 144, 23)">LinkedList</a><a href="/tags/C/" style="font-size: 1.3em; color: rgb(161, 41, 79)">C</a><a href="/tags/%E6%B1%95%E5%A4%A7%E8%AF%BE%E7%A8%8B%E8%A1%A8/" style="font-size: 1.15em; color: rgb(26, 181, 58)">汕大课程表</a><a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 1.15em; color: rgb(87, 110, 120)">音乐</a><a href="/tags/%E7%AE%A1%E4%B9%90%E5%9B%A2/" style="font-size: 1.15em; color: rgb(104, 178, 115)">管乐团</a><a href="/tags/Markdown/" style="font-size: 1.15em; color: rgb(48, 156, 33)">Markdown</a><a href="/tags/Mou/" style="font-size: 1.15em; color: rgb(155, 96, 117)">Mou</a><a href="/tags/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 1.15em; color: rgb(112, 108, 4)">人工神经网络</a><a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 1.15em; color: rgb(19, 76, 6)">多线程</a><a href="/tags/GCD/" style="font-size: 1.15em; color: rgb(97, 16, 112)">GCD</a><a href="/tags/GRE/" style="font-size: 1.15em; color: rgb(22, 119, 162)">GRE</a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 1.15em; color: rgb(190, 75, 48)">英语</a><a href="/tags/%E9%80%BB%E8%BE%91/" style="font-size: 1.15em; color: rgb(92, 141, 117)">逻辑</a><a href="/tags/Argument/" style="font-size: 1.15em; color: rgb(107, 35, 29)">Argument</a><a href="/tags/Logic/" style="font-size: 1.15em; color: rgb(115, 72, 9)">Logic</a><a href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/" style="font-size: 1.15em; color: rgb(103, 92, 81)">微积分</a><a href="/tags/Calculus/" style="font-size: 1.15em; color: rgb(168, 25, 182)">Calculus</a><a href="/tags/Python/" style="font-size: 1.15em; color: rgb(146, 197, 30)">Python</a><a href="/tags/%E6%A6%82%E7%8E%87/" style="font-size: 1.15em; color: rgb(182, 9, 59)">概率</a><a href="/tags/Probability/" style="font-size: 1.15em; color: rgb(160, 139, 18)">Probability</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%A4%A7%E5%B0%8F/" style="font-size: 1.15em; color: rgb(43, 47, 56)">数据类型大小</a><a href="/tags/size-t/" style="font-size: 1.15em; color: rgb(63, 75, 21)">size_t</a><a href="/tags/%E8%A1%A5%E7%A0%81/" style="font-size: 1.15em; color: rgb(53, 121, 110)">补码</a><a href="/tags/unsigned/" style="font-size: 1.15em; color: rgb(71, 28, 148)">unsigned</a><a href="/tags/signed/" style="font-size: 1.15em; color: rgb(125, 40, 124)">signed</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">50</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">82.3k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-04-12T10:08:00.697Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2015 - 2021 By Junhao Wang</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">return 0;</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script>function panguFn () {
   if (typeof pangu === 'object') pangu.autoSpacingPage()
   else {
     getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')

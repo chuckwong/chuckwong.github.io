@@ -7,7 +7,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://www.junhaow.com/resources/banner/banner_1.jpg">
 <meta property="article:published_time" content="2019-02-06T18:03:01.000Z">
-<meta property="article:modified_time" content="2019-04-26T17:52:37.000Z">
+<meta property="article:modified_time" content="2021-04-12T02:06:30.848Z">
 <meta property="article:author" content="Junhao Wang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://www.junhaow.com/resources/banner/banner_1.jpg"><link rel="shortcut icon" href="/resources/favicon/favicon.ico"><link rel="canonical" href="http://www.junhaow.com/studynotes/java/Java%20%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%8B%EF%BC%89"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-146643833-1"></script><script>window.dataLayer = window.dataLayer || [];
@@ -60,7 +60,7 @@ gtag('config', 'UA-146643833-1');
   isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '04/26/2019 10:52'
+  postUpdate: '04/11/2021 19:06'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -263,15 +263,15 @@ gtag('config', 'UA-146643833-1');
 </ul>
 <h4 id="夏令时"><a href="#夏令时" class="headerlink" title="夏令时"></a>夏令时</h4><p>夏令时 / Daylight Saving Time。</p>
 <p>我国 1992 年就废除了夏令时，但美国人还在使用。</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9sqhz.jpg" title="夏令时"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/9sqhz.jpg" alt="夏令时"></p>
 <p>同一地区用 GMT / UTC 和<code>城市表示的时区</code>可能导致时间不同，如：GMT / UTC 时间和纽约时间不一样。</p>
 <h4 id="地区"><a href="#地区" class="headerlink" title="地区"></a>地区</h4><p>Locale 表示一个国家或地区的日期、时间、数字、货币等<code>格式</code>：</p>
 <ul>
 <li>zh_CN：2016-11-30</li>
 <li>en_US：11/30/2016</li>
 </ul>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/qjmdp.jpg" title="中国和美国的地区格式"></p>
-<h3 id="java-util-的-API"><a href="#java-util-的-API" class="headerlink" title="java.util 的 API"></a>java.util 的 API</h3><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/in99m.jpg" title="存储方式 vs. 展示方式"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/qjmdp.jpg" alt="中国和美国的地区格式"></p>
+<h3 id="java-util-的-API"><a href="#java-util-的-API" class="headerlink" title="java.util 的 API"></a>java.util 的 API</h3><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/in99m.jpg" alt="存储方式 vs. 展示方式"></p>
 <p>时间的展示方式：</p>
 <ul>
 <li>2016-11-20 8:15:01 GMT+08:00</li>
@@ -337,8 +337,8 @@ gtag('config', 'UA-146643833-1');
 <li>LocalTime</li>
 <li>LocalDateTime</li>
 </ul>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/hmy97.jpg" title="java.time 类图"></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/q3icw.jpg" title="TemporalAmount 的子类"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/hmy97.jpg" alt="java.time 类图"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/q3icw.jpg" alt="TemporalAmount 的子类"></p>
 <p>TemporalAmount 表示一段时间：1 天 / 2 小时 / 30 分钟</p>
 <p>新 API 特点：</p>
 <ul>
@@ -370,7 +370,7 @@ gtag('config', 'UA-146643833-1');
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">LocalDate d1 = LocalDate.of(<span class="number">2016</span>, <span class="number">11</span>, <span class="number">20</span>);</span><br><span class="line">LocalDate d2 = LocalDate.of(<span class="number">2050</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">Period p = d1.until(d2);</span><br><span class="line">System.out.println(p); <span class="comment">// P33Y1M12D</span></span><br><span class="line"><span class="comment">// p.getYears()</span></span><br><span class="line"><span class="comment">// p.getMonths()</span></span><br><span class="line"><span class="comment">// p.getDays()</span></span><br><span class="line"><span class="comment">// 或者 d2.toEpochDay() - d1.toEpochDay()</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>注意：</strong>LocalDateTime 无法与 long 进行转换，因为 LocalDateTime 没有时区，无法确定某一时刻；而 ZonedDateTime 有时区，可以与 long 进行转换。</p>
-<h4 id="ZonedDateTime"><a href="#ZonedDateTime" class="headerlink" title="ZonedDateTime"></a>ZonedDateTime</h4><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/com11.jpg" title="java.time 类的关系图"></p>
+<h4 id="ZonedDateTime"><a href="#ZonedDateTime" class="headerlink" title="ZonedDateTime"></a>ZonedDateTime</h4><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/com11.jpg" alt="java.time 类的关系图"></p>
 <p><code>ZonedDateTime = LocalDateTime + ZoneId</code></p>
 <ul>
 <li>ZonedDateTime：带时区的日期和时间</li>
@@ -381,7 +381,7 @@ gtag('config', 'UA-146643833-1');
 
 <h3 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h3><p>java.util.Data 的不合理设计：同时表示日期和时间。</p>
 <p>Java 对象 - 数据库类型的对应关系：</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/s2okl.jpg" title="Java 对象 - 数据库类型"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/s2okl.jpg" alt="Java 对象 - 数据库类型"></p>
 <p>新旧 API 的转换方法：</p>
 <p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/pcf1d.jpg"></p>
 <p>三条忠告：</p>
@@ -444,7 +444,7 @@ gtag('config', 'UA-146643833-1');
 <h4 id="非贪婪匹配"><a href="#非贪婪匹配" class="headerlink" title="非贪婪匹配"></a>非贪婪匹配</h4><p>问题：判断数字末尾 0 的个数</p>
 <p><code>123000</code>：3 个 0<br><code>10100</code>：2 个 0<br><code>1001</code>：0 个 0</p>
 <p>正则表达式：<code>^(\d+)(0*)&amp;</code></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/2c19u.jpg" title="结果"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/2c19u.jpg" alt="结果"></p>
 <p>正则表达式默认使用贪婪匹配，尽可能多地向后匹配。可以使用<code>?</code>实现非贪婪匹配：<code>^(\d+?)(0*)$</code>。</p>
 <p>但注意：<code>^(\d??)(9*)$</code>，第一个<code>?</code>指匹配 0 个或 1 个，第二个<code>?</code>指非贪婪匹配。所以，扔个<code>9999</code>过去，第一组匹配的结果为空。</p>
 <h4 id="搜索和替换"><a href="#搜索和替换" class="headerlink" title="搜索和替换"></a>搜索和替换</h4><p>使用正则表达式分割字符串：</p>
@@ -522,7 +522,7 @@ gtag('config', 'UA-146643833-1');
 <li>优先级高的线程被操作系统调度的优先级高</li>
 <li><strong>不能</strong>通过设置优先级来确保功能的执行顺序</li>
 </ul>
-<h4 id="线程的状态"><a href="#线程的状态" class="headerlink" title="线程的状态"></a>线程的状态</h4><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/6ndgr.jpg" title="线程的状态"></p>
+<h4 id="线程的状态"><a href="#线程的状态" class="headerlink" title="线程的状态"></a>线程的状态</h4><p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/6ndgr.jpg" alt="线程的状态"></p>
 <p>线程终止的原因：</p>
 <ul>
 <li>run() 方法执行到 return 语句返回（线程正常终止）</li>
@@ -694,7 +694,7 @@ gtag('config', 'UA-146643833-1');
 </ul>
 </li>
 </ul>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/4t7ae.jpg" title="Fixed Rate 和 Fixed Delay 的区别"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/4t7ae.jpg" alt="Fixed Rate 和 Fixed Delay 的区别"></p>
 <p>java.util.Timer</p>
 <ul>
 <li>一个 Timer 对应一个 Thread（多个任务要多个 Timer）</li>
@@ -787,7 +787,7 @@ gtag('config', 'UA-146643833-1');
 
 <p>在 Maven 中声明一个依赖项可以自动下载并导入 classpath；Maven 使用 groupId、artifactId 和 version 唯一定位一个 jar 包。</p>
 <p>普通的 Java 项目 pom.xml 结构：</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/kmox5.jpg" title="pom.xml 的基本结构"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/kmox5.jpg" alt="pom.xml 的基本结构"></p>
 <p>Group Id：域名，如 com.mycompany。<br>Artifact Id：项目名，如 helloworld。</p>
 <p>修改项目 JDK、编译器等版本：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -797,7 +797,7 @@ gtag('config', 'UA-146643833-1');
 <p>Maven 解决了依赖管理问题（Sample 项目 -&gt; abc -&gt; xyz）：</p>
 <p>Maven 会自动导入 abc，又会自动导入 xyz。</p>
 <p>Maven 的依赖关系类型：</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/u02da.jpg" title="依赖关系类型"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/u02da.jpg" alt="依赖关系类型"></p>
 <p>Maven 从何下载所需的依赖？</p>
 <ul>
 <li>Maven 维护了一个中央仓库（repo1.maven.org）</li>
@@ -808,7 +808,7 @@ gtag('config', 'UA-146643833-1');
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>Maven 镜像仓库：</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tmhv9.jpg" title="Maven 镜像仓库"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/tmhv9.jpg" alt="Maven 镜像仓库"></p>
 <p>在<code>~/.m2/settings.xml</code>配置 Maven 镜像仓库：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">setting</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">usl</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">mirros</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">setting</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -819,7 +819,7 @@ gtag('config', 'UA-146643833-1');
 <li>package（打包为 jar / war）</li>
 </ul>
 <p>Maven 的生命周期（lifecycle）由一系列阶段（phase）构成：</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/y6tuo.jpg" title="Maven 的生命周期"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/y6tuo.jpg" alt="Maven 的生命周期"></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mvn compile</span><br><span class="line">mvn clean test  # 将执行 clean、compile、test，因为 test 依赖 compile</span><br></pre></td></tr></table></figure>
 
 <p>执行一个 Phase 实际上是执行了一系列 Goal 直到该 Phase 为止。</p>
@@ -850,10 +850,10 @@ gtag('config', 'UA-146643833-1');
 <li>findbugs-maven-plugin：对 Java 源码进行静态分析以找出潜在问题</li>
 </ul>
 <h4 id="模块管理"><a href="#模块管理" class="headerlink" title="模块管理"></a>模块管理</h4><p>把大项目拆分为模块是降低软件复杂度的有效方法。</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/n5q8r.jpg" title="模块化"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/n5q8r.jpg" alt="模块化"></p>
 <p>如果模块 A 和模块 B 的 pom.xml 高度相似，可以提取出共同部分作为 parent。</p>
 <p>Maven 有中央仓库、私有仓库、本地仓库。</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ms3si.jpg" title="本地仓库"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/ms3si.jpg" alt="本地仓库"></p>
 <p>但不推荐。</p>
 <p>可以通过<code>&lt;moduels&gt;</code>编译多个模块。</p>
 <p>在 IntelliJ IDEA 中 Project 是最顶级的级别，次级别是 Module。一个 Project 可以有多个 Module。目前主流的大型项目结构都是类似这种多 Module 结构，比如我们的项目可以划分为 helloworld-app、helloworld-utils、helloworld-model 等等，Module 之间可以互相依赖。而 Project 是一个抽象的概念，Project 由一个或者多个Module 组成。Project 跟 Module 之间的关系由 pom.xml 来配置，Module 之间的依赖由 Module 文件夹中的 pom.xml 来配置。</p>
@@ -861,7 +861,7 @@ gtag('config', 'UA-146643833-1');
 <figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">project</span> -&gt;</span> <span class="function"><span class="title">module</span> -&gt;</span> <span class="function"><span class="title">package</span> -&gt;</span> <span class="function"><span class="title">class</span> -&gt;</span> method</span><br></pre></td></tr></table></figure>
 
 <h2 id="JDBC-基础"><a href="#JDBC-基础" class="headerlink" title="JDBC 基础"></a>JDBC 基础</h2><h3 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h3><p>JDBC：Java DataBase Connectivity</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/1eh13.jpg" title="JDBC 底层关系"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/1eh13.jpg" alt="JDBC 底层关系"></p>
 <p>使用方法：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String JDBC_URL = <span class="string">&quot;jbc:mysql://localhost:3306/test&quot;</span>;</span><br><span class="line">String JDBC_USER = <span class="string">&quot;root&quot;</span>;</span><br><span class="line">String JDBC_PASSWORD = <span class="string">&quot;password&quot;</span>;</span><br><span class="line">Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);</span><br><span class="line">conn.close();</span><br></pre></td></tr></table></figure>
 
@@ -941,8 +941,8 @@ gtag('config', 'UA-146643833-1');
 </ul>
 <h3 id="Stream"><a href="#Stream" class="headerlink" title="Stream"></a>Stream</h3><h4 id="简介-3"><a href="#简介-3" class="headerlink" title="简介"></a>简介</h4><p>Java 8 引入了全新的 Stream API：java.util.stream。</p>
 <p>其不同于 java.io 的 InputStream / OutputStream：</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/0ppro.jpg" title="java.io VS. java.util.stream"></p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/kw9qz.jpg" title="java.util.List VS. java.util.stream"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/0ppro.jpg" alt="java.io VS. java.util.stream"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/kw9qz.jpg" alt="java.util.List VS. java.util.stream"></p>
 <p>Stream 的特点：</p>
 <ul>
 <li>可以“存储”有限个或无限个元素</li>
@@ -962,7 +962,7 @@ gtag('config', 'UA-146643833-1');
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (Stream&lt;String&gt; lines = Files.lines(Paths.get(<span class="string">&quot;/path/to/access.og&quot;</span>))) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">String input = <span class="string">&quot;a, b, c, dd, E, ff&quot;</span>;</span><br><span class="line">Pattern pattern = Pattern.compile(<span class="string">&quot;\\s*\\,\\s*&quot;</span>);</span><br><span class="line">Stream&lt;String&gt; s = pattern.splitAsStream(input);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建基本类型的 Stream</span></span><br><span class="line">Stream&lt;<span class="keyword">int</span>&gt; s;  <span class="comment">// compile error!</span></span><br><span class="line">IntStream is = IntStream.generate(IntSupplier s);</span><br><span class="line">LongStream ls = LongStream.generate(LongSupplier s);</span><br><span class="line">DoubleStream ds = DoubleStream.generate(DoubleSupplier s);</span><br></pre></td></tr></table></figure>
 
 <h4 id="map"><a href="#map" class="headerlink" title="map"></a>map</h4><p>Stream.map() 是一个 Stream 的转换方法，把一个 Stream 转换为另一个 Stream。</p>
-<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/d3cgm.jpg" title="map"></p>
+<p><img src="https://bloggg-1254259681.cos.na-siliconvalley.myqcloud.com/d3cgm.jpg" alt="map"></p>
 <p>Stream.map()</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注意 T 是 Strema 声明的泛型参数</span></span><br><span class="line"><span class="comment">// class Stream&lt;T&gt; &#123;</span></span><br><span class="line"><span class="comment">// ... ??? super, extends</span></span><br><span class="line">&lt;R&gt; <span class="function">Stream&lt;R&gt; <span class="title">map</span><span class="params">(Function_Foo&lt;? <span class="keyword">super</span> T, ? extends R&gt; mapper)</span></span>;</span><br><span class="line"><span class="comment">// T -&gt; R</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Function_Foo</span>&lt;<span class="title">T</span>, <span class="title">R</span>&gt; </span>&#123;</span><br><span class="line">  <span class="comment">// 将 T 类型转换为 R 类型</span></span><br><span class="line">  <span class="function">R <span class="title">apply</span><span class="params">(T t)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -1000,7 +1000,7 @@ gtag('config', 'UA-146643833-1');
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Anything/"><span class="card-category-list-name">Anything</span><span class="card-category-list-count">10</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C</span><span class="card-category-list-count">18</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Math/"><span class="card-category-list-name">Math</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Music/"><span class="card-category-list-name">Music</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/OS/"><span class="card-category-list-name">OS</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Reading-Notes/"><span class="card-category-list-name">Reading Notes</span><span class="card-category-list-count">5</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/i/" style="font-size: 1.1em; color: #999">++i</a> <a href="/tags/ANSI-C/" style="font-size: 1.1em; color: #999">ANSI C</a> <a href="/tags/Abstract-Class/" style="font-size: 1.1em; color: #999">Abstract Class</a> <a href="/tags/Argument/" style="font-size: 1.1em; color: #999">Argument</a> <a href="/tags/AutoLayout/" style="font-size: 1.1em; color: #999">AutoLayout</a> <a href="/tags/C/" style="font-size: 1.5em; color: #99a9bf">C</a> <a href="/tags/C-Traps-and-Pitfalls/" style="font-size: 1.5em; color: #99a9bf">C Traps and Pitfalls</a> <a href="/tags/C11/" style="font-size: 1.1em; color: #999">C11</a> <a href="/tags/C89/" style="font-size: 1.1em; color: #999">C89</a> <a href="/tags/C90/" style="font-size: 1.1em; color: #999">C90</a> <a href="/tags/C99/" style="font-size: 1.1em; color: #999">C99</a> <a href="/tags/CPU-%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/" style="font-size: 1.1em; color: #999">CPU 工作模式</a> <a href="/tags/Calculus/" style="font-size: 1.1em; color: #999">Calculus</a> <a href="/tags/Compute-Shader/" style="font-size: 1.1em; color: #999">Compute Shader</a> <a href="/tags/Covariant/" style="font-size: 1.1em; color: #999">Covariant</a> <a href="/tags/English/" style="font-size: 1.1em; color: #999">English</a> <a href="/tags/Expert-C-Programming/" style="font-size: 1.5em; color: #99a9bf">Expert C Programming</a> <a href="/tags/GCD/" style="font-size: 1.1em; color: #999">GCD</a> <a href="/tags/GRE/" style="font-size: 1.1em; color: #999">GRE</a> <a href="/tags/Grass/" style="font-size: 1.1em; color: #999">Grass</a> <a href="/tags/Hexo/" style="font-size: 1.1em; color: #999">Hexo</a> <a href="/tags/Interface/" style="font-size: 1.1em; color: #999">Interface</a> <a href="/tags/Iteration/" style="font-size: 1.1em; color: #999">Iteration</a> <a href="/tags/Java/" style="font-size: 1.5em; color: #99a9bf">Java</a> <a href="/tags/K-R-C/" style="font-size: 1.1em; color: #999">K&R C</a> <a href="/tags/LinkedList/" style="font-size: 1.1em; color: #999">LinkedList</a> <a href="/tags/Logic/" style="font-size: 1.1em; color: #999">Logic</a> <a href="/tags/Mac/" style="font-size: 1.5em; color: #99a9bf">Mac</a> <a href="/tags/Markdown/" style="font-size: 1.1em; color: #999">Markdown</a> <a href="/tags/Mou/" style="font-size: 1.1em; color: #999">Mou</a> <a href="/tags/Multivarible-Calculus/" style="font-size: 1.1em; color: #999">Multivarible Calculus</a> <a href="/tags/Probability/" style="font-size: 1.1em; color: #999">Probability</a> <a href="/tags/Protected-Mode/" style="font-size: 1.1em; color: #999">Protected Mode</a> <a href="/tags/Python/" style="font-size: 1.1em; color: #999">Python</a> <a href="/tags/Real-Mode/" style="font-size: 1.1em; color: #999">Real Mode</a> <a href="/tags/Recursion/" style="font-size: 1.1em; color: #999">Recursion</a> <a href="/tags/Shader/" style="font-size: 1.1em; color: #999">Shader</a> <a href="/tags/Sky/" style="font-size: 1.1em; color: #999">Sky</a> <a href="/tags/Stack/" style="font-size: 1.1em; color: #999">Stack</a> <a href="/tags/TypeFu/" style="font-size: 1.1em; color: #999">TypeFu</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">50</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">82.3k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-04-12T02:03:21.414Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2015 - 2021 By Junhao Wang</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">return 0;</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script>function panguFn () {
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/iOS/" style="font-size: 1.45em; color: rgb(47, 42, 177)">iOS</a><a href="/tags/Xcode/" style="font-size: 1.15em; color: rgb(60, 170, 68)">Xcode</a><a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 1.15em; color: rgb(192, 157, 54)">插件</a><a href="/tags/UIScrollView/" style="font-size: 1.15em; color: rgb(13, 132, 114)">UIScrollView</a><a href="/tags/UITableView/" style="font-size: 1.15em; color: rgb(191, 15, 42)">UITableView</a><a href="/tags/AutoLayout/" style="font-size: 1.15em; color: rgb(82, 42, 182)">AutoLayout</a><a href="/tags/%E7%9E%8E%E6%89%AF/" style="font-size: 1.15em; color: rgb(40, 39, 127)">瞎扯</a><a href="/tags/Mac/" style="font-size: 1.3em; color: rgb(32, 149, 179)">Mac</a><a href="/tags/TypeFu/" style="font-size: 1.15em; color: rgb(108, 84, 94)">TypeFu</a><a href="/tags/%E7%BB%83%E6%89%93%E5%AD%97/" style="font-size: 1.15em; color: rgb(12, 86, 66)">练打字</a><a href="/tags/Hexo/" style="font-size: 1.15em; color: rgb(161, 192, 24)">Hexo</a><a href="/tags/%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/" style="font-size: 1.15em; color: rgb(28, 177, 155)">本地图片</a><a href="/tags/Unity/" style="font-size: 1.3em; color: rgb(102, 20, 114)">Unity</a><a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 1.15em; color: rgb(64, 41, 18)">游戏</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1.15em; color: rgb(57, 148, 155)">数据结构</a><a href="/tags/LinkedList/" style="font-size: 1.15em; color: rgb(53, 144, 23)">LinkedList</a><a href="/tags/C/" style="font-size: 1.3em; color: rgb(161, 41, 79)">C</a><a href="/tags/%E6%B1%95%E5%A4%A7%E8%AF%BE%E7%A8%8B%E8%A1%A8/" style="font-size: 1.15em; color: rgb(26, 181, 58)">汕大课程表</a><a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 1.15em; color: rgb(87, 110, 120)">音乐</a><a href="/tags/%E7%AE%A1%E4%B9%90%E5%9B%A2/" style="font-size: 1.15em; color: rgb(104, 178, 115)">管乐团</a><a href="/tags/Markdown/" style="font-size: 1.15em; color: rgb(48, 156, 33)">Markdown</a><a href="/tags/Mou/" style="font-size: 1.15em; color: rgb(155, 96, 117)">Mou</a><a href="/tags/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 1.15em; color: rgb(112, 108, 4)">人工神经网络</a><a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 1.15em; color: rgb(19, 76, 6)">多线程</a><a href="/tags/GCD/" style="font-size: 1.15em; color: rgb(97, 16, 112)">GCD</a><a href="/tags/GRE/" style="font-size: 1.15em; color: rgb(22, 119, 162)">GRE</a><a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 1.15em; color: rgb(190, 75, 48)">英语</a><a href="/tags/%E9%80%BB%E8%BE%91/" style="font-size: 1.15em; color: rgb(92, 141, 117)">逻辑</a><a href="/tags/Argument/" style="font-size: 1.15em; color: rgb(107, 35, 29)">Argument</a><a href="/tags/Logic/" style="font-size: 1.15em; color: rgb(115, 72, 9)">Logic</a><a href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/" style="font-size: 1.15em; color: rgb(103, 92, 81)">微积分</a><a href="/tags/Calculus/" style="font-size: 1.15em; color: rgb(168, 25, 182)">Calculus</a><a href="/tags/Python/" style="font-size: 1.15em; color: rgb(146, 197, 30)">Python</a><a href="/tags/%E6%A6%82%E7%8E%87/" style="font-size: 1.15em; color: rgb(182, 9, 59)">概率</a><a href="/tags/Probability/" style="font-size: 1.15em; color: rgb(160, 139, 18)">Probability</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%A4%A7%E5%B0%8F/" style="font-size: 1.15em; color: rgb(43, 47, 56)">数据类型大小</a><a href="/tags/size-t/" style="font-size: 1.15em; color: rgb(63, 75, 21)">size_t</a><a href="/tags/%E8%A1%A5%E7%A0%81/" style="font-size: 1.15em; color: rgb(53, 121, 110)">补码</a><a href="/tags/unsigned/" style="font-size: 1.15em; color: rgb(71, 28, 148)">unsigned</a><a href="/tags/signed/" style="font-size: 1.15em; color: rgb(125, 40, 124)">signed</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">50</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">82.3k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-04-12T10:08:00.697Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2015 - 2021 By Junhao Wang</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">return 0;</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script>function panguFn () {
   if (typeof pangu === 'object') pangu.autoSpacingPage()
   else {
     getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
